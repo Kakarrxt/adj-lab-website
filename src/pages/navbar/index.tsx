@@ -1,19 +1,23 @@
+// Components/Navbar/Navbar.tsx
 "use client";
+
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import styles from "./Navbar.module.css";
+import { usePathname } from 'next/navigation';
 
 const navItems = [
-  { name: "Research", href: "/" },
-  { name: "Anand", href: "/" },
-  { name: "Lab Members", href: "/" },
-  { name: "Publication", href: "/" },
-  { name: "Contact", href: "/" },
+  { name: "Research", href: "/research" },
+  { name: "Anand", href: "/Anand" },
+  { name: "Lab Members", href: "/lab-members" },
+  { name: "Publication", href: "/publications" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const pathname = usePathname();
 
   return (
     <motion.nav
@@ -30,12 +34,13 @@ export default function Navbar() {
         >
           <Link href="/">ADJ</Link>
         </motion.div>
-
         <div className={styles.navItems}>
           {navItems.map((item) => (
             <motion.div
               key={item.name}
-              className={styles.navItem}
+              className={`${styles.navItem} ${
+                pathname === item.href ? styles.active : ""
+              }`}
               onHoverStart={() => setHoveredItem(item.name)}
               onHoverEnd={() => setHoveredItem(null)}
               whileHover={{ y: -2 }}
@@ -45,7 +50,7 @@ export default function Navbar() {
                 className={styles.underline}
                 initial={false}
                 animate={{
-                  width: hoveredItem === item.name ? "100%" : "0%",
+                  width: hoveredItem === item.name || pathname === item.href ? "100%" : "0%",
                 }}
                 transition={{ duration: 0.3 }}
               />

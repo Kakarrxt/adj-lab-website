@@ -1,0 +1,105 @@
+/* Research.module.css */
+.container {
+  min-height: 100vh;
+  background-color: white;
+  color: #333;
+}
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.header h1 {
+  font-size: 3.5rem;
+  color: #6b46c1;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.underline {
+  height: 4px;
+  width: 100px;
+  background-color: #6b46c1;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.intro {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  color: #4a5568;
+}
+
+.observations {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.observation {
+  display: flex;
+  gap: 1.5rem;
+  padding: 2rem;
+  background-color: rgba(107, 70, 193, 0.05);
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.observation:hover {
+  transform: translateX(10px);
+}
+
+.number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #6b46c1;
+  flex-shrink: 0;
+}
+
+.observation p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.hypothesis {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  padding: 2rem;
+  background-color: rgba(107, 70, 193, 0.05);
+  border-radius: 12px;
+  margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 2rem 1rem;
+  }
+
+  .header h1 {
+    font-size: 2.5rem;
+  }
+
+  .observation {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .number {
+    font-size: 1.25rem;
+  }
+}
