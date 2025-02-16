@@ -1,0 +1,112 @@
+/* Components/Anand/Anand.module.css */
+.container {
+  min-height: 100vh;
+  background-color: white;
+}
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.imageContainer {
+  width: 300px;
+  height: 400px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profileImage {
+  object-fit: cover;
+}
+
+.content {
+  max-width: 800px;
+  text-align: center;
+}
+
+.name {
+  font-size: 2.5rem;
+  color: #6b46c1;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4a5568;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.email {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4a5568;
+  font-size: 1.1rem;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.socialLink {
+  color: #6b46c1;
+  transition: color 0.3s ease;
+}
+
+.socialLink:hover {
+  color: #553c9a;
+}
+
+@media (min-width: 768px) {
+  .profile {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 4rem;
+  }
+
+  .content {
+    text-align: left;
+  }
+
+  .contact {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding: 2rem 1rem;
+  }
+
+  .name {
+    font-size: 2rem;
+  }
+
+  .imageContainer {
+    width: 250px;
+    height: 333px;
+  }
+}

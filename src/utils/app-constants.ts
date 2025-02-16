@@ -1,6 +1,6 @@
 
 export const dataFetchKeys = {
-   predictions: "predictions",
+   test: "test",
     
 }
 

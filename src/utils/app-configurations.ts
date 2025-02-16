@@ -8,8 +8,8 @@ export const appConfigurations = appConfigs();
 
 const appKeyConfigs = () => {
     return {
-        keyToken: process.env.REACT_APP_KEY_TOKEN || "keyUserInfoSentiMotionFrontend",
-        keyUserInfo: process.env.REACT_APP_KEY_USER_INFO || "keyTokenSentiMotionFrontend",
+        keyToken: process.env.REACT_APP_KEY_TOKEN || "keyUserInfoADJFrontend",
+        keyUserInfo: process.env.REACT_APP_KEY_USER_INFO || "keyTokenADJFrontend",
     }
 }
 

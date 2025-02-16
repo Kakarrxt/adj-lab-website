@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 
 const navItems = [
   { name: "Research", href: "/research" },
-  { name: "Anand", href: "/Anand" },
+  { name: "Anand", href: "/anand" },
   { name: "Lab Members", href: "/lab-members" },
   { name: "Publication", href: "/publications" },
   { name: "Contact", href: "/contact" },
@@ -28,11 +28,11 @@ export default function Navbar() {
     >
       <div className={styles.navContent}>
         <motion.div
-          className={styles.logo}
+          className={styles.logoContainer}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
-          <Link href="/">ADJ</Link>
+          <Link href="/" className={styles.logo}>ADJ</Link>
         </motion.div>
         <div className={styles.navItems}>
           {navItems.map((item) => (
