@@ -4,7 +4,6 @@ export interface AppState {
   selectedPage: AppTab | null;
   screen: boolean;
   camera: boolean;
-  predictions: Prediction;
 }
 export type appStateAction =
   | {
