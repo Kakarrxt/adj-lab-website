@@ -3,7 +3,6 @@
 
 import { motion } from "framer-motion";
 import styles from "./Research.module.css";
-import Navbar from "../navbar/index";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 
@@ -32,8 +31,6 @@ export default function ResearchPage() {
 
   return (
     <div className={styles.container}>
-      <Navbar />
-      
       <main className={styles.main}>
         <motion.div
           initial={{ opacity: 0, y: -20 }}

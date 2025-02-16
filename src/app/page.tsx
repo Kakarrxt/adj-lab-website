@@ -9,6 +9,7 @@ export default function Main() {
   return (
     <div className={styles.container}>
       <Navbar />
+      
       <main className={styles.main}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
