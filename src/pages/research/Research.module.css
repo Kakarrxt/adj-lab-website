@@ -102,4 +102,19 @@
   .number {
     font-size: 1.25rem;
   }
+  
+  .underline {
+    height: 2px;
+    background-color: currentColor;
+    width: 0;
+  }
+  
+  .observation {
+    opacity: 0;
+  }
+  
+  .number {
+    display: inline-block;
+    min-width: 2em;
+  }
 }
