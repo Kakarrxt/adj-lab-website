@@ -31,30 +31,34 @@
 }
 
 .publication {
-  background: var(--color-background-alt);
+  background: rgba(34, 23, 60, 0.3); 
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 4px 20px var(--shadow-color);
+  box-shadow: 0 4px 20px rgba(201, 159, 205, 0.15); 
   border: 1px solid var(--color-border);
   transition: var(--transition);
+  backdrop-filter: blur(8px); 
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .publication:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(30, 42, 76, 0.15);
-  border-color: rgba(0, 182, 214, 0.3);
+  box-shadow: 0 6px 24px rgba(201, 159, 205, 0.25); 
+  border-color: rgba(201, 159, 205, 0.3); 
+  background: rgba(34, 23, 60, 0.4);
 }
 
 .publication h2 {
-  color: var(--color-primary);
+  color: #22173c;
   font-family: "Helvetica Neue LT Pro", sans-serif;
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
   line-height: 1.3;
 }
 
+
 .journal {
-  color: var(--color-text-light);
+  color: #22173c;
   font-family: "Helvetica Neue LT Pro", sans-serif;
   font-weight: 500;
   margin-bottom: 0.5rem;
@@ -69,28 +73,31 @@
 
 .year, .type {
   font-family: "Helvetica Neue LT Pro", sans-serif;
-  color: #3D402F;
+  color: #22173c;
   font-size: 0.9rem;
 }
 
 .type {
-  color: #C99FCD;
+  color: #22173c;
   font-weight: 500;
 }
 
 .link {
+  font-family: "Helvetica Neue LT Pro", sans-serif;
+  font-weight: 500;
   display: inline-block;
   margin-top: 1rem;
   padding: 0.5rem 1rem;
-  background-color: var(--color-accent);
-  color: var(--color-background);
+  background-color: #22173c;
+  color: #C99FCD;
   text-decoration: none;
   border-radius: 8px;
   transition: var(--transition);
 }
 
 .link:hover {
-  background-color: var(--color-primary);
+  background-color: #e7cfef;
+  color: #22173c;
   transform: translateY(-2px);
 }
 
