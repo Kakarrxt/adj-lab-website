@@ -6,6 +6,9 @@ import Link from "next/link";
 import { useState } from "react";
 import styles from "./Navbar.module.css";
 import { usePathname } from 'next/navigation';
+import CircularText from '@/utils/CircularText/CircularText';
+  
+
 
 const navItems = [
   { name: "Research", href: "/research" },
@@ -14,6 +17,9 @@ const navItems = [
   { name: "Publication", href: "/publications" },
   { name: "Contact", href: "/contact" },
 ];
+
+
+
 
 export default function Navbar() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
@@ -32,7 +38,9 @@ export default function Navbar() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
-          <Link href="/" className={styles.logo}>ADJ</Link>
+          <Link href="/" className={styles.logo}>
+          ADJ
+          </Link>
         </motion.div>
         <div className={styles.navItems}>
           {navItems.map((item) => (

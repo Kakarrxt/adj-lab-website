@@ -52,7 +52,6 @@ interface WorkSummary {
   };
 }
 
-// Interface for our formatted publication data
 interface Publication {
   id: number;
   title: string;
@@ -66,10 +65,12 @@ interface Publication {
 
 export default function Publications() {
   const [publications, setPublications] = useState<Publication[]>([]);
+  const [sortedPublications, setSortedPublications] = useState<Publication[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState('year-desc');
 
-  const ORCID_ID = '0000-0001-9816-6137'; // Replace with your ORCID ID
+  const ORCID_ID = '0000-0001-9816-6137';
 
   useEffect(() => {
     const fetchPublications = async () => {
@@ -90,7 +91,7 @@ export default function Publications() {
 
         const data: OrcidResponse = await response.json();
         
-        // Format the publications data
+        
         const formattedPublications: Publication[] = data.group.map(item => {
           const work = item['work-summary'][0];
           return {
@@ -119,6 +120,29 @@ export default function Publications() {
 
     fetchPublications();
   }, [ORCID_ID]);
+  
+  console.log(publications);
+  useEffect(() => {
+    const sortPublications = () => {
+      const sorted = [...publications].sort((a, b) => {
+        switch (sortBy) {
+          case 'year-desc':
+            return (b.year || '0') > (a.year || '0') ? 1 : -1;
+          case 'year-asc':
+            return (a.year || '0') > (b.year || '0') ? 1 : -1;
+          case 'title-asc':
+            return a.title.localeCompare(b.title);
+          case 'title-desc':
+            return b.title.localeCompare(a.title);
+          default:
+            return 0;
+        }
+      });
+      setSortedPublications(sorted);
+    };
+
+    sortPublications();
+  }, [publications, sortBy]);
 
   return (
     <div className={styles.container}>
@@ -138,6 +162,19 @@ export default function Publications() {
           >
             Publications
           </motion.h1>
+
+          <div className={styles.sortContainer}>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className={styles.sortSelect}
+            >
+              <option value="year-desc">Newest First</option>
+              <option value="year-asc">Oldest First</option>
+              <option value="title-asc">Title (A-Z)</option>
+              <option value="title-desc">Title (Z-A)</option>
+            </select>
+          </div>
         </motion.div>
 
         <motion.div
@@ -154,18 +191,17 @@ export default function Publications() {
             <div className={styles.error}>Error: {error}</div>
           )}
 
-          {!loading && !error && publications.length === 0 && (
+          {!loading && !error && sortedPublications.length === 0 && (
             <div className={styles.empty}>No publications found.</div>
           )}
 
-          {!loading && !error && publications.map((pub, index) => (
+          {!loading && !error && sortedPublications.map((pub, index) => (
             <motion.div
               key={pub.id}
               className={styles.publication}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
             >
               <h2>{pub.title}</h2>
               {pub.authors && pub.authors.length > 0 && (
