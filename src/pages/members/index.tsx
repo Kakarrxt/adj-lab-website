@@ -1,8 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Navbar from "@/pages/navbar/index"
-import styles from "./page.module.css"
+import styles from "./members.module.css"
 import NeonIsometricMaze from "@/components/NeonIsometricMaze"
 import HalftoneWaves from "@/components/halftoneWaves"
 
@@ -11,11 +10,13 @@ import HalftoneWaves from "@/components/halftoneWaves"
 export default function Main() {
   return (
     <div className={styles.container}>
-      <Navbar />
-      <div className="fixed inset-0 -z-10">
+        {/* 1st section */}
+    <div className="fixed inset-0 -z-10">
         <NeonIsometricMaze />
       </div>
+      {/* 2nd section */}
       <main className={styles.main}>
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -41,6 +42,7 @@ export default function Main() {
           </div>
         </motion.div>
       </main>
+        {/* 3rd section */}
       <div className="fixed inset-0 -z-10">
         <HalftoneWaves />
       </div>
