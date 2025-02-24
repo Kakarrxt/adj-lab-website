@@ -2,7 +2,6 @@
 //Made changes
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Navbar from '@/pages/navbar/index';
 import styles from './Publications.module.css';
 
 // Define proper interfaces for the API response
