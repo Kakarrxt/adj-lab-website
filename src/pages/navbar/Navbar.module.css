@@ -5,9 +5,7 @@
   transform: translateX(-50%);
   width: 99%;
   height: 60px;
-  background: rgba(255, 255, 255, 0.05); /* Added a slight translucent background */
-  backdrop-filter: blur(2px); /* Adds a slight blur effect behind the navbar */
-  -webkit-backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.01); 
   z-index: 1000;
   margin-left: 10px;
   padding: 0;
@@ -33,10 +31,9 @@
 }
 
 .navContent {
-  
   flex: 1; 
   height: 100%;
-  background: rgba(242, 228, 233, 0.7);
+  background: rgba(242, 228, 233, 0.6);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 100px;
@@ -49,13 +46,15 @@
   padding: 0 2rem;
 }
 
+
+
 .navItemsContainer {
   display: flex;
   align-items: center;
 }
 
 .navItems {
-  left: 165%;
+  left: 220%;
   display: flex;
   gap: 0.5rem;
   position: relative;
@@ -87,7 +86,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(245, 240, 250, 0.8);
   border-radius: 100px;
   z-index: 1;
   box-shadow: 
@@ -102,6 +101,7 @@
 
 @media (max-width: 768px) {
   .navbar {
+    background: rgba(255, 255, 255, 0.05);
     width: 90%;
   }
   
@@ -118,7 +118,6 @@
   }
 }
 
-/* Hover effects */
 .navContent:hover {
   background: rgba(242, 228, 233, 0.8);
   box-shadow: 
@@ -127,12 +126,9 @@
     0 0 35px rgba(139, 123, 153, 0.15);
 }
 
-/* Smooth transitions */
 .navItem, .navContent {
   transition: all 0.3s ease;
 }
-
-
 
 .container {
   margin: 0;
