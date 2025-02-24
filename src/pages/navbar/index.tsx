@@ -34,29 +34,35 @@ export default function Navbar() {
             ADJ
           </Link>
         </motion.div>
-        <div className={styles.navItems}>
-          {navItems.map((item) => (
-            <motion.div
-              key={item.name}
-              className={`${styles.navItem} ${
-                pathname === item.href ? styles.active : ""
-              }`}
-              onHoverStart={() => setHoveredItem(item.name)}
-              onHoverEnd={() => setHoveredItem(null)}
-              whileHover={{ y: -2 }}
-            >
-              <Link href={item.href}>{item.name}</Link>
+
+        <motion.div className={styles.navItemsContainer}>
+          <div className={styles.navItems}>
+            {navItems.map((item) => (
               <motion.div
-                className={styles.underline}
-                initial={false}
-                animate={{
-                  width: hoveredItem === item.name || pathname === item.href ? "100%" : "0%",
-                }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.div>
-          ))}
-        </div>
+                key={item.name}
+                className={`${styles.navItem} ${
+                  pathname === item.href ? styles.active : ""
+                }`}
+                onHoverStart={() => setHoveredItem(item.name)}
+                onHoverEnd={() => setHoveredItem(null)}
+              >
+                <Link href={item.href}>{item.name}</Link>
+                {(hoveredItem === item.name || pathname === item.href) && (
+                  <motion.div
+                    className={styles.activeBackground}
+                    layoutId="activeBackground"
+                    initial={false}
+                    transition={{
+                      type: "spring",
+                      stiffness: 380,
+                      damping: 30
+                    }}
+                  />
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </motion.nav>
   );
