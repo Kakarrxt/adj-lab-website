@@ -133,12 +133,6 @@
 }
 
 
-/* Add this to your global CSS or page.module.css */
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
 
 .container {
   margin: 0;
