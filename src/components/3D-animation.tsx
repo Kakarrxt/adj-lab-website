@@ -1,6 +1,6 @@
 "use client"
 
-import { Canvas, useThree } from "@react-three/fiber"
+import { Canvas } from "@react-three/fiber"
 import { OrbitControls, Environment } from "@react-three/drei"
 import { useRef, useState, useEffect } from "react"
 import * as THREE from "three"
@@ -81,8 +81,18 @@ const BoxLetter = ({ letter, position }: { letter: string; position: [number, nu
   )
 }
 
-const Scene = () => {
-  const orbitControlsRef = useRef()
+interface SceneProps {
+  text: string;
+  color: string;
+  edgeColor: string;
+  autoRotate: boolean;
+  autoRotateSpeed: number;
+  mobileEnvUrl?: string;
+  desktopEnvUrl?: string;
+}
+
+const Scene = ({autoRotate, autoRotateSpeed}: SceneProps) => {
+  const orbitControlsRef = useRef(null)
   const [mounted, setMounted] = useState(false)
   const [isMobileDevice, setIsMobileDevice] = useState(false)
 
@@ -101,7 +111,8 @@ const Scene = () => {
     <>
       <group position={[-0.5, 0, 0]} rotation={[0, Math.PI / 1.5, 0]}>
         <BoxLetter letter="A" position={[-3.75, 0, 0]} />
-        <BoxLetter letter="D" position={[-1.25, 0, 0]} />
+        autoRotate={autoRotate}
+        autoRotateSpeed={autoRotateSpeed}
         <BoxLetter letter="J" position={[1.25, 0, 0]} />
       </group>
       <OrbitControls
@@ -111,7 +122,6 @@ const Scene = () => {
         enableRotate
         autoRotate
         autoRotateSpeed={2}
-        rotation={[Math.PI, 0, 0]}
       />
 
       <ambientLight intensity={0.5} />
