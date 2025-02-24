@@ -1,12 +1,9 @@
-// Components/Navbar/Navbar.tsx
 "use client";
-
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import styles from "./Navbar.module.css";
 import { usePathname } from 'next/navigation';
-
 
 const navItems = [
   { name: "Research", href: "/research" },
@@ -16,13 +13,10 @@ const navItems = [
   { name: "Contact", href: "/contact" },
 ];
 
-
-
-
 export default function Navbar() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const pathname = usePathname();
-
+  
   return (
     <motion.nav
       className={styles.navbar}
@@ -37,7 +31,7 @@ export default function Navbar() {
           whileTap={{ scale: 0.95 }}
         >
           <Link href="/" className={styles.logo}>
-          ADJ
+            ADJ
           </Link>
         </motion.div>
         <div className={styles.navItems}>

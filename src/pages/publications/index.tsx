@@ -146,7 +146,6 @@ export default function Publications() {
 
   return (
     <div className={styles.container}>
-      <Navbar />
       
       <main className={styles.main}>
         <motion.div
