@@ -13,6 +13,7 @@ const navItems = [
   { name: "Contact", href: "/contact" },
 ];
 
+
 export default function Navbar() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const pathname = usePathname();

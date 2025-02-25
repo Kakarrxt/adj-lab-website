@@ -3,6 +3,7 @@ import { AppProps } from 'next/app';
 import NavBar from './navbar/index';
 //import Footer from './common/Footer';
 import Providers from '@/app/providers/Providers';
+import Footer from './footer/index';
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
@@ -11,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 <main>
                     <NavBar />
                     <Component {...pageProps} />
-                    {/* <Footer /> */}
+                    <Footer />
                 </main>
             </HydrationBoundary>
         </Providers>
