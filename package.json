@@ -22,6 +22,8 @@
     "@react-three/fiber": "^9.0.4",
     "@tailwindcss/postcss": "^4.0.8",
     "@tanstack/react-query": "^5.66.2",
+    "@tsparticles/engine": "^3.8.1",
+    "@tsparticles/react": "^3.0.0",
     "@types/animejs": "^3.1.13",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
@@ -38,7 +40,8 @@
     "react-dom": "^19.0.0",
     "react-i18next": "^12.3.1",
     "react-icons": "^5.5.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "tsparticles": "^3.8.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

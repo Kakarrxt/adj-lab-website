@@ -5,6 +5,7 @@ import { useInView } from "framer-motion";
 import styles from "./Footer.module.css";
 import { FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
 import React from "react";
+import Image from "next/image";
 
 export default function Footer() {
   const footerRef = useRef(null);
@@ -75,7 +76,7 @@ export default function Footer() {
                 onClick={() => handleLogoClick(logoUrls.nus)}
                 style={{ cursor: 'pointer' }}
               >
-                <img src="/media/NUS-logo.png" alt="NUS" />
+                <Image src="/media/NUS-logo.png" alt="NUS" />
               </motion.div>
               <motion.div
                 className={styles.companyLogo}
@@ -83,7 +84,7 @@ export default function Footer() {
                 onClick={() => handleLogoClick(logoUrls.csi)}
                 style={{ cursor: 'pointer' }}
               >
-                <img src="/media/CSI-logo.png" alt="CSI" />
+                <Image src="/media/CSI-logo.png" alt="CSI" />
               </motion.div>
             </div>
           </motion.div>

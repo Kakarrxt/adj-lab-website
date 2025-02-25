@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { useInView } from "framer-motion";
 import styles from "./contact.module.css";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import Image from "next/image";
 
 export default function ContactPage() {
   const mapRef = useRef(null);
@@ -104,7 +105,7 @@ export default function ContactPage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <img src="/media/lab-1.png" alt="Lab facility" />
+              <Image src="/media/lab-1.png" alt="Lab facility" />
             </motion.div>
             <motion.div 
               className={styles.labImage}
@@ -112,7 +113,7 @@ export default function ContactPage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <img src="/media/lab-1.png" alt="Lab facility" />
+              <Image src="/media/lab-1.png" alt="Lab facility" />
             </motion.div>
           </motion.div>
         </motion.section>
