@@ -18,7 +18,6 @@ export default function AnandPage() {
 
   return (
     <div className={styles.container}>
-      
       <main className={styles.main}>
         <div className={styles.profile}>
           <motion.div 
@@ -102,6 +101,22 @@ export default function AnandPage() {
               </div>
             </motion.div>
           </motion.div>
+        </div>
+        <div className={styles.awards}>
+        <motion.h1 
+              variants={fadeInUp}
+              className={styles.name}
+            >
+              Awards
+            </motion.h1>
+        </div>
+        <div className={styles.affiliation}>
+        <motion.h1 
+              variants={fadeInUp}
+              className={styles.name}
+            >
+              affiliation
+            </motion.h1>
         </div>
       </main>
     </div>

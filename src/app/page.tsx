@@ -5,6 +5,7 @@ import Navbar from "@/pages/navbar/index"
 import styles from "./page.module.css"
 import NeonIsometricMaze from "@/components/NeonIsometricMaze"
 import HalftoneWaves from "@/components/halftoneWaves"
+import Footer from "@/pages/footer/index"
 
 export default function Main() {
   const { scrollYProgress } = useScroll()
@@ -72,6 +73,7 @@ export default function Main() {
           <HalftoneWaves />
         </div>
       </motion.div>
+      <Footer />
     </div>
   )
 }
