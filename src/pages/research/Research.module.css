@@ -1,120 +1,370 @@
-/* Research.module.css */
+/* Components/Research/Research.module.css */
 .container {
-  min-height: 100vh;
-  background-color: white;
-  color: #333;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0rem 1.5rem;
+  overflow-x: hidden;
+}
+
+.sectionTop {
+  position: relative;
+  height: 100px; 
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; 
+  z-index: 0; 
+}
+
+/* Add a container for your animation to control its size */
+.sectionTop > div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
 }
 
 .header h1 {
-  font-size: 3.5rem;
-  color: #6b46c1;
-  margin-bottom: 1rem;
+  font-size: 2.5rem;
   font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #333;
 }
 
 .underline {
-  height: 4px;
-  width: 100px;
-  background-color: #6b46c1;
+  height: 3px;
+  width: 80px;
+  background: #6b46c1;
   margin: 0 auto;
-  border-radius: 2px;
 }
 
-.content {
-  max-width: 800px;
-  margin: 0 auto;
+/* Hero section with image */
+.heroSection {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin: 2rem 0 3rem;
+}
+
+.heroContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.heroImage {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.researchImage {
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 .intro {
   font-size: 1.2rem;
-  line-height: 1.8;
-  margin-bottom: 3rem;
-  color: #4a5568;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 2rem;
 }
 
 .observations {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .observation {
   display: flex;
-  gap: 1.5rem;
-  padding: 2rem;
-  background-color: rgba(107, 70, 193, 0.05);
-  border-radius: 12px;
-  transition: transform 0.3s ease;
-}
-
-.observation:hover {
-  transform: translateX(10px);
+  align-items: flex-start;
+  gap: 1rem;
+  background: rgba(107, 70, 193, 0.05);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #6b46c1;
 }
 
 .number {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #6b46c1;
-  flex-shrink: 0;
+  line-height: 1;
+  min-width: 45px;
 }
 
 .observation p {
   font-size: 1.1rem;
-  line-height: 1.7;
+  line-height: 1.5;
   margin: 0;
+  color: #333;
 }
 
 .hypothesis {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  padding: 2rem;
-  background-color: rgba(107, 70, 193, 0.05);
-  border-radius: 12px;
-  margin-top: 3rem;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #444;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background: #f8f9fa;
+  border-left: 4px solid #6b46c1;
+  margin: 2rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Research Themes Section */
+.themesSection, 
+.facilitiesSection, 
+.labCulture {
+  margin: 3rem 0;
+}
+
+.themesSection h2, 
+.facilitiesSection h2, 
+.labCulture h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.themesSection h2::after, 
+.facilitiesSection h2::after, 
+.labCulture h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 60px;
+  background: #6b46c1;
+}
+
+.themesSection > p, 
+.facilitiesSection > p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.themesList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.themeItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.themeItem:hover {
+  transform: translateY(-5px);
+}
+
+.themeNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  background: #6b46c1;
+  color: white;
+  font-weight: 600;
+  border-radius: 50%;
+}
+
+.themeContent {
+  flex: 1;
+}
+
+.themeContent h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.themeContent p {
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Facilities List */
+.facilitiesList {
+  margin: 1.5rem 0;
+  padding-left: 1.2rem;
+}
+
+.facilitiesList li {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 1.8rem;
+  list-style-type: none;
+}
+
+.facilitiesList li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  background: #6b46c1;
+  border-radius: 50%;
+}
+
+/* Lab Culture */
+.labCulture p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+.commitments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.commitment {
+  flex: 1;
+  min-width: 200px;
+  padding: 1.2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.commitment span {
+  display: inline-block;
+  font-weight: 600;
+  color: #6b46c1;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.commitment p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.commitment a {
+  color: #6b46c1;
+  text-decoration: none;
+}
+
+.commitment a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .heroSection {
+    gap: 2rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .main {
-    padding: 2rem 1rem;
+  .container {
+    padding: 1.5rem 1rem;
   }
 
+  .sectionTop {
+    height: 100px;
+  }
+  
+  .heroSection {
+    flex-direction: column-reverse;
+    gap: 2rem;
+  }
+  
+  .heroContent, .heroImage {
+    flex: 1 1 100%;
+  }
+  
+  .researchImage {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .commitments {
+    flex-direction: column;
+  }
+  
+  .commitment {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
   .header h1 {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
   }
-
+  
   .observation {
     flex-direction: column;
-    gap: 1rem;
-  }
-
-  .number {
-    font-size: 1.25rem;
-  }
-  
-  .underline {
-    height: 2px;
-    background-color: currentColor;
-    width: 0;
-  }
-  
-  .observation {
-    opacity: 0;
+    padding: 1.2rem;
   }
   
   .number {
-    display: inline-block;
-    min-width: 2em;
+    margin-bottom: 0.5rem;
+  }
+  
+  .hypothesis {
+    padding: 1.2rem;
+    font-size: 1rem;
+  }
+  
+  .themesSection h2, 
+  .facilitiesSection h2, 
+  .labCulture h2 {
+    font-size: 1.5rem;
+  }
+  
+  .themeItem {
+    padding: 1.2rem;
+  }
+  
+  .themeContent h3 {
+    font-size: 1.1rem;
   }
 }

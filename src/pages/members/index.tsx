@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import styles from "./members.module.css"
 import Link from "next/link"
 import Image from "next/image"
+import NeonIsometricMaze from "@/components/NeonIsometricMaze"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -151,38 +152,53 @@ export default function LabMembers() {
   ]
 
   return (
+    <><motion.div
+      className={styles.sectionTop}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+    >
+      <div>
+        <NeonIsometricMaze />
+      </div>
+
+    </motion.div>
+    
     <div className={styles.container}>
-      <main className={styles.main}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className={styles.hero}
-        >
-          <h1>Lab Members</h1>
-          <p>Meet the brilliant minds behind our groundbreaking research</p>
-        </motion.div>
-
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Principal Investigator</h2>
-          <MemberCard member={PI} />
-        </section>
-
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Current Lab Members</h2>
-          <motion.div 
-            className={styles.membersGrid}
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+        <main className={styles.main}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className={styles.hero}
           >
-            {currentMembers.map((member, index) => (
-              <MemberCard key={index} member={member} />
-            ))}
+            <h1>Lab Members</h1>
+            <p>Meet the brilliant minds behind our groundbreaking research</p>
           </motion.div>
-        </section>
-      </main>
-    </div>
+
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>Principal Investigator</h2>
+            <MemberCard member={PI} />
+          </section>
+
+      {/* Add section for lab outing and more images here */}
+      {/* FUN STUFF*/}
+
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>Current Lab Members</h2>
+            <motion.div
+              className={styles.membersGrid}
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {currentMembers.map((member, index) => (
+                <MemberCard key={index} member={member} />
+              ))}
+            </motion.div>
+          </section>
+        </main>
+      </div></>
   )
 }
 

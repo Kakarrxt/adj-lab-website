@@ -1,8 +1,9 @@
 "use client";
-//Made changes
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+
+import { useState, useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import styles from './Publications.module.css';
+import NeonIsometricMaze from '@/components/NeonIsometricMaze';
 
 // Define proper interfaces for the API response
 interface OrcidResponse {
@@ -68,8 +69,33 @@ export default function Publications() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState('year-desc');
+  
+  const headerRef = useRef(null);
+  const contentRef = useRef(null);
+  const isHeaderInView = useInView(headerRef, { once: true });
+  const isContentInView = useInView(contentRef, { once: true });
 
   const ORCID_ID = '0000-0001-9816-6137';
+  
+  // Animation variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+  
+  const staggerChildren = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchPublications = async () => {
@@ -89,7 +115,6 @@ export default function Publications() {
         }
 
         const data: OrcidResponse = await response.json();
-        
         
         const formattedPublications: Publication[] = data.group.map(item => {
           const work = item['work-summary'][0];
@@ -112,6 +137,17 @@ export default function Publications() {
         setError(null);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
+        // Fallback data in case of error
+        setPublications([
+          {
+            id: 1,
+            title: "Example publication (Data unavailable)",
+            journal: "Connect to ORCID to see publications",
+            year: "2024",
+            type: "journal-article",
+            authors: ["Connect to view authors"]
+          }
+        ]);
       } finally {
         setLoading(false);
       }
@@ -120,7 +156,6 @@ export default function Publications() {
     fetchPublications();
   }, [ORCID_ID]);
   
-  console.log(publications);
   useEffect(() => {
     const sortPublications = () => {
       const sorted = [...publications].sort((a, b) => {
@@ -144,101 +179,171 @@ export default function Publications() {
   }, [publications, sortBy]);
 
   return (
-    <div className={styles.container}>
+    <>
+      <motion.div 
+        className={styles.sectionTop}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div>
+          <div className={styles.decorativeElement}><NeonIsometricMaze /></div>
+        </div>
+      </motion.div>
       
-      <main className={styles.main}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className={styles.hero}
-        >
-          <motion.h1 
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1, type: "spring" }}
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <motion.div
+            ref={headerRef}
+            initial="hidden"
+            animate={isHeaderInView ? "visible" : "hidden"}
+            variants={fadeInUp}
+            className={styles.header}
           >
-            Publications
-          </motion.h1>
-
-          <div className={styles.sortContainer}>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className={styles.sortSelect}
+            <h1>Publications</h1>
+            <div className={styles.underline} />
+            
+            <motion.div 
+              variants={fadeInUp}
+              className={styles.sortWrapper}
             >
-              <option value="year-desc">Newest First</option>
-              <option value="year-asc">Oldest First</option>
-              <option value="title-asc">Title (A-Z)</option>
-              <option value="title-desc">Title (Z-A)</option>
-            </select>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className={styles.content}
-        >
-          {loading && (
-            <div className={styles.loading}>Loading publications...</div>
-          )}
-          
-          {error && (
-            <div className={styles.error}>Error: {error}</div>
-          )}
-
-          {!loading && !error && sortedPublications.length === 0 && (
-            <div className={styles.empty}>No publications found.</div>
-          )}
-
-          {!loading && !error && sortedPublications.map((pub, index) => (
-            <motion.div
-              key={pub.id}
-              className={styles.publication}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <h2>{pub.title}</h2>
-              {pub.authors && pub.authors.length > 0 && (
-                <p className={styles.authors}>
-                  {pub.authors.join(', ')}
-                </p>
-              )}
-              {pub.journal && (
-                <p className={styles.journal}>{pub.journal}</p>
-              )}
-              <div className={styles.metadata}>
-                {pub.year && <span className={styles.year}>{pub.year}</span>}
-                {pub.type && <span className={styles.type}>{pub.type}</span>}
-              </div>
-              {pub.doi && (
-                <a 
-                  href={`https://doi.org/${pub.doi}`}
-                  target="_blank"
-                  rel="noopener noreferrer" 
-                  className={styles.link}
-                >
-                  View Publication (DOI)
-                </a>
-              )}
-              {!pub.doi && pub.url && (
-                <a 
-                  href={pub.url}
-                  target="_blank"
-                  rel="noopener noreferrer" 
-                  className={styles.link}
-                >
-                  View Publication
-                </a>
-              )}
+              <label htmlFor="sortPublications">Sort by:</label>
+              <select
+                id="sortPublications"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className={styles.sortSelect}
+              >
+                <option value="year-desc">Newest First</option>
+                <option value="year-asc">Oldest First</option>
+                <option value="title-asc">Title (A-Z)</option>
+                <option value="title-desc">Title (Z-A)</option>
+              </select>
             </motion.div>
-          ))}
-        </motion.div>
-      </main>
-    </div>
+          </motion.div>
+
+          <motion.div
+            ref={contentRef}
+            initial="hidden"
+            animate={isContentInView ? "visible" : "hidden"}
+            variants={staggerChildren}
+            className={styles.content}
+          >
+            {loading && (
+              <motion.div 
+                variants={fadeInUp}
+                className={styles.loadingContainer}
+              >
+                <div className={styles.loadingSpinner}></div>
+                <p>Loading publications...</p>
+              </motion.div>
+            )}
+            
+            {error && !publications.length && (
+              <motion.div 
+                variants={fadeInUp}
+                className={styles.errorContainer}
+              >
+                <h3>Error fetching publications</h3>
+                <p>{error}</p>
+                <p>Please try again later or check your connection</p>
+              </motion.div>
+            )}
+
+            {!loading && !error && sortedPublications.length === 0 && (
+              <motion.div 
+                variants={fadeInUp}
+                className={styles.emptyContainer}
+              >
+                <h3>No publications found</h3>
+                <p>Publications will appear here once available</p>
+              </motion.div>
+            )}
+
+            {sortedPublications.map((pub) => (
+              <motion.div
+                key={pub.id}
+                variants={fadeInUp}
+                className={styles.publication}
+              >
+                <h2>{pub.title}</h2>
+                {pub.authors && pub.authors.length > 0 && (
+                  <p className={styles.authors}>
+                    {pub.authors.join(', ')}
+                  </p>
+                )}
+                {pub.journal && (
+                  <p className={styles.journal}>{pub.journal}</p>
+                )}
+                <div className={styles.metadata}>
+                  {pub.year && (
+                    <span className={styles.year}>
+                      <span className={styles.metaLabel}>Year:</span> {pub.year}
+                    </span>
+                  )}
+                  {pub.type && (
+                    <span className={styles.type}>
+                      <span className={styles.metaLabel}>Type:</span> {pub.type.replace(/-/g, ' ')}
+                    </span>
+                  )}
+                </div>
+                <div className={styles.actions}>
+                  {pub.doi && (
+                    <a 
+                      href={`https://doi.org/${pub.doi}`}
+                      target="_blank"
+                      rel="noopener noreferrer" 
+                      className={styles.link}
+                    >
+                      View Publication (DOI)
+                    </a>
+                  )}
+                  {!pub.doi && pub.url && (
+                    <a 
+                      href={pub.url}
+                      target="_blank"
+                      rel="noopener noreferrer" 
+                      className={styles.link}
+                    >
+                      View Publication
+                    </a>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+          
+          {/* Add featured publications or stats section */}
+          {!loading && sortedPublications.length > 0 && (
+            <motion.section
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className={styles.statsSection}
+            >
+              <h2>Publication Metrics</h2>
+              <div className={styles.statsGrid}>
+                <div className={styles.statCard}>
+                  <div className={styles.statNumber}>{sortedPublications.length}</div>
+                  <div className={styles.statLabel}>Total Publications</div>
+                </div>
+                <div className={styles.statCard}>
+                  <div className={styles.statNumber}>
+                    {new Set(sortedPublications.map(p => p.year)).size}
+                  </div>
+                  <div className={styles.statLabel}>Years Active</div>
+                </div>
+                <div className={styles.statCard}>
+                  <div className={styles.statNumber}>
+                    {sortedPublications.filter(p => p.type === 'journal-article').length}
+                  </div>
+                  <div className={styles.statLabel}>Journal Articles</div>
+                </div>
+              </div>
+            </motion.section>
+          )}
+        </main>
+      </div>
+    </>
   );
 }
-

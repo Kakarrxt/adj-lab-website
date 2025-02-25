@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
+import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 
 export default function AnandPage() {
   const [init, setInit] = useState(false);
@@ -134,7 +135,16 @@ export default function AnandPage() {
           className={styles.particles}
         />
       )}
-      
+      <motion.div 
+        className={styles.sectionTop}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div>
+          <NeonIsometricMaze />
+        </div>
+      </motion.div>
       <main className={styles.main}>
         <div className={styles.profile}>
           <motion.div 
