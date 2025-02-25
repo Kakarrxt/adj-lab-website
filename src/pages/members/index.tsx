@@ -1,4 +1,5 @@
 "use client"
+
 import { motion } from "framer-motion"
 import styles from "./members.module.css"
 import Link from "next/link"

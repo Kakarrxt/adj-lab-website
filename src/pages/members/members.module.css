@@ -1,4 +1,4 @@
-/* Main container for the page */
+/* App/main.module.css */
 .container {
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
@@ -188,17 +188,22 @@
     flex-direction: column;
   }
   
-  .photoSection, .infoSection, .bioSection {
-    width: 100%;
-    border-right: none;
+  .main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    text-align: center;
   }
   
-  .photoSection {
-    border-bottom: 1px solid #eee;
+  .hero {
+    margin-bottom: 4rem;
   }
   
-  .infoSection {
-    border-bottom: 1px solid #eee;
+  .hero h1 {
+    font-size: 3.5rem;
+    color: #6b46c1;
+    margin-bottom: 1rem;
+    font-weight: 700;
   }
 }
 .sectionTop{
