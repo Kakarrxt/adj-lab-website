@@ -1,11 +1,13 @@
 /* Main container for the page */
 .container {
   min-height: 100vh;
+  padding: 2rem;
+  background-color: #f8f7ff;
   font-family: 'Inter', sans-serif;
 }
 
 .main {
-  background-color: #f8f7ff;
+  
   max-width: 1200px;
   margin: 0 auto;
 }
