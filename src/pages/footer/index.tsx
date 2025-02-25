@@ -76,7 +76,7 @@ export default function Footer() {
                 onClick={() => handleLogoClick(logoUrls.nus)}
                 style={{ cursor: 'pointer' }}
               >
-                <Image src="/media/NUS-logo.png" alt="NUS" width={20} height={20} />
+                <img src="/media/NUS-logo.png" alt="NUS" />
               </motion.div>
               <motion.div
                 className={styles.companyLogo}
@@ -84,7 +84,7 @@ export default function Footer() {
                 onClick={() => handleLogoClick(logoUrls.csi)}
                 style={{ cursor: 'pointer' }}
               >
-                <Image src="/media/CSI-logo.png" alt="CSI" width={20} height={20}  />
+                <img src="/media/CSI-logo.png" alt="CSI" />
               </motion.div>
             </div>
           </motion.div>

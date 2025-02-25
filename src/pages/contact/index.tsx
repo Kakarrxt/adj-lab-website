@@ -105,7 +105,7 @@ export default function ContactPage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <Image src="/media/lab-1.png" alt="Lab facility" />
+              <img src="/media/lab-1.png" alt="Lab facility" />
             </motion.div>
             <motion.div 
               className={styles.labImage}
@@ -113,7 +113,7 @@ export default function ContactPage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <Image src="/media/lab-1.png" alt="Lab facility" />
+              <img src="/media/lab-1.png" alt="Lab facility" />
             </motion.div>
           </motion.div>
         </motion.section>
