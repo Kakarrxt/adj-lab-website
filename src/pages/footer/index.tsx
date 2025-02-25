@@ -5,7 +5,6 @@ import { useInView } from "framer-motion";
 import styles from "./Footer.module.css";
 import { FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
 import React from "react";
-import Image from "next/image";
 
 export default function Footer() {
   const footerRef = useRef(null);
@@ -19,7 +18,6 @@ export default function Footer() {
       transition: { duration: 0.6, ease: "easeOut" }
     }
   };
-
 
   interface LogoUrls {
     nus: string;
@@ -146,7 +144,7 @@ export default function Footer() {
               <motion.a
                 href={item.path}
                 className={styles.navLink}
-                whileHover={{ color: "#3b82f6" }}
+                whileHover={{ color: "#6b46c1" }}
               >
                 {item.name}
               </motion.a>

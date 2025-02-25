@@ -5,7 +5,6 @@ import { useRef } from "react";
 import { useInView } from "framer-motion";
 import styles from "./contact.module.css";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
-import Image from "next/image";
 
 export default function ContactPage() {
   const mapRef = useRef(null);

@@ -1,8 +1,7 @@
 /* App/main.module.css */
 .container {
   position: relative;
-  height: 300vh; /* Changed from min-height to height */
-  background: linear-gradient(135deg, #C4B7D7 0%, #F2E4E9 100%);
+  background: transparent;
   overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
@@ -47,6 +46,7 @@
   padding: 2rem;
   overflow: hidden; /* Prevent section overflow */
 }
+
 
 .contentSection {
   background: rgba(255, 255, 255, 0.1);
