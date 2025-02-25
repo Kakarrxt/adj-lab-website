@@ -1,84 +1,210 @@
-/* App/main.module.css */
 .container {
+  width: 100%;
+  min-height: 100vh;
   position: relative;
-  background: transparent;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-x: hidden;
 }
 
-.main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
+.animationContainer {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  background-color: black;
+  overflow: hidden;
+}
+
+.imageContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  will-change: transform, opacity;
+}
+
+.welcomeText {
+  position: absolute;
+  z-index: 3;
+  color: white;
   text-align: center;
+  font-size: 2.5rem;
+  text-shadow: 0 0 15px rgba(0, 150, 255, 0.8);
+  will-change: opacity, transform;
+  font-weight: bold;
+}
+
+.navbarWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 5;
+}
+
+.mainContentWrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.sectionTop {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section {
+  position: relative;
+  padding: 5rem 2rem;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .hero {
+  margin-bottom: 2.5rem;
   text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 .hero h1 {
-  font-size: 3.5rem;
-  color: #8B7B99;
+  font-size: 3rem;
   margin-bottom: 1rem;
-  font-weight: 700;
-}
-
-.hero p {
-  font-size: 1.5rem;
-  color: #8B7B99;
+  background: linear-gradient(45deg, #4aaffe, #c0eaff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 8px rgba(74, 175, 254, 0.5);
 }
 
 .content {
   max-width: 800px;
-  margin: 2rem auto;
+  margin: 0 auto;
 }
-
-.section {
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  overflow: hidden; /* Prevent section overflow */
-}
-
 
 .contentSection {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 2rem;
-  border-radius: 16px;
-  border: 1px solid rgba(139, 123, 153, 0.2);
+  margin-bottom: 2.5rem;
+  color: white;
 }
 
 .contentSection h2 {
-  color: #8B7B99;
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
+  color: #4aaffe;
+  font-size: 1.8rem;
 }
 
 .contentSection p {
-  color: #8B7B99;
-  font-size: 1.2rem;
-  line-height: 1.8;
+  line-height: 1.7;
+  font-size: 1.1rem;
 }
 
-@media (max-width: 768px) {
-  .main {
-    padding: 2rem 1rem;
-  }
+/* Media Queries for Responsive Design */
 
+/* Large phones and small tablets (portrait) */
+@media screen and (max-width: 768px) {
+  .welcomeText {
+    font-size: 2rem;
+    width: 90%;
+  }
+  
   .hero h1 {
     font-size: 2.5rem;
   }
+  
+  .contentSection h2 {
+    font-size: 1.6rem;
+  }
+  
+  .contentSection p {
+    font-size: 1rem;
+  }
+  
+  .section {
+    padding: 4rem 1.5rem;
+  }
+}
 
-  .hero p {
+/* Phones */
+@media screen and (max-width: 480px) {
+  .welcomeText {
+    font-size: 1.75rem;
+    width: 90%;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .contentSection h2 {
+    font-size: 1.4rem;
+  }
+  
+  .contentSection p {
+    font-size: 0.95rem;
+  }
+  
+  .section {
+    padding: 3rem 1rem;
+  }
+  
+  /* Adjust animation focal points for mobile */
+  .animationContainer {
+    height: 100dvh; /* Use dynamic viewport height if supported */
+  }
+}
+
+/* Extra small phones */
+@media screen and (max-width: 320px) {
+  .welcomeText {
+    font-size: 1.5rem;
+  }
+  
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .contentSection h2 {
     font-size: 1.2rem;
+  }
+  
+  .section {
+    padding: 2.5rem 0.75rem;
+  }
+}
+
+/* Height-based adjustments for short screens */
+@media screen and (max-height: 600px) {
+  .section {
+    min-height: 65vh;
+  }
+  
+  .sectionTop {
+    height: 65vh;
+  }
+}
+
+/* Fix for notched phones and safe areas */
+@supports (padding: max(0px)) {
+  .navbarWrapper {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .section {
+    padding-left: calc(1rem + env(safe-area-inset-left));
+    padding-right: calc(1rem + env(safe-area-inset-right));
   }
 }

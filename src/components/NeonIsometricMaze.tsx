@@ -50,7 +50,7 @@ const NeonIsometricMaze: React.FC = () => {
           x.closePath()
 
           const l = x.createLinearGradient(p, q - f, p + s, q)
-          l.addColorStop(0, "rgba(0,255,255,.8)")
+          l.addColorStop(0, "rgba(21, 0, 255, 0.8)")
           l.addColorStop(1, "rgba(255,0,255,.8)")
           x.fillStyle = l
           x.fill()

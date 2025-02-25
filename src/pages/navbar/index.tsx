@@ -1,7 +1,7 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
 import { usePathname } from 'next/navigation';
 
@@ -13,11 +13,52 @@ const navItems = [
   { name: "Contact", href: "/contact" },
 ];
 
-
 export default function Navbar() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
-  
+
+  // Check if mobile on component mount and window resize
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Initial check
+    checkIfMobile();
+    
+    // Add event listener
+    window.addEventListener('resize', checkIfMobile);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isMobileMenuOpen]);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <motion.nav
       className={styles.navbar}
@@ -25,7 +66,7 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className={styles.navContent}>
+      <div className={`${styles.navContent} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
         <motion.div
           className={styles.logoContainer}
           whileHover={{ scale: 1.1 }}
@@ -36,6 +77,7 @@ export default function Navbar() {
           </Link>
         </motion.div>
 
+        {/* Desktop Navigation */}
         <motion.div className={styles.navItemsContainer}>
           <div className={styles.navItems}>
             {navItems.map((item) => (
@@ -64,6 +106,48 @@ export default function Navbar() {
             ))}
           </div>
         </motion.div>
+
+        {/* Mobile Menu Button */}
+        <button 
+          className={styles.mobileMenuButton} 
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+        >
+          <div className={styles.mobileMenuIcon}></div>
+        </button>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMobile && (
+            <motion.div 
+              className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isMobileMenuOpen ? 1 : 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {navItems.map((item) => (
+                <motion.div
+                  key={item.name}
+                  className={`${styles.mobileNavItem} ${
+                    pathname === item.href ? styles.mobileActiveItem : ""
+                  }`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ 
+                    opacity: isMobileMenuOpen ? 1 : 0,
+                    y: isMobileMenuOpen ? 0 : 20
+                  }}
+                  transition={{ 
+                    duration: 0.3,
+                    delay: isMobileMenuOpen ? navItems.indexOf(item) * 0.1 : 0
+                  }}
+                >
+                  <Link href={item.href}>{item.name}</Link>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.nav>
   );

@@ -92,26 +92,6 @@
   font-weight: 600;
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    background: rgba(255, 255, 255, 0.05);
-    width: 100%;
-    padding: 0 0.5rem; /* Adjust padding for smaller screens */
-  }
-
-  .navItemsContainer {
-    display: none;
-  }
-
-  .logo {
-    font-size: 1.5rem;
-  }
-
-  .navContent {
-    padding: 0 1rem;
-  }
-}
-
 .navContent:hover {
   background: rgba(242, 228, 233, 0.8);
   box-shadow:
@@ -127,4 +107,184 @@
 .container {
   margin: 0;
   padding: 0;
+}
+
+/* Mobile menu styles */
+.mobileMenuButton {
+  display: none;
+  position: relative;
+  z-index: 1001;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin-left: auto;
+}
+
+.mobileMenuIcon {
+  position: relative;
+  width: 24px;
+  height: 2px;
+  background-color: #675775;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+}
+
+.mobileMenuIcon::before,
+.mobileMenuIcon::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: #675775;
+  transition: all 0.3s ease;
+  left: 0;
+}
+
+.mobileMenuIcon::before {
+  top: -8px;
+}
+
+.mobileMenuIcon::after {
+  bottom: -8px;
+}
+
+.mobileMenuOpen .mobileMenuIcon {
+  background-color: transparent;
+}
+
+.mobileMenuOpen .mobileMenuIcon::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.mobileMenuOpen .mobileMenuIcon::after {
+  transform: rotate(-45deg);
+  bottom: 0;
+}
+
+.mobileMenu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(242, 228, 233, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  padding: 2rem;
+}
+
+.mobileMenuOpen .mobileMenu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobileNavItem {
+  padding: 0.75rem 0;
+  text-align: center;
+  width: 100%;
+  max-width: 250px;
+  position: relative;
+}
+
+.mobileNavItem a {
+  font-family: "Helvetica Neue LT Pro", sans-serif;
+  color: #55396e;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: block;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+}
+
+.mobileActiveItem a {
+  color: #6f607d;
+  font-weight: 600;
+  background: rgba(245, 240, 250, 0.8);
+  box-shadow:
+    0 1px 3px rgba(139, 123, 153, 0.1),
+    0 0 10px rgba(139, 123, 153, 0.1);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .navbar {
+    background: rgba(255, 255, 255, 0.05);
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+  
+  .navItemsContainer {
+    display: none;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .navContent {
+    padding: 0 1rem;
+    justify-content: space-between;
+  }
+  
+  .mobileMenuButton {
+    display: block;
+  }
+  
+  .mobileMenu {
+    display: flex;
+  }
+}
+
+/* Small Phone Screens */
+@media (max-width: 480px) {
+  .navbar {
+    top: 0.3rem;
+    height: 50px;
+  }
+  
+  .logo {
+    font-size: 1.3rem;
+  }
+  
+  .navContent {
+    border-radius: 50px;
+  }
+  
+  .mobileMenuButton {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .mobileNavItem a {
+    font-size: 1.1rem;
+  }
+}
+
+/* Support for safe areas on notched phones */
+@supports (padding: max(0px)) {
+  .navbar {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+  
+  .mobileMenu {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
 }
