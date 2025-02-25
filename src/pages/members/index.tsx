@@ -21,7 +21,7 @@ export default function LabMembers() {
   const PI = {
     name: "Dr. Anand Jeyashekharan",
     title: "Principal Investigator",
-    image: "/Media/LabMembers/Anand.jpeg",
+    image: "/media/LabMembers/Anand.jpeg",
     description: "The ADJ laboratory investigates immune recognition of cancer after chemotherapy to develop effective immunotherapy-chemotherapy combinations. We conduct both molecular research and clinical studies, with special focus on lymphomas in collaboration with the NUH Lymphoma team.",
     bio: "Clinician-scientist and Assistant Professor at NUS Centre for Cancer Research. Medical Oncologist at National University Cancer Institute and Principal Investigator at Cancer Science Institute. Leads Microscopy Core and co-leads Translational Research platform for Singapore Translational Cancer Consortium.",
     email: "csiadj@nus.edu.sg"
@@ -31,7 +31,7 @@ export default function LabMembers() {
     {
       name: "Patrick William Jaynes",
       title: "Research Fellow",
-      image: "/Media/LabMembers/Patrick.jpg",
+      image: "/media/LabMembers/Patrick.jpg",
       description: "Developing ways to augment the efficacy of chemotherapy within the context of lymphoma through the activation of the immune system.",
       bio: "Developing ways to augment the efficacy of chemotherapy within the context of lymphoma through the activation of the immune system.",
       email: "Email"
@@ -39,7 +39,7 @@ export default function LabMembers() {
     {
       name: "Norbert Tay Sheng Cong",
       title: "PhD Student",
-      image: "/Media/LabMembers/Chow-Norbert-Tay-.jpg",
+      image: "/media/LabMembers/Chow-Norbert-Tay-.jpg",
       description: "Investigating Molecular Mechanism of DNA Damage Response-based Therapies in Haematological Malignancies.",
       bio: "Investigating Molecular Mechanism of DNA Damage Response-based Therapies in Haematological Malignancies.",
       email: "Email"
@@ -47,7 +47,7 @@ export default function LabMembers() {
     {
       name: "Clarissa Toh Chin Min",
       title: "Research Fellow",
-      image: "/Media/LabMembers/Clarissa-Toh.jpeg",
+      image: "/media/LabMembers/Clarissa-Toh.jpeg",
       description: "Investigating the role of novel proteins in replication stress-induced inflammatory signalling.",
       bio: "Investigating the role of novel proteins in replication stress-induced inflammatory signalling.",
       email: "Email"
@@ -55,7 +55,7 @@ export default function LabMembers() {
     {
       name: "Allison Chan",
       title: "Research Fellow",
-      image: "/Media/LabMembers/Allison.jpg",
+      image: "/media/LabMembers/Allison.jpg",
       description: "Investigating immune activation after DNA damage in B cell lymphoma.",
       bio: "Investigating immune activation after DNA damage in B cell lymphoma.",
       email: "Email"
@@ -63,7 +63,7 @@ export default function LabMembers() {
     {
       name: "Akshaya Anbuselvan",
       title: "Research Assistant",
-      image: "/Media/LabMembers/Akshaya.jpg",
+      image: "/media/LabMembers/Akshaya.jpg",
       description: "Study of immune activation after DNA damage in Diffuse large B cell lymphoma.",
       bio: "Study of immune activation after DNA damage in Diffuse large B cell lymphoma.",
       email: "Email"
@@ -71,7 +71,7 @@ export default function LabMembers() {
     {
       name: "Bryce Tan Wei Quan",
       title: "PhD Student",
-      image: "/Media/LabMembers/Bryce-Tan.jpeg",
+      image: "/media/LabMembers/Bryce-Tan.jpeg",
       description: "Studying the role of mTOR in cellular survival and proliferation.",
       bio: "Studying the role of mTOR in cellular survival and proliferation.",
       email: "Email"
@@ -87,7 +87,7 @@ export default function LabMembers() {
     {
       name: "Ong Zi Yan Charmaine",
       title: "PhD Student",
-      image: "/Media/LabMembers/Charmaine-Ong.jpg",
+      image: "/media/LabMembers/Charmaine-Ong.jpg",
       description: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
       bio: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
       email: "Email"
@@ -95,7 +95,7 @@ export default function LabMembers() {
     {
       name: "Shruti Sridhar",
       title: "PhD Student",
-      image: "/Media/LabMembers/Shruti.png",
+      image: "/media/LabMembers/Shruti.png",
       description: "Investigating cellular and spatial patterns of prognostically relevant oncogene co-expression in DLBCL.",
       bio: "Investigating cellular and spatial patterns of prognostically relevant oncogene co-expression in DLBCL.",
       email: "Email"
@@ -103,7 +103,7 @@ export default function LabMembers() {
     {
       name: "Zuo Suhui",
       title: "Research Assistant",
-      image: "/Media/LabMembers/ZUO.png",
+      image: "/media/LabMembers/ZUO.png",
       description: "",
       bio: "",
       email: "Email"
@@ -111,7 +111,7 @@ export default function LabMembers() {
     {
       name: "Hong Liang",
       title: "Research Assistant",
-      image: "/Media/LabMembers/Hong.png",
+      image: "/media/LabMembers/Hong.png",
       description: "Study of transcriptomics like RNA sequencing analysis using bioinformatics techniques.",
       bio: "Study of transcriptomics like RNA sequencing analysis using bioinformatics techniques.",
       email: "Email"
@@ -119,7 +119,7 @@ export default function LabMembers() {
     {
       name: "Chartsiam (Sam) Tipgomut",
       title: "Research Fellow",
-      image: "/Media/LabMembers/sam-Chartsiam.jpg",
+      image: "/media/LabMembers/sam-Chartsiam.jpg",
       description: "Development of human cellular model systems for in-depth analysis and drug screening of a novel Diamond-Blackfan anemia mutation.",
       bio: "Development of human cellular model systems for in-depth analysis and drug screening of a novel Diamond-Blackfan anemia mutation.",
       email: "Email"
@@ -127,7 +127,7 @@ export default function LabMembers() {
     {
       name: "Lee Rui Xue",
       title: "PhD Student",
-      image: "/Media/LabMembers/Lee-Rui-Xue.jpg",
+      image: "/media/LabMembers/Lee-Rui-Xue.jpg",
       description: "Identifying novel drug combinations that augment the efficacy of immunomodulators in DLBCL.",
       bio: "Identifying novel drug combinations that augment the efficacy of immunomodulators in DLBCL.",
       email: "Email"
@@ -135,7 +135,7 @@ export default function LabMembers() {
     {
       name: "Girija Shenoy",
       title: "Research Assistant",
-      image: "/Media/LabMembers/Girija.png",
+      image: "/media/LabMembers/Girija.png",
       description: "RNAseq and single-cell RNA sequencing data analysis using bioinformatics techniques.",
       bio: "RNAseq and single-cell RNA sequencing data analysis using bioinformatics techniques.",
       email: "Email"
@@ -143,7 +143,7 @@ export default function LabMembers() {
     {
       name: "Tang Jing Ping",
       title: "Senior Laboratory Executive",
-      image: "/Media/LabMembers/tang_jing_ping.jpg",
+      image: "/media/LabMembers/tang_jing_ping.jpg",
       description: "Lab management and work on crystallography and SALL4 drug screening project.",
       bio: "Lab management and work on crystallography and SALL4 drug screening project.",
       email: "Email"
