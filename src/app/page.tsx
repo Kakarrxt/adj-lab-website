@@ -42,7 +42,6 @@ export default function Main() {
       </motion.div>
 
       {/* Third Section - Second Animation */}
-
       <Footer />
     </div>
   )
