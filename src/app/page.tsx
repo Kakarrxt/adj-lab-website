@@ -7,6 +7,9 @@ import Footer from "@/pages/footer/index";
 import styles from "./page.module.css";
 import anime from "animejs";
 import NeonIsometricMaze from "@/components/NeonIsometricMaze";
+import FlowingMenu from "@/components/FlowingMenu";
+import { FaUser, FaMicroscope, FaUsers, FaBook } from 'react-icons/fa';
+// import DecryptedText from "@/components/DecryptedText";
 
 export default function Main() {
   const [animationComplete, setAnimationComplete] = useState(false);
@@ -95,6 +98,7 @@ export default function Main() {
         setTimeout(() => setShowContent(true), 600 * animationSpeed);
       }
     });
+    
 
     return () => {
       // Cleanup
@@ -102,8 +106,10 @@ export default function Main() {
       timeline.pause();
     };
   }, [isMobile]); // Re-run when isMobile changes
+  
 
   return (
+    
     <div className={styles.container}>
       {!showContent ? (
         <div className={styles.animationContainer}>
@@ -166,22 +172,37 @@ export default function Main() {
           >
             <Navbar />
             
-            <motion.div className={styles.sectionTop}>
-              <div className="fixed inset-0 -z-10">
+            <motion.div
+              className={styles.sectionTop}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div>
                 <NeonIsometricMaze />
               </div>
             </motion.div>
             
             {/* Second Section - Welcome Text */}
+            
             <motion.div 
               className={styles.section}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.7 }}
             >
+              
               <div className={styles.hero}>
+                
                 <h1 className="text-white">Welcome to ADJ Lab</h1>
-                <p className="text-gray-300">Advancing Cancer Research Through Innovation</p>
+                {/* <DecryptedText
+                text="Advancing Cancer Research Through Innovation"
+                animateOn="view"
+                revealDirection="center"
+                color="#55396e"
+                size="20px"
+              /> */}
+  
               </div>
               
               <motion.div 
@@ -196,9 +217,17 @@ export default function Main() {
                     Dedicated to understanding and developing innovative approaches in cancer treatment through cutting-edge research and collaboration.
                   </p>
                 </div>
+                
               </motion.div>
+              
             </motion.div>
-            
+            <div style={{ height: '600px', position: 'relative',backgroundColor: '#413e44' }}>
+              <FlowingMenu items={[ { link: '/anand', text: 'Anand', icon: FaUser },
+                          { link: '/research', text: 'Research', icon: FaMicroscope },
+                          { link: '/memmbers', text: 'Lab Members', icon: FaUsers },
+                          { link: '/publications', text: 'Publications', icon: FaBook  }]} />
+            </div>
+         
             {/* Footer with animation */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}

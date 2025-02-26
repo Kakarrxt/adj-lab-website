@@ -4,6 +4,9 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import styles from './Publications.module.css';
 import NeonIsometricMaze from '@/components/NeonIsometricMaze';
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+import type { Engine } from "@tsparticles/engine";
 
 // Define proper interfaces for the API response
 interface OrcidResponse {
@@ -64,6 +67,14 @@ interface Publication {
 }
 
 export default function Publications() {
+  const [init, setInit] = useState(false);
+  useEffect(() => {
+    initParticlesEngine(async (engine: Engine) => {
+      await loadSlim(engine);
+    }).then(() => {
+      setInit(true);
+    });
+  }, []);
   const [publications, setPublications] = useState<Publication[]>([]);
   const [sortedPublications, setSortedPublications] = useState<Publication[]>([]);
   const [loading, setLoading] = useState(true);
@@ -177,7 +188,55 @@ export default function Publications() {
 
     sortPublications();
   }, [publications, sortBy]);
-
+ 
+  const particlesOptions = {
+    background: {
+      color: {
+        value: "transparent",
+      },
+    },
+    fpsLimit: 120,
+    particles: {
+      color: {
+        value: "#6b46c1",
+      },
+      links: {
+        color: "#9f7aea",
+        distance: 150,
+        enable: true,
+        opacity: 0.2,
+        width: 1,
+      },
+      move: {
+        direction: "none" as const,
+        enable: true,
+        outModes: {
+          default: "bounce" as const,
+        },
+        random: false,
+        speed: 0.8,
+        straight: false,
+      },
+      number: {
+        density: {
+          enable: true,
+          area: 800,
+        },
+        value: 70,
+      },
+      opacity: {
+        value: 0.25,
+      },
+      shape: {
+        type: "circle",
+      },
+      size: {
+        value: { min: 1, max: 4 },
+      },
+    },
+    detectRetina: true,
+  };
+  
   return (
     <>
       <motion.div 
@@ -192,6 +251,13 @@ export default function Publications() {
       </motion.div>
       
       <div className={styles.container}>
+      {init && (
+        <Particles
+          id="tsparticles"
+          options={particlesOptions}
+          className={styles.particles}
+        />
+      )}
         <main className={styles.main}>
           <motion.div
             ref={headerRef}

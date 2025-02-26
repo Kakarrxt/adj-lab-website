@@ -1,49 +1,66 @@
 "use client"
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+import type { Engine } from "@tsparticles/engine";
 import styles from "./members.module.css"
 import Link from "next/link"
-import Image from "next/image"
 import NeonIsometricMaze from "@/components/NeonIsometricMaze"
+import TiltedCard from "./TiltedCard"
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.2 }
-  }
+    transition: { staggerChildren: 0.2 },
+  },
 }
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 }
 
+
+
 export default function LabMembers() {
+  const [init, setInit] = useState(false);
+  useEffect(() => {
+    initParticlesEngine(async (engine: Engine) => {
+      await loadSlim(engine);
+    }).then(() => {
+      setInit(true);
+    });
+  }, []);
   const PI = {
     name: "Dr. Anand Jeyashekharan",
     title: "Principal Investigator",
     image: "/media/LabMembers/Anand.jpeg",
-    description: "The ADJ laboratory investigates immune recognition of cancer after chemotherapy to develop effective immunotherapy-chemotherapy combinations. We conduct both molecular research and clinical studies, with special focus on lymphomas in collaboration with the NUH Lymphoma team.",
+    description:
+      "The ADJ laboratory investigates immune recognition of cancer after chemotherapy to develop effective immunotherapy-chemotherapy combinations. We conduct both molecular research and clinical studies, with special focus on lymphomas in collaboration with the NUH Lymphoma team.",
     bio: "Clinician-scientist and Assistant Professor at NUS Centre for Cancer Research. Medical Oncologist at National University Cancer Institute and Principal Investigator at Cancer Science Institute. Leads Microscopy Core and co-leads Translational Research platform for Singapore Translational Cancer Consortium.",
-    email: "csiadj@nus.edu.sg"
-   }
+    email: "csiadj@nus.edu.sg",
+  }
 
   const currentMembers = [
     {
       name: "Patrick William Jaynes",
       title: "Research Fellow",
       image: "/media/LabMembers/Patrick.jpg",
-      description: "Developing ways to augment the efficacy of chemotherapy within the context of lymphoma through the activation of the immune system.",
+      description:
+        "Developing ways to augment the efficacy of chemotherapy within the context of lymphoma through the activation of the immune system.",
       bio: "Developing ways to augment the efficacy of chemotherapy within the context of lymphoma through the activation of the immune system.",
-      email: "Email"
+      email: "Email",
     },
     {
       name: "Norbert Tay Sheng Cong",
       title: "PhD Student",
       image: "/media/LabMembers/Chow-Norbert-Tay-.jpg",
-      description: "Investigating Molecular Mechanism of DNA Damage Response-based Therapies in Haematological Malignancies.",
+      description:
+        "Investigating Molecular Mechanism of DNA Damage Response-based Therapies in Haematological Malignancies.",
       bio: "Investigating Molecular Mechanism of DNA Damage Response-based Therapies in Haematological Malignancies.",
-      email: "Email"
+      email: "Email",
     },
     {
       name: "Clarissa Toh Chin Min",
@@ -51,7 +68,7 @@ export default function LabMembers() {
       image: "/media/LabMembers/Clarissa-Toh.jpeg",
       description: "Investigating the role of novel proteins in replication stress-induced inflammatory signalling.",
       bio: "Investigating the role of novel proteins in replication stress-induced inflammatory signalling.",
-      email: "Email"
+      email: "Email",
     },
     {
       name: "Allison Chan",
@@ -59,7 +76,7 @@ export default function LabMembers() {
       image: "/media/LabMembers/Allison.jpg",
       description: "Investigating immune activation after DNA damage in B cell lymphoma.",
       bio: "Investigating immune activation after DNA damage in B cell lymphoma.",
-      email: "Email"
+      email: "Email",
     },
     {
       name: "Akshaya Anbuselvan",
@@ -67,7 +84,7 @@ export default function LabMembers() {
       image: "/media/LabMembers/Akshaya.jpg",
       description: "Study of immune activation after DNA damage in Diffuse large B cell lymphoma.",
       bio: "Study of immune activation after DNA damage in Diffuse large B cell lymphoma.",
-      email: "Email"
+      email: "Email",
     },
     {
       name: "Bryce Tan Wei Quan",
@@ -75,7 +92,7 @@ export default function LabMembers() {
       image: "/media/LabMembers/Bryce-Tan.jpeg",
       description: "Studying the role of mTOR in cellular survival and proliferation.",
       bio: "Studying the role of mTOR in cellular survival and proliferation.",
-      email: "Email"
+      email: "Email",
     },
     {
       name: "Phuong Mai Hoang",
@@ -83,7 +100,7 @@ export default function LabMembers() {
       image: "/media/LabMembers/Phoung.jpg",
       description: "Investigating immune activation in response to replication stress.",
       bio: "Investigating immune activation in response to replication stress.",
-      email: "Email"
+      email: "Email",
     },
     {
       name: "Ong Zi Yan Charmaine",
@@ -91,15 +108,16 @@ export default function LabMembers() {
       image: "/media/LabMembers/Charmaine-Ong.jpg",
       description: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
       bio: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
-      email: "Email"
+      email: "Email",
     },
     {
       name: "Shruti Sridhar",
       title: "PhD Student",
       image: "/media/LabMembers/Shruti.png",
-      description: "Investigating cellular and spatial patterns of prognostically relevant oncogene co-expression in DLBCL.",
+      description:
+        "Investigating cellular and spatial patterns of prognostically relevant oncogene co-expression in DLBCL.",
       bio: "Investigating cellular and spatial patterns of prognostically relevant oncogene co-expression in DLBCL.",
-      email: "Email"
+      email: "Email",
     },
     {
       name: "Zuo Suhui",
@@ -107,7 +125,7 @@ export default function LabMembers() {
       image: "/media/LabMembers/ZUO.png",
       description: "",
       bio: "",
-      email: "Email"
+      email: "Email",
     },
     {
       name: "Hong Liang",
@@ -115,15 +133,16 @@ export default function LabMembers() {
       image: "/media/LabMembers/Hong.png",
       description: "Study of transcriptomics like RNA sequencing analysis using bioinformatics techniques.",
       bio: "Study of transcriptomics like RNA sequencing analysis using bioinformatics techniques.",
-      email: "Email"
+      email: "Email",
     },
     {
       name: "Chartsiam (Sam) Tipgomut",
       title: "Research Fellow",
       image: "/media/LabMembers/sam-Chartsiam.jpg",
-      description: "Development of human cellular model systems for in-depth analysis and drug screening of a novel Diamond-Blackfan anemia mutation.",
+      description:
+        "Development of human cellular model systems for in-depth analysis and drug screening of a novel Diamond-Blackfan anemia mutation.",
       bio: "Development of human cellular model systems for in-depth analysis and drug screening of a novel Diamond-Blackfan anemia mutation.",
-      email: "Email"
+      email: "Email",
     },
     {
       name: "Lee Rui Xue",
@@ -131,7 +150,7 @@ export default function LabMembers() {
       image: "/media/LabMembers/Lee-Rui-Xue.jpg",
       description: "Identifying novel drug combinations that augment the efficacy of immunomodulators in DLBCL.",
       bio: "Identifying novel drug combinations that augment the efficacy of immunomodulators in DLBCL.",
-      email: "Email"
+      email: "Email",
     },
     {
       name: "Girija Shenoy",
@@ -139,7 +158,7 @@ export default function LabMembers() {
       image: "/media/LabMembers/Girija.png",
       description: "RNAseq and single-cell RNA sequencing data analysis using bioinformatics techniques.",
       bio: "RNAseq and single-cell RNA sequencing data analysis using bioinformatics techniques.",
-      email: "Email"
+      email: "Email",
     },
     {
       name: "Tang Jing Ping",
@@ -147,24 +166,79 @@ export default function LabMembers() {
       image: "/media/LabMembers/tang_jing_ping.jpg",
       description: "Lab management and work on crystallography and SALL4 drug screening project.",
       bio: "Lab management and work on crystallography and SALL4 drug screening project.",
-      email: "Email"
+      email: "Email",
     },
   ]
+  const particlesOptions = {
+    background: {
+      color: {
+        value: "transparent",
+      },
+    },
+    fpsLimit: 120,
+    particles: {
+      color: {
+        value: "#6b46c1",
+      },
+      links: {
+        color: "#9f7aea",
+        distance: 150,
+        enable: true,
+        opacity: 0.2,
+        width: 1,
+      },
+      move: {
+        direction: "none" as const,
+        enable: true,
+        outModes: {
+          default: "bounce" as const,
+        },
+        random: false,
+        speed: 0.8,
+        straight: false,
+      },
+      number: {
+        density: {
+          enable: true,
+          area: 800,
+        },
+        value: 70,
+      },
+      opacity: {
+        value: 0.25,
+      },
+      shape: {
+        type: "circle",
+      },
+      size: {
+        value: { min: 1, max: 4 },
+      },
+    },
+    detectRetina: true,
+  };
 
   return (
-    <><motion.div
-      className={styles.sectionTop}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-    >
-      <div>
-        <NeonIsometricMaze />
-      </div>
+    <>
+     
+      <motion.div
+        className={styles.sectionTop}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div>
+          <NeonIsometricMaze />
+        </div>
+      </motion.div>
 
-    </motion.div>
-    
-    <div className={styles.container}>
+      <div className={styles.container}>
+      {init && (
+        <Particles
+          id="tsparticles"
+          options={particlesOptions}
+          className={styles.particles}
+        />
+      )}
         <main className={styles.main}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -181,63 +255,62 @@ export default function LabMembers() {
             <MemberCard member={PI} />
           </section>
 
-      {/* Add section for lab outing and more images here */}
-      {/* FUN STUFF*/}
+          {/* Add section for lab outing and more images here */}
+          {/* FUN STUFF*/}
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Current Lab Members</h2>
-            <motion.div
-              className={styles.membersGrid}
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
+            <motion.div className={styles.membersGrid} variants={containerVariants} initial="hidden" animate="visible">
               {currentMembers.map((member, index) => (
                 <MemberCard key={index} member={member} />
               ))}
             </motion.div>
           </section>
         </main>
-      </div></>
+      </div>
+    </>
   )
 }
 
 interface Member {
-  name: string;
-  title: string;
-  image: string;
-  description: string;
-  bio: string;
-  email: string;
+  name: string
+  title: string
+  image: string
+  description: string
+  bio: string
+  email: string
 }
 
 function MemberCard({ member }: { member: Member }) {
   return (
-    <motion.div
-      variants={itemVariants}
-      className={styles.memberCard}
-    >
+    <motion.div variants={itemVariants} className={styles.memberCard}>
       <div className={styles.photoSection}>
         <div className={styles.imageWrapper}>
-          <Image
-            src={member.image}
-            alt={member.name}
-            width={180}
-            height={180}
-            className={styles.memberImage}
+          <TiltedCard
+            imageSrc={member.image}
+            altText={member.name}
+            containerHeight=""
+            containerWidth=""
+            imageHeight="180px"
+            imageWidth="180px"
+            borderRadius='50%'
+            scaleOnHover={1.05}
+            rotateAmplitude={3}
+            showMobileWarning={false}
+            showTooltip={false}
           />
         </div>
         <Link href={`mailto:${member.email}`} className={styles.emailLink}>
           <span className={styles.emailIcon}>✉️</span> Contact
         </Link>
       </div>
-      
+
       <div className={styles.infoSection}>
         <h3 className={styles.memberName}>{member.name}</h3>
         <p className={styles.memberTitle}>{member.title}</p>
         <p className={styles.memberDescription}>{member.description}</p>
       </div>
-      
+
       <div className={styles.bioSection}>
         <h4 className={styles.bioTitle}>Biography</h4>
         <p className={styles.memberBio}>{member.bio}</p>
@@ -245,3 +318,4 @@ function MemberCard({ member }: { member: Member }) {
     </motion.div>
   )
 }
+
