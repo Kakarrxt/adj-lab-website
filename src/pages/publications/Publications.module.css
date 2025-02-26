@@ -85,12 +85,19 @@
   gap: 1rem;
   margin: 2rem auto;
   max-width: 320px;
+  z-index: 10;
+  position: relative;
 }
 
 .sortWrapper label {
   font-weight: 600;
   color: #6b46c1;
   font-size: 1rem;
+}
+
+.selectContainer {
+  position: relative;
+  flex-grow: 1;
 }
 
 .sortSelect {
@@ -101,13 +108,18 @@
   color: #333;
   font-size: 0.95rem;
   appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236b46c1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 1.2em;
   transition: all 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  flex-grow: 1;
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
 }
 
 .sortSelect:hover {
@@ -401,4 +413,15 @@
   .statsGrid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Fix for overlapping elements and z-index issues */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
 }

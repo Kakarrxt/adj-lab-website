@@ -167,14 +167,21 @@ export default function Publications() {
     fetchPublications();
   }, [ORCID_ID]);
   
+  // Handler for changing sort order
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newSortBy = e.target.value;
+    setSortBy(newSortBy);
+  };
+  
   useEffect(() => {
     const sortPublications = () => {
       const sorted = [...publications].sort((a, b) => {
         switch (sortBy) {
           case 'year-desc':
-            return (b.year || '0') > (a.year || '0') ? 1 : -1;
+            // Convert to numbers for proper comparison, default to 0 if undefined
+            return (parseInt(b.year || '0') - parseInt(a.year || '0'));
           case 'year-asc':
-            return (a.year || '0') > (b.year || '0') ? 1 : -1;
+            return (parseInt(a.year || '0') - parseInt(b.year || '0'));
           case 'title-asc':
             return a.title.localeCompare(b.title);
           case 'title-desc':
@@ -274,17 +281,19 @@ export default function Publications() {
               className={styles.sortWrapper}
             >
               <label htmlFor="sortPublications">Sort by:</label>
-              <select
-                id="sortPublications"
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className={styles.sortSelect}
-              >
-                <option value="year-desc">Newest First</option>
-                <option value="year-asc">Oldest First</option>
-                <option value="title-asc">Title (A-Z)</option>
-                <option value="title-desc">Title (Z-A)</option>
-              </select>
+              <div className={styles.selectContainer}>
+                <select
+                  id="sortPublications"
+                  value={sortBy}
+                  onChange={handleSortChange}
+                  className={styles.sortSelect}
+                >
+                  <option value="year-desc">Newest First</option>
+                  <option value="year-asc">Oldest First</option>
+                  <option value="title-asc">Title (A-Z)</option>
+                  <option value="title-desc">Title (Z-A)</option>
+                </select>
+              </div>
             </motion.div>
           </motion.div>
 
