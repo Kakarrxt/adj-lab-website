@@ -10,6 +10,7 @@ import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 import FlowingMenu from "@/components/FlowingMenu";
 import { FaUser, FaMicroscope, FaUsers, FaBook } from 'react-icons/fa';
 // import DecryptedText from "@/components/DecryptedText";
+import FBXViewer from "@/components/CancerCell";
 
 export default function Main() {
   const [animationComplete, setAnimationComplete] = useState(false);
@@ -191,8 +192,10 @@ export default function Main() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.7 }}
             >
+             
               
               <div className={styles.hero}>
+              
                 
                 <h1 className="text-white">Welcome to ADJ Lab</h1>
                 {/* <DecryptedText
@@ -211,12 +214,25 @@ export default function Main() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.7 }}
               >
-                <div className={styles.contentSection}>
-                  <h2>Our Mission</h2>
-                  <p>
-                    Dedicated to understanding and developing innovative approaches in cancer treatment through cutting-edge research and collaboration.
-                  </p>
+              
+              <section className={styles.card}>
+                <div className={styles.contentWrapper}>
+                  <div className={styles.contentCard}>
+                    <h2 className={styles.sectionTitle}>Our Mission</h2>
+                    <p>
+                      Dedicated to understanding and developing innovative approaches in cancer treatment through cutting-edge research and collaboration.
+                    </p>
+                  </div>
+                  <FBXViewer 
+                    modelPath="/media/cancer_cell.fbx" 
+                    height="400px"
+                    backgroundColor="rgba(62, 54, 74, 0)" // Match your site's lavender background
+                    cameraPosition={[0, 0, 5]} // Adjust for best viewing angle
+                    animationSpeed={0.7} // Slow down rotation for subtlety
+                  />
                 </div>
+              </section>
+                
                 
               </motion.div>
               
@@ -227,6 +243,7 @@ export default function Main() {
                           { link: '/memmbers', text: 'Lab Members', icon: FaUsers },
                           { link: '/publications', text: 'Publications', icon: FaBook  }]} />
             </div>
+            
          
             {/* Footer with animation */}
             <motion.div
