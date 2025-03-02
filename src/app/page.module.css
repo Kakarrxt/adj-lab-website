@@ -81,7 +81,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #ebe0fa;
+  background-color: #28262a;
   box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -94,7 +94,7 @@
   font-size: 3rem;
   margin-bottom: 1rem;
   font-family: "Helvetica Neue LT Pro", sans-serif;
-  color: #55396e;
+  color: #e0cef0;
   -webkit-background-clip: text;
   background-clip: text;
 }
@@ -221,4 +221,41 @@
     padding-left: calc(1rem + env(safe-area-inset-left));
     padding-right: calc(1rem + env(safe-area-inset-right));
   }
+}
+
+.contentWrapper {
+  display: flex; /* Use flexbox for side-by-side layout */
+  align-items: flex-start; /* Align items at the start */
+  justify-content: space-between; /* Space between content and model */
+  padding: 2rem; /* Add some padding */
+}
+
+.contentCard {
+  flex: 1; /* Allow the card to take available space */
+  margin-top: 5.5rem;
+  margin-right: 2rem; /* Space between card and model */
+  padding: 2rem; /* Inner padding for the card */
+  border: 1px solid #656262; /* Border for the card */
+  border-radius: 12px; /* Rounded corners */
+  background-color: #6d5883; /* Background color for the card */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  color: #e0cef0;
+  width:100%;
+}
+
+.contentCard h2 {
+  margin-bottom: 1rem; /* Space below the heading */
+}
+
+.contentCard p {
+  line-height: 1.6; /* Improve readability */
+}
+
+.card{
+  background-color: rgba(62, 54, 74, 0.8);
+  border: 1px solid #383047; /* Border for the card */
+  border-radius: 12px;
+  box-shadow: 0 -10px 20px rgba(93, 92, 92, 0.3);
+  width: 100%;
+  height: 0%
 }
