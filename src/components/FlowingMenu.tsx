@@ -1,19 +1,9 @@
-import React from "react";
-import { gsap } from "gsap";
-import { IconType } from "react-icons"; // Assuming you want to import from 'react-icons'
-import "./FlowingMenu.css";
+import React from 'react';
+import { gsap } from 'gsap';
+import { IconType } from 'react-icons/lib';
+import './FlowingMenu.css';
 
-interface MenuItemProps {
-  link: string;
-  text: string;
-  icon: IconType;
-}
-
-interface FlowingMenuProps {
-  items?: MenuItemProps[];
-}
-
-const FlowingMenu: React.FC<FlowingMenuProps> = ({ items = [] }) => {
+function FlowingMenu({ items = [] }) {
   return (
     <div className="menu-wrap">
       <nav className="menu">
@@ -23,35 +13,29 @@ const FlowingMenu: React.FC<FlowingMenuProps> = ({ items = [] }) => {
       </nav>
     </div>
   );
-};
+}
 
-const MenuItem: React.FC<MenuItemProps> = ({ link, text, icon }) => {
-  const itemRef = React.useRef<HTMLDivElement>(null);
-  const marqueeRef = React.useRef<HTMLDivElement>(null);
-  const marqueeInnerRef = React.useRef<HTMLDivElement>(null);
+function MenuItem({ link, text, icon: Icon }) {
+  const itemRef = React.useRef(null);
+  const marqueeRef = React.useRef(null);
+  const marqueeInnerRef = React.useRef(null);
 
   const animationDefaults: gsap.TweenVars = { duration: 0.6, ease: "expo" };
 
-  const distMetric = (x: number, y: number, x2: number, y2: number): number => {
+  const findClosestEdge = (mouseX, mouseY, width, height) => {
+    const topEdgeDist = distMetric(mouseX, mouseY, width / 2, 0);
+    const bottomEdgeDist = distMetric(mouseX, mouseY, width / 2, height);
+    return topEdgeDist < bottomEdgeDist ? 'top' : 'bottom';
+  };
+
+  const distMetric = (x, y, x2, y2) => {
     const xDiff = x - x2;
     const yDiff = y - y2;
     return xDiff * xDiff + yDiff * yDiff;
   };
 
-  const findClosestEdge = (
-    mouseX: number,
-    mouseY: number,
-    width: number,
-    height: number
-  ): "top" | "bottom" => {
-    const topEdgeDist = distMetric(mouseX, mouseY, width / 2, 0);
-    const bottomEdgeDist = distMetric(mouseX, mouseY, width / 2, height);
-    return topEdgeDist < bottomEdgeDist ? "top" : "bottom";
-  };
-
-  const handleMouseEnter = (ev: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current)
-      return;
+  const handleMouseEnter = (ev) => {
+    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
     const rect = itemRef.current.getBoundingClientRect();
     const x = ev.clientX - rect.left;
     const y = ev.clientY - rect.top;
@@ -64,9 +48,8 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, icon }) => {
       .to([marqueeRef.current, marqueeInnerRef.current], { y: "0%" }, 0);
   };
 
-  const handleMouseLeave = (ev: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current)
-      return;
+  const handleMouseLeave = (ev) => {
+    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
     const rect = itemRef.current.getBoundingClientRect();
     const x = ev.clientX - rect.left;
     const y = ev.clientY - rect.top;
