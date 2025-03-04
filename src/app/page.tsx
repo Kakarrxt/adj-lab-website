@@ -1,261 +1,346 @@
 "use client"
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
-import Navbar from "@/pages/navbar/index";
-import Footer from "@/pages/footer/index";
+import Link from "next/link";
+import Navbar from "@/pages/navbar";
+import Footer from "@/pages/footer";
 import styles from "./page.module.css";
-import anime from "animejs";
-import NeonIsometricMaze from "@/components/NeonIsometricMaze";
-import FlowingMenu from "@/components/FlowingMenu";
-import { FaUser, FaMicroscope, FaUsers, FaBook } from 'react-icons/fa';
-// import DecryptedText from "@/components/DecryptedText";
-import FBXViewer from "@/components/CancerCell";
 
-export default function Main() {
-  const [animationComplete, setAnimationComplete] = useState(false);
-  const [showContent, setShowContent] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const nauticalMapRef = useRef<HTMLDivElement>(null);
-  const cellsRef = useRef<HTMLDivElement>(null);
+// Interfaces for type safety
+interface ResearchTopic {
+  id: string;
+  title: string;
+  description: string;
+  fullDescription: string;
+  image: string;
+  tags: string[];
+}
 
-  // Detect if device is mobile
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    
-    // Check on initial load
-    checkMobile();
-    
-    // Add event listener for window resize
-    window.addEventListener('resize', checkMobile);
-    
-    // Cleanup
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+interface NewsItem {
+  id: string;
+  title: string;
+  date: string;
+  summary: string;
+  category: string;
+  link?: string;
+}
 
-  useEffect(() => {
-    // Enable scrolling
-    document.body.style.overflow = "auto";
-    
-    // Define focal point (adjust for mobile)
-    const focalPointMap = isMobile ? { x: "50%", y: "50%" } : { x: "90%", y: "90%" };
-    const focalPointcells = isMobile ? { x: "50%", y: "50%" } : { x: "90%", y: "90%" };
+export default function ResearchPage() {
+  const [animationStage, setAnimationStage] = useState<'initial' | 'map-zoom' | 'cells-zoom' | 'cells-out'>('initial');
+  const [selectedResearch, setSelectedResearch] = useState<ResearchTopic | null>(null);
+  const [filter, setFilter] = useState<string | null>(null);
 
-    if (nauticalMapRef.current) {
-      nauticalMapRef.current.style.transformOrigin = `${focalPointMap.x} ${focalPointMap.y}`;
-    }
-    if (cellsRef.current) {
-      cellsRef.current.style.transformOrigin = `${focalPointcells.x} ${focalPointcells.y}`;
-    }
-    
-    // Animation timeline - adjust durations for mobile
-    const animationSpeed = isMobile ? 0.8 : 1; // Slightly faster animations on mobile
-    
-    const timeline = anime.timeline({
-      easing: "easeInOutQuad"
-    });
-    
-    // Adjust scale for mobile devices
-    const scaleAmount = isMobile ? 1.5 : 2;
-    
-    // Step 1: Zoom into nautical map
-    timeline.add({
-      targets: "#nautical-map",
-      scale: [1, scaleAmount],
-      duration: 2000 * animationSpeed,
-      easing: "easeInOutCubic"
-    })
-    // Step 2: Fade in cells with slight overlap for seamless transition
-    .add({
-      targets: "#cells",
-      opacity: [0, 1],
-      duration: 800 * animationSpeed,
-      offset: "-=300" // Start before previous animation ends
-    }, "+=100")
-    // Step 3: Zoom out cells
-    .add({
-      targets: "#cells",
-      scale: [scaleAmount, 1],
-      duration: 1500 * animationSpeed,
-      easing: "easeOutQuad"
-    }, "-=600")
-    // Step 4: Fade out nautical map as cells become prominent
-    .add({
-      targets: "#nautical-map",
-      opacity: [1, 0],
-      duration: 600 * animationSpeed
-    }, "-=1200")
-    // Step 5: Fade in welcome text
-    .add({
-      targets: "#welcome-text",
-      opacity: [0, 1],
-      scale: [0.9, 1],
-      duration: 800 * animationSpeed,
-      complete: () => {
-        setAnimationComplete(true);
-        // Delay showing content for smooth transition
-        setTimeout(() => setShowContent(true), 600 * animationSpeed);
-      }
-    });
-    
-
-    return () => {
-      // Cleanup
-      document.body.style.overflow = "auto";
-      timeline.pause();
-    };
-  }, [isMobile]); // Re-run when isMobile changes
+  // Refs for intersection observer
+  const researchRef = useRef(null);
+  const newsRef = useRef(null);
+  const isResearchInView = useInView(researchRef, { once: true });
+  const isNewsInView = useInView(newsRef, { once: true });
   
 
+  // Research Topics with more detailed information
+  const researchTopics: ResearchTopic[] = [
+    {
+      id: "molecular-mapping",
+      title: "Molecular Mapping",
+      description: "Advanced cancer progression analysis",
+      fullDescription: "Pioneering research into molecular-level cancer progression mapping, utilizing cutting-edge genomic and proteomic techniques to understand cellular transformations.",
+      image: "/media/molecular-mapping.jpg",
+      tags: ["Genomics", "Cancer Research", "Molecular Biology"]
+    },
+    {
+      id: "cellular-intervention",
+      title: "Cellular Intervention",
+      description: "Targeted cellular therapeutic strategies",
+      fullDescription: "Developing innovative cellular intervention techniques to disrupt cancer cell growth, focusing on precision medicine and targeted therapeutic approaches.",
+      image: "/media/cellular-intervention.jpg",
+      tags: ["Therapeutics", "Cell Biology", "Precision Medicine"]
+    },
+    {
+      id: "genetic-markers",
+      title: "Genetic Markers",
+      description: "Identifying critical tumor development indicators",
+      fullDescription: "Comprehensive research into genetic markers that play crucial roles in tumor development, progression, and potential therapeutic targeting.",
+      image: "/media/genetic-markers.jpg",
+      tags: ["Genetics", "Oncology", "Biomarkers"]
+    },
+    {
+      id: "immunotherapy",
+      title: "Advanced Immunotherapy",
+      description: "Enhancing immune system cancer response",
+      fullDescription: "Groundbreaking immunotherapy research to enhance the body's natural defense mechanisms against cancer, exploring novel immune modulation techniques.",
+      image: "/media/immunotherapy.jpg",
+      tags: ["Immunology", "Cancer Treatment", "Immune Therapy"]
+    }
+  ];
+
+  // News Items with more categories
+  const newsItems: NewsItem[] = [
+    {
+      id: "breakthrough-2024",
+      title: "Revolutionary Cancer Cell Targeting Method",
+      date: "March 1, 2024",
+      summary: "Breakthrough in targeting highly resistant cancer cell populations using novel molecular techniques.",
+      category: "Research",
+      link: "/news/breakthrough-2024"
+    },
+    {
+      id: "grant-awarded",
+      title: "$2.5M Research Grant Secured",
+      date: "February 15, 2024",
+      summary: "Major funding awarded to advance molecular mapping and cellular intervention research.",
+      category: "Funding",
+      link: "/news/grant-awarded"
+    },
+    {
+      id: "international-collaboration",
+      title: "Global Research Network Expansion",
+      date: "January 20, 2024",
+      summary: "Establishing collaborative research partnerships with leading international oncology institutions.",
+      category: "Collaboration",
+      link: "/news/international-collaboration"
+    }
+  ];
+
+  // Advanced background animation logic
+  useEffect(() => {
+    const animationSequence = () => {
+      setAnimationStage('initial');
+      setTimeout(() => setAnimationStage('map-zoom'), 1000);
+      setTimeout(() => setAnimationStage('cells-zoom'), 3000);
+      setTimeout(() => setAnimationStage('cells-out'), 5000);
+      setTimeout(() => setAnimationStage('initial'), 7000);
+    };
+
+    animationSequence();
+    const interval = setInterval(animationSequence, 8000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Variants for background animations
+  const backgroundVariants = {
+    initial: { 
+      scale: 1, 
+      opacity: 0.3,
+      transition: { duration: 1 }
+    },
+    'map-zoom': { 
+      scale: 1.5, 
+      opacity: 0.5,
+      transition: { duration: 2, ease: "easeInOut" }
+    },
+    'cells-zoom': { 
+      scale: 2, 
+      opacity: 0.7,
+      transition: { duration: 2, ease: "easeInOut" }
+    },
+    'cells-out': { 
+      scale: 1, 
+      opacity: 0.3,
+      transition: { duration: 1, ease: "easeInOut" }
+    }
+  };
+
+  // Filter research topics
+  const filteredResearch = filter 
+    ? researchTopics.filter(topic => topic.tags.includes(filter)) 
+    : researchTopics;
+
   return (
-    
     <div className={styles.container}>
-      {!showContent ? (
-        <div className={styles.animationContainer}>
-          {/* First Image - Nautical Map */}
-          <div 
-            id="nautical-map" 
-            ref={nauticalMapRef}
-            className={styles.imageContainer}
+      <Navbar />
+      
+      {/* Dynamic Hero Section */}
+      <section className={styles.heroSection}>
+        <AnimatePresence>
+          <motion.div 
+            key="nautical-map"
+            className={styles.backgroundImage}
+            variants={backgroundVariants}
+            animate={animationStage}
+            initial="initial"
           >
             <Image 
               src="/media/Nautical.png" 
-              alt="Nautical Map" 
+              alt="Nautical Map Background" 
               layout="fill" 
               objectFit="cover" 
-              priority
-              sizes="100vw" // Responsive image sizing
+              priority 
             />
-          </div>
-          
-          {/* Second Image - Cancer Cells */}
-          <div 
-            id="cells" 
-            ref={cellsRef}
-            className={styles.imageContainer} 
-            style={{ opacity: 0 }}
-          >
-            <Image 
-              src="/media/cells.jpg" 
-              alt="Cancer Cells" 
-              layout="fill" 
-              objectFit="cover" 
-              priority
-              sizes="100vw" // Responsive image sizing
-            />
-          </div>
-          
-          {/* Welcome Text Fade In */}
-          <div id="welcome-text" className={styles.welcomeText} style={{ opacity: 0 }}>
-            <h1>Welcome to ADJ Lab</h1>
-          </div>
-          
-          {animationComplete && (
+          </motion.div>
+
+          {(animationStage === 'cells-zoom' || animationStage === 'cells-out') && (
             <motion.div 
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className={styles.navbarWrapper}
+              key="cells"
+              className={styles.backgroundImage}
+              style={{ zIndex: 2 }}
+              variants={backgroundVariants}
+              animate={animationStage}
+              initial={{ scale: 1.5, opacity: 0 }}
             >
-              <Navbar />
+              <Image 
+                src="/media/cells.jpg" 
+                alt="Cancer Cells" 
+                layout="fill" 
+                objectFit="cover" 
+                priority 
+              />
             </motion.div>
           )}
+        </AnimatePresence>
+        
+        <motion.div 
+          className={styles.heroContent}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ 
+            opacity: animationStage === 'initial' ? 1 : 0.5, 
+            scale: 1 
+          }}
+          transition={{ duration: 1 }}
+        >
+          <h1>ADJ Laboratory</h1>
+          <p>Pioneering Cancer Research through Innovative Science</p>
+        </motion.div>
+      </section>
+
+      {/* Research Topics Section */}
+      <section 
+        ref={researchRef} 
+        className={styles.researchSection}
+      >
+        <motion.h2
+          initial={{ opacity: 0, y: 50 }}
+          animate={isResearchInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          Our Research Focus
+        </motion.h2>
+
+        {/* Research Filters */}
+        <div className={styles.filterContainer}>
+          {Array.from(new Set(researchTopics.flatMap(topic => topic.tags))).map(tag => (
+            <button 
+              key={tag}
+              onClick={() => setFilter(filter === tag ? null : tag)}
+              className={`${styles.filterButton} ${filter === tag ? styles.activeFilter : ''}`}
+            >
+              {tag}
+            </button>
+          ))}
         </div>
-      ) : (
-        <>
+
+        <div className={styles.researchGrid}>
+          {filteredResearch.map((topic) => (
+            <motion.div 
+              key={topic.id}
+              className={styles.researchCard}
+              whileHover={{ scale: 1.05 }}
+              onClick={() => setSelectedResearch(topic)}
+            >
+              <div className={styles.cardImageContainer}>
+                <Image 
+                  src={topic.image} 
+                  alt={topic.title} 
+                  layout="fill" 
+                  objectFit="cover" 
+                />
+              </div>
+              <div className={styles.cardContent}>
+                <h3>{topic.title}</h3>
+                <p>{topic.description}</p>
+                <div className={styles.cardTags}>
+                  {topic.tags.map(tag => (
+                    <span key={tag} className={styles.tag}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* News Section */}
+      <section 
+        ref={newsRef} 
+        className={styles.newsSection}
+      >
+        <motion.h2
+          initial={{ opacity: 0, y: 50 }}
+          animate={isNewsInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          Latest Research News
+        </motion.h2>
+
+        <div className={styles.newsGrid}>
+          {newsItems.map((news) => (
+            <motion.div 
+              key={news.id}
+              className={styles.newsCard}
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className={styles.newsCategory}>{news.category}</div>
+              <h3>{news.title}</h3>
+              <p className={styles.newsDate}>{news.date}</p>
+              <p>{news.summary}</p>
+              {news.link && (
+                <Link href={news.link} className={styles.readMore}>
+                  Read More
+                </Link>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Research Modal */}
+      <AnimatePresence>
+        {selectedResearch && (
           <motion.div 
+            className={styles.modalOverlay}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className={styles.mainContentWrapper}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedResearch(null)}
           >
-            <Navbar />
-            
-            <motion.div
-              className={styles.sectionTop}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div>
-                <NeonIsometricMaze />
-              </div>
-            </motion.div>
-            
-            {/* Second Section - Welcome Text */}
-            
             <motion.div 
-              className={styles.section}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.7 }}
+              className={styles.modalContent}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
             >
-             
-              
-              <div className={styles.hero}>
-              
-                
-                <h1 className="text-white">Welcome to ADJ Lab</h1>
-                {/* <DecryptedText
-                text="Advancing Cancer Research Through Innovation"
-                animateOn="view"
-                revealDirection="center"
-                color="#55396e"
-                size="20px"
-              /> */}
-  
-              </div>
-              
-              <motion.div 
-                className={styles.content}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.7 }}
+              <button 
+                className={styles.closeButton} 
+                onClick={() => setSelectedResearch(null)}
               >
-              
-              <section className={styles.card}>
-                <div className={styles.contentWrapper}>
-                  <div className={styles.contentCard}>
-                    <h2 className={styles.sectionTitle}>Our Mission</h2>
-                    <p>
-                      Dedicated to understanding and developing innovative approaches in cancer treatment through cutting-edge research and collaboration.
-                    </p>
-                  </div>
-                  <FBXViewer 
-                    modelPath="/media/cancer_cell.fbx" 
-                    height="400px"
-                    backgroundColor="rgba(62, 54, 74, 0)" // Match your site's lavender background
-                    cameraPosition={[0, 0, 5]} // Adjust for best viewing angle
-                    animationSpeed={0.7} // Slow down rotation for subtlety
-                  />
+                ×
+              </button>
+              <div className={styles.modalHeader}>
+                <h2>{selectedResearch.title}</h2>
+                <div className={styles.modalTags}>
+                  {selectedResearch.tags.map(tag => (
+                    <span key={tag} className={styles.tag}>{tag}</span>
+                  ))}
                 </div>
-              </section>
-                
-                
-              </motion.div>
-              
-            </motion.div>
-            <div style={{ height: '600px', position: 'relative',backgroundColor: '#413e44' }}>
-              <FlowingMenu items={[ { link: '/anand', text: 'Anand', icon: FaUser },
-                          { link: '/research', text: 'Research', icon: FaMicroscope },
-                          { link: '/memmbers', text: 'Lab Members', icon: FaUsers },
-                          { link: '/publications', text: 'Publications', icon: FaBook  }]} />
-            </div>
-            
-         
-            {/* Footer with animation */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.7 }}
-            >
-              <Footer />
+              </div>
+              <div className={styles.modalImageContainer}>
+                <Image 
+                  src={selectedResearch.image} 
+                  alt={selectedResearch.title} 
+                  layout="fill" 
+                  objectFit="cover" 
+                />
+              </div>
+              <p className={styles.modalDescription}>
+                {selectedResearch.fullDescription}
+              </p>
             </motion.div>
           </motion.div>
-        </>
-      )}
+        )}
+      </AnimatePresence>
+
+      <Footer />
     </div>
   );
 }

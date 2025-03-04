@@ -1,261 +1,325 @@
+
+
+/* Container Styles */
 .container {
   width: 100%;
   min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
+  background-color: white;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
 }
 
-.animationContainer {
+/* Hero Section */
+.heroSection {
+  position: relative;
   width: 100%;
   height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
-  background-color: black;
   overflow: hidden;
+  background-color: black;
 }
 
-.imageContainer {
+.backgroundImage {
   position: absolute;
-  width: 100%;
-  height: 100%;
   top: 0;
   left: 0;
-  will-change: transform, opacity;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
 }
 
-.welcomeText {
-  position: absolute;
-  z-index: 3;
-  color: white;
+.heroContent {
+  position: relative;
+  z-index: 10;
   text-align: center;
-  font-size: 2.5rem;
-  text-shadow: 0 0 15px rgba(0, 150, 255, 0.8);
-  will-change: opacity, transform;
+  color: white;
+  mix-blend-mode: difference;
+  max-width: 800px;
+  padding: 0 2rem;
+}
+
+.heroContent h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
   font-weight: bold;
 }
 
-.navbarWrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 5;
+.heroContent p {
+  font-size: 1.5rem;
+  opacity: 0.8;
 }
 
-.mainContentWrapper {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-}
-
-.sectionTop {
-  position: relative;
-  height: 100px; 
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden; 
-  z-index: 0;
-}
-
-/* Add a container for your animation to control its size */
-.sectionTop > div {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.section {
-  position: relative;
-  padding: 5rem 2rem;
-  min-height: 50vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #28262a;
-  box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.3);
-}
-
-.hero {
-  margin-bottom: 2.5rem;
+/* Research and News Sections */
+.researchSection, 
+.newsSection {
+  padding: 4rem 2rem;
+  background-color: var(--background-light);
   text-align: center;
 }
 
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  font-family: "Helvetica Neue LT Pro", sans-serif;
-  color: #e0cef0;
-  -webkit-background-clip: text;
-  background-clip: text;
+.researchSection h2, 
+.newsSection h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+  font-weight: bold;
 }
 
-.content {
-  max-width: 800px;
-  margin: 0 auto;
-  
+/* Filter Styles */
+.filterContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-.contentSection {
-  margin-bottom: 2.5rem;
+.filterButton {
+  padding: 0.5rem 1rem;
+  background-color: white;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--transition-speed);
+  font-size: 0.9rem;
+}
+
+.filterButton:hover, 
+.activeFilter {
+  background-color: var(--primary-color);
   color: white;
 }
 
-.contentSection h2 {
-  margin-bottom: 1.2rem;
-  font-family: "Helvetica Neue LT Pro", sans-serif;
-  color: #55396e;
-  font-size: 1.8rem;
+/* Grid Layouts */
+.researchGrid, 
+.newsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.contentSection p {
-  line-height: 1.7;
-  font-size: 1.1rem;
-  font-family: "Helvetica Neue LT Pro", sans-serif;
-  color: #55396e;
+/* Research and News Cards */
+.researchCard, 
+.newsCard {
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transition: var(--transition-speed);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Media Queries for Responsive Design */
+.cardImageContainer {
+  position: relative;
+  width: 100%;
+  height: 250px;
+}
 
-/* Large phones and small tablets (portrait) */
-@media screen and (max-width: 768px) {
-  .welcomeText {
-    font-size: 2rem;
-    width: 90%;
-  }
-  
-  .hero h1 {
+.cardContent {
+  padding: 1.5rem;
+  flex-grow: 1;
+}
+
+.cardContent h3 {
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+/* Tag Styles */
+.cardTags, 
+.modalTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  background-color: rgba(107, 70, 193, 0.1);
+  color: var(--primary-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+/* News Card Specific Styles */
+.newsCategory {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.newsDate {
+  color: var(--secondary-color);
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.readMore {
+  display: inline-block;
+  margin-top: auto;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+  align-self: flex-start;
+  padding: 0.5rem 1rem;
+  border-bottom: 2px solid var(--primary-color);
+  transition: var(--transition-speed);
+}
+
+.readMore:hover {
+  color: rgba(107, 70, 193, 0.7);
+  border-bottom-color: rgba(107, 70, 193, 0.7);
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 20px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.modalHeader {
+  padding: 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHeader h2 {
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--secondary-color);
+  cursor: pointer;
+  transition: var(--transition-speed);
+}
+
+.closeButton:hover {
+  color: var(--primary-color);
+  transform: rotate(90deg);
+}
+
+.modalImageContainer {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+.modalDescription {
+  padding: 1.5rem;
+  line-height: 1.6;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .heroContent h1 {
     font-size: 2.5rem;
   }
-  
-  .contentSection h2 {
-    font-size: 1.6rem;
-  }
-  
-  .contentSection p {
-    font-size: 1rem;
-  }
-  
-  .section {
-    padding: 4rem 1.5rem;
-  }
-}
 
-/* Phones */
-@media screen and (max-width: 480px) {
-  .welcomeText {
-    font-size: 1.75rem;
-    width: 90%;
-  }
-  
-  .hero h1 {
-    font-size: 2rem;
-  }
-  
-  .contentSection h2 {
-    font-size: 1.4rem;
-  }
-  
-  .contentSection p {
-    font-size: 0.95rem;
-  }
-  
-  .section {
-    padding: 3rem 1rem;
-  }
-  
-  /* Adjust animation focal points for mobile */
-  .animationContainer {
-    height: 100dvh; /* Use dynamic viewport height if supported */
-  }
-}
-
-/* Extra small phones */
-@media screen and (max-width: 320px) {
-  .welcomeText {
-    font-size: 1.5rem;
-  }
-  
-  .hero h1 {
-    font-size: 1.8rem;
-  }
-  
-  .contentSection h2 {
+  .heroContent p {
     font-size: 1.2rem;
   }
-  
-  .section {
-    padding: 2.5rem 0.75rem;
+
+  .researchGrid, 
+  .newsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .modalContent {
+    margin: 1rem;
+    max-height: 95vh;
+  }
+
+  .modalImageContainer {
+    height: 250px;
+  }
+
+  .filterContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .filterButton {
+    width: 100%;
+    max-width: 300px;
   }
 }
 
-/* Height-based adjustments for short screens */
-@media screen and (max-height: 600px) {
-  .section {
-    min-height: 65vh;
+/* Scroll Bar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 70, 193, 0.7);
+}
+
+/* Accessibility and Focus States */
+*:focus {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+/* Print Styles */
+@media print {
+  .container {
+    background: white;
+    color: black;
   }
-  
-  .sectionTop {
-    height: 65vh;
+
+  .heroSection,
+  .backgroundImage {
+    display: none;
   }
-}
-
-/* Fix for notched phones and safe areas */
-@supports (padding: max(0px)) {
-  .navbarWrapper {
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-    padding-top: env(safe-area-inset-top);
-  }
-  
-  .section {
-    padding-left: calc(1rem + env(safe-area-inset-left));
-    padding-right: calc(1rem + env(safe-area-inset-right));
-  }
-}
-
-.contentWrapper {
-  display: flex; /* Use flexbox for side-by-side layout */
-  align-items: flex-start; /* Align items at the start */
-  justify-content: space-between; /* Space between content and model */
-  padding: 2rem; /* Add some padding */
-}
-
-.contentCard {
-  flex: 1; /* Allow the card to take available space */
-  margin-top: 5.5rem;
-  margin-right: 2rem; /* Space between card and model */
-  padding: 2rem; /* Inner padding for the card */
-  border: 1px solid #656262; /* Border for the card */
-  border-radius: 12px; /* Rounded corners */
-  background-color: #6d5883; /* Background color for the card */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  color: #e0cef0;
-  width:100%;
-}
-
-.contentCard h2 {
-  margin-bottom: 1rem; /* Space below the heading */
-}
-
-.contentCard p {
-  line-height: 1.6; /* Improve readability */
-}
-
-.card{
-  background-color: rgba(62, 54, 74, 0.8);
-  border: 1px solid #383047; /* Border for the card */
-  border-radius: 12px;
-  box-shadow: 0 -10px 20px rgba(93, 92, 92, 0.3);
-  width: 100%;
-  height: 0%
 }
