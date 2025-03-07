@@ -9,7 +9,7 @@ const navItems = [
   { name: "Research", href: "/research" },
   { name: "Anand", href: "/anand" },
   { name: "Lab Members", href: "/members" },
-  { name: "Alumni", href: "/alumni" },
+  { name: "Lab Events", href: "/lab-events" },
   { name: "Publication", href: "/publications" },
   { name: "Join Us", href: "/join-us" },
   { name: "Contact", href: "/contact" },
