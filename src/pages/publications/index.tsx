@@ -18,11 +18,32 @@ interface PubMedSearchResponse {
   };
 }
 
+interface ArticleId {
+  idtype: string;
+  value: string;
+}
+
+interface Author {
+  name: string;
+}
+
+interface PubMedArticle {
+  title?: string;
+  fulljournalname?: string;
+  source?: string;
+  pubdate?: string;
+  articleids?: ArticleId[];
+  authors?: Author[];
+  abstract?: string;
+}
+
+interface PubMedResult {
+  uids: string[];
+  [key: string]: PubMedArticle | string[];
+}
+
 interface PubMedSummaryResponse {
-  result: {
-    uids: string[];
-    [key: string]: any;
-  };
+  result: PubMedResult;
 }
 
 interface Publication {
@@ -39,12 +60,16 @@ interface Publication {
 
 export default function Publications() {
   const [init, setInit] = useState(false);
+  
   useEffect(() => {
-    initParticlesEngine(async (engine: Engine) => {
-      await loadSlim(engine);
-    }).then(() => {
+    const initEngine = async () => {
+      await initParticlesEngine(async (engine: Engine) => {
+        await loadSlim(engine);
+      });
       setInit(true);
-    });
+    };
+    
+    initEngine().catch(console.error);
   }, []);
   
   const [publications, setPublications] = useState<Publication[]>([]);
@@ -53,8 +78,8 @@ export default function Publications() {
   const [error, setError] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState('year-desc');
   
-  const headerRef = useRef(null);
-  const contentRef = useRef(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const isHeaderInView = useInView(headerRef, { once: true });
   const isContentInView = useInView(contentRef, { once: true });
 
@@ -85,67 +110,78 @@ export default function Publications() {
 
   // Function to search PubMed for article IDs
   const searchPubMed = async (query: string, max: number): Promise<string[]> => {
-    const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${encodeURIComponent(query)}&retmax=${max}&retmode=json`;
-    
-    const response = await fetch(searchUrl);
-    if (!response.ok) {
-      throw new Error('Failed to fetch from PubMed');
+    try {
+      const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${encodeURIComponent(query)}&retmax=${max}&retmode=json`;
+      
+      const response = await fetch(searchUrl);
+      if (!response.ok) {
+        throw new Error('Failed to fetch from PubMed');
+      }
+      
+      const data: PubMedSearchResponse = await response.json();
+      return data.esearchresult.idlist;
+    } catch (error) {
+      console.error("Error searching PubMed:", error);
+      return [];
     }
-    
-    const data: PubMedSearchResponse = await response.json();
-    return data.esearchresult.idlist;
   };
 
   // Function to fetch article details
   const fetchArticleDetails = async (ids: string[]): Promise<Publication[]> => {
     if (ids.length === 0) return [];
     
-    const summaryUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=${ids.join(',')}&retmode=json`;
-    
-    const response = await fetch(summaryUrl);
-    if (!response.ok) {
-      throw new Error('Failed to fetch article details from PubMed');
-    }
-    
-    const data: PubMedSummaryResponse = await response.json();
-    
-    const articles: Publication[] = [];
-    
-    for (const id of data.result.uids) {
-      const article = data.result[id];
+    try {
+      const summaryUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=${ids.join(',')}&retmode=json`;
       
-      // Extract year from pubdate
-      let year = undefined;
-      if (article.pubdate) {
-        const yearMatch = article.pubdate.match(/(\d{4})/);
-        if (yearMatch) {
-          year = yearMatch[1];
-        }
+      const response = await fetch(summaryUrl);
+      if (!response.ok) {
+        throw new Error('Failed to fetch article details from PubMed');
       }
       
-      // Extract DOI if available
-      let doi = undefined;
-      if (article.articleids) {
-        const doiObj = article.articleids.find((idObj: any) => idObj.idtype === 'doi');
-        if (doiObj) {
-          doi = doiObj.value;
+      const data: PubMedSummaryResponse = await response.json();
+      
+      const articles: Publication[] = [];
+      
+      for (const id of data.result.uids) {
+        // Type assertion here because we know the structure but TypeScript doesn't
+        const article = data.result[id] as PubMedArticle;
+        
+        // Extract year from pubdate
+        let year = undefined;
+        if (article.pubdate) {
+          const yearMatch = article.pubdate.match(/(\d{4})/);
+          if (yearMatch) {
+            year = yearMatch[1];
+          }
         }
+        
+        // Extract DOI if available
+        let doi = undefined;
+        if (article.articleids) {
+          const doiObj = article.articleids.find((idObj) => idObj.idtype === 'doi');
+          if (doiObj) {
+            doi = doiObj.value;
+          }
+        }
+        
+        articles.push({
+          id: id,
+          title: article.title || 'No title available',
+          journal: article.fulljournalname || article.source || undefined,
+          year: year,
+          url: `https://pubmed.ncbi.nlm.nih.gov/${id}/`,
+          type: 'journal-article',
+          doi: doi,
+          authors: article.authors?.map((author) => author.name) || [],
+          abstract: article.abstract || undefined
+        });
       }
       
-      articles.push({
-        id: id,
-        title: article.title || 'No title available',
-        journal: article.fulljournalname || article.source || undefined,
-        year: year,
-        url: `https://pubmed.ncbi.nlm.nih.gov/${id}/`,
-        type: 'journal-article',
-        doi: doi,
-        authors: article.authors?.map((author: any) => author.name) || [],
-        abstract: article.abstract || undefined
-      });
+      return articles;
+    } catch (error) {
+      console.error("Error fetching article details:", error);
+      return [];
     }
-    
-    return articles;
   };
 
   useEffect(() => {
@@ -158,6 +194,7 @@ export default function Publications() {
         
         if (articleIds.length === 0) {
           setPublications([]);
+          setLoading(false);
           return;
         }
         
@@ -354,7 +391,7 @@ export default function Publications() {
                 initial="hidden"
                 whileInView="visible" 
                 viewport={{ once: true, amount: 0.5 }}
-                            >
+              >
                 <h2>{pub.title}</h2>
                 {pub.authors && pub.authors.length > 0 && (
                   <p className={styles.authors}>
@@ -383,10 +420,6 @@ export default function Publications() {
                       target="_blank"
                       rel="noopener noreferrer" 
                       className={styles.link}
-                      onClick={(e) => {
-                        console.log('Link clicked!');
-                        // Don't add e.preventDefault() as that would stop the navigation
-                      }}
                     >
                       View Publication (DOI)
                     </a>
@@ -397,7 +430,6 @@ export default function Publications() {
                       target="_blank"
                       rel="noopener noreferrer" 
                       className={styles.link}
-                      
                     >
                       View on PubMed
                     </a>
