@@ -8,62 +8,33 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
 
-// Define proper interfaces for the API response
-interface OrcidResponse {
-  group: Array<{
-    'work-summary': Array<WorkSummary>;
-  }>;
+// Define interfaces for the PubMed API response
+interface PubMedSearchResponse {
+  esearchresult: {
+    count: string;
+    retmax: string;
+    retstart: string;
+    idlist: string[];
+  };
 }
 
-interface WorkSummary {
-  'put-code': number;
-  title: {
-    title: {
-      value: string;
-    };
-  };
-  'journal-title'?: {
-    value: string;
-  };
-  'publication-date'?: {
-    year?: {
-      value: string;
-    };
-    month?: {
-      value: string;
-    };
-    day?: {
-      value: string;
-    };
-  };
-  url?: {
-    value: string;
-  };
-  type: string;
-  'external-ids'?: {
-    'external-id': Array<{
-      'external-id-type': string;
-      'external-id-value': string;
-    }>;
-  };
-  contributors?: {
-    contributor: Array<{
-      'credit-name': {
-        value: string;
-      };
-    }>;
+interface PubMedSummaryResponse {
+  result: {
+    uids: string[];
+    [key: string]: any;
   };
 }
 
 interface Publication {
-  id: number;
+  id: string;
   title: string;
   journal?: string;
   year?: string;
-  url?: string;
+  url: string;
   type: string;
   doi?: string;
-  authors?: string[];
+  authors: string[];
+  abstract?: string;
 }
 
 export default function Publications() {
@@ -75,6 +46,7 @@ export default function Publications() {
       setInit(true);
     });
   }, []);
+  
   const [publications, setPublications] = useState<Publication[]>([]);
   const [sortedPublications, setSortedPublications] = useState<Publication[]>([]);
   const [loading, setLoading] = useState(true);
@@ -86,7 +58,10 @@ export default function Publications() {
   const isHeaderInView = useInView(headerRef, { once: true });
   const isContentInView = useInView(contentRef, { once: true });
 
-  const ORCID_ID = '0000-0001-9816-6137';
+  // You can replace this with your name or specific search terms
+  const AUTHOR_NAME = 'Jeyasekharan AD[Author]';
+  // Maximum number of results to fetch
+  const MAX_RESULTS = 30;
   
   // Animation variants
   const fadeInUp = {
@@ -108,53 +83,98 @@ export default function Publications() {
     }
   };
 
+  // Function to search PubMed for article IDs
+  const searchPubMed = async (query: string, max: number): Promise<string[]> => {
+    const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${encodeURIComponent(query)}&retmax=${max}&retmode=json`;
+    
+    const response = await fetch(searchUrl);
+    if (!response.ok) {
+      throw new Error('Failed to fetch from PubMed');
+    }
+    
+    const data: PubMedSearchResponse = await response.json();
+    return data.esearchresult.idlist;
+  };
+
+  // Function to fetch article details
+  const fetchArticleDetails = async (ids: string[]): Promise<Publication[]> => {
+    if (ids.length === 0) return [];
+    
+    const summaryUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=${ids.join(',')}&retmode=json`;
+    
+    const response = await fetch(summaryUrl);
+    if (!response.ok) {
+      throw new Error('Failed to fetch article details from PubMed');
+    }
+    
+    const data: PubMedSummaryResponse = await response.json();
+    
+    const articles: Publication[] = [];
+    
+    for (const id of data.result.uids) {
+      const article = data.result[id];
+      
+      // Extract year from pubdate
+      let year = undefined;
+      if (article.pubdate) {
+        const yearMatch = article.pubdate.match(/(\d{4})/);
+        if (yearMatch) {
+          year = yearMatch[1];
+        }
+      }
+      
+      // Extract DOI if available
+      let doi = undefined;
+      if (article.articleids) {
+        const doiObj = article.articleids.find((idObj: any) => idObj.idtype === 'doi');
+        if (doiObj) {
+          doi = doiObj.value;
+        }
+      }
+      
+      articles.push({
+        id: id,
+        title: article.title || 'No title available',
+        journal: article.fulljournalname || article.source || undefined,
+        year: year,
+        url: `https://pubmed.ncbi.nlm.nih.gov/${id}/`,
+        type: 'journal-article',
+        doi: doi,
+        authors: article.authors?.map((author: any) => author.name) || [],
+        abstract: article.abstract || undefined
+      });
+    }
+    
+    return articles;
+  };
+
   useEffect(() => {
     const fetchPublications = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          `https://pub.orcid.org/v3.0/${ORCID_ID}/works`,
-          {
-            headers: {
-              'Accept': 'application/json'
-            }
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch publications');
-        }
-
-        const data: OrcidResponse = await response.json();
         
-        const formattedPublications: Publication[] = data.group.map(item => {
-          const work = item['work-summary'][0];
-          return {
-            id: work['put-code'],
-            title: work.title.title.value,
-            journal: work['journal-title']?.value,
-            year: work['publication-date']?.year?.value,
-            url: work.url?.value,
-            type: work.type,
-            doi: work['external-ids']?.['external-id']
-              ?.find(id => id['external-id-type'] === 'doi')
-              ?.['external-id-value'],
-            authors: work.contributors?.contributor
-              ?.map(author => author['credit-name'].value) || []
-          };
-        });
-
-        setPublications(formattedPublications);
+        // Step 1: Search PubMed for article IDs
+        const articleIds = await searchPubMed(AUTHOR_NAME, MAX_RESULTS);
+        
+        if (articleIds.length === 0) {
+          setPublications([]);
+          return;
+        }
+        
+        // Step 2: Fetch details for those IDs
+        const articleDetails = await fetchArticleDetails(articleIds);
+        setPublications(articleDetails);
         setError(null);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
         // Fallback data in case of error
         setPublications([
           {
-            id: 1,
+            id: '1',
             title: "Example publication (Data unavailable)",
-            journal: "Connect to ORCID to see publications",
+            journal: "Connect to PubMed to see publications",
             year: "2024",
+            url: "#",
             type: "journal-article",
             authors: ["Connect to view authors"]
           }
@@ -165,7 +185,7 @@ export default function Publications() {
     };
 
     fetchPublications();
-  }, [ORCID_ID]);
+  }, [AUTHOR_NAME]);
   
   useEffect(() => {
     const sortPublications = () => {
@@ -331,7 +351,10 @@ export default function Publications() {
                 key={pub.id}
                 variants={fadeInUp}
                 className={styles.publication}
-              >
+                initial="hidden"
+                whileInView="visible" 
+                viewport={{ once: true, amount: 0.5 }}
+                            >
                 <h2>{pub.title}</h2>
                 {pub.authors && pub.authors.length > 0 && (
                   <p className={styles.authors}>
@@ -360,18 +383,23 @@ export default function Publications() {
                       target="_blank"
                       rel="noopener noreferrer" 
                       className={styles.link}
+                      onClick={(e) => {
+                        console.log('Link clicked!');
+                        // Don't add e.preventDefault() as that would stop the navigation
+                      }}
                     >
                       View Publication (DOI)
                     </a>
                   )}
-                  {!pub.doi && pub.url && (
+                  {pub.url && (
                     <a 
                       href={pub.url}
                       target="_blank"
                       rel="noopener noreferrer" 
                       className={styles.link}
+                      
                     >
-                      View Publication
+                      View on PubMed
                     </a>
                   )}
                 </div>
@@ -379,7 +407,7 @@ export default function Publications() {
             ))}
           </motion.div>
           
-          {/* Add featured publications or stats section */}
+          {/* Stats section */}
           {!loading && sortedPublications.length > 0 && (
             <motion.section
               initial={{ opacity: 0, y: 30 }}
@@ -395,13 +423,13 @@ export default function Publications() {
                 </div>
                 <div className={styles.statCard}>
                   <div className={styles.statNumber}>
-                    {new Set(sortedPublications.map(p => p.year)).size}
+                    {new Set(sortedPublications.map(p => p.year).filter(Boolean)).size}
                   </div>
                   <div className={styles.statLabel}>Years Active</div>
                 </div>
                 <div className={styles.statCard}>
                   <div className={styles.statNumber}>
-                    {sortedPublications.filter(p => p.type === 'journal-article').length}
+                    {sortedPublications.filter(p => p.journal).length}
                   </div>
                   <div className={styles.statLabel}>Journal Articles</div>
                 </div>

@@ -248,6 +248,9 @@
   transition: all 0.3s ease;
   text-align: center;
   cursor: pointer;
+  /* Add this to make sure the links are clickable */
+  position: relative;
+  z-index: 2;
 }
 
 .link {
@@ -255,12 +258,15 @@
   color: white;
   text-decoration: none;
   box-shadow: 0 2px 5px rgba(107, 70, 193, 0.3);
+  /* This ensures the entire button area is clickable */
+  display: inline-block;
 }
 
 .link:hover {
   background-color: #553c9a;
   box-shadow: 0 4px 10px rgba(107, 70, 193, 0.4);
-  transform: translateY(-2px);
+  /* Use translate instead of translateY */
+  transform: translate(0, -2px);
 }
 
 .citeButton {
@@ -400,5 +406,15 @@
   
   .statsGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .link, .citeButton {
+    /* Minimum touch target size for mobile */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
