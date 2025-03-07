@@ -1,5 +1,4 @@
-
-/* Container Styles */
+/* Container Styles - No changes needed */
 .container {
   width: 100%;
   min-height: 100vh;
@@ -9,7 +8,7 @@
   line-height: 1.6;
 }
 
-/* Hero Section */
+/* Hero Section - No changes needed */
 .heroSection {
   position: relative;
   width: 100%;
@@ -19,6 +18,8 @@
   justify-content: center;
   overflow: hidden;
   background-color: black;
+  /* Add a subtle gradient overlay for depth */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)); /* Subtle dark overlay */
 }
 
 .backgroundImage {
@@ -41,61 +42,69 @@
 }
 
 .heroContent h1 {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  font-weight: bold;
+  font-size: 4.5rem; /* Slightly larger and bolder */
+  margin-bottom: 1.2rem; /* Slightly more spacing */
+  font-weight: 700; /* Even bolder */
+  letter-spacing: -0.05rem; /* Tighten letter spacing for modern look */
+  text-shadow: 0 0 10px rgba(0,0,0,0.3); /* Subtle text shadow for lift */
 }
 
 .heroContent p {
-  font-size: 1.5rem;
-  opacity: 0.8;
+  font-size: 1.6rem; /* Slightly larger */
+  opacity: 0.9; /* Slightly less transparent */
+  font-weight: 400; /* More standard font weight */
+  text-shadow: 0 0 5px rgba(0,0,0,0.2); /* Subtle text shadow for lift */
 }
 
-/* Research and News Sections */
-.researchSection, 
-.newsSection {
-  padding: 4rem 2rem;
+/* Research and Publications Sections - No changes needed */
+.researchSection,
+.publicationsSection {
+  padding: 5rem 2rem; /* Increased padding for more spacious feel */
   background-color: var(--background-light);
   text-align: center;
 }
 
-.researchSection h2, 
-.newsSection h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
+.researchSection h2,
+.publicationsSection h2 {
+  font-size: 3rem; /* Larger heading */
+  margin-bottom: 2.5rem; /* More space below heading */
   color: #6b46c1;
-  font-weight: bold;
+  font-weight: 700; /* Bolder heading */
+  letter-spacing: -0.03rem; /* Tighten letter spacing */
+  text-shadow: 0 0 5px rgba(0,0,0,0.05); /* Subtle text shadow */
 }
 
-/* Filter Styles */
+/* Filter Styles - No changes needed */
 .filterContainer {
   display: flex;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem; /* Increased margin */
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.75rem; /* Slightly larger gap */
 }
 
 .filterButton {
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem; /* Slightly larger button */
   background-color: white;
-  border: 1px solid #6b46c1;
+  border: 2px solid #6b46c1; /* Thicker border */
   color: #6b46c1;
-  border-radius: 20px;
+  border-radius: 25px; /* More rounded buttons */
   cursor: pointer;
   transition: var(--transition-speed);
-  font-size: 0.9rem;
+  font-size: 1rem; /* Slightly larger font */
+  font-weight: 500; /* Medium font weight */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
 }
 
-.filterButton:hover, 
+.filterButton:hover,
 .activeFilter {
   background-color: #6b46c1;
   color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Deeper shadow on hover/active */
 }
 
-/* Grid Layouts */
-.researchGrid, 
-.newsGrid {
+/* Grid Layouts - No changes needed */
+.researchGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
@@ -103,206 +112,736 @@
   margin: 0 auto;
 }
 
-/* Research and News Cards */
-.researchCard, 
-.newsCard {
+/* Research Cards - No changes needed */
+.researchCard {
   background-color: white;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  transition: var(--transition-speed);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15); /* Deeper card shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for transform and shadow */
   cursor: pointer;
   display: flex;
   flex-direction: column;
 }
 
+.researchCard:hover {
+  transform: scale(1.03); /* Slightly more scale on hover */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2); /* Even deeper shadow on hover */
+}
+
+
 .cardImageContainer {
   position: relative;
   width: 100%;
-  height: 250px;
+  height: 260px; /* Slightly taller image container */
 }
 
 .cardContent {
-  padding: 1.5rem;
+  padding: 2rem; /* Increased padding */
   flex-grow: 1;
 }
 
 .cardContent h3 {
   color: #6b46c1;
-  margin-bottom: 0.75rem;
-  font-size: 1.25rem;
+  margin-bottom: 1rem; /* More space below title */
+  font-size: 1.4rem; /* Slightly larger title */
+  font-weight: 600; /* Semi-bold title */
 }
 
-/* Tag Styles */
-.cardTags, 
+/* Tag Styles - No changes needed */
+.cardTags,
 .modalTags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
+  gap: 0.6rem; /* Slightly larger gap */
+  margin-top: 1.2rem; /* More margin above tags */
 }
 
 .tag {
-  background-color: rgba(107, 70, 193, 0.1);
+  background-color: rgba(107, 70, 193, 0.15); /* Slightly less transparent tag background */
   color: #6b46c1;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
+  padding: 0.3rem 0.85rem; /* Slightly larger tag padding */
+  border-radius: 25px; /* More rounded tags */
+  font-size: 0.9rem; /* Slightly larger tag font */
+  font-weight: 500; /* Medium font weight */
 }
 
-/* News Card Specific Styles */
-.newsCategory {
-  background-color: #6b46c1;
-  color: white;
-  padding: 0.5rem;
-  text-align: center;
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 0.8rem;
+/* Publications Styling - More Interesting List */
+.publicationsContainer {
+  max-width: 1250px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns per row */
+  gap: 2.5rem;
 }
 
-.newsDate {
-  color: var(--secondary-color);
-  margin: 0.5rem 0;
-  font-size: 0.9rem;
+.publicationCard {
+  background-color: #fff; /* White background */
+  border-radius: 14px; /* Slightly more rounded corners */
+  overflow: hidden;
+  box-shadow: 0 9px 22px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+  transition: box-shadow 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
+  position: relative; /* For highlight bar */
+  border: 1px solid rgba(107, 70, 193, 0.12); /* Slightly more pronounced border */
+  background-image: linear-gradient(to right, #ffffff, #f8f8f8); /* Subtle gradient background */
 }
 
-.readMore {
+.publicationCard:nth-child(even) { /* Alternate background for even cards */
+  background-image: linear-gradient(to right, #ffffff, #fdfdfd); /* Slightly different gradient for even cards */
+}
+
+
+.publicationCard:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+  transform: translateY(-4px); /* Slightly more lift on hover */
+  background-color: #f9f9f9; /* Light grey background on hover */
+}
+
+
+.publicationHighlight {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px; /* Slightly thicker highlight bar */
+  background-color: #6b46c1; /* Purple highlight */
+  opacity: 0.9; /* Slightly more opaque highlight */
+  border-radius: 0 10px 10px 0; /* Rounded right corners on highlight */
+}
+
+
+.publicationContent {
+  padding: 2.2rem 2.5rem 2.5rem 2.5rem; /* Adjusted top padding */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content to start */
+  text-align: left;
+}
+
+.publicationTitle {
+  color: #2e2e2e; /* Darker title color */
+  font-size: 1.25rem; /* Slightly larger title */
+  margin-bottom: 0.3rem; /* Reduced title margin */
+  font-weight: 700; /* Bolder title */
+  transition: color 0.3s ease;
+}
+
+
+.publicationInfoLine {
+  display: flex;
+  align-items: baseline; /* Align journal and year baseline */
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  gap: 0.6rem; /* Spacing between journal and year */
+}
+
+
+.publicationJournal {
+  font-style: italic;
+  color: #5a6169; /* More prominent journal color */
+  font-size: 0.95rem;
+  margin-bottom: 0; /* Remove bottom margin from journal */
+}
+
+.publicationJournal::before {
+    content: "\2013"; /* en dash */
+    margin-right: 0.4em;
+    color: #ccc; /* Light grey en dash */
+}
+
+.publicationYear {
+    color: #6b46c1; /* Purple year color */
+    font-size: 0.9rem;
+    font-weight: 600; /* Semi-bold year */
+    margin-top: 0; /* Remove top margin from year */
+}
+
+
+.publicationDoi {
   display: inline-block;
-  margin-top: auto;
   color: #6b46c1;
   text-decoration: none;
-  font-weight: bold;
-  align-self: flex-start;
-  padding: 0.5rem 1rem;
-  border-bottom: 2px solid #6b46c1;
-  transition: var(--transition-speed);
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-bottom: 1px dashed #6b46c1; /* Dashed line for DOI */
+  transition: color 0.3s ease, border-bottom-color 0.3s ease;
 }
 
-.readMore:hover {
-  color: rgba(107, 70, 193, 0.7);
-  border-bottom-color: rgba(107, 70, 193, 0.7);
+.publicationDoi:hover {
+  color: #4b2e8b;
+  border-bottom-color: #4b2e8b;
 }
 
-/* Modal Styles */
+
+/* Modal Styles - Pop Up Compact now - No changes needed */
 .modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.75); /* Slightly darker overlay */
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
-  padding: 2rem;
+  z-index: 100;
+  padding: 1rem; /* Reduced padding for more compact modal */
+  backdrop-filter: blur(5px); /* Add slight blur to background */
 }
 
 .modalContent {
-  background: white;
-  border-radius: 20px;
-  max-width: 800px;
-  width: 100%;
-  max-height: 90vh;
+  background-color: white;
+  border-radius: 18px; /* Slightly less rounded modal corners */
+  width: 95%; /* Slightly wider modal */
+  max-width: 850px; /*  Reduced max width for compact modal */
+  max-height: 90vh; /* Slightly shorter max height for compact modal */
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-.modalHeader {
-  padding: 1.5rem;
-  border-bottom: 1px solid #f0f0f0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.modalHeader h2 {
-  color: #6b46c1;
-  margin: 0;
+  padding: 2.5rem; /* Reduced padding for more compact modal */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2); /* Slightly reduced modal shadow */
 }
 
 .closeButton {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 1rem; /* Closer to top for compact modal */
+  right: 1rem; /* Closer to right for compact modal */
   background: none;
   border: none;
-  font-size: 2rem;
-  color: var(--secondary-color);
+  font-size: 2rem; /* Slightly smaller close button */
+  color: #6b46c1;
   cursor: pointer;
-  transition: var(--transition-speed);
+  z-index: 10;
+  opacity: 0.8; /* Slightly less opaque close button */
+  transition: opacity 0.2s ease; /* Smooth opacity transition */
 }
 
 .closeButton:hover {
+  opacity: 1; /* Full opacity on hover */
+}
+
+.modalHeader {
+  margin-bottom: 1.5rem; /* Reduced margin for compact modal */
+  border-bottom: 1.5px solid #eee; /* Thinner separator line for compact modal */
+  padding-bottom: 1rem; /* Reduced padding below header for compact modal */
+}
+
+.modalHeader h2 {
   color: #6b46c1;
-  transform: rotate(90deg);
+  font-size: 1.8rem; /* Slightly smaller modal title for compact modal */
+  margin-bottom: 0.8rem; /* Reduced space below modal title for compact modal */
+  font-weight: 700; /* Bolder modal title */
+  letter-spacing: -0.02rem; /* Tighten letter spacing */
 }
 
 .modalImageContainer {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 280px; /* Slightly shorter modal image container for compact modal */
+  margin-bottom: 1.5rem; /* Reduced margin below modal image for compact modal */
+  border-radius: 12px; /* Slightly less rounded modal image corners */
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* More subtle shadow for modal image in compact modal */
 }
 
 .modalDescription {
-  padding: 1.5rem;
-  line-height: 1.6;
+  font-size: 1.1rem; /* Slightly smaller modal description font for compact modal */
+  line-height: 1.7; /* Reduced line height for readability in compact modal */
+  color: #555; /* Slightly lighter text color */
+  font-weight: 400; /* Standard font weight */
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
+/* Publication Modal Specific Styles - Pop Up Compact now - No changes needed */
+.publicationModalContent {
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh; /* Limit the height of the modal */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.publicationModalHeader {
+  margin-bottom: 2rem; /* Reduced margin for compact modal */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align header content to start */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.publicationModalYear {
+  display: inline-block;
+  background-color: #6b46c1;
+  color: white;
+  padding: 0.5rem 1rem; /* Reduced padding for year in modal for compact modal */
+  border-radius: 20px; /* More rounded year badge */
+  font-weight: 700;
+  font-size: 1rem; /* Reduced font size for year in modal for compact modal */
+  margin-bottom: 0.6rem; /* Reduced margin below year for compact modal */
+  align-self: flex-start; /* Ensure year is at start even if header is wider */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* More subtle shadow for year badge in compact modal */
+}
+
+.publicationModalHeader h2 {
+  color: #333; /* Slightly darker modal header text */
+  font-size: 1.5rem; /* Smaller modal publication title for compact modal */
+  font-weight: 700;
+  margin-top: 0.5rem; /* Reduced margin above title for compact modal */
+  line-height: 1.3; /* Improved line height for title in compact modal */
+}
+
+.publicationModalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Reduced gap in modal body for compact modal */
+  max-height: 60vh; /* Limit the height of the modal body */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.publicationModalSection {
+  margin-bottom: 20px;
+}
+
+.publicationModalSection h3 {
+  color: #6b46c1;
+  font-size: 1.1rem; /* Slightly smaller section heading for compact modal */
+  margin-bottom: 0.6rem; /* Reduced space below section heading for compact modal */
+  font-weight: 600; /* Semi-bold section headings */
+}
+
+.publicationModalSection p {
+  color: #555; /* Slightly lighter section text */
+  line-height: 1.6; /* Improved line height for section text in compact modal */
+  font-size: 1rem; /* Slightly smaller section text font for compact modal */
+}
+
+.publicationAbstract {
+  background-color: rgba(107, 70, 193, 0.08); /* Slightly less transparent abstract background */
+  padding: 1rem; /* Reduced padding for abstract in compact modal */
+  border-radius: 8px; /* More rounded abstract box */
+  font-style: italic;
+  border-left: 3px solid #6b46c1; /* Thicker border for abstract */
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04); /* More subtle shadow for abstract box in compact modal */
+  white-space: pre-wrap;
+}
+
+/* CSS Variables - No changes needed */
+/* Animation Keyframes - No changes needed */
+
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
   .heroContent h1 {
-    font-size: 2.5rem;
+    font-size: 3rem; /* Adjusted font size for mobile */
+    margin-bottom: 0.8rem;
   }
 
   .heroContent p {
-    font-size: 1.2rem;
+    font-size: 1.3rem; /* Adjusted font size for mobile */
   }
 
-  .researchGrid, 
-  .newsGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .modalContent {
-    margin: 1rem;
-    max-height: 95vh;
-  }
-
-  .modalImageContainer {
-    height: 250px;
+  .researchSection h2,
+  .publicationsSection h2 {
+    font-size: 2.2rem; /* Adjusted font size for mobile */
+    margin-bottom: 2rem;
   }
 
   .filterContainer {
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 2rem;
+    gap: 0.6rem;
   }
 
   .filterButton {
-    width: 100%;
-    max-width: 300px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-width: 1.5px; /* Slightly thinner border on mobile */
+    border-radius: 20px;
+  }
+
+  .researchGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .researchCard {
+     box-shadow: 0 8px 18px rgba(0,0,0,0.12); /* Slightly reduced shadow on mobile */
+  }
+
+  .cardImageContainer {
+    height: 200px; /* Adjusted image height for mobile */
+  }
+
+  .cardContent {
+    padding: 1.5rem;
+  }
+
+  .cardContent h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .tag {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+    border-radius: 18px;
+  }
+
+  .publicationsContainer {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .publicationCard {
+    box-shadow: 0 5px 12px rgba(0,0,0,0.07); /* Further reduced publication card shadow on mobile */
+    border-radius: 10px; /* Keep rounded corners on mobile */
+    border: none; /* Remove border separator on mobile */
+    padding: 1.2rem 1rem; /* Adjusted padding on mobile to be more compact */
+    background-color: white; /* Ensure white background on mobile */
+}
+.publicationCard:hover {
+    background-color: #f9f9f9; /* Keep hover background on mobile */
+    transform: none; /* Disable hover transform on mobile */
+    box-shadow:  0 5px 12px rgba(0,0,0,0.07); /* Keep reduced shadow on mobile hover */
+}
+
+
+  .publicationCard:last-child {
+    border-bottom: none; /* Remove border from the last card on mobile */
+}
+
+
+  .publicationYear {
+    display: block; /* Show year on mobile now */
+     margin-top: 0.2rem; /* Reduced margin for year in mobile */
+     font-size: 0.85rem; /* Smaller year font in mobile */
+  }
+
+  .publicationContent {
+    padding: 1rem; /* Reduced padding for content on mobile */
+  }
+
+  .publicationTitle {
+    font-size: 1.05rem; /* Adjusted title font size on mobile */
+    margin-bottom: 0.3rem; /* Adjusted margin on mobile */
+  }
+
+
+  .publicationJournal {
+    margin-bottom: 0.3rem; /* Adjusted journal margin on mobile */
+    font-size: 0.8rem; /* Adjusted journal font size on mobile */
+  }
+
+  .publicationDoi {
+    margin-top: 0.2rem; /* Adjusted DOI margin on mobile */
+    font-size: 0.8rem; /* Adjusted DOI font size on mobile */
+    border-bottom-width: 1px; /* Thinner DOI border on mobile */
+  }
+
+  .modalContent {
+    padding: 1.5rem; /* Reduced padding on mobile modal */
+    width: 98%; /* Wider modal on mobile */
+    border-radius: 12px; /* Less rounded corners on mobile modal */
+     box-shadow: 0 8px 16px rgba(0,0,0,0.15); /* Further reduced modal shadow on mobile */
+  }
+
+  .modalImageContainer {
+    height: 180px; /* Shorter image container on mobile modal */
+    margin-bottom: 1rem; /* Reduced margin on mobile modal */
+    border-radius: 10px;
+  }
+
+  .modalHeader h2 {
+    font-size: 1.5rem; /* Smaller header font on mobile modal */
+    margin-bottom: 0.7rem; /* Reduced margin on mobile modal */
+  }
+
+  .modalDescription {
+    font-size: 1rem; /* Smaller description font on mobile modal */
+    line-height: 1.6;
+  }
+
+  .publicationModalHeader h2 {
+    font-size: 1.3rem; /* Smaller publication modal header font on mobile modal */
+    margin-top: 0.3rem; /* Reduced margin on mobile modal */
+  }
+
+  .publicationModalBody {
+    gap: 1.2rem; /* Reduced gap on mobile modal */
+  }
+
+  .publicationModalSection h3 {
+    font-size: 1rem; /* Smaller section heading on mobile modal */
+    margin-bottom: 0.3rem; /* Reduced margin on mobile modal */
+  }
+
+  .publicationModalSection p {
+    font-size: 0.95rem; /* Smaller section text on mobile modal */
+    line-height: 1.5;
+  }
+
+  .publicationAbstract {
+    padding: 0.8rem; /* Reduced padding on mobile modal abstract */
+    border-radius: 6px; /* More rounded corners on mobile modal abstract */
+    border-left-width: 2.5px; /* Thinner border on mobile modal abstract */
+  }
+
+  .filterContainer {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    justify-content: flex-start;
+  }
+
+  .filterButton {
+    flex-shrink: 0;
   }
 }
 
+/* Tablet Responsive Styles - No changes needed */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .heroContent h1 {
+    font-size: 3rem;
+  }
 
+  .researchGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-/* Accessibility and Focus States */
-@global(*:focus) {
-  outline: 3px solid #6b46c1;
-  outline-offset: 3px;
+  .publicationsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-/* Print Styles */
+/* Large Screen Adjustments - No changes needed */
+@media screen and (min-width: 1600px) {
+  .researchGrid,
+  .publicationsContainer {
+    max-width: 1400px;
+  }
+
+  .heroContent {
+    max-width: 1000px;
+  }
+
+  .heroContent h1 {
+    font-size: 5rem;
+  }
+
+  .heroContent p {
+    font-size: 1.8rem;
+  }
+}
+
+/* Accessibility Improvements - No changes needed */
+@media (prefers-reduced-motion: reduce) {
+  .researchCard,
+  .publicationCard,
+  .modalContent,
+  .backgroundImage {
+    transition: none !important;
+  }
+
+  .publicationTitle:after {
+    transition: none !important;
+  }
+}
+
+/* Print Styles - No changes needed */
 @media print {
+  .heroSection {
+    height: auto;
+    min-height: 0;
+  }
+
+  .backgroundImage,
+  .filterContainer,
+  .closeButton,
+  .modalOverlay {
+    display: none !important;
+  }
+
+  .researchGrid,
+  .publicationsContainer {
+    display: block;
+  }
+
+  .researchCard,
+  .publicationCard {
+    page-break-inside: avoid;
+    margin-bottom: 1rem;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .heroContent,
+  .researchSection,
+  .publicationsSection {
+    padding: 1rem 0;
+  }
+
   .container {
-    background: white;
     color: black;
   }
+}
 
-  .heroSection,
-  .backgroundImage {
-    display: none;
+/* Additional Support for Touch Devices - No changes needed */
+@media (hover: none) {
+  .researchCard:hover,
+  .publicationCard:hover {
+    transform: none;
   }
+
+  .researchCard:active,
+  .publicationCard:active {
+    background-color: rgba(107, 70, 193, 0.05);
+  }
+
+  .filterButton:hover {
+    background-color: rgba(107, 70, 193, 0.2);
+  }
+}
+
+/* For extra small devices - No changes needed */
+@media screen and (max-width: 480px) {
+  .heroContent h1 {
+    font-size: 2rem;
+  }
+
+  .heroContent p {
+    font-size: 1rem;
+  }
+
+  .researchSection,
+  .publicationsSection {
+    padding: 2rem 1rem;
+  }
+
+  .researchSection h2,
+  .publicationsSection h2 {
+    font-size: 1.8rem;
+  }
+
+  .cardImageContainer {
+    height: 180px;
+  }
+
+  .publicationYear {
+    min-width: 50px;
+    min-height: 50px;
+    font-size: 1rem;
+  }
+
+  .publicationContent {
+    padding: 1rem;
+  }
+
+  .publicationTitle {
+    font-size: 1rem;
+  }
+
+  .modalContent {
+    padding: 1rem;
+  }
+
+  .publicationModalHeader h2 {
+    font-size: 1.2rem;
+  }
+}
+
+/* High DPI Screens - No changes needed */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .cardImageContainer img,
+  .backgroundImage img,
+  .modalImageContainer img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Focus states for better accessibility - No changes needed */
+.researchCard:focus,
+.publicationCard:focus,
+.filterButton:focus,
+.closeButton:focus,
+.publicationDoi:focus {
+  outline: 2px solid #6b46c1;
+  outline-offset: 2px;
+}
+
+/* Ensure interactive elements are accessible - No changes needed */
+.researchCard,
+.publicationCard,
+.filterButton,
+.closeButton {
+  -webkit-tap-highlight-color: rgba(107, 70, 193, 0.2);
+}
+
+/* Loading state styles for dynamic content - No changes needed */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(107, 70, 193, 0.1);
+  border-radius: 50%;
+  border-top-color: #6b46c1;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Additional animations for content elements - No changes needed */
+.fadeInUp {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered animations for cards - No changes needed */
+.staggeredFade {
+  opacity: 0;
+}
+
+.staggeredFade.visible {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Support for RTL languages - No changes needed */
+[dir="rtl"] .publicationYear {
+  border-radius: 0 0 0 15px;
+}
+
+[dir="rtl"] .closeButton {
+  right: auto;
+  left: 1rem;
+}
+
+[dir="rtl"] .publicationTitle:after {
+  left: auto;
+  right: 0;
+  transform-origin: bottom left;
+}
+
+[dir="rtl"] .publicationCard:hover .publicationTitle:after {
+  transform-origin: bottom right;
 }
