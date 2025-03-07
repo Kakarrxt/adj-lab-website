@@ -187,7 +187,7 @@ export default function JoinUsPage() {
               >
                 <h3>Postdoctoral Research Fellow (Bioinformatics)</h3>
                 <div className={styles.positionDetails}>
-                  <p>We're looking for talented researchers with experience in <strong>bioinformatics</strong> to join our team.</p>
+                  <p>We&apos;re looking for talented researchers with experience in <strong>bioinformatics</strong> to join our team.</p>
                   <a href="https://careers.nus.edu.sg/job-invite/27885" className={styles.applyButton}>
                     View Position
                   </a>
