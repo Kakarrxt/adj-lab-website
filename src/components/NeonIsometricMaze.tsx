@@ -15,6 +15,9 @@ const NeonIsometricMaze: React.FC = () => {
 
     let t = 0
     let animationFrameId: number
+    let lastRenderTime = 0
+    const fps = 30 // Target frames per second
+    const interval = 1000 / fps
 
     const r = () => {
       if (!canvas) return
@@ -70,18 +73,22 @@ const NeonIsometricMaze: React.FC = () => {
       }
     }
 
-    const a = () => {
+    const a = (currentTime: number) => {
       if (!canvas || !x) return
-      x.fillStyle = "rgba(0,0,0,.1)"
-      x.fillRect(0, 0, canvas.width, canvas.height)
-      d()
-      t += 0.05
+      const deltaTime = currentTime - lastRenderTime
+      if (deltaTime >= interval) {
+        x.fillStyle = "rgba(0,0,0,.1)"
+        x.fillRect(0, 0, canvas.width, canvas.height)
+        d()
+        t += 0.05
+        lastRenderTime = currentTime
+      }
       animationFrameId = requestAnimationFrame(a)
     }
 
     window.addEventListener("resize", r)
     r()
-    a()
+    animationFrameId = requestAnimationFrame(a)
 
     return () => {
       window.removeEventListener("resize", r)
