@@ -9,8 +9,10 @@ import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 export default function ResearchPage() {
   const textRef = useRef(null);
   const imageRef = useRef(null);
+  const sectionsRef = useRef(null);
   const isInView = useInView(textRef, { once: true });
   const isImageInView = useInView(imageRef, { once: true });
+  const areSectionsInView = useInView(sectionsRef, { once: true, margin: "-100px 0px" });
   
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -48,6 +50,15 @@ export default function ResearchPage() {
       }
     }
   };
+  
+  const highlightText = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5, ease: "easeOut" }
+    }
+  };
 
   return (
     <>
@@ -69,7 +80,7 @@ export default function ResearchPage() {
             transition={{ duration: 0.8 }}
             className={styles.header}
           >
-            <h1>Cancer Cartography</h1>
+            <h1>Lymphoma Research</h1>
             <div className={styles.underline} />
           </motion.div>
 
@@ -82,22 +93,14 @@ export default function ResearchPage() {
               className={styles.heroContent}
             >
               <motion.p variants={fadeInUp} className={styles.intro}>
-                We are interested in the effects of genotoxic chemotherapy on the immune mileu in cancer.
-                This interest stems from 2 key observations:
+                Optimising treatment strategies for <strong>aggressive lymphomas</strong> requires a precise understanding of tumour biology and its clinical implications. Our research focuses on identifying <strong>high-risk patients</strong> who may benefit from <strong>immunotherapeutic interventions</strong>, such as bispecific antibodies and CAR-T cell therapy, while improving diagnostic and therapeutic approaches for <strong>chemotherapy-resistant disease</strong>.
               </motion.p>
 
               <motion.div
-                variants={staggerChildren}
-                className={styles.observations}
+                variants={highlightText}
+                className={styles.highlightBox}
               >
-                <motion.div variants={fadeInUp} className={styles.observation}>
-                  <span className={styles.number}>01</span>
-                  <p>Defects in DNA repair in cancer contribute to the generation of immunogenic nucleic acids and peptide neo-antigens</p>
-                </motion.div>
-                <motion.div variants={fadeInUp} className={styles.observation}>
-                  <span className={styles.number}>02</span>
-                  <p>Genotoxic chemotherapy activates innate and adaptive immune responses through immunogenic cell death and cytosolic nucleic acid sensors</p>
-                </motion.div>
+                <p>A key priority is to <strong>bridge the gap</strong> between the growing array of therapeutic options and the need for <strong>clinically actionable strategies</strong> to guide treatment selection.</p>
               </motion.div>
             </motion.div>
 
@@ -110,7 +113,7 @@ export default function ResearchPage() {
             >
               <Image
                 src="/media/Research.png"
-                alt="Cancer Research Visualization"
+                alt="Lymphoma Research Visualization"
                 width={500}
                 height={400}
                 className={styles.researchImage} />
@@ -118,56 +121,40 @@ export default function ResearchPage() {
           </div>
 
           <motion.section
+            ref={sectionsRef}
             initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            animate={areSectionsInView ? "visible" : "hidden"}
             variants={staggerChildren}
             className={styles.content}
           >
-            <motion.p variants={fadeInUp} className={styles.hypothesis}>
-              We hypothesize that intracellular changes in cancer differentially affect the ability of distinct
-              chemotherapeutics to result in immune clearance of tumours. A comprehensive understanding of these
-              intracellular components that regulate immune activation after DNA damage will facilitate the
-              development of predictive biomarkers for chemotherapy-immunotherapy combination trials.
-            </motion.p>
-
-            <motion.div variants={fadeInUp} className={styles.themesSection}>
-              <h2>Research Themes</h2>
-              <p>Accordingly, current work in my laboratory spans two broad themes:</p>
-              <motion.div variants={staggerChildren} className={styles.themesList}>
-                <motion.div variants={fadeInUp} className={styles.themeItem}>
-                  <span className={styles.themeNumber}>1</span>
-                  <div className={styles.themeContent}>
-                    <h3>Intracellular Changes and Immune Response</h3>
-                    <p>Intracellular changes in cancer that influence the activation of the immune response after DNA damage</p>
-                  </div>
-                </motion.div>
-
-                <motion.div variants={fadeInUp} className={styles.themeItem}>
-                  <span className={styles.themeNumber}>2</span>
-                  <div className={styles.themeContent}>
-                    <h3>Combination Strategies</h3>
-                    <p>Combination strategies to potentiate the action of genotoxic chemotherapy, through cell-intrinsic and cell-extrinsic mechanisms</p>
-                  </div>
-                </motion.div>
-              </motion.div>
+            <motion.div variants={fadeInUp} className={styles.researchSection}>
+              <h2>Molecular Profiling of DLBCL</h2>
+              <p>
+                Leveraging <strong>advanced spatial and molecular profiling</strong>, we have identified a subpopulation of tumor cells overexpressing <strong>MYC</strong> and <strong>BCL2</strong> while lacking <strong>BCL6</strong> (<span className={styles.highlight}>M+2+6−</span>) in diffuse large B-cell lymphoma (DLBCL) as a <strong>predictor of chemotherapy failure</strong>, leading to the development of an immunohistochemistry-based assay for treatment stratification. Our findings (<span className={styles.publication}>Cancer Discovery 2023</span>), provide a foundation for exploring the relevance of oncogene co-expression at the single-cell level in other cancers.
+              </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className={styles.facilitiesSection}>
-              <h2>Research Infrastructure</h2>
-              <p>To facilitate the above studies, we have:</p>
-              <motion.ul variants={staggerChildren} className={styles.facilitiesList}>
-                <motion.li variants={fadeInUp}>Acquired a range of cell line models for epithelial and lymphoid cancers</motion.li>
-                <motion.li variants={fadeInUp}>Setup systems and assays for DNA repair and immune activation studies in-vitro</motion.li>
-                <motion.li variants={fadeInUp}>Setup platforms for quantitative microscopy in histological material, to interrogate immune modulation pathways in samples of human cancer</motion.li>
-                <motion.li variants={fadeInUp}>Established international and local collaborations for the acquisition of well-annotated clinical samples</motion.li>
-                <motion.li variants={fadeInUp}>Established connections with pharmaceutical companies and medical technology companies, to translate our research findings to clinical trials and biomarker development</motion.li>
-              </motion.ul>
+            <motion.div variants={fadeInUp} className={styles.researchSection}>
+              <h2>Personalized Treatment Optimization</h2>
+              <p>
+                We also explored innovative strategies to optimise drug combinations for patients with refractory lymphoma using the <strong>Quadratic Phenotypic Optimisation Platform (QPOP)</strong>. Our <strong>first-in-human trial</strong> (<span className={styles.publication}>Science Translational Medicine 2022</span>) demonstrated the clinical utility of QPOP in guiding personalized treatment approaches.
+              </p>
+            </motion.div>
+
+            <motion.div variants={fadeInUp} className={styles.researchSection}>
+              <h2>Immune Microenvironment Research</h2>
+              <p>
+                In advancing immune microenvironment research, our team characterised infiltrating macrophages in DLBCL using <strong>NanoString Digital Spatial Profiling (DSP)</strong> and identified clinically relevant macrophage subtypes with prognostic significance (<span className={styles.publication}>Nature Communications 2024</span>). 
+              </p>
+              <p>
+                Furthermore, we elucidated mechanisms of immune regulation in lymphoma, demonstrating that the <strong>PRMT5-ZNF326 axis</strong> serves as a key mediator of innate immune activation in response to chemotherapy-induced replication stress (<span className={styles.publication}>Science Advances 2024</span>). These findings have <strong>important implications</strong> for the development of novel immunotherapy combinations.
+              </p>
             </motion.div>
 
             <motion.div variants={fadeInUp} className={styles.labCulture}>
               <h2>Lab Culture & Collaboration</h2>
               <p>
-                Graduate students and post-doctoral researchers in the lab lead specific projects, and we collaborate with local and overseas colleagues to test our findings in relevant clinical tissue collections. The ADJ lab also hosts overseas elective students, NUH residents and medical students who are interested in translational cancer research.
+                Graduate students and post-doctoral researchers take the helm on exciting projects. We collaborate with both local and international colleagues to explore our findings in real-world clinical tissue collections. We welcome overseas students, NUH residents and medical students, who are passionate about translational cancer research.
               </p>
               <div className={styles.commitments}>
                 <motion.div variants={fadeInRight} className={styles.commitment}>
@@ -180,7 +167,7 @@ export default function ResearchPage() {
                 </motion.div>
                 <motion.div variants={fadeInRight} className={styles.commitment}>
                   <span>DORA</span>
-                  <p>ADJ is a DORA signatory - <a href="https://sfdora.org/" target="_blank" rel="noopener noreferrer">sfdora.org</a></p>
+                  <p>We are committed to fairness and transparency - <a href="https://sfdora.org/" target="_blank" rel="noopener noreferrer">sfdora.org</a></p>
                 </motion.div>
               </div>
             </motion.div>
