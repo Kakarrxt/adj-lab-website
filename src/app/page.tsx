@@ -27,17 +27,17 @@ interface Publication {
 }
 
 export default function ResearchPage() {
-  const [animationStage, setAnimationStage] = useState<'initial' | 'map-zoom' | 'cells-zoom' | 'cells-out'>('initial');
+
+  const [animationStage, setAnimationStage] = useState<'initial' | 'map-zoom' | 'cells-zoom' | 'cells-out' | 'cells-fade' | 'map-fade-in' | 'reverse-map-zoom'>('initial');
   const [selectedResearch, setSelectedResearch] = useState<ResearchTopic | null>(null);
   const [selectedPublication, setSelectedPublication] = useState<Publication | null>(null);
   const [filter, setFilter] = useState<string | null>(null);
-
+  
   // Refs for intersection observer
   const researchRef = useRef(null);
   const publicationsRef = useRef(null);
   const isResearchInView = useInView(researchRef, { once: true });
   const isPublicationsInView = useInView(publicationsRef, { once: true });
-
 
   // Research Topics with more detailed information
   const researchTopics: ResearchTopic[] = [
@@ -169,106 +169,150 @@ export default function ResearchPage() {
     }
   ];
 
-  // Advanced background animation logic
-  useEffect(() => {
-    const animationSequence = () => {
-      setAnimationStage('initial');
-      setTimeout(() => setAnimationStage('map-zoom'), 1000);
-      setTimeout(() => setAnimationStage('cells-zoom'), 3000);
-      setTimeout(() => setAnimationStage('cells-out'), 5000);
-      setTimeout(() => setAnimationStage('initial'), 7000);
+
+    
+    // Advanced background animation logic
+    useEffect(() => {
+      const animationSequence = () => {
+        setAnimationStage('initial');
+        setTimeout(() => setAnimationStage('map-zoom'), 1000);
+        setTimeout(() => setAnimationStage('cells-zoom'), 3000);
+        setTimeout(() => setAnimationStage('cells-out'), 5000);
+        setTimeout(() => setAnimationStage('cells-fade'), 7000);
+        setTimeout(() => setAnimationStage('map-fade-in'), 8000);
+        setTimeout(() => setAnimationStage('reverse-map-zoom'), 10000);
+        setTimeout(() => setAnimationStage('initial'), 12000);
+      };
+      
+      animationSequence();
+      const interval = setInterval(animationSequence, 13000);
+      return () => clearInterval(interval);
+    }, []);
+    
+    // Variants for background animations
+    const backgroundVariants = {
+      initial: {
+        scale: 1,
+        opacity: 0.3,
+        transition: { duration: 1 }
+      },
+      'map-zoom': {
+        scale: 1.2,
+        opacity: 0.5,
+        transition: { duration: 2, ease: "easeInOut" }
+      },
+      'cells-zoom': {
+        scale: 1.5,
+        opacity: 0.7,
+        transition: { duration: 2, ease: "easeInOut" }
+      },
+      'cells-out': {
+        scale: 1.5,
+        opacity: 0.7,
+        transition: { duration: 2, ease: "easeInOut" }
+      },
+      'cells-fade': {
+        scale: 1.2,
+        opacity: 0.3,
+        transition: { duration: 1, ease: "easeInOut" }
+      },
+      'map-fade-in': {
+        scale: 1,
+        opacity: 0.5,
+        transition: { duration: 2, ease: "easeInOut" }
+      },
+      'reverse-map-zoom': {
+        scale: 1,
+        opacity: 0.3,
+        transition: { duration: 2, ease: "easeInOut" }
+      }
     };
-
-    animationSequence();
-    const interval = setInterval(animationSequence, 8000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Variants for background animations
-  const backgroundVariants = {
-    initial: {
-      scale: 1,
-      opacity: 0.3,
-      transition: { duration: 1 }
-    },
-    'map-zoom': {
-      scale: 1.5,
-      opacity: 0.5,
-      transition: { duration: 2, ease: "easeInOut" }
-    },
-    'cells-zoom': {
-      scale: 2,
-      opacity: 0.7,
-      transition: { duration: 2, ease: "easeInOut" }
-    },
-    'cells-out': {
-      scale: 1,
-      opacity: 0.3,
-      transition: { duration: 1, ease: "easeInOut" }
-    }
-  };
-
-  // Filter research topics
-  const filteredResearch = filter
-    ? researchTopics.filter(topic => topic.tags.includes(filter))
-    : researchTopics;
-
-  return (
-    <div className={styles.container}>
-      <Navbar />
-
-      {/* Dynamic Hero Section */}
-      <section className={styles.heroSection}>
-        <AnimatePresence>
-          <motion.div
-            key="nautical-map"
-            className={styles.backgroundImage}
-            variants={backgroundVariants}
-            animate={animationStage}
-            initial="initial"
-          >
-            <Image
-              src="/media/Nautical.png"
-              alt="Nautical Map Background"
-              layout="fill"
-              objectFit="cover"
-              priority
-            />
-          </motion.div>
-
-          {(animationStage === 'cells-zoom' || animationStage === 'cells-out') && (
+    
+    // Variants specifically for the cells layer
+    const cellsVariants = {
+      'cells-zoom': {
+        scale: 1.8,
+        opacity: 0.7,
+        transition: { duration: 2, ease: "easeInOut" }
+      },
+      'cells-out': {
+        scale: 1.5,
+        opacity: 0.7,
+        transition: { duration: 2, ease: "easeInOut" }
+      },
+      'cells-fade': {
+        scale: 1.2,
+        opacity: 0.2,
+        transition: { duration: 1, ease: "easeInOut" }
+      },
+      'map-fade-in': {
+        scale: 1,
+        opacity: 0,
+        transition: { duration: 1, ease: "easeInOut" }
+      }
+    };
+    
+    // Filter research topics
+    const filteredResearch = filter
+      ? researchTopics.filter(topic => topic.tags.includes(filter))
+      : researchTopics;
+    
+    return (
+      <div className={styles.container}>
+        <Navbar />
+        {/* Dynamic Hero Section */}
+        <section className={styles.heroSection}>
+          <AnimatePresence>
             <motion.div
-              key="cells"
+              key="nautical-map"
               className={styles.backgroundImage}
-              style={{ zIndex: 2 }}
               variants={backgroundVariants}
               animate={animationStage}
-              initial={{ scale: 1.5, opacity: 0 }}
+              initial="initial"
             >
               <Image
-                src="/media/cells.jpg"
-                alt="Cancer Cells"
+                src="/media/Nautical.png"
+                alt="Nautical Map Background"
                 layout="fill"
                 objectFit="cover"
                 priority
               />
             </motion.div>
-          )}
-        </AnimatePresence>
-
-        <motion.div
-          className={styles.heroContent}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{
-            opacity: animationStage === 'initial' ? 1 : 0.5,
-            scale: 1
-          }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-        >
-          <h1>ADJ Laboratory</h1>
-          <p>Pioneering Cancer Research through Innovative Science</p>
-        </motion.div>
-      </section>
+            
+            {(animationStage === 'cells-zoom' || animationStage === 'cells-out' || animationStage === 'cells-fade') && (
+              <motion.div
+                key="cells"
+                className={styles.backgroundImage}
+                style={{ zIndex: 2 }}
+                variants={cellsVariants}
+                animate={animationStage}
+                initial={{ scale: 1.5, opacity: 0 }}
+                exit={{ opacity: 0, transition: { duration: 0.5 } }}
+              >
+                <Image
+                  src="/media/cells.jpg"
+                  alt="Cancer Cells"
+                  layout="fill"
+                  objectFit="cover"
+                  priority
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+          
+          <motion.div
+            className={styles.heroContent}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{
+              opacity: animationStage === 'initial' ? 1 : 0.5,
+              scale: 1
+            }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+          >
+            <h1>ADJ Laboratory</h1>
+            <p>Pioneering Cancer Research through Innovative Science</p>
+          </motion.div>
+        </section>
 
       {/* Research Topics Section */}
       <section
