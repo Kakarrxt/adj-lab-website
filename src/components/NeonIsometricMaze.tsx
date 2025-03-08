@@ -1,5 +1,4 @@
 "use client"
-
 import type React from "react"
 import { useEffect, useRef } from "react"
 
@@ -10,94 +9,135 @@ const NeonIsometricMaze: React.FC = () => {
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const x = canvas.getContext("2d")
-    if (!x) return
+    const ctx = canvas.getContext("2d", { alpha: false })
+    if (!ctx) return
 
     let t = 0
     let animationFrameId: number
     let lastRenderTime = 0
-    const fps = 30 // Target frames per second
+    const fps = 15 // Reduced target frames per second
     const interval = 1000 / fps
 
-    const r = () => {
+    const setupCanvas = () => {
       if (!canvas) return
+
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
-      d()
+
+      ctx.fillStyle = "rgb(5, 5, 15)"
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
     }
 
-    const d = () => {
-      if (!canvas || !x) return
-      const s = Math.min(canvas.width, canvas.height) / 15
-      const g = Math.ceil(canvas.width / s) * 2
-      const h = Math.ceil(canvas.height / (s * 0.5)) * 2
-      const w = canvas.width / 2
-      const v = canvas.height / 2
+    const drawMaze = () => {
+      if (!canvas || !ctx) return
 
-      for (let y = -h; y < h; y++) {
-        for (let i = -g; i < g; i++) {
-          const p = w + ((i - y) * s) / 2
-          const q = v + ((i + y) * s) / 4
-          const m = Math.sqrt(i * i + y * y)
-          const n = Math.sqrt(g * g + h * h)
-          const e = 1 - m / n
-          const f = s * e * Math.abs(Math.sin(m * 0.5 + t))
+      const cellSize = Math.min(canvas.width, canvas.height) / 20 // Adjusted cell size for better visual density
+      const gridWidth = Math.ceil(canvas.width / cellSize) * 1.5
+      const gridHeight = Math.ceil(canvas.height / (cellSize * 0.5)) * 1.5
+      const centerX = canvas.width / 2
+      const centerY = canvas.height / 2
+      const maxDistance = Math.sqrt(gridWidth * gridWidth + gridHeight * gridHeight)
 
-          x.beginPath()
-          x.moveTo(p, q - f)
-          x.lineTo(p + s / 2, q - s / 2 - f)
-          x.lineTo(p + s, q - f)
-          x.lineTo(p + s, q)
-          x.lineTo(p + s / 2, q + s / 2)
-          x.lineTo(p, q)
-          x.closePath()
+      ctx.fillStyle = "#6b46c1"
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-          const l = x.createLinearGradient(p, q - f, p + s, q)
-          l.addColorStop(0, "rgba(21, 0, 255, 0.8)")
-          l.addColorStop(1, "rgba(255,0,255,.8)")
-          x.fillStyle = l
-          x.fill()
-          x.strokeStyle = "rgba(255,255,0,.5)"
-          x.stroke()
+      t += 0.03
 
-          x.beginPath()
-          x.moveTo(p, q)
-          x.lineTo(p, q - f)
-          x.moveTo(p + s, q)
-          x.lineTo(p + s, q - f)
-          x.moveTo(p + s / 2, q + s / 2)
-          x.lineTo(p + s / 2, q - s / 2 - f)
-          x.strokeStyle = "rgba(255,255,255,.3)"
-          x.stroke()
+      const visibleStartX = -gridWidth / 2 - 2
+      const visibleEndX = gridWidth / 2 + 2
+      const visibleStartY = -gridHeight / 2 - 2
+      const visibleEndY = gridHeight / 2 + 2
+      const step = 3 // Adjusted step size for better visual density
+
+      for (let y = visibleStartY; y < visibleEndY; y += step) {
+        for (let x = visibleStartX; x < visibleEndX; x += step) {
+          const posX = centerX + ((x - y) * cellSize) / 2
+          const posY = centerY + ((x + y) * cellSize) / 4
+
+          if (posX < -cellSize * 2 || posX > canvas.width + cellSize * 2 ||
+              posY < -cellSize * 2 || posY > canvas.height + cellSize * 2) {
+            continue
+          }
+
+          const distance = Math.sqrt(x * x + y * y)
+          const normalizedDistance = 1 - distance / maxDistance
+          const heightFactor = Math.abs(Math.sin(distance * 0.3 + t)) * 0.7 + Math.abs(Math.cos(x * 0.2 + y * 0.2 + t * 0.8)) * 0.3
+          const height = cellSize * normalizedDistance * heightFactor * 1.2
+
+          ctx.beginPath()
+          ctx.moveTo(posX, posY - height)
+          ctx.lineTo(posX + cellSize / 2, posY - cellSize / 2 - height)
+          ctx.lineTo(posX + cellSize, posY - height)
+          ctx.lineTo(posX + cellSize, posY)
+          ctx.lineTo(posX + cellSize / 2, posY + cellSize / 2)
+          ctx.lineTo(posX, posY)
+          ctx.closePath()
+
+          const gradient = ctx.createLinearGradient(posX, posY - height, posX + cellSize, posY)
+          gradient.addColorStop(0, `rgba(21, 0, 255, ${0.5 + normalizedDistance * 0.4})`)
+          gradient.addColorStop(1, `rgba(255, 0, 255, ${0.5 + normalizedDistance * 0.4})`)
+          ctx.fillStyle = gradient
+          ctx.fill()
+
+          if (normalizedDistance > 0.4) {
+            ctx.shadowColor = 'rgba(120, 0, 255, 0.3)'
+            ctx.shadowBlur = 10
+          } else {
+            ctx.shadowBlur = 0
+          }
+
+          ctx.strokeStyle = `rgba(255, 255, 0, ${0.2 + normalizedDistance * 0.3})`
+          ctx.lineWidth = 1
+          ctx.stroke()
+
+          ctx.beginPath()
+          ctx.moveTo(posX, posY)
+          ctx.lineTo(posX, posY - height)
+          ctx.moveTo(posX + cellSize, posY)
+          ctx.lineTo(posX + cellSize, posY - height)
+          ctx.moveTo(posX + cellSize / 2, posY + cellSize / 2)
+          ctx.lineTo(posX + cellSize / 2, posY - cellSize / 2 - height)
+          ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 + normalizedDistance * 0.2})`
+          ctx.stroke()
+
+          ctx.shadowBlur = 0
         }
       }
+
+      const radialGlow = ctx.createRadialGradient(
+        centerX, centerY, 0,
+        centerX, centerY, Math.max(canvas.width, canvas.height) * 0.7
+      )
+      radialGlow.addColorStop(0, 'rgba(60, 20, 120, 0.05)')
+      radialGlow.addColorStop(1, 'rgba(0, 0, 0, 0)')
+
+      ctx.fillStyle = radialGlow
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
     }
 
-    const a = (currentTime: number) => {
-      if (!canvas || !x) return
+    const animate = (currentTime: number) => {
+      if (!canvas || !ctx) return
+
       const deltaTime = currentTime - lastRenderTime
       if (deltaTime >= interval) {
-        x.fillStyle = "rgba(0,0,0,.1)"
-        x.fillRect(0, 0, canvas.width, canvas.height)
-        d()
-        t += 0.05
+        drawMaze()
         lastRenderTime = currentTime
       }
-      animationFrameId = requestAnimationFrame(a)
+
+      animationFrameId = requestAnimationFrame(animate)
     }
 
-    window.addEventListener("resize", r)
-    r()
-    animationFrameId = requestAnimationFrame(a)
+    window.addEventListener("resize", setupCanvas)
+    setupCanvas()
+    animationFrameId = requestAnimationFrame(animate)
 
     return () => {
-      window.removeEventListener("resize", r)
+      window.removeEventListener("resize", setupCanvas)
       cancelAnimationFrame(animationFrameId)
     }
   }, [])
 
-  return <canvas ref={canvasRef} className="block" />
+  return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full -z-10" />
 }
 
 export default NeonIsometricMaze
-
