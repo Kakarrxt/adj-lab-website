@@ -1,7 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styles from "./Navbar.module.css";
 import { usePathname } from 'next/navigation';
 
@@ -22,29 +22,29 @@ export default function Navbar() {
   const [isHovered, setIsHovered] = useState(false);
   const pathname = usePathname();
 
-  // Responsive mobile check with debounce
-  useEffect(() => {
-    const handleResize = () => {
-      const checkMobile = () => setIsMobile(window.innerWidth <= 768);
-      
-      // Debounce to improve performance
-      let timeoutId: NodeJS.Timeout;
-      const debouncedCheck = () => {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(checkMobile, 100);
-      };
+  // Improved responsive check with debounce
+  const checkMobile = useCallback(() => {
+    setIsMobile(window.innerWidth <= 768);
+  }, []);
 
-      debouncedCheck();
-      window.addEventListener('resize', debouncedCheck);
-      
-      return () => {
-        window.removeEventListener('resize', debouncedCheck);
-        clearTimeout(timeoutId);
-      };
+  useEffect(() => {
+    // Initial check
+    checkMobile();
+    
+    // Debounced resize handler
+    let timeoutId: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(checkMobile, 100);
     };
 
-    handleResize();
-  }, []);
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeoutId);
+    };
+  }, [checkMobile]);
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -53,8 +53,31 @@ export default function Navbar() {
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'auto';
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
+      
+      // Add touch handling for mobile
+      if (isMobileMenuOpen) {
+        document.addEventListener('touchmove', preventScroll, { passive: false });
+      } else {
+        document.removeEventListener('touchmove', preventScroll);
+      }
+    }
+    
+    return () => {
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+        document.removeEventListener('touchmove', preventScroll);
+      }
+    };
   }, [isMobileMenuOpen]);
+
+  // Prevent scroll on touch devices when menu is open
+  const preventScroll = (e: TouchEvent) => {
+    if (isMobileMenuOpen) {
+      e.preventDefault();
+    }
+  };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(prev => !prev);
@@ -63,17 +86,21 @@ export default function Navbar() {
   const mobileMenuVariants = {
     hidden: { 
       opacity: 0,
+      y: -20,
       transition: {
         when: "afterChildren",
         staggerChildren: 0.05,
-        staggerDirection: -1
+        staggerDirection: -1,
+        duration: 0.2
       }
     },
     visible: {
       opacity: 1,
+      y: 0,
       transition: {
         when: "beforeChildren",
-        staggerChildren: 0.1
+        staggerChildren: 0.1,
+        duration: 0.3
       }
     }
   };
@@ -165,20 +192,26 @@ export default function Navbar() {
             aria-label="Toggle menu"
             whileTap={{ scale: 0.9 }}
           >
-            <div className={`${styles.mobileMenuIcon} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}></div>
+            <div className={`${styles.hamburgerIcon} ${isMobileMenuOpen ? styles.open : ''}`}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </motion.button>
         )}
+      </div>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobile && isMobileMenuOpen && (
-            <motion.div 
-              className={styles.mobileMenu}
-              variants={mobileMenuVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-            >
+      {/* Mobile Menu - Outside navContent for better positioning */}
+      <AnimatePresence>
+        {isMobile && isMobileMenuOpen && (
+          <motion.div 
+            className={styles.mobileMenu}
+            variants={mobileMenuVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+          >
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               {navItems.map((item) => (
                 <motion.div
                   key={item.name}
@@ -192,10 +225,10 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
               ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }
