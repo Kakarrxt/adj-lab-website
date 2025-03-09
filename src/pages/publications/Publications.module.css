@@ -350,6 +350,8 @@
   border-radius: 10px;
   padding: 1.5rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  position: relative;
+  z-index: 5;
 }
 
 .paginationInfo {
@@ -363,6 +365,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  position: relative;
+  z-index: 5;
 }
 
 .paginationButton {
@@ -376,7 +380,8 @@
   border: 1px solid #6b46c1;
   cursor: pointer;
   position: relative;
-  z-index: 1;
+  z-index: 5;
+  pointer-events: auto;
 }
 
 .paginationButton:hover {
@@ -416,7 +421,8 @@
   color: #333;
   border: 1px solid rgba(107, 70, 193, 0.3);
   position: relative;
-  z-index: 1;
+  z-index: 5;
+  pointer-events: auto;
 }
 
 .pageNumber:hover {
