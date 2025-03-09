@@ -78,6 +78,12 @@ export default function Publications() {
   const [error, setError] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState('year-desc');
   
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [totalPages, setTotalPages] = useState(1);
+  const [currentPublications, setCurrentPublications] = useState<Publication[]>([]);
+  
   const headerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const isHeaderInView = useInView(headerRef, { once: true });
@@ -245,6 +251,53 @@ export default function Publications() {
 
     sortPublications();
   }, [publications, sortBy]);
+  
+  // Update pagination when sorted publications or page changes
+  useEffect(() => {
+    if (sortedPublications.length > 0) {
+      // Calculate total pages
+      const newTotalPages = Math.ceil(sortedPublications.length / itemsPerPage);
+      setTotalPages(newTotalPages);
+      
+      // Ensure current page is valid
+      if (currentPage > newTotalPages) {
+        setCurrentPage(1);
+      }
+      
+      // Get current page publications
+      const indexOfLastItem = currentPage * itemsPerPage;
+      const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+      setCurrentPublications(sortedPublications.slice(indexOfFirstItem, indexOfLastItem));
+    } else {
+      setCurrentPublications([]);
+      setTotalPages(1);
+    }
+  }, [sortedPublications, currentPage, itemsPerPage]);
+  
+  // Handle page change
+  const paginate = (pageNumber: number) => {
+    // Scroll to top of content when changing page
+    contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setCurrentPage(pageNumber);
+  };
+  
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      paginate(currentPage + 1);
+    }
+  };
+  
+  const prevPage = () => {
+    if (currentPage > 1) {
+      paginate(currentPage - 1);
+    }
+  };
+  
+  // Handle items per page change
+  const handleItemsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setItemsPerPage(Number(e.target.value));
+    setCurrentPage(1); // Reset to first page when changing items per page
+  };
  
   const particlesOptions = {
     background: {
@@ -328,20 +381,38 @@ export default function Publications() {
             
             <motion.div 
               variants={fadeInUp}
-              className={styles.sortWrapper}
+              className={styles.filterBar}
             >
-              <label htmlFor="sortPublications">Sort by:</label>
-              <select
-                id="sortPublications"
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className={styles.sortSelect}
-              >
-                <option value="year-desc">Newest First</option>
-                <option value="year-asc">Oldest First</option>
-                <option value="title-asc">Title (A-Z)</option>
-                <option value="title-desc">Title (Z-A)</option>
-              </select>
+              <div className={styles.sortWrapper}>
+                <label htmlFor="sortPublications">Sort by:</label>
+                <select
+                  id="sortPublications"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className={styles.sortSelect}
+                >
+                  <option value="year-desc">Newest First</option>
+                  <option value="year-asc">Oldest First</option>
+                  <option value="title-asc">Title (A-Z)</option>
+                  <option value="title-desc">Title (Z-A)</option>
+                </select>
+              </div>
+              
+              <div className={styles.paginationSettings}>
+                <label htmlFor="itemsPerPage">Show:</label>
+                <select
+                  id="itemsPerPage"
+                  value={itemsPerPage}
+                  onChange={handleItemsPerPageChange}
+                  className={styles.paginationSelect}
+                >
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                </select>
+                <span>per page</span>
+              </div>
             </motion.div>
           </motion.div>
 
@@ -383,7 +454,7 @@ export default function Publications() {
               </motion.div>
             )}
 
-            {sortedPublications.map((pub) => (
+            {currentPublications.map((pub) => (
               <motion.div
                 key={pub.id}
                 variants={fadeInUp}
@@ -391,6 +462,11 @@ export default function Publications() {
                 initial="hidden"
                 whileInView="visible" 
                 viewport={{ once: true, amount: 0.5 }}
+                transition={{
+                  duration: 0.2, // Reduced duration for faster transitions
+                  ease: "easeOut",
+                  delay: currentPublications.findIndex(p => p.id === pub.id) * 0.04 // Adjusted delay for faster stagger
+                }}
               >
                 <h2>{pub.title}</h2>
                 {pub.authors && pub.authors.length > 0 && (
@@ -437,6 +513,71 @@ export default function Publications() {
                 </div>
               </motion.div>
             ))}
+            
+            {/* Pagination controls */}
+            {!loading && sortedPublications.length > 0 && (
+              <motion.div 
+                variants={fadeInUp}
+                className={styles.pagination}
+              >
+                <div className={styles.paginationInfo}>
+                  Showing {(currentPage - 1) * itemsPerPage + 1} to {Math.min(currentPage * itemsPerPage, sortedPublications.length)} of {sortedPublications.length} publications
+                </div>
+                <div className={styles.paginationControls}>
+                  <button
+                    onClick={prevPage}
+                    disabled={currentPage === 1}
+                    className={`${styles.paginationButton} ${currentPage === 1 ? styles.paginationButtonDisabled : ''}`}
+                    aria-label="Previous page"
+                    type="button"
+                  >
+                    &laquo; Prev
+                  </button>
+                  
+                  {/* Page numbers */}
+                  <div className={styles.pageNumbers}>
+                    {Array.from({ length: totalPages }, (_, i) => {
+                      const pageNum = i + 1;
+                      // Show ellipsis for many pages
+                      if (
+                        pageNum === 1 ||
+                        pageNum === totalPages ||
+                        (pageNum >= currentPage - 1 && pageNum <= currentPage + 1)
+                      ) {
+                        return (
+                          <button
+                            key={pageNum}
+                            onClick={() => paginate(pageNum)}
+                            className={`${styles.pageNumber} ${pageNum === currentPage ? styles.currentPage : ''}`}
+                            aria-label={`Page ${pageNum}`}
+                            aria-current={pageNum === currentPage ? 'page' : undefined}
+                            type="button"
+                          >
+                            {pageNum}
+                          </button>
+                        );
+                      } else if (
+                        (pageNum === currentPage - 2 && currentPage > 3) ||
+                        (pageNum === currentPage + 2 && currentPage < totalPages - 2)
+                      ) {
+                        return <span key={pageNum} className={styles.ellipsis}>...</span>;
+                      }
+                      return null;
+                    })}
+                  </div>
+                  
+                  <button
+                    onClick={nextPage}
+                    disabled={currentPage === totalPages}
+                    className={`${styles.paginationButton} ${currentPage === totalPages ? styles.paginationButtonDisabled : ''}`}
+                    aria-label="Next page"
+                    type="button"
+                  >
+                    Next &raquo;
+                  </button>
+                </div>
+              </motion.div>
+            )}
           </motion.div>
           
           {/* Stats section */}
