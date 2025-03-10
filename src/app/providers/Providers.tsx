@@ -1,13 +1,11 @@
 'use client';
 import React from 'react';
 import AppContextProvider from './AppContextProvider';
-import ReactQueryClientProvider from './ReactQueryClientProvider';
 import SessionProvider from './SessionProvider';
 import SuspenseProvider from './SuspenseProvider';
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
     return (
-        <ReactQueryClientProvider>
             <SuspenseProvider>
                 <AppContextProvider>
                     <SessionProvider>
@@ -15,7 +13,6 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
                     </SessionProvider>
                 </AppContextProvider>
             </SuspenseProvider>
-        </ReactQueryClientProvider>
     )
 }
 
