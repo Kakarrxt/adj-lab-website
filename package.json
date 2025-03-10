@@ -44,7 +44,8 @@
     "react-tsparticles": "^2.12.2",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.174.0",
-    "tsparticles": "^3.8.1"
+    "tsparticles": "^3.8.1",
+    "olg":"^1.55.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
