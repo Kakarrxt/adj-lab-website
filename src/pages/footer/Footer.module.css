@@ -7,6 +7,7 @@
   position: relative;
   overflow: hidden;
   margin-top: auto; /* Push footer to bottom */
+  font-family: 'Inter', sans-serif;
 }
 
 .footer::before {

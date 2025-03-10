@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
   --primary-color: Transparent;
   --secondary-color: #4f4f4f;
   --background-light: #f9f9f9;
   --text-color: #333;
   --transition-speed: 0.3s;
+  --font-family: 'Inter', sans-serif;
 }
 
 ::-webkit-scrollbar {

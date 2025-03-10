@@ -13,6 +13,7 @@
   justify-content: center;
   align-items: center;
   perspective: 1000px;
+  font-family: 'Inter', sans-serif;
 }
 
 .navContent {
