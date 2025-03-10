@@ -7,12 +7,12 @@
 
 .sectionTop {
   position: relative;
-  height: 100px; 
+  height: 100px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; 
+  overflow: hidden;
   z-index: 0;
 }
 
@@ -107,23 +107,6 @@
   border-right: 1px solid #eee;
 }
 
-/* .imageWrapper {
-  width: 180px;
-  height: 180px; 
-  margin: 0 auto;
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  overflow: hidden; 
-  box-shadow: 0 4px 12px rgba(123, 31, 162, 0.15);
-  border: 4px solid white;
-} */
-
-
-
-
 .emailLink {
   display: flex;
   align-items: center;
@@ -202,6 +185,58 @@
   line-height: 1.6;
 }
 
+/* Alumni Grid and Card Styling */
+.alumniGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.alumniCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.alumniCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.alumniPhoto {
+  margin-bottom: 1rem;
+}
+
+.alumniInfo {
+  width: 100%;
+}
+
+.alumniName {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #4a0072;
+  margin-bottom: 0.25rem;
+}
+
+.alumniTitle {
+  color: #7b1fa2;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.alumniPeriod {
+  color: #666;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .memberCard {
@@ -219,6 +254,16 @@
   
   .infoSection {
     border-bottom: 1px solid #eee;
+  }
+  
+  .alumniGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .alumniGrid {
+    grid-template-columns: 1fr;
   }
 }
 

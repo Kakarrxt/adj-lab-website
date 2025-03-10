@@ -22,8 +22,6 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 }
 
-
-
 export default function LabMembers() {
   const [init, setInit] = useState(false);
   useEffect(() => {
@@ -33,29 +31,11 @@ export default function LabMembers() {
       setInit(true);
     });
   }, []);
-  const PI = {
-    name: "Dr. Anand Jeyashekharan",
-    title: "Principal Investigator",
-    image: "/media/LabMembers/Anand.jpeg",
-    description:
-      "The ADJ laboratory investigates immune recognition of cancer after chemotherapy to develop effective immunotherapy-chemotherapy combinations. We conduct both molecular research and clinical studies, with special focus on lymphomas in collaboration with the NUH Lymphoma team.",
-    bio: "Clinician-scientist and Assistant Professor at NUS Centre for Cancer Research. Medical Oncologist at National University Cancer Institute and Principal Investigator at Cancer Science Institute. Leads Microscopy Core and co-leads Translational Research platform for Singapore Translational Cancer Consortium.",
-    email: "csiadj@nus.edu.sg",
-  }
 
   const currentMembers = [
     {
-      name: "Patrick William Jaynes",
-      title: "Research Fellow",
-      image: "/media/LabMembers/Patrick.jpg",
-      description:
-        "Developing ways to augment the efficacy of chemotherapy within the context of lymphoma through the activation of the immune system.",
-      bio: "Developing ways to augment the efficacy of chemotherapy within the context of lymphoma through the activation of the immune system.",
-      email: "Email",
-    },
-    {
       name: "Norbert Tay Sheng Cong",
-      title: "PhD Student",
+      title: "Research Fellow",
       image: "/media/LabMembers/Chow-Norbert-Tay-.jpg",
       description:
         "Investigating Molecular Mechanism of DNA Damage Response-based Therapies in Haematological Malignancies.",
@@ -87,14 +67,6 @@ export default function LabMembers() {
       email: "Email",
     },
     {
-      name: "Bryce Tan Wei Quan",
-      title: "PhD Student",
-      image: "/media/LabMembers/Bryce-Tan.jpeg",
-      description: "Studying the role of mTOR in cellular survival and proliferation.",
-      bio: "Studying the role of mTOR in cellular survival and proliferation.",
-      email: "Email",
-    },
-    {
       name: "Phuong Mai Hoang",
       title: "Research Fellow",
       image: "/media/LabMembers/Phoung.jpg",
@@ -103,7 +75,7 @@ export default function LabMembers() {
       email: "Email",
     },
     {
-      name: "Ong Zi Yan Charmaine",
+      name: "Charmaine Ong Zi Yan",
       title: "PhD Student",
       image: "/media/LabMembers/Charmaine-Ong.jpg",
       description: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
@@ -120,16 +92,8 @@ export default function LabMembers() {
       email: "Email",
     },
     {
-      name: "Zuo Suhui",
-      title: "Research Assistant",
-      image: "/media/LabMembers/ZUO.png",
-      description: "",
-      bio: "",
-      email: "Email",
-    },
-    {
       name: "Hong Liang",
-      title: "Research Assistant",
+      title: "Research Assistant/PhD Student",
       image: "/media/LabMembers/Hong.png",
       description: "Study of transcriptomics like RNA sequencing analysis using bioinformatics techniques.",
       bio: "Study of transcriptomics like RNA sequencing analysis using bioinformatics techniques.",
@@ -137,7 +101,7 @@ export default function LabMembers() {
     },
     {
       name: "Chartsiam (Sam) Tipgomut",
-      title: "Research Fellow",
+      title: "Scientific Officer",
       image: "/media/LabMembers/sam-Chartsiam.jpg",
       description:
         "Development of human cellular model systems for in-depth analysis and drug screening of a novel Diamond-Blackfan anemia mutation.",
@@ -161,14 +125,60 @@ export default function LabMembers() {
       email: "Email",
     },
     {
-      name: "Tang Jing Ping",
-      title: "Senior Laboratory Executive",
-      image: "/media/LabMembers/tang_jing_ping.jpg",
-      description: "Lab management and work on crystallography and SALL4 drug screening project.",
-      bio: "Lab management and work on crystallography and SALL4 drug screening project.",
+      name: "Irene Biju",
+      title: "Undergraduate-Master Student",
+      image: "/media/LabMembers/Irene.jpg", // Add proper image path
+      description: "",
+      bio: "",
       email: "Email",
     },
   ]
+
+  const alumniMembers = [
+    {
+      name: "Justin Chan",
+      title: "Former Research Assistant",
+      image: "/media/LabMembers/Justin.jpg", // Add proper image path
+      period: "2020-2023",
+    },
+    {
+      name: "Bryce Tan Wei Quan",
+      title: "Former PhD Student",
+      image: "/media/LabMembers/Bryce-Tan.jpeg",
+      period: "2019-2024",
+    },
+    {
+      name: "Michal Marek Hoppe",
+      title: "Former Research Fellow",
+      image: "/media/LabMembers/Michal.jpg", // Add proper image path
+      period: "2018-2022",
+    },
+    {
+      name: "Patrick William Jaynes",
+      title: "Former Research Fellow",
+      image: "/media/LabMembers/Patrick.jpg",
+      period: "2020-2024",
+    },
+    {
+      name: "Liu Min",
+      title: "Former Research Assistant",
+      image: "/media/LabMembers/Liu-Min.jpg", // Add proper image path
+      period: "2019-2022",
+    },
+    {
+      name: "Kanav Kupta",
+      title: "Former Research Intern",
+      image: "/media/LabMembers/Kanav.jpg", // Add proper image path
+      period: "May 2024 - Nov 2024",
+    },
+    {
+      name: "Wang Rui",
+      title: "Former Research Assistant",
+      image: "/media/LabMembers/Wang-Rui.jpg", // Add proper image path
+      period: "2019-2021",
+    },
+  ]
+
   const particlesOptions = {
     background: {
       color: {
@@ -219,7 +229,6 @@ export default function LabMembers() {
 
   return (
     <>
-     
       <motion.div
         className={styles.sectionTop}
         initial={{ opacity: 0 }}
@@ -251,18 +260,19 @@ export default function LabMembers() {
           </motion.div>
 
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Principal Investigator</h2>
-            <MemberCard member={PI} />
-          </section>
-
-          {/* Add section for lab outing and more images here */}
-          {/* FUN STUFF*/}
-
-          <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Current Lab Members</h2>
             <motion.div className={styles.membersGrid} variants={containerVariants} initial="hidden" animate="visible">
               {currentMembers.map((member, index) => (
                 <MemberCard key={index} member={member} />
+              ))}
+            </motion.div>
+          </section>
+
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>Alumni</h2>
+            <motion.div className={styles.alumniGrid} variants={containerVariants} initial="hidden" animate="visible">
+              {alumniMembers.map((alumni, index) => (
+                <AlumniCard key={index} alumni={alumni} />
               ))}
             </motion.div>
           </section>
@@ -279,6 +289,13 @@ interface Member {
   description: string
   bio: string
   email: string
+}
+
+interface Alumni {
+  name: string
+  title: string
+  image: string
+  period: string
 }
 
 function MemberCard({ member }: { member: Member }) {
@@ -319,3 +336,29 @@ function MemberCard({ member }: { member: Member }) {
   )
 }
 
+function AlumniCard({ alumni }: { alumni: Alumni }) {
+  return (
+    <motion.div variants={itemVariants} className={styles.alumniCard}>
+      <div className={styles.alumniPhoto}>
+        <TiltedCard
+          imageSrc={alumni.image}
+          altText={alumni.name}
+          containerHeight=""
+          containerWidth=""
+          imageHeight="150px"
+          imageWidth="150px"
+          borderRadius='50%'
+          scaleOnHover={1.05}
+          rotateAmplitude={3}
+          showMobileWarning={false}
+          showTooltip={false}
+        />
+      </div>
+      <div className={styles.alumniInfo}>
+        <h3 className={styles.alumniName}>{alumni.name}</h3>
+        <p className={styles.alumniTitle}>{alumni.title}</p>
+        <p className={styles.alumniPeriod}>{alumni.period}</p>
+      </div>
+    </motion.div>
+  )
+}
