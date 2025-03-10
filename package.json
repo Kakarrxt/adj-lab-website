@@ -45,7 +45,7 @@
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.174.0",
     "tsparticles": "^3.8.1",
-    "olg":"^1.55.1"
+    "ogl":"^1.0.11"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
