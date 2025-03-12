@@ -1,20 +1,27 @@
-import { HydrationBoundary } from '@tanstack/react-query';
-import { AppProps } from 'next/app';
-import NavBar from './navbar/index';
-//import Footer from './common/Footer';
-import Providers from '@/app/providers/Providers';
-import Footer from './footer/index';
+import "@/styles/globals.css";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import { AnimatePresence } from "framer-motion";
 
-export default function App({ Component, pageProps }: AppProps) {
-    return (
-        <Providers>
-            <HydrationBoundary state={pageProps.dehydratedState}>
-                <main>
-                    <NavBar />
-                    <Component {...pageProps} />
-                    <Footer />
-                </main>
-            </HydrationBoundary>
-        </Providers>
-    );
+export default function App({
+	Component,
+	pageProps,
+	router,
+}: {
+	Component: any;
+	pageProps: any;
+	router: any;
+}) {
+	return (
+		<>
+			<Navbar />
+			<AnimatePresence mode="wait">
+				<Component
+					key={router.route}
+					{...pageProps}
+				/>
+			</AnimatePresence>
+			<Footer />
+		</>
+	);
 }

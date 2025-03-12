@@ -6,6 +6,7 @@ import styles from "./join-us.module.css";
 import { FaUsers, FaCodeBranch, FaFlask, FaGraduationCap } from "react-icons/fa";
 import Image from "next/image";
 import NeonIsometricMaze from "@/components/NeonIsometricMaze";
+import Curve from '@/components/Curve/Curve'
 
 export default function JoinUsPage() {
   const positionsRef = useRef(null);
@@ -67,6 +68,7 @@ export default function JoinUsPage() {
   
   return (
     <>
+    <Curve backgroundColor="#f1f1f1">
       <motion.div 
         className={styles.sectionTop}
         initial={{ opacity: 0 }}
@@ -74,7 +76,9 @@ export default function JoinUsPage() {
         transition={{ duration: 0.8 }}
       >
         <div>
+                  {/*
           <NeonIsometricMaze />
+        */}
         </div>
       </motion.div>
 
@@ -261,6 +265,7 @@ export default function JoinUsPage() {
           </motion.section>
         </main>
       </div>
+    </Curve>
     </>
   );
 }

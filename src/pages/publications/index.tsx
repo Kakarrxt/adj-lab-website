@@ -7,6 +7,7 @@ import NeonIsometricMaze from '@/components/NeonIsometricMaze';
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
+import Curve from '@/components/Curve/Curve'
 
 // Define interfaces for the PubMed API response
 interface PubMedSearchResponse {
@@ -349,6 +350,7 @@ export default function Publications() {
   
   return (
     <>
+    <Curve backgroundColor="#f1f1f1">
       <motion.div 
         className={styles.sectionTop}
         initial={{ opacity: 0 }}
@@ -356,7 +358,9 @@ export default function Publications() {
         transition={{ duration: 0.8 }}
       >
         <div>
-          <div className={styles.decorativeElement}><NeonIsometricMaze /></div>
+                  {/*
+          <NeonIsometricMaze />
+        */}
         </div>
       </motion.div>
       
@@ -611,6 +615,8 @@ export default function Publications() {
           )}
         </main>
       </div>
+
+      </Curve>
     </>
   );
 }

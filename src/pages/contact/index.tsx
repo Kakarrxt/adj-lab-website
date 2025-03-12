@@ -6,6 +6,7 @@ import styles from "./contact.module.css";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import Image from "next/image";
 import NeonIsometricMaze from "@/components/NeonIsometricMaze";
+import Curve from '@/components/Curve/Curve'
 
 export default function ContactPage() {
   const mapRef = useRef(null);
@@ -61,6 +62,7 @@ export default function ContactPage() {
 
   return (
     <>
+    <Curve backgroundColor="#f1f1f1">
       <motion.div 
         className={styles.sectionTop}
         initial={{ opacity: 0 }}
@@ -68,7 +70,9 @@ export default function ContactPage() {
         transition={{ duration: 0.8 }}
       >
         <div>
+                  {/*
           <NeonIsometricMaze />
+        */}
         </div>
       </motion.div>
 
@@ -212,6 +216,7 @@ export default function ContactPage() {
           </motion.section>
         </main>
       </div>
+      </Curve>
     </>
   );
 }

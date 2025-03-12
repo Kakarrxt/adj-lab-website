@@ -2,9 +2,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import Image from "next/image";
-import Navbar from "@/pages/navbar";
-import Footer from "@/pages/footer";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 import styles from "./page.module.css";
+import Curve from '@/components/Curve/Curve'
 
 // Interfaces for type safety
 interface ResearchTopic {
@@ -258,6 +259,9 @@ export default function ResearchPage() {
       : researchTopics;
     
     return (
+    
+      <>
+       <Curve backgroundColor="#f1f1f1">
       <div className={styles.container}>
         <Navbar />
         {/* Dynamic Hero Section */}
@@ -275,10 +279,9 @@ export default function ResearchPage() {
                 alt="Nautical Map Background"
                 layout="fill"
                 objectFit="cover"
-                priority
-              />
+                priority />
             </motion.div>
-            
+
             {(animationStage === 'cells-zoom' || animationStage === 'cells-out' || animationStage === 'cells-fade') && (
               <motion.div
                 key="cells"
@@ -294,12 +297,11 @@ export default function ResearchPage() {
                   alt="Cancer Cells"
                   layout="fill"
                   objectFit="cover"
-                  priority
-                />
+                  priority />
               </motion.div>
             )}
           </AnimatePresence>
-          
+
           <motion.div
             className={styles.heroContent}
             initial={{ opacity: 0, scale: 0.9 }}
@@ -314,218 +316,218 @@ export default function ResearchPage() {
           </motion.div>
         </section>
 
-      {/* Research Topics Section */}
-      <section
-        ref={researchRef}
-        className={styles.researchSection}
-      >
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
-          animate={isResearchInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+        {/* Research Topics Section */}
+        <section
+          ref={researchRef}
+          className={styles.researchSection}
         >
-          Our Research Focus
-        </motion.h2>
-
-        {/* Research Filters */}
-        <div className={styles.filterContainer}>
-          {Array.from(new Set(researchTopics.flatMap(topic => topic.tags))).map(tag => (
-            <button
-              key={tag}
-              onClick={() => setFilter(filter === tag ? null : tag)}
-              className={`${styles.filterButton} ${filter === tag ? styles.activeFilter : ''}`}
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
-
-        <div className={styles.researchGrid}>
-          {filteredResearch.map((topic) => (
-            <motion.div
-              key={topic.id}
-              className={styles.researchCard}
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              onClick={() => setSelectedResearch(topic)}
-            >
-              <div className={styles.cardImageContainer}>
-                <Image
-                  src={topic.image}
-                  alt={topic.title}
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-              <div className={styles.cardContent}>
-                <h3>{topic.title}</h3>
-                <p>{topic.description}</p>
-                <div className={styles.cardTags}>
-                  {topic.tags.map(tag => (
-                    <span key={tag} className={styles.tag}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Publications Section */}
-      <section
-        ref={publicationsRef}
-        className={styles.publicationsSection}
-      >
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
-          animate={isPublicationsInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-        >
-          Selected Publications
-        </motion.h2>
-
-        <div className={styles.publicationsContainer}>
-          {publications.map((pub) => (
-            <motion.div
-              key={pub.id}
-              className={styles.publicationCard}
-              initial={{ opacity: 0, y: 20 }} // Slight vertical offset for initial state
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{
-                duration: 0.2, // Reduced duration for faster transitions
-                ease: "easeOut",
-                delay: publications.findIndex(p => p.id === pub.id) * 0.04 // Adjusted delay for faster stagger
-              }}
-              whileHover={{ scale: 1.05, backgroundColor: '#f9f9f9' }} // Increased scale for faster hover effect
-              onClick={() => setSelectedPublication(pub)}
-            >
-              <div className={styles.publicationHighlight}></div> {/* Highlight element */}
-              <div className={styles.publicationContent}>
-                <h3 className={styles.publicationTitle}>
-                  {pub.title}
-                </h3>
-                <div className={styles.publicationInfoLine}> {/* New div for journal and year */}
-                  <p className={styles.publicationJournal}>{pub.journal}</p>
-                  <p className={styles.publicationYear}>{pub.year}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Research Modal */}
-      <AnimatePresence>
-        {selectedResearch && (
-          <motion.div
-            className={styles.modalOverlay}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            onClick={() => setSelectedResearch(null)}
+          <motion.h2
+            initial={{ opacity: 0, y: 50 }}
+            animate={isResearchInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
           >
-            <motion.div
-              className={styles.modalContent}
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                className={styles.closeButton}
-                onClick={() => setSelectedResearch(null)}
-              >
-                ×
-              </button>
-              <div className={styles.modalHeader}>
-                <h2>{selectedResearch.title}</h2>
-                <div className={styles.modalTags}>
-                  {selectedResearch.tags.map(tag => (
-                    <span key={tag} className={styles.tag}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-              <div className={styles.modalImageContainer}>
-                <Image
-                  src={selectedResearch.image}
-                  alt={selectedResearch.title}
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-              <p className={styles.modalDescription}>
-                {selectedResearch.fullDescription}
-              </p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            Our Research Focus
+          </motion.h2>
 
-      {/* Publication Modal */}
-      <AnimatePresence>
-        {selectedPublication && (
-          <motion.div
-            className={styles.modalOverlay}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }} // Reduced duration for faster modal transition
-            onClick={() => setSelectedPublication(null)}
-          >
-            <motion.div
-              className={`${styles.modalContent} ${styles.publicationModalContent}`}
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut" }} // Reduced duration for faster modal transition
-              onClick={(e) => e.stopPropagation()}
-            >
+          {/* Research Filters */}
+          <div className={styles.filterContainer}>
+            {Array.from(new Set(researchTopics.flatMap(topic => topic.tags))).map(tag => (
               <button
-                className={styles.closeButton}
-                onClick={() => setSelectedPublication(null)}
+                key={tag}
+                onClick={() => setFilter(filter === tag ? null : tag)}
+                className={`${styles.filterButton} ${filter === tag ? styles.activeFilter : ''}`}
               >
-                ×
+                {tag}
               </button>
-              <div className={styles.publicationModalHeader}>
-                <div className={styles.publicationModalYear}>{selectedPublication.year}</div>
-                <h2>{selectedPublication.title}</h2>
-              </div>
-              <div className={styles.publicationModalBody}>
-                <div className={styles.publicationModalSection}>
-                  <h3>Authors</h3>
-                  <p>{selectedPublication.authors}</p>
+            ))}
+          </div>
+
+          <div className={styles.researchGrid}>
+            {filteredResearch.map((topic) => (
+              <motion.div
+                key={topic.id}
+                className={styles.researchCard}
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                onClick={() => setSelectedResearch(topic)}
+              >
+                <div className={styles.cardImageContainer}>
+                  <Image
+                    src={topic.image}
+                    alt={topic.title}
+                    layout="fill"
+                    objectFit="cover" />
                 </div>
-                <div className={styles.publicationModalSection}>
-                  <h3>Journal</h3>
-                  <p>{selectedPublication.journal}</p>
-                </div>
-                <div className={styles.publicationModalSection}>
-                  <h3>DOI</h3>
-                  <a
-                    href={`https://doi.org/${selectedPublication.doi}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.publicationDoi}
-                  >
-                    {selectedPublication.doi}
-                  </a>
-                </div>
-                {selectedPublication.abstract && (
-                  <div className={styles.publicationModalSection}>
-                    <h3>Abstract</h3>
-                    <p className={styles.publicationAbstract}>{selectedPublication.abstract}</p>
+                <div className={styles.cardContent}>
+                  <h3>{topic.title}</h3>
+                  <p>{topic.description}</p>
+                  <div className={styles.cardTags}>
+                    {topic.tags.map(tag => (
+                      <span key={tag} className={styles.tag}>{tag}</span>
+                    ))}
                   </div>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
-      <Footer />
-    </div>
+        {/* Publications Section */}
+        <section
+          ref={publicationsRef}
+          className={styles.publicationsSection}
+        >
+          <motion.h2
+            initial={{ opacity: 0, y: 50 }}
+            animate={isPublicationsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+          >
+            Selected Publications
+          </motion.h2>
+
+          <div className={styles.publicationsContainer}>
+            {publications.map((pub) => (
+              <motion.div
+                key={pub.id}
+                className={styles.publicationCard}
+                initial={{ opacity: 0, y: 20 }} // Slight vertical offset for initial state
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{
+                  duration: 0.2, // Reduced duration for faster transitions
+                  ease: "easeOut",
+                  delay: publications.findIndex(p => p.id === pub.id) * 0.04 // Adjusted delay for faster stagger
+                }}
+                whileHover={{ scale: 1.05, backgroundColor: '#f9f9f9' }} // Increased scale for faster hover effect
+                onClick={() => setSelectedPublication(pub)}
+              >
+                <div className={styles.publicationHighlight}></div> {/* Highlight element */}
+                <div className={styles.publicationContent}>
+                  <h3 className={styles.publicationTitle}>
+                    {pub.title}
+                  </h3>
+                  <div className={styles.publicationInfoLine}> {/* New div for journal and year */}
+                    <p className={styles.publicationJournal}>{pub.journal}</p>
+                    <p className={styles.publicationYear}>{pub.year}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Research Modal */}
+        <AnimatePresence>
+          {selectedResearch && (
+            <motion.div
+              className={styles.modalOverlay}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              onClick={() => setSelectedResearch(null)}
+            >
+              <motion.div
+                className={styles.modalContent}
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  className={styles.closeButton}
+                  onClick={() => setSelectedResearch(null)}
+                >
+                  ×
+                </button>
+                <div className={styles.modalHeader}>
+                  <h2>{selectedResearch.title}</h2>
+                  <div className={styles.modalTags}>
+                    {selectedResearch.tags.map(tag => (
+                      <span key={tag} className={styles.tag}>{tag}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className={styles.modalImageContainer}>
+                  <Image
+                    src={selectedResearch.image}
+                    alt={selectedResearch.title}
+                    layout="fill"
+                    objectFit="cover" />
+                </div>
+                <p className={styles.modalDescription}>
+                  {selectedResearch.fullDescription}
+                </p>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Publication Modal */}
+        <AnimatePresence>
+          {selectedPublication && (
+            <motion.div
+              className={styles.modalOverlay}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }} // Reduced duration for faster modal transition
+              onClick={() => setSelectedPublication(null)}
+            >
+              <motion.div
+                className={`${styles.modalContent} ${styles.publicationModalContent}`}
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ duration: 0.4, ease: "easeOut" }} // Reduced duration for faster modal transition
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  className={styles.closeButton}
+                  onClick={() => setSelectedPublication(null)}
+                >
+                  ×
+                </button>
+                <div className={styles.publicationModalHeader}>
+                  <div className={styles.publicationModalYear}>{selectedPublication.year}</div>
+                  <h2>{selectedPublication.title}</h2>
+                </div>
+                <div className={styles.publicationModalBody}>
+                  <div className={styles.publicationModalSection}>
+                    <h3>Authors</h3>
+                    <p>{selectedPublication.authors}</p>
+                  </div>
+                  <div className={styles.publicationModalSection}>
+                    <h3>Journal</h3>
+                    <p>{selectedPublication.journal}</p>
+                  </div>
+                  <div className={styles.publicationModalSection}>
+                    <h3>DOI</h3>
+                    <a
+                      href={`https://doi.org/${selectedPublication.doi}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.publicationDoi}
+                    >
+                      {selectedPublication.doi}
+                    </a>
+                  </div>
+                  {selectedPublication.abstract && (
+                    <div className={styles.publicationModalSection}>
+                      <h3>Abstract</h3>
+                      <p className={styles.publicationAbstract}>{selectedPublication.abstract}</p>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <Footer />
+      </div>
+      </Curve>
+      </>
   );
 }

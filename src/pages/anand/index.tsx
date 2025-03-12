@@ -8,6 +8,7 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
 import NeonIsometricMaze from "@/components/NeonIsometricMaze";
+import Curve from '@/components/Curve/Curve'
 
 export default function AnandPage() {
   const [init, setInit] = useState(false);
@@ -180,6 +181,7 @@ export default function AnandPage() {
   };
 
   return (
+    <Curve backgroundColor="#f1f1f1">
     <motion.div 
       className={styles.container}
       initial={{ opacity: 0 }}
@@ -203,7 +205,9 @@ export default function AnandPage() {
         transition={{ duration: 0.8 }}
       >
         <div>
+        {/*
           <NeonIsometricMaze />
+        */}
         </div>
       </motion.div>
       
@@ -402,5 +406,6 @@ export default function AnandPage() {
         </motion.div>
       </main>
     </motion.div>
+    </Curve>
   );
 }

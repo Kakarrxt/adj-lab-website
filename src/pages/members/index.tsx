@@ -8,6 +8,7 @@ import styles from "./members.module.css"
 import Link from "next/link"
 import NeonIsometricMaze from "@/components/NeonIsometricMaze"
 import TiltedCard from "./TiltedCard"
+import Curve from '@/components/Curve/Curve'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -229,6 +230,7 @@ export default function LabMembers() {
 
   return (
     <>
+    <Curve backgroundColor="#f1f1f1">
       <motion.div
         className={styles.sectionTop}
         initial={{ opacity: 0 }}
@@ -236,7 +238,9 @@ export default function LabMembers() {
         transition={{ duration: 0.8 }}
       >
         <div>
+                  {/*
           <NeonIsometricMaze />
+        */}
         </div>
       </motion.div>
 
@@ -278,6 +282,7 @@ export default function LabMembers() {
           </section>
         </main>
       </div>
+      </Curve>
     </>
   )
 }

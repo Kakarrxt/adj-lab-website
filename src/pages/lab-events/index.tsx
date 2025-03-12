@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 import styles from "./lab-events.module.css"
 import CircularGallery from "@/components/CircularGallery/CircularGallery";
+import Curve from '@/components/Curve/Curve'
 
 export default function LabEvents(){
 
@@ -35,6 +36,7 @@ export default function LabEvents(){
 
     return(
         <>
+        <Curve backgroundColor="#f1f1f1">
         <motion.div 
         className={styles.sectionTop}
         initial={{ opacity: 0 }}
@@ -42,7 +44,9 @@ export default function LabEvents(){
         transition={{ duration: 0.8 }}
       >
         <div>
+                  {/*
           <NeonIsometricMaze />
+        */}
         </div>
       </motion.div>
       <div className={styles.container}>
@@ -84,6 +88,8 @@ export default function LabEvents(){
           
           </main>
           </div>
+
+        </Curve>
         </>
     )
 }
