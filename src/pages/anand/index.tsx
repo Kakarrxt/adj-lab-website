@@ -10,7 +10,10 @@ import type { Engine } from "@tsparticles/engine";
 import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 import Curve from '@/components/Curve/Curve'
 
+
 export default function AnandPage() {
+
+
   const [init, setInit] = useState(false);
   const [activeTab, setActiveTab] = useState('affiliations');
   const [isLoaded, setIsLoaded] = useState(false);

@@ -1,6 +1,6 @@
 "use client"
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect} from "react";
 import { useInView } from "framer-motion";
 import styles from "./contact.module.css";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
@@ -9,6 +9,9 @@ import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 import Curve from '@/components/Curve/Curve'
 import Aurora from "@/components/Aurora/Aurora";
 export default function ContactPage() {
+
+
+
   const mapRef = useRef(null);
   const contactInfoRef = useRef(null);
   const isMapInView = useInView(mapRef, { once: true });

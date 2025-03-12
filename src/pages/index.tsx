@@ -263,7 +263,6 @@ export default function ResearchPage() {
       <>
        <Curve backgroundColor="#f1f1f1">
       <div className={styles.container}>
-        <Navbar />
         {/* Dynamic Hero Section */}
         <section className={styles.heroSection}>
           <AnimatePresence>
@@ -524,8 +523,6 @@ export default function ResearchPage() {
             </motion.div>
           )}
         </AnimatePresence>
-
-        <Footer />
       </div>
       </Curve>
       </>
