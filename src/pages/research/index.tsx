@@ -6,7 +6,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 import Curve from '@/components/Curve/Curve'
-
+import Aurora from "@/components/Aurora/Aurora";
 export default function ResearchPage() {
   const textRef = useRef(null);
   const imageRef = useRef(null);
@@ -74,6 +74,12 @@ export default function ResearchPage() {
                {/*
           <NeonIsometricMaze />
         */}
+        <Aurora
+          colorStops={["#A855F7", "#9333EA", "#6B21A8"]}
+          blend={0.5}
+          amplitude={1.0}
+          speed={0.5}
+        />
       </div>
     </motion.div>
     <div className={styles.container}>

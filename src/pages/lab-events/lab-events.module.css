@@ -29,11 +29,11 @@
     /* margin-bottom: 1rem; */
   }
   
-  .header h1 {
+  .animatedChar {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: #333;
+    color: #6b46c1;
     display: inline-block;
   }
 

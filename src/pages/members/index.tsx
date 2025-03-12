@@ -9,6 +9,7 @@ import Link from "next/link"
 import NeonIsometricMaze from "@/components/NeonIsometricMaze"
 import TiltedCard from "./TiltedCard"
 import Curve from '@/components/Curve/Curve'
+import Aurora from "@/components/Aurora/Aurora";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -241,6 +242,12 @@ export default function LabMembers() {
                   {/*
           <NeonIsometricMaze />
         */}
+        <Aurora
+          colorStops={["#A855F7", "#9333EA", "#6B21A8"]}
+          blend={0.5}
+          amplitude={1.0}
+          speed={0.5}
+        />
         </div>
       </motion.div>
 
