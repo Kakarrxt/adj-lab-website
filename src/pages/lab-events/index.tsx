@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 import styles from "./lab-events.module.css"
-import CircularGallery from "@/components/CircularGallery/CircularGallery";
+import CircularGalleryWithFlip from "@/components/CircularGallery/CircularGallery";
 
 export default function LabEvents(){
 
@@ -75,10 +75,10 @@ export default function LabEvents(){
             variants={fadeInUp}
             initial="hidden"
             animate="visible"
-            className={styles.circularGallery}
+            
           >
-            <div style={{ height: '700px', position: 'relative' }}>
-            <CircularGallery bend={3} textColor="#6b46c1" borderRadius={0.05} />
+            <div className={styles.circularGallery}>
+            <CircularGalleryWithFlip bend={3} textColor="#6b46c1" borderRadius={0.05} />
             </div>
           </motion.div>
           
