@@ -1,9 +1,9 @@
 "use client"
 import { motion } from "framer-motion";
-
+import Masonry from "@/components/Masonry/Masonry";
 import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 import styles from "./lab-events.module.css"
-import CircularGalleryWithFlip from "@/components/CircularGallery/CircularGallery";
+// import CircularGalleryWithFlip from "@/components/CircularGallery/CircularGallery";
 
 export default function LabEvents(){
 
@@ -32,6 +32,19 @@ export default function LabEvents(){
     };
   
     const title = "ADJ Lab Events";
+
+    const data = [
+      { id: 1, image: 'https://picsum.photos/id/10/200/300', height: 400 },
+      { id: 2, image: 'https://picsum.photos/id/14/200/300', height: 300 },
+      { id: 3, image: 'https://picsum.photos/id/15/200/300', height: 400 },
+      { id: 4, image: 'https://picsum.photos/id/16/200/300', height: 300 },
+      { id: 5, image: 'https://picsum.photos/id/17/200/300', height: 400 },
+      { id: 6, image: 'https://picsum.photos/id/19/200/300', height: 300 },
+      { id: 7, image: 'https://picsum.photos/id/37/200/300', height: 300 },
+      { id: 8, image: 'https://picsum.photos/id/39/200/300', height: 300 },
+      { id: 9, image: 'https://picsum.photos/id/85/200/300', height: 400 },
+      { id: 10, image: 'https://picsum.photos/id/103/200/300', height: 400 }
+    ];
 
     return(
         <>
@@ -77,9 +90,12 @@ export default function LabEvents(){
             animate="visible"
             
           >
-            <div className={styles.circularGallery}>
+            {/* <div className={styles.circularGallery}>
             <CircularGalleryWithFlip bend={3} textColor="#6b46c1" borderRadius={0.05} />
-            </div>
+            </div> */}
+          <div className={styles.photoGallery}>
+          <Masonry data={data} />
+          </div>
           </motion.div>
           
           </main>

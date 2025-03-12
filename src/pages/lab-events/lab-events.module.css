@@ -37,9 +37,13 @@
     display: inline-block;
   }
 
-  .circularGallery{
+  /* .circularGallery{
     height: 600px; 
     position: 'relative';
     margin-top: -7rem; 
     margin-bottom: 10rem;
-  }
+  } */
+   .photoGallery{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+   }
