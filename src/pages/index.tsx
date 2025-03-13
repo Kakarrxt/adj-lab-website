@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Curve from '@/components/Curve/Curve'
+import VariableFontCursorProximity from "@/fancy/components/text/variable-font-cursor-proximity"
 
 // Interfaces for type safety
 interface ResearchTopic {
@@ -37,6 +38,8 @@ export default function ResearchPage() {
   const publicationsRef = useRef(null);
   const isResearchInView = useInView(researchRef, { once: true });
   const isPublicationsInView = useInView(publicationsRef, { once: true });
+
+  
 
   // Research Topics with more detailed information
   const researchTopics: ResearchTopic[] = [
