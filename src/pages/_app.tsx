@@ -2,6 +2,9 @@ import "@/styles/globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { AnimatePresence } from "framer-motion";
+import "./anand/Anand.module.css";
+import "./contact/contact.module.css";
+import "./join-us/join-us.module.css";	
 
 export default function App({
 	Component,
