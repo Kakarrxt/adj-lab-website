@@ -21,9 +21,9 @@ interface TiltedCardProps {
 }
 
 const springValues: SpringOptions = {
-  damping: 30,
-  stiffness: 100,
-  mass: 2,
+  damping: 25,
+  stiffness: 300,
+  mass: 1.2,
 };
 
 export default function TiltedCard({
@@ -62,15 +62,23 @@ export default function TiltedCard({
     if (!ref.current) return;
 
     const rect = ref.current.getBoundingClientRect();
-    const offsetX = e.clientX - rect.left - rect.width / 2;
-    const offsetY = e.clientY - rect.top - rect.height / 2;
+    
+    // Calculate center point of the element
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    // Calculate distance from cursor to center
+    const offsetX = e.clientX - centerX;
+    const offsetY = e.clientY - centerY;
 
+    // Calculate rotation based on distance from center
     const rotationX = (offsetY / (rect.height / 2)) * -rotateAmplitude;
     const rotationY = (offsetX / (rect.width / 2)) * rotateAmplitude;
 
     rotateX.set(rotationX);
     rotateY.set(rotationY);
 
+    // Update position for tooltip
     x.set(e.clientX - rect.left);
     y.set(e.clientY - rect.top);
 
@@ -119,6 +127,7 @@ export default function TiltedCard({
           rotateX,
           rotateY,
           scale,
+          transformStyle: "preserve-3d",
         }}
       >
         <motion.img

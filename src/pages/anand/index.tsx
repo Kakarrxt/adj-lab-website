@@ -9,7 +9,7 @@ import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
 import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 import Curve from '@/components/Curve/Curve'
-
+import Aurora from "@/components/Aurora/Aurora";
 
 export default function AnandPage() {
 
@@ -211,6 +211,12 @@ export default function AnandPage() {
         {/*
           <NeonIsometricMaze />
         */}
+        <Aurora
+          colorStops={["#A855F7", "#9333EA", "#6B21A8"]}
+          blend={0.5}
+          amplitude={1.0}
+          speed={0.5}
+        />
         </div>
       </motion.div>
       
