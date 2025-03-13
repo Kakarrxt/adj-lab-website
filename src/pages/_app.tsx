@@ -5,6 +5,11 @@ import { AnimatePresence } from "framer-motion";
 import "./anand/Anand.module.css";
 import "./contact/contact.module.css";
 import "./join-us/join-us.module.css";	
+import "./lab-events/lab-events.module.css";
+import "./members/members.module.css";
+import "./publications/Publications.module.css";
+import "./research/Research.module.css";
+import "./page.module.css";
 
 export default function App({
 	Component,

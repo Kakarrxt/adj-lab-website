@@ -2,8 +2,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import Image from "next/image";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import styles from "./page.module.css";
 import Curve from '@/components/Curve/Curve'
 
