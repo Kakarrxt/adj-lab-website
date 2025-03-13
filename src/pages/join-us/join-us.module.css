@@ -45,13 +45,13 @@
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: #333;
+    color: #4a0072;
     display: inline-block;
   }
   
   .animatedChar {
     display: inline-block;
-    color: #333;
+    color: #4a0072;
     transition: color 0.3s ease;
   }
   

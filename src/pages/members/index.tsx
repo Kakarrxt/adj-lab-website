@@ -238,16 +238,13 @@ export default function LabMembers() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <div>
-                  {/*
-          <NeonIsometricMaze />
-        */}
-        <Aurora
-          colorStops={["#A855F7", "#9333EA", "#6B21A8"]}
-          blend={0.5}
-          amplitude={1.0}
-          speed={0.5}
-        />
+        <div className={styles.auroraContainer}>
+          <Aurora
+            colorStops={["#A855F7", "#9333EA", "#6B21A8"]}
+            blend={0.5}
+            amplitude={1.0}
+            speed={0.5}
+          />
         </div>
       </motion.div>
 
@@ -318,13 +315,13 @@ function MemberCard({ member }: { member: Member }) {
           <TiltedCard
             imageSrc={member.image}
             altText={member.name}
-            containerHeight=""
-            containerWidth=""
+            containerHeight="180px"
+            containerWidth="180px"
             imageHeight="180px"
             imageWidth="180px"
             borderRadius='50%'
             scaleOnHover={1.05}
-            rotateAmplitude={3}
+            rotateAmplitude={5}
             showMobileWarning={false}
             showTooltip={false}
           />
@@ -355,13 +352,13 @@ function AlumniCard({ alumni }: { alumni: Alumni }) {
         <TiltedCard
           imageSrc={alumni.image}
           altText={alumni.name}
-          containerHeight=""
-          containerWidth=""
+          containerHeight="150px"
+          containerWidth="150px"
           imageHeight="150px"
           imageWidth="150px"
           borderRadius='50%'
           scaleOnHover={1.05}
-          rotateAmplitude={3}
+          rotateAmplitude={7}
           showMobileWarning={false}
           showTooltip={false}
         />

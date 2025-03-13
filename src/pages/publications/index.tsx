@@ -8,7 +8,7 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
 import Curve from '@/components/Curve/Curve'
-
+import Aurora from '@/components/Aurora/Aurora';
 // Define interfaces for the PubMed API response
 interface PubMedSearchResponse {
   esearchresult: {
@@ -357,10 +357,13 @@ export default function Publications() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <div>
-                  {/*
-          <NeonIsometricMaze />
-        */}
+        <div className={styles.decorativeElement}>
+          <Aurora
+            colorStops={["#A855F7", "#9333EA", "#6B21A8"]}
+            blend={0.5}
+            amplitude={1.0}
+            speed={0.5}
+          />
         </div>
       </motion.div>
       
