@@ -61,16 +61,17 @@ interface Publication {
 
 export default function Publications() {
   const [init, setInit] = useState(false);
-  
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
-    const initEngine = async () => {
-      await initParticlesEngine(async (engine: Engine) => {
-        await loadSlim(engine);
-      });
+    initParticlesEngine(async (engine: Engine) => {
+      await loadSlim(engine);
+    }).then(() => {
       setInit(true);
-    };
+    });
     
-    initEngine().catch(console.error);
+    // Set page as loaded after a slight delay for animations
+    setTimeout(() => setIsLoaded(true), 300);
   }, []);
   
   const [publications, setPublications] = useState<Publication[]>([]);
@@ -309,14 +310,14 @@ export default function Publications() {
     fpsLimit: 120,
     particles: {
       color: {
-        value: "#6b46c1",
+        value: "#5a3da5", // Darker purple color for particles
       },
       links: {
-        color: "#9f7aea",
+        color: "#8a6ad6", // Slightly darker link color
         distance: 150,
         enable: true,
-        opacity: 0.2,
-        width: 1,
+        opacity: 0.3, // Increased opacity from 0.2 to 0.3
+        width: 1.2, // Slightly wider links
       },
       move: {
         direction: "none" as const,
@@ -325,7 +326,7 @@ export default function Publications() {
           default: "bounce" as const,
         },
         random: false,
-        speed: 0.8,
+        speed: 0.7, // Slightly slower speed for smoother movement
         straight: false,
       },
       number: {
@@ -333,16 +334,36 @@ export default function Publications() {
           enable: true,
           area: 800,
         },
-        value: 70,
+        value: 70, // Reduced from 80 to 70 for less cluttered appearance
       },
       opacity: {
-        value: 0.25,
+        value: 0.35, // Increased from 0.25 to 0.35 for more visibility
+        anim: {
+          enable: true,
+          speed: 0.4, // Slightly slower animation
+          opacity_min: 0.15, // Higher minimum opacity
+          sync: false
+        }
       },
       shape: {
         type: "circle",
       },
       size: {
-        value: { min: 1, max: 4 },
+        value: { min: 1, max: 4.5 }, // Slightly larger max size
+      },
+    },
+    interactivity: {
+      events: {
+        onHover: {
+          enable: true,
+          mode: "repulse" as const,
+        },
+      },
+      modes: {
+        repulse: {
+          distance: 120, // Increased from 100 to 120
+          duration: 0.5, // Slightly longer duration
+        },
       },
     },
     detectRetina: true,
@@ -351,6 +372,9 @@ export default function Publications() {
   return (
     <>
     <Curve backgroundColor="#f1f1f1">
+    <div className={styles.backgroundGradient}></div>
+      
+      
       <motion.div 
         className={styles.sectionTop}
         initial={{ opacity: 0 }}

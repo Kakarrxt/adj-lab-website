@@ -1,6 +1,6 @@
 "use client"
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef,useEffect, useState} from "react";
 import { useInView } from "framer-motion";
 import styles from "./join-us.module.css";
 import { FaUsers, FaCodeBranch, FaFlask, FaGraduationCap } from "react-icons/fa";
@@ -8,11 +8,26 @@ import Image from "next/image";
 import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 import Curve from '@/components/Curve/Curve'
 import Aurora from "@/components/Aurora/Aurora";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+import type { Engine } from "@tsparticles/engine";
 export default function JoinUsPage() {
   const positionsRef = useRef(null);
   const careerInfoRef = useRef(null);
   const isPositionsInView = useInView(positionsRef, { once: true });
   const isCareerInfoInView = useInView(careerInfoRef, { once: true });
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [init, setInit] = useState(false);
+  useEffect(() => {
+    initParticlesEngine(async (engine: Engine) => {
+      await loadSlim(engine);
+    }).then(() => {
+      setInit(true);
+    });
+    
+    // Set page as loaded after a slight delay for animations
+    setTimeout(() => setIsLoaded(true), 300);
+  }, []);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -64,11 +79,87 @@ export default function JoinUsPage() {
     }),
   };
 
+  const particlesOptions = {
+    background: {
+      color: {
+        value: "transparent",
+      },
+    },
+    fpsLimit: 120,
+    particles: {
+      color: {
+        value: "#5a3da5", // Darker purple color for particles
+      },
+      links: {
+        color: "#8a6ad6", // Slightly darker link color
+        distance: 150,
+        enable: true,
+        opacity: 0.3, // Increased opacity from 0.2 to 0.3
+        width: 1.2, // Slightly wider links
+      },
+      move: {
+        direction: "none" as const,
+        enable: true,
+        outModes: {
+          default: "bounce" as const,
+        },
+        random: false,
+        speed: 0.7, // Slightly slower speed for smoother movement
+        straight: false,
+      },
+      number: {
+        density: {
+          enable: true,
+          area: 800,
+        },
+        value: 70, // Reduced from 80 to 70 for less cluttered appearance
+      },
+      opacity: {
+        value: 0.35, // Increased from 0.25 to 0.35 for more visibility
+        anim: {
+          enable: true,
+          speed: 0.4, // Slightly slower animation
+          opacity_min: 0.15, // Higher minimum opacity
+          sync: false
+        }
+      },
+      shape: {
+        type: "circle",
+      },
+      size: {
+        value: { min: 1, max: 4.5 }, // Slightly larger max size
+      },
+    },
+    interactivity: {
+      events: {
+        onHover: {
+          enable: true,
+          mode: "repulse" as const,
+        },
+      },
+      modes: {
+        repulse: {
+          distance: 120, // Increased from 100 to 120
+          duration: 0.5, // Slightly longer duration
+        },
+      },
+    },
+    detectRetina: true,
+  };
+
   const title = "Join Our Team";
   
   return (
     <>
     <Curve backgroundColor="#f1f1f1">
+    <div className={styles.backgroundGradient}></div>
+    {init && (
+        <Particles
+          id="tsparticles"
+          options={particlesOptions}
+          className={styles.particles}
+        />
+      )}
       <motion.div 
         className={styles.sectionTop}
         initial={{ opacity: 0 }}

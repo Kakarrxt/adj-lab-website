@@ -190,14 +190,14 @@ export default function LabMembers() {
     fpsLimit: 120,
     particles: {
       color: {
-        value: "#6b46c1",
+        value: "#5a3da5", // Darker purple color for particles
       },
       links: {
-        color: "#9f7aea",
+        color: "#8a6ad6", // Slightly darker link color
         distance: 150,
         enable: true,
-        opacity: 0.2,
-        width: 1,
+        opacity: 0.3, // Increased opacity from 0.2 to 0.3
+        width: 1.2, // Slightly wider links
       },
       move: {
         direction: "none" as const,
@@ -206,7 +206,7 @@ export default function LabMembers() {
           default: "bounce" as const,
         },
         random: false,
-        speed: 0.8,
+        speed: 0.7, // Slightly slower speed for smoother movement
         straight: false,
       },
       number: {
@@ -214,24 +214,54 @@ export default function LabMembers() {
           enable: true,
           area: 800,
         },
-        value: 70,
+        value: 70, // Reduced from 80 to 70 for less cluttered appearance
       },
       opacity: {
-        value: 0.25,
+        value: 0.35, // Increased from 0.25 to 0.35 for more visibility
+        anim: {
+          enable: true,
+          speed: 0.4, // Slightly slower animation
+          opacity_min: 0.15, // Higher minimum opacity
+          sync: false
+        }
       },
       shape: {
         type: "circle",
       },
       size: {
-        value: { min: 1, max: 4 },
+        value: { min: 1, max: 4.5 }, // Slightly larger max size
+      },
+    },
+    interactivity: {
+      events: {
+        onHover: {
+          enable: true,
+          mode: "repulse" as const,
+        },
+      },
+      modes: {
+        repulse: {
+          distance: 120, // Increased from 100 to 120
+          duration: 0.5, // Slightly longer duration
+        },
       },
     },
     detectRetina: true,
   };
 
+
   return (
     <>
     <Curve backgroundColor="#f1f1f1">
+    <div className={styles.backgroundGradient}></div>
+      
+      {init && (
+        <Particles
+          id="tsparticles"
+          options={particlesOptions}
+          className={styles.particles}
+        />
+      )}
       <motion.div
         className={styles.sectionTop}
         initial={{ opacity: 0 }}
@@ -249,13 +279,7 @@ export default function LabMembers() {
       </motion.div>
 
       <div className={styles.container}>
-      {init && (
-        <Particles
-          id="tsparticles"
-          options={particlesOptions}
-          className={styles.particles}
-        />
-      )}
+  
         <main className={styles.main}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

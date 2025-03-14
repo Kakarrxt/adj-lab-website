@@ -36,6 +36,13 @@
     color: #4a0072;
     display: inline-block;
   }
+  
+  .titleUnderline {
+    height: 3px;
+    width: 80px;
+    background: #6b46c1;
+    margin: 0 auto;
+  }
 
   /* .circularGallery{
     height: 600px; 

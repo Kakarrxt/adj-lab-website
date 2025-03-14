@@ -91,7 +91,7 @@ export default function LabEvents(){
                 </motion.span>
               ))}
             </h1>
-            <div className={styles.underline} />
+            <div className={styles.titleUnderline} />
           </motion.div>
           
         
