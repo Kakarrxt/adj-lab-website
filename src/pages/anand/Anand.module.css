@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   min-height: 100vh;
-  padding: 0 0 0 0; /* Removed left and right padding */
+  padding: 0 0 2rem 0; 
   position: relative;
   overflow: hidden;
   background: linear-gradient(180deg, #ffffff 0%, #f5f3ff 100%);

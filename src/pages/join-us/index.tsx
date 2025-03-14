@@ -5,7 +5,6 @@ import { useInView } from "framer-motion";
 import styles from "./join-us.module.css";
 import { FaUsers, FaCodeBranch, FaFlask, FaGraduationCap } from "react-icons/fa";
 import Image from "next/image";
-import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 import Curve from '@/components/Curve/Curve'
 import Aurora from "@/components/Aurora/Aurora";
 import Particles, { initParticlesEngine } from "@tsparticles/react";

@@ -4,7 +4,6 @@ import styles from "./Research.module.css";
 import { useInView } from "framer-motion";
 import { useRef,useState,useEffect } from "react";
 import Image from "next/image";
-import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 import Curve from '@/components/Curve/Curve'
 import Aurora from "@/components/Aurora/Aurora";
 import Particles, { initParticlesEngine } from "@tsparticles/react";

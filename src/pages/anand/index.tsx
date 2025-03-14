@@ -7,9 +7,9 @@ import { useState, useEffect } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
-import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 import Curve from '@/components/Curve/Curve'
 import Aurora from "@/components/Aurora/Aurora";
+import { primaryAffiliations, additionalPositions, awards } from "@/constants";
 
 export default function AnandPage() {
 
@@ -74,32 +74,7 @@ export default function AnandPage() {
     }
   };
 
-  // Primary affiliations
-  const primaryAffiliations = [
-    "Principal Investigator and Facility Head (Microscopy and Multiplexed Assay Core), Cancer Science Institute of Singapore, NUS",
-    "Senior Consultant, Department of Haematology-Oncology, National University Cancer Institute, Singapore",
-    "Assistant Professor; Department of Medicine, Yong Loo Lin School of Medicine, NUS",
-  ];
 
-  // Additional positions
-  const additionalPositions = [
-    "Platform leader and EXCO member; Translational Research Integration and Support platform - Singapore Translational Cancer Consortium",
-    "Facility head; CSI Microscopy and Multiplex Assays (MMA) Core",
-    "Program Chair, Musculoskeletal Oncology, Sarcoma; NCIS, NUH",
-    "Senior Principal Investigator; Institute of Molecular and Cell Biology (IMCB) - A*STAR",
-    "Research Director; NCIS, NUH"
-  ];
-
-  const awards = [
-    { year: "2025", description: "Clinician Scientist Award - Senior Investigator, National Medical Research Council, Singapore" },
-    { year: "2021", description: "Clinician Scientist Award - Investigator, National Medical Research Council, Singapore" },
-    { year: "2016", description: "Clinician-Scientist Transition Award, National Medical Research Council, Singapore" },
-    { year: "2015", description: "NUHS Clinician-Scientist Program Award, National University Hospital, Singapore" },
-    { year: "2014", description: "NRF Singapore nomination to attend the 64th Lindau Nobel meeting (Medicine and Physiology)" },
-    { year: "2011", description: "Academic Development Award, National University Hospital, Singapore" },
-    { year: "2009-2010", description: "Junior Research Fellowship, Wolfson College, Cambridge" },
-    { year: "2005-2008", description: "Gates Cambridge Scholarship, Gates Cambridge Trust, University of Cambridge, UK" }
-  ];
 
   // Updated particles options with darker colors and improved settings
   const particlesOptions = {

@@ -3,13 +3,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import styles from './Publications.module.css';
-import NeonIsometricMaze from '@/components/NeonIsometricMaze';
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
 import Curve from '@/components/Curve/Curve'
 import Aurora from '@/components/Aurora/Aurora';
-// Define interfaces for the PubMed API response
+
 interface PubMedSearchResponse {
   esearchresult: {
     count: string;
@@ -70,7 +69,6 @@ export default function Publications() {
       setInit(true);
     });
     
-    // Set page as loaded after a slight delay for animations
     setTimeout(() => setIsLoaded(true), 300);
   }, []);
   
@@ -79,8 +77,6 @@ export default function Publications() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState('year-desc');
-  
-  // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [totalPages, setTotalPages] = useState(1);
@@ -91,12 +87,9 @@ export default function Publications() {
   const isHeaderInView = useInView(headerRef, { once: true });
   const isContentInView = useInView(contentRef, { once: true });
 
-  // You can replace this with your name or specific search terms
   const AUTHOR_NAME = 'Jeyasekharan AD[Author]';
-  // Maximum number of results to fetch
-  const MAX_RESULTS = 30;
-  
-  // Animation variants
+  const MAX_RESULTS = 50;
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -116,7 +109,6 @@ export default function Publications() {
     }
   };
 
-  // Function to search PubMed for article IDs
   const searchPubMed = async (query: string, max: number): Promise<string[]> => {
     try {
       const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${encodeURIComponent(query)}&retmax=${max}&retmode=json`;
@@ -134,7 +126,6 @@ export default function Publications() {
     }
   };
 
-  // Function to fetch article details
   const fetchArticleDetails = async (ids: string[]): Promise<Publication[]> => {
     if (ids.length === 0) return [];
     
@@ -151,10 +142,8 @@ export default function Publications() {
       const articles: Publication[] = [];
       
       for (const id of data.result.uids) {
-        // Type assertion here because we know the structure but TypeScript doesn't
         const article = data.result[id] as PubMedArticle;
-        
-        // Extract year from pubdate
+
         let year = undefined;
         if (article.pubdate) {
           const yearMatch = article.pubdate.match(/(\d{4})/);
@@ -162,8 +151,7 @@ export default function Publications() {
             year = yearMatch[1];
           }
         }
-        
-        // Extract DOI if available
+
         let doi = undefined;
         if (article.articleids) {
           const doiObj = article.articleids.find((idObj) => idObj.idtype === 'doi');
@@ -196,8 +184,6 @@ export default function Publications() {
     const fetchPublications = async () => {
       try {
         setLoading(true);
-        
-        // Step 1: Search PubMed for article IDs
         const articleIds = await searchPubMed(AUTHOR_NAME, MAX_RESULTS);
         
         if (articleIds.length === 0) {
@@ -205,14 +191,12 @@ export default function Publications() {
           setLoading(false);
           return;
         }
-        
-        // Step 2: Fetch details for those IDs
+
         const articleDetails = await fetchArticleDetails(articleIds);
         setPublications(articleDetails);
         setError(null);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
-        // Fallback data in case of error
         setPublications([
           {
             id: '1',
@@ -253,20 +237,16 @@ export default function Publications() {
 
     sortPublications();
   }, [publications, sortBy]);
-  
-  // Update pagination when sorted publications or page changes
+
   useEffect(() => {
     if (sortedPublications.length > 0) {
-      // Calculate total pages
       const newTotalPages = Math.ceil(sortedPublications.length / itemsPerPage);
       setTotalPages(newTotalPages);
       
-      // Ensure current page is valid
       if (currentPage > newTotalPages) {
         setCurrentPage(1);
       }
-      
-      // Get current page publications
+
       const indexOfLastItem = currentPage * itemsPerPage;
       const indexOfFirstItem = indexOfLastItem - itemsPerPage;
       setCurrentPublications(sortedPublications.slice(indexOfFirstItem, indexOfLastItem));
@@ -276,9 +256,7 @@ export default function Publications() {
     }
   }, [sortedPublications, currentPage, itemsPerPage]);
   
-  // Handle page change
   const paginate = (pageNumber: number) => {
-    // Scroll to top of content when changing page
     contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setCurrentPage(pageNumber);
   };
@@ -294,11 +272,10 @@ export default function Publications() {
       paginate(currentPage - 1);
     }
   };
-  
-  // Handle items per page change
+
   const handleItemsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setItemsPerPage(Number(e.target.value));
-    setCurrentPage(1); // Reset to first page when changing items per page
+    setCurrentPage(1); 
   };
  
   const particlesOptions = {

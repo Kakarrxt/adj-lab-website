@@ -1,7 +1,6 @@
 "use client"
 import { motion } from "framer-motion";
 import Masonry from "@/components/Masonry/Masonry";
-import NeonIsometricMaze from "@/components/NeonIsometricMaze";
 import styles from "./lab-events.module.css"
 // import CircularGalleryWithFlip from "@/components/CircularGallery/CircularGallery";
 import Curve from '@/components/Curve/Curve'

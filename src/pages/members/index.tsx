@@ -6,10 +6,10 @@ import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
 import styles from "./members.module.css"
 import Link from "next/link"
-import NeonIsometricMaze from "@/components/NeonIsometricMaze"
 import TiltedCard from "./TiltedCard"
 import Curve from '@/components/Curve/Curve'
 import Aurora from "@/components/Aurora/Aurora";
+import { currentMembers, alumniMembers } from "@/constants";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -34,152 +34,6 @@ export default function LabMembers() {
     });
   }, []);
 
-  const currentMembers = [
-    {
-      name: "Norbert Tay Sheng Cong",
-      title: "Research Fellow",
-      image: "/media/LabMembers/Chow-Norbert-Tay-.jpg",
-      description:
-        "Investigating Molecular Mechanism of DNA Damage Response-based Therapies in Haematological Malignancies.",
-      bio: "Investigating Molecular Mechanism of DNA Damage Response-based Therapies in Haematological Malignancies.",
-      email: "Email",
-    },
-    {
-      name: "Clarissa Toh Chin Min",
-      title: "Research Fellow",
-      image: "/media/LabMembers/Clarissa-Toh.jpeg",
-      description: "Investigating the role of novel proteins in replication stress-induced inflammatory signalling.",
-      bio: "Investigating the role of novel proteins in replication stress-induced inflammatory signalling.",
-      email: "Email",
-    },
-    {
-      name: "Allison Chan",
-      title: "Research Fellow",
-      image: "/media/LabMembers/Allison.jpg",
-      description: "Investigating immune activation after DNA damage in B cell lymphoma.",
-      bio: "Investigating immune activation after DNA damage in B cell lymphoma.",
-      email: "Email",
-    },
-    {
-      name: "Akshaya Anbuselvan",
-      title: "Research Assistant",
-      image: "/media/LabMembers/Akshaya.jpg",
-      description: "Study of immune activation after DNA damage in Diffuse large B cell lymphoma.",
-      bio: "Study of immune activation after DNA damage in Diffuse large B cell lymphoma.",
-      email: "Email",
-    },
-    {
-      name: "Phuong Mai Hoang",
-      title: "Research Fellow",
-      image: "/media/LabMembers/Phoung.jpg",
-      description: "Investigating immune activation in response to replication stress.",
-      bio: "Investigating immune activation in response to replication stress.",
-      email: "Email",
-    },
-    {
-      name: "Charmaine Ong Zi Yan",
-      title: "PhD Student",
-      image: "/media/LabMembers/Charmaine-Ong.jpg",
-      description: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
-      bio: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
-      email: "Email",
-    },
-    {
-      name: "Shruti Sridhar",
-      title: "PhD Student",
-      image: "/media/LabMembers/Shruti.png",
-      description:
-        "Investigating cellular and spatial patterns of prognostically relevant oncogene co-expression in DLBCL.",
-      bio: "Investigating cellular and spatial patterns of prognostically relevant oncogene co-expression in DLBCL.",
-      email: "Email",
-    },
-    {
-      name: "Hong Liang",
-      title: "Research Assistant/PhD Student",
-      image: "/media/LabMembers/Hong.png",
-      description: "Study of transcriptomics like RNA sequencing analysis using bioinformatics techniques.",
-      bio: "Study of transcriptomics like RNA sequencing analysis using bioinformatics techniques.",
-      email: "Email",
-    },
-    {
-      name: "Chartsiam (Sam) Tipgomut",
-      title: "Scientific Officer",
-      image: "/media/LabMembers/sam-Chartsiam.jpg",
-      description:
-        "Development of human cellular model systems for in-depth analysis and drug screening of a novel Diamond-Blackfan anemia mutation.",
-      bio: "Development of human cellular model systems for in-depth analysis and drug screening of a novel Diamond-Blackfan anemia mutation.",
-      email: "Email",
-    },
-    {
-      name: "Lee Rui Xue",
-      title: "PhD Student",
-      image: "/media/LabMembers/Lee-Rui-Xue.jpg",
-      description: "Identifying novel drug combinations that augment the efficacy of immunomodulators in DLBCL.",
-      bio: "Identifying novel drug combinations that augment the efficacy of immunomodulators in DLBCL.",
-      email: "Email",
-    },
-    {
-      name: "Girija Shenoy",
-      title: "Research Assistant",
-      image: "/media/LabMembers/Girija.png",
-      description: "RNAseq and single-cell RNA sequencing data analysis using bioinformatics techniques.",
-      bio: "RNAseq and single-cell RNA sequencing data analysis using bioinformatics techniques.",
-      email: "Email",
-    },
-    {
-      name: "Irene Biju",
-      title: "Undergraduate-Master Student",
-      image: "/media/LabMembers/Irene.jpg", // Add proper image path
-      description: "",
-      bio: "",
-      email: "Email",
-    },
-  ]
-
-  const alumniMembers = [
-    {
-      name: "Justin Chan",
-      title: "Former Research Assistant",
-      image: "/media/LabMembers/Justin.jpg", // Add proper image path
-      period: "2020-2023",
-    },
-    {
-      name: "Bryce Tan Wei Quan",
-      title: "Former PhD Student",
-      image: "/media/LabMembers/Bryce-Tan.jpeg",
-      period: "2019-2024",
-    },
-    {
-      name: "Michal Marek Hoppe",
-      title: "Former Research Fellow",
-      image: "/media/LabMembers/Michal.jpg", // Add proper image path
-      period: "2018-2022",
-    },
-    {
-      name: "Patrick William Jaynes",
-      title: "Former Research Fellow",
-      image: "/media/LabMembers/Patrick.jpg",
-      period: "2020-2024",
-    },
-    {
-      name: "Liu Min",
-      title: "Former Research Assistant",
-      image: "/media/LabMembers/Liu-Min.jpg", // Add proper image path
-      period: "2019-2022",
-    },
-    {
-      name: "Kanav Kupta",
-      title: "Former Research Intern",
-      image: "/media/LabMembers/Kanav.jpg", // Add proper image path
-      period: "May 2024 - Nov 2024",
-    },
-    {
-      name: "Wang Rui",
-      title: "Former Research Assistant",
-      image: "/media/LabMembers/Wang-Rui.jpg", // Add proper image path
-      period: "2019-2021",
-    },
-  ]
 
   const particlesOptions = {
     background: {
