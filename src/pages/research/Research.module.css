@@ -275,11 +275,26 @@
 .commitment a {
   color: #6b46c1;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.commitment a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #6b46c1;
+  transition: width 0.3s ease;
+}
+
+.commitment a:hover::after {
+  width: 100%;
 }
 
 .commitment a:hover {
-  text-decoration: underline;
   color: #4a2f89;
 }
 

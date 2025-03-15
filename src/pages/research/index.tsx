@@ -26,7 +26,6 @@ export default function ResearchPage() {
       setInit(true);
     });
     
-    // Set page as loaded after a slight delay for animations
     setTimeout(() => setIsLoaded(true), 300);
   }, []);
 
@@ -85,14 +84,14 @@ export default function ResearchPage() {
     fpsLimit: 120,
     particles: {
       color: {
-        value: "#5a3da5", // Darker purple color for particles
+        value: "#5a3da5", 
       },
       links: {
-        color: "#8a6ad6", // Slightly darker link color
+        color: "#8a6ad6", 
         distance: 150,
         enable: true,
-        opacity: 0.3, // Increased opacity from 0.2 to 0.3
-        width: 1.2, // Slightly wider links
+        opacity: 0.3,
+        width: 1.2, 
       },
       move: {
         direction: "none" as const,
@@ -101,7 +100,7 @@ export default function ResearchPage() {
           default: "bounce" as const,
         },
         random: false,
-        speed: 0.7, // Slightly slower speed for smoother movement
+        speed: 0.7, 
         straight: false,
       },
       number: {
@@ -109,10 +108,10 @@ export default function ResearchPage() {
           enable: true,
           area: 800,
         },
-        value: 70, // Reduced from 80 to 70 for less cluttered appearance
+        value: 70,
       },
       opacity: {
-        value: 0.35, // Increased from 0.25 to 0.35 for more visibility
+        value: 0.35,
         anim: {
           enable: true,
           speed: 0.4, // Slightly slower animation
@@ -161,6 +160,7 @@ export default function ResearchPage() {
   return (
     <>
     <Curve backgroundColor="#f1f1f1">
+
     <div className={styles.backgroundGradient}></div>
     {init && (
         <Particles
@@ -187,6 +187,8 @@ export default function ResearchPage() {
         />
       </div>
     </motion.div>
+
+
     <div className={styles.container}>
         <main className={styles.main}>
         <motion.div
@@ -220,6 +222,7 @@ export default function ResearchPage() {
           }}
           />
         </motion.div>
+        
 
           <div className={styles.heroSection}>
             <motion.div
