@@ -84,6 +84,7 @@ export default function Publications() {
   
   const headerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const topRef = useRef<HTMLDivElement>(null);
   const isHeaderInView = useInView(headerRef, { once: true });
   const isContentInView = useInView(contentRef, { once: true });
 
@@ -257,7 +258,8 @@ export default function Publications() {
   }, [sortedPublications, currentPage, itemsPerPage]);
   
   const paginate = (pageNumber: number) => {
-    contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Scroll to the top of the component
+    topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setCurrentPage(pageNumber);
   };
   
@@ -363,9 +365,15 @@ export default function Publications() {
   return (
     <>
     <Curve backgroundColor="#f1f1f1">
-    <div className={styles.backgroundGradient}></div>
-      
-      
+      <div ref={topRef} id="publications-top"></div>
+      {init && (
+        <Particles
+          id="tsparticles"
+          options={particlesOptions}
+          className={styles.particles}
+        />
+      )}
+          
       <motion.div 
         className={styles.sectionTop}
         initial={{ opacity: 0 }}
@@ -383,13 +391,6 @@ export default function Publications() {
       </motion.div>
       
       <div className={styles.container}>
-      {init && (
-        <Particles
-          id="tsparticles"
-          options={particlesOptions}
-          className={styles.particles}
-        />
-      )}
         <main className={styles.main}>
           <motion.div
             ref={headerRef}
@@ -399,7 +400,7 @@ export default function Publications() {
             className={styles.header}
           >
  
-        <h1 aria-label={title}>
+            <h1 aria-label={title}>
               {title.split("").map((char, i) => (
                 <motion.span
                   key={`${char}-${i}`}
@@ -413,21 +414,23 @@ export default function Publications() {
                 </motion.span>
               ))}
             </h1>
-          <motion.div 
-          className={styles.underline} 
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ 
-            duration: 0.8, 
-            delay: 1, 
-            ease: "easeOut" 
-          }}
-          />
-            
             <motion.div 
-              variants={fadeInUp}
-              className={styles.filterBar}
-            >
+              className={styles.underline} 
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 1, 
+                ease: "easeOut" 
+              }}
+            />
+          </motion.div>
+
+          <motion.div 
+            variants={fadeInUp}
+            className={styles.filterBarWrapper}
+          >
+            <div className={styles.filterBar}>
               <div className={styles.sortWrapper}>
                 <label htmlFor="sortPublications">Sort by:</label>
                 <select
@@ -458,7 +461,7 @@ export default function Publications() {
                 </select>
                 <span>per page</span>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
 
           <motion.div
@@ -656,8 +659,7 @@ export default function Publications() {
           )}
         </main>
       </div>
-
-      </Curve>
+    </Curve>
     </>
   );
 }

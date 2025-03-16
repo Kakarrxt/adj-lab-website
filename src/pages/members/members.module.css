@@ -6,6 +6,18 @@
   width: 100%;
   overflow-x: hidden;
 }
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.8; 
+  pointer-events: none;
+}
+
 .header {
   text-align: center;
   margin-bottom: 1rem;
@@ -132,6 +144,7 @@
   overflow: hidden;
   background-color: #fff;
   transition: all 0.3s ease;
+  z-index: 1;
 }
 
 .memberCard:hover {
@@ -325,13 +338,3 @@
   }
 }
 
-.particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  opacity: 0.8; /* Increased from 0.7 to 0.8 for slightly darker particles */
-  pointer-events: none;
-}

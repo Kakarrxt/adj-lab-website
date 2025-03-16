@@ -1,25 +1,24 @@
 "use client"
 import { motion } from "framer-motion";
-import { useRef, useEffect,useState} from "react";
+import { useRef, useEffect, useState } from "react";
 import { useInView } from "framer-motion";
 import styles from "./contact.module.css";
-import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
 import Image from "next/image";
 import Curve from '@/components/Curve/Curve'
 import Aurora from "@/components/Aurora/Aurora";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
+
 export default function ContactPage() {
-
-
-
   const mapRef = useRef(null);
   const contactInfoRef = useRef(null);
-  const isMapInView = useInView(mapRef, { once: true });
-  const isContactInfoInView = useInView(contactInfoRef, { once: true });
+  const isMapInView = useInView(mapRef, { once: true, amount: 0.3 });
+  const isContactInfoInView = useInView(contactInfoRef, { once: true, amount: 0.3 });
   const [isLoaded, setIsLoaded] = useState(false);
   const [init, setInit] = useState(false);
+
   useEffect(() => {
     initParticlesEngine(async (engine: Engine) => {
       await loadSlim(engine);
@@ -27,7 +26,6 @@ export default function ContactPage() {
       setInit(true);
     });
     
-    // Set page as loaded after a slight delay for animations
     setTimeout(() => setIsLoaded(true), 300);
   }, []);
 
@@ -86,14 +84,14 @@ export default function ContactPage() {
     fpsLimit: 120,
     particles: {
       color: {
-        value: "#5a3da5", // Darker purple color for particles
+        value: "#5a3da5",
       },
       links: {
-        color: "#8a6ad6", // Slightly darker link color
+        color: "#8a6ad6",
         distance: 150,
         enable: true,
-        opacity: 0.3, // Increased opacity from 0.2 to 0.3
-        width: 1.2, // Slightly wider links
+        opacity: 0.3,
+        width: 1.2,
       },
       move: {
         direction: "none" as const,
@@ -102,7 +100,7 @@ export default function ContactPage() {
           default: "bounce" as const,
         },
         random: false,
-        speed: 0.7, // Slightly slower speed for smoother movement
+        speed: 0.7,
         straight: false,
       },
       number: {
@@ -110,14 +108,14 @@ export default function ContactPage() {
           enable: true,
           area: 800,
         },
-        value: 70, // Reduced from 80 to 70 for less cluttered appearance
+        value: 50, // Reduced for cleaner look
       },
       opacity: {
-        value: 0.35, // Increased from 0.25 to 0.35 for more visibility
+        value: 0.35,
         anim: {
           enable: true,
-          speed: 0.4, // Slightly slower animation
-          opacity_min: 0.15, // Higher minimum opacity
+          speed: 0.4,
+          opacity_min: 0.15,
           sync: false
         }
       },
@@ -125,7 +123,7 @@ export default function ContactPage() {
         type: "circle",
       },
       size: {
-        value: { min: 1, max: 4.5 }, // Slightly larger max size
+        value: { min: 1, max: 4 },
       },
     },
     interactivity: {
@@ -137,8 +135,8 @@ export default function ContactPage() {
       },
       modes: {
         repulse: {
-          distance: 120, // Increased from 100 to 120
-          duration: 0.5, // Slightly longer duration
+          distance: 120,
+          duration: 0.5,
         },
       },
     },
@@ -153,7 +151,7 @@ export default function ContactPage() {
       opacity: 1,
       y: 0,
       transition: {
-        delay: 0.8 +  i * 0.04,
+        delay: 0.8 + i * 0.04,
         duration: 0.8,
         ease: [0.2, 0.65, 0.3, 0.9],
       },
@@ -162,196 +160,208 @@ export default function ContactPage() {
 
   return (
     <>
-    <Curve backgroundColor="#f1f1f1">
-    <div className={styles.backgroundGradient}></div>
-    {init && (
-        <Particles
-          id="tsparticles"
-          options={particlesOptions}
-          className={styles.particles}
-        />
-      )}
-      <motion.div 
-        className={styles.sectionTop}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div>
-                  {/*
-          <NeonIsometricMaze />
-        */}
-        <Aurora
-          colorStops={["#A855F7", "#9333EA", "#6B21A8"]}
-          blend={0.5}
-          amplitude={1.0}
-          speed={0.5}
-        />
-        </div>
-      </motion.div>
-
-      <div className={styles.container}>
-        <main className={styles.main}>
-        <motion.div
+      <Curve backgroundColor="#f7f7f8">
+        <div className={styles.backgroundGradient}></div>
+        {init && (
+          <Particles
+            id="tsparticles"
+            options={particlesOptions}
+            className={styles.particles}
+          />
+        )}
+        <motion.div 
+          className={styles.sectionTop}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}  
-          className={styles.header}
+          transition={{ duration: 0.8 }}
         >
-        <h1 aria-label={title}>
-              {title.split("").map((char, i) => (
-                <motion.span
-                  key={`${char}-${i}`}
-                  custom={i}
-                  variants={charAnimation}
-                  initial="hidden"
-                  animate="visible"
-                  className={styles.animatedChar}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
-            </h1>
-          <motion.div 
-          className={styles.underline} 
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ 
-            duration: 0.8, 
-            delay: 1, 
-            ease: "easeOut" 
-          }}
-          />
+          <div>
+            <Aurora
+              colorStops={["#A855F7", "#9333EA", "#6B21A8"]}
+              blend={0.6}
+              amplitude={1.2}
+              speed={0.5}
+            />
+          </div>
         </motion.div>
 
-          <motion.section
-            ref={contactInfoRef}
-            initial="hidden"
-            animate={isContactInfoInView ? "visible" : "hidden"}
-            variants={staggerChildren}
-            className={styles.contactInfo}
-          >
-            <motion.div variants={scaleIn} className={styles.contactCard}>
-              <div className={styles.iconWrapper}>
-                <FaPhone className={styles.icon} />
-              </div>
-              <h3>Phone</h3>
-              <p>+65 6516 2162</p>
+        <div className={styles.container}>
+          <main className={styles.main}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1 }}  
+              className={styles.header}
+            >
+              <h1 aria-label={title}>
+                {title.split("").map((char, i) => (
+                  <motion.span
+                    key={`${char}-${i}`}
+                    custom={i}
+                    variants={charAnimation}
+                    initial="hidden"
+                    animate="visible"
+                    className={styles.animatedChar}
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </h1>
+              <motion.div 
+                className={styles.underline} 
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 1, 
+                  ease: "easeOut" 
+                }}
+              />
             </motion.div>
 
-            <motion.div variants={scaleIn} className={styles.contactCard}>
-              <div className={styles.iconWrapper}>
-                <FaEnvelope className={styles.icon} />
-              </div>
-              <h3>Email</h3>
-              <a href="mailto:csiadj@nus.edu.sg" className={styles.emailLink}>
-                csiadj@nus.edu.sg
-              </a>
+            <motion.div
+              variants={fadeInUp}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 1.2 }}
+              className={styles.messageBox}
+            >
+              <h2>Get in <span className={styles.highlight}>Touch</span></h2>
+              <p>
+                Interested in <span className={styles.colorHighlight}>collaborating</span> or have <span className={styles.colorHighlight}>questions</span> about our research? 
+                We&apos;d love to hear from you. Our team is dedicated to advancing cancer research 
+                and fostering innovative partnerships.
+              </p>
             </motion.div>
 
-            <motion.div variants={scaleIn} className={styles.contactCard}>
-              <div className={styles.iconWrapper}>
-                <FaMapMarkerAlt className={styles.icon} />
-              </div>
-              <h3>Address</h3>
-              <p>Cancer Science Institute (CSI) Singapore</p>
-              <p>14 Medical Dr, Centre for Translational Medicine (MD6)</p>
-              <p>Singapore 117599</p>
-            </motion.div>
-          </motion.section>
+            <motion.section
+              ref={contactInfoRef}
+              initial="hidden"
+              animate={isContactInfoInView ? "visible" : "hidden"}
+              variants={staggerChildren}
+              className={styles.contactInfo}
+            >
+              <motion.div variants={scaleIn} className={styles.contactCard}>
+                <div className={styles.iconWrapper}>
+                  <FaPhone className={styles.icon} />
+                </div>
+                <h3>Phone</h3>
+                <p>+65 6516 2162</p>
+              </motion.div>
 
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
-            className={styles.messageBox}
-          >
-            <h2>Get in Touch</h2>
-            <p>Interested in collaborating or have questions about our research? We&apos;d love to hear from you.</p>
-          </motion.div>
+              <motion.div variants={scaleIn} className={styles.contactCard}>
+                <div className={styles.iconWrapper}>
+                  <FaEnvelope className={styles.icon} />
+                </div>
+                <h3>Email</h3>
+                <a href="mailto:csiadj@nus.edu.sg" className={styles.emailLink}>
+                  csiadj@nus.edu.sg
+                </a>
+              </motion.div>
 
-          <motion.section
-            ref={mapRef}
-            initial="hidden"
-            animate={isMapInView ? "visible" : "hidden"}
-            variants={staggerChildren}
-            className={styles.contentSection}
-          >
-            <motion.div variants={fadeInRight} className={styles.mapContainer}>
-              <h2>Find Us</h2>
-              <div className={styles.mapWrapper}>
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7985025311636!2d103.78172909999999!3d1.2954827000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1a51485a1695%3A0x5a1ae37f15111c63!2sCancer%20Science%20Institute%20(CSI)%20Singapore%20-%20NUS!5e0!3m2!1sen!2sin!4v1740492023597!5m2!1sen!2sin"
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen={false} 
-                  loading="lazy"
-                  title="Lab Location"
-                ></iframe>
-              </div>
-            </motion.div>
-            
-            <motion.div variants={fadeInLeft} className={styles.labImagesSection}>
-              <h2>Our Lab</h2>
-              <div className={styles.labImagesContainer}>
-                <motion.div 
-                  className={styles.labImage}
-                  whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
-                >
-                  <div className={styles.imageWrapper}>
-                    <Image 
-                      src="/media/Lab-MD6.png" 
-                      alt="Lab facility" 
-                      fill
-                      objectFit="cover"
-                    />
-                    <div className={styles.imageCaption}>Research Laboratory</div>
+              <motion.div variants={scaleIn} className={styles.contactCard}>
+                <div className={styles.iconWrapper}>
+                  <FaMapMarkerAlt className={styles.icon} />
+                </div>
+                <h3>Address</h3>
+                <p>Cancer Science Institute (CSI) Singapore</p>
+                <p>14 Medical Dr, Centre for Translational Medicine (MD6)</p>
+                <p>Singapore 117599</p>
+              </motion.div>
+            </motion.section>
+
+            <motion.section
+              ref={mapRef}
+              initial="hidden"
+              animate={isMapInView ? "visible" : "hidden"}
+              variants={staggerChildren}
+              className={styles.contentSection}
+            >
+              <motion.div variants={fadeInRight} className={styles.mapContainer}>
+                <h2>Find Us</h2>
+                <div className={styles.mapWrapper}>
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7985025311636!2d103.78172909999999!3d1.2954827000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1a51485a1695%3A0x5a1ae37f15111c63!2sCancer%20Science%20Institute%20(CSI)%20Singapore%20-%20NUS!5e0!3m2!1sen!2sin!4v1740492023597!5m2!1sen!2sin"
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen={false} 
+                    loading="lazy"
+                    title="Lab Location"
+                  ></iframe>
+                </div>
+              </motion.div>
+              
+              <motion.div variants={fadeInLeft} className={styles.labImagesSection}>
+                <h2>Our Lab</h2>
+                <div className={styles.labImagesGrid}>
+                  <motion.div 
+                    className={styles.labImage}
+                    whileHover={{ scale: 1, transition: { duration: 0.3 } }}
+                  >
+                    <div className={styles.imageWrapper}>
+                      <Image 
+                        src="/media/Lab-MD6.png" 
+                        alt="Lab facility" 
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        style={{ objectFit: "cover" }}
+                      />
+                      <div className={styles.imageCaption}>Research Laboratory</div>
+                    </div>
+                  </motion.div>
+                  <motion.div 
+                    className={styles.labImage}
+                    whileHover={{ scale: 1, transition: { duration: 0.3 } }}
+                  >
+                    <div className={styles.imageWrapper}>
+                      <Image 
+                        src="/media/Lab-interior.jpeg" 
+                        alt="Lab facility" 
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        style={{ objectFit: "cover" }}
+                      />
+                      <div className={styles.imageCaption}>Equipment Room</div>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </motion.section>
+
+            <motion.section 
+              className={styles.visitSection}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
+              <h2>Working Hours</h2>
+              <div className={styles.hoursContainer}>
+                <div className={styles.hoursItem}>
+                  <div className={styles.dayWrapper}>
+                    <FaClock className={styles.timeIcon} />
+                    <span className={styles.day}>Monday - Friday</span>
                   </div>
-                </motion.div>
-                <motion.div 
-                  className={styles.labImage}
-                  whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
-                >
-                  <div className={styles.imageWrapper}>
-                    <Image 
-                      src="/media/Lab-interior.jpeg" 
-                      alt="Lab facility" 
-                      fill
-                      objectFit="cover"
-                    />
-                    <div className={styles.imageCaption}>Equipment Room</div>
+                  <span className={styles.time}>8:00 AM - 6:00 PM</span>
+                </div>
+                <div className={styles.hoursItem}>
+                  <div className={styles.dayWrapper}>
+                    <FaClock className={styles.timeIcon} />
+                    <span className={styles.day}>Saturday & Sunday</span>
                   </div>
-                </motion.div>
+                  <span className={styles.time}>Closed</span>
+                </div>
+                <div className={styles.hoursItem}>
+                  <div className={styles.dayWrapper}>
+                    <FaClock className={styles.timeIcon} />
+                    <span className={styles.day}>Public Holidays</span>
+                  </div>
+                  <span className={styles.time}>Closed</span>
+                </div>
               </div>
-            </motion.div>
-          </motion.section>
-
-        {/*Optional section for visiting hours*/}
-          <motion.section 
-            className={styles.visitSection}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-            <h2>Visiting Hours</h2>
-            <div className={styles.hoursContainer}>
-              <div className={styles.hoursItem}>
-                <span className={styles.day}>Monday - Friday</span>
-                <span className={styles.time}>9:00 AM - 5:00 PM</span>
-              </div>
-              <div className={styles.hoursItem}>
-                <span className={styles.day}>Saturday</span>
-                <span className={styles.time}>?</span>
-              </div>
-              <div className={styles.hoursItem}>
-                <span className={styles.day}>Sunday & Public Holidays</span>
-                <span className={styles.time}>Closed</span>
-              </div>
-            </div>
-          </motion.section>
-        </main>
-      </div>
+            </motion.section>
+          </main>
+        </div>
       </Curve>
     </>
   );

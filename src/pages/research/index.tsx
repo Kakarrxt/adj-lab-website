@@ -160,8 +160,7 @@ export default function ResearchPage() {
   return (
     <>
     <Curve backgroundColor="#f1f1f1">
-
-    <div className={styles.backgroundGradient}></div>
+      
     {init && (
         <Particles
           id="tsparticles"

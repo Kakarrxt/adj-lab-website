@@ -220,10 +220,10 @@ export default function JoinUsPage() {
           >
         <h2>Are you passionate about <span className={styles.highlight}>translational cancer research</span>?</h2>
         <p>
-          We are always excited to welcome <strong>enthusiastic and driven individuals</strong> to our team! 
+          We are always excited to welcome <span className={styles.colorHighlight}>enthusiastic and driven individuals</span> to our team! 
           Whether you are an overseas student, an NUH resident, or a medical student eager 
-          to explore the frontiers of cancer biology, we offer a <strong>collaborative and dynamic 
-          environment</strong> to grow your research skills.
+          to explore the frontiers of cancer biology, we offer a <span className={styles.colorHighlight}>collaborative and dynamic 
+          environment</span> to grow your research skills.
         </p>
         </motion.div>
 
@@ -240,7 +240,7 @@ export default function JoinUsPage() {
             <FaUsers className={styles.icon} />
           </div>
           <h3>Collaborative Team</h3>
-          <p>Join our diverse team of researchers working at the <strong>intersection of cutting-edge science and clinical impact</strong>.</p>
+          <p>Join our diverse team of researchers working at the <span className={styles.colorHighlight}>intersection of cutting-edge science and clinical impact</span>.</p>
         </motion.div>
 
         <motion.div variants={scaleIn} className={styles.careerCard}>
@@ -248,7 +248,7 @@ export default function JoinUsPage() {
             <FaCodeBranch className={styles.icon} />
           </div>
           <h3>Technical Skills</h3>
-          <p>We value experience in <strong>coding</strong> or proficiency in image analysis tools such as <strong>QuPath</strong>.</p>
+          <p>We value experience in <span className={styles.colorHighlight}>coding</span> or proficiency in image analysis tools such as <span className={styles.colorHighlight}>QuPath</span>.</p>
         </motion.div>
 
         <motion.div variants={scaleIn} className={styles.careerCard}>
@@ -256,7 +256,7 @@ export default function JoinUsPage() {
             <FaFlask className={styles.icon} />
           </div>
           <h3>Research Opportunity</h3>
-          <p>Gain valuable exposure to <strong>translational oncology research</strong> in a supportive environment.</p>
+          <p>Gain valuable exposure to <span className={styles.colorHighlight}>translational oncology research</span> in a supportive environment.</p>
         </motion.div>
         </motion.section>
 
@@ -269,7 +269,7 @@ export default function JoinUsPage() {
         <h2>How to Apply</h2>
         <div className={styles.applyContent}>
           <p>
-            To apply, please send your CV to <strong>Sam Tipgomut</strong> (<a href="mailto:c.tip@nus.edu.sg" className={styles.emailLink}>c.tip@nus.edu.sg</a>).
+            To apply, please send your CV to <strong>Sam Tipgomut</strong> (<a href="mailto:c.tip@nus.edu.sg" className={styles.underlineAnimation}>c.tip@nus.edu.sg</a>).
           </p>
           <div className={styles.importantNote}>
             <p>
@@ -337,7 +337,7 @@ export default function JoinUsPage() {
         <div className={styles.skillsGrid}>
           <motion.div 
             className={styles.skillCard}
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(107, 70, 193, 0.1)" }}
+            whileHover={{ scale: 1, backgroundColor: "rgba(107, 70, 193, 0.1)" }}
             transition={{ duration: 0.3 }}
           >
             <FaGraduationCap className={styles.skillIcon} />
@@ -345,7 +345,7 @@ export default function JoinUsPage() {
           </motion.div>
           <motion.div 
             className={styles.skillCard}
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(107, 70, 193, 0.1)" }}
+            whileHover={{ scale: 1, backgroundColor: "rgba(107, 70, 193, 0.1)" }}
             transition={{ duration: 0.3 }}
           >
             <FaCodeBranch className={styles.skillIcon} />
@@ -353,7 +353,7 @@ export default function JoinUsPage() {
           </motion.div>
           <motion.div 
             className={styles.skillCard}
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(107, 70, 193, 0.1)" }}
+            whileHover={{ scale: 1, backgroundColor: "rgba(107, 70, 193, 0.1)" }}
             transition={{ duration: 0.3 }}
           >
             <FaFlask className={styles.skillIcon} />
@@ -361,7 +361,7 @@ export default function JoinUsPage() {
           </motion.div>
           <motion.div 
             className={styles.skillCard}
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(107, 70, 193, 0.1)" }}
+            whileHover={{ scale: 1, backgroundColor: "rgba(107, 70, 193, 0.1)" }}
             transition={{ duration: 0.3 }}
           >
             <FaUsers className={styles.skillIcon} />

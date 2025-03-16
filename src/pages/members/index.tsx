@@ -123,7 +123,6 @@ export default function LabMembers() {
   return (
     <>
     <Curve backgroundColor="#f1f1f1">
-    <div className={styles.backgroundGradient}></div>
       
       {init && (
         <Particles
@@ -220,7 +219,7 @@ interface Member {
 interface Alumni {
   name: string
   title: string
-  image: string
+  image?: string
   period: string
 }
 

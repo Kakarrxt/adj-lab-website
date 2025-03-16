@@ -1,4 +1,6 @@
 /* Publications.module.css */
+
+/* Base layout and container styles */
 .container {
   width: 100%;
   max-width: 1200px;
@@ -8,63 +10,24 @@
   font-family: 'Inter', sans-serif;
 }
 
-.sectionTop {
-  position: relative;
-  height: 100px; 
-  width: 100vw;
-  /* margin-left: calc(-50vw + 50%); */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden; 
-  z-index: 0;
-}
-
-/* .backgroundGradient {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 70% 30%, rgba(107, 70, 193, 0.1) 0%, transparent 60%),
-              radial-gradient(circle at 30% 70%, rgba(159, 122, 234, 0.08) 0%, transparent 55%);
-  z-index: 0;
-} */
-
-/* Decorative element replaces NeonIsometricMaze */
-.decorativeElement {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-}
-
-@keyframes pulse {
-  0%, 100% { 
-    opacity: 0.3;
-    transform: scale(0.8);
-  }
-  50% { 
-    opacity: 0.6;
-    transform: scale(1.2);
-  }
-}
-
 .main {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem; /* Reduced from 3rem to decrease spacing */
   padding: 0 1.5rem 4rem 1.5rem;
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Header Styles */
 .header {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem; /* Reduced from 1rem */
   padding-top: 2rem;
 }
 
@@ -79,7 +42,57 @@
   height: 3px;
   width: 80px;
   background: #6b46c1;
-  margin: 0.5rem auto 2rem;
+  margin: 0.5rem auto 1.5rem; /* Reduced bottom margin from 2rem to 1.5rem */
+}
+
+/* Decorative top section */
+.sectionTop {
+  position: relative;
+  height: 100px; 
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; 
+  z-index: 0;
+}
+
+.decorativeElement {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Sorting and Filtering Controls - Centered globally */
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 0 auto 1rem; /* Adjusted margin */
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
 }
 
 .sortWrapper {
@@ -87,8 +100,9 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  margin: 2rem auto;
+  margin: 0.75rem auto; /* Reduced from 2rem to 0.75rem */
   max-width: 320px;
+  z-index: 1;
 }
 
 .sortWrapper label {
@@ -125,57 +139,7 @@
   box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.2);
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.loadingContainer, 
-.errorContainer, 
-.emptyContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem;
-  text-align: center;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-  margin: 2rem 0;
-  min-height: 180px;
-}
-
-.loadingSpinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(107, 70, 193, 0.1);
-  border-radius: 50%;
-  border-top-color: #6b46c1;
-  animation: spin 1s linear infinite;
-  margin-bottom: 1rem;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.errorContainer {
-  border-left: 4px solid #e53e3e;
-  background: rgba(229, 62, 62, 0.05);
-}
-
-.errorContainer h3 {
-  color: #e53e3e;
-  margin-bottom: 0.5rem;
-}
-
-.emptyContainer {
-  border-left: 4px solid #6b46c1;
-  background: rgba(107, 70, 193, 0.05);
-}
-
+/* Publication Card Styles */
 .publication {
   display: flex;
   flex-direction: column;
@@ -185,6 +149,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
   border-left: 4px solid #6b46c1;
   transition: all 0.3s ease;
+  z-index: 1;
 }
 
 .publication:hover {
@@ -252,7 +217,6 @@
   transition: all 0.3s ease;
   text-align: center;
   cursor: pointer;
-  /* Add this to make sure the links are clickable */
   position: relative;
   z-index: 2;
 }
@@ -262,14 +226,12 @@
   color: white;
   text-decoration: none;
   box-shadow: 0 2px 5px rgba(107, 70, 193, 0.3);
-  /* This ensures the entire button area is clickable */
   display: inline-block;
 }
 
 .link:hover {
   background-color: #553c9a;
   box-shadow: 0 4px 10px rgba(107, 70, 193, 0.4);
-  /* Use translate instead of translateY */
   transform: translate(0, -2px);
 }
 
@@ -285,10 +247,52 @@
   transform: translateY(-2px);
 }
 
-/* Stats Section */
+/* Loading, Error, and Empty States */
+.loadingContainer, 
+.errorContainer, 
+.emptyContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  margin: 1rem 0; /* Reduced from 2rem to 1rem */
+  min-height: 180px;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(107, 70, 193, 0.1);
+  border-radius: 50%;
+  border-top-color: #6b46c1;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.errorContainer {
+  border-left: 4px solid #e53e3e;
+  background: rgba(229, 62, 62, 0.05);
+}
+
+.errorContainer h3 {
+  color: #e53e3e;
+  margin-bottom: 0.5rem;
+}
+
+.emptyContainer {
+  border-left: 4px solid #6b46c1;
+  background: rgba(107, 70, 193, 0.05);
+}
+
+/* Statistics Section */
 .statsSection {
-  margin-top: 2rem;
-  padding: 2rem 0;
+  margin-top: 1.5rem; /* Reduced from 2rem */
+  padding: 1.5rem 0; /* Reduced from 2rem */
 }
 
 .statsSection h2 {
@@ -343,12 +347,12 @@
   color: #555;
 }
 
-/* Added pagination styles */
+/* Pagination Styles */
 .pagination {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1.5rem; /* Reduced from 2rem */
   gap: 1rem;
   background: white;
   border-radius: 10px;
@@ -456,15 +460,15 @@
   align-items: center;
   gap: 0.5rem;
   margin-top: 0rem;
-  
 }
-.paginationSettings label{
+
+.paginationSettings label {
   color: #6b46c1;
   font-weight: 600;
   font-size: 1rem;
 }
 
-.paginationSettings span{
+.paginationSettings span {
   color: #6b46c1;
   font-weight: 600;
   font-size: 1rem;
@@ -481,7 +485,6 @@
   background-size: 1em;
   padding-right: 1.5rem;
   border: 2px solid rgba(107, 70, 193, 0.3);
-  
 }
 
 .paginationSelect:hover {
@@ -495,16 +498,23 @@
   box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.2);
 }
 
-.filterBar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 1rem;
+/* Animations */
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% { 
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
 }
 
-/* Responsive styles */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Styles */
 @media (max-width: 992px) {
   .header h1 {
     font-size: 2.2rem;
@@ -557,6 +567,14 @@
     width: 100%;
     justify-content: center;
   }
+  
+  .link, .citeButton, .paginationButton {
+    /* Minimum touch target size for mobile */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 640px) {
@@ -590,26 +608,4 @@
     height: 35px;
     font-size: 0.9rem;
   }
-}
-
-@media (max-width: 768px) {
-  .link, .citeButton, .paginationButton {
-    /* Minimum touch target size for mobile */
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-/* Fix for particles potentially blocking clicks */
-.particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  opacity: 0.8; /* Increased from 0.7 to 0.8 for slightly darker particles */
-  pointer-events: none;
 }

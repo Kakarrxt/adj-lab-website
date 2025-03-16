@@ -1,12 +1,12 @@
-/* Components/Contact/Contact.module.css */
+/* Components/Contact/contact.module.css */
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
   color: #333;
-  overflow-x: hidden;
   font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
 }
 
 .sectionTop {
@@ -20,35 +20,12 @@
   z-index: 0; 
 }
 
-/* Add a container for animation to control its size */
 .sectionTop > div {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-/* .backgroundGradient {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 70% 30%, rgba(107, 70, 193, 0.1) 0%, transparent 60%),
-              radial-gradient(circle at 30% 70%, rgba(159, 122, 234, 0.08) 0%, transparent 55%);
-  z-index: 0;
-} */
-
-.particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  opacity: 0.8; /* Increased from 0.7 to 0.8 for slightly darker particles */
-  pointer-events: none;
 }
 
 .main {
@@ -64,24 +41,38 @@
 }
 
 .header h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: #4a0072;
+  display: inline-block;
+  letter-spacing: -0.5px;
+}
+
+.animatedChar {
+  display: inline-block;
+  color: #4a0072;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.animatedChar:hover {
+  color: #6b46c1;
+  transform: translateY(-2px);
 }
 
 .underline {
   height: 3px;
   width: 80px;
-  background: #6b46c1;
+  background: linear-gradient(90deg, #6b46c1, #9333ea);
   margin: 0 auto;
+  border-radius: 3px;
 }
 
 /* Contact info section */
 .contactInfo {
   display: flex;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1.5rem;
   margin: 2rem 0;
 }
 
@@ -89,13 +80,14 @@
   flex: 1;
   background: white;
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
   z-index: 1;
+  border: 1px solid rgba(107, 70, 193, 0.08);
 }
 
 .contactCard::before {
@@ -105,14 +97,14 @@
   left: 0;
   width: 5px;
   height: 100%;
-  background: #6b46c1;
+  background: linear-gradient(180deg, #6b46c1, #9233ea5e);
   z-index: -1;
-  transition: width 0.3s ease;
+  transition: width 1s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .contactCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.09);
 }
 
 .contactCard:hover::before {
@@ -145,7 +137,7 @@
 .contactCard h3 {
   font-size: 1.3rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   color: #333;
 }
 
@@ -160,51 +152,82 @@
   color: #6b46c1;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s ease;
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.emailLink::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6b46c1, #9333ea);
+  transition: width 0.3s ease;
 }
 
 .emailLink:hover {
-  color: #5835a9;
-  text-decoration: underline;
+  color: #9333ea;
+}
+
+.emailLink:hover::after {
+  width: 100%;
 }
 
 /* Message box */
 .messageBox {
-  background: rgba(107, 70, 193, 0.05);
-  border-radius: 10px;
-  padding: 1.5rem 2rem;
+  background: rgba(107, 70, 193, 0.03);
+  border-radius: 16px;
+  padding: 2.5rem 3rem;
   margin: 1rem 0;
   text-align: center;
-  border-left: 4px solid #6b46c1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid transparent;
+  border-image: linear-gradient(to bottom, #6b46c1, #9333ea);
+  border-image-slice: 1;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 .messageBox h2 {
-  font-size: 1.6rem;
+  font-size: 2rem;
   color: #333;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
 }
 
 .messageBox p {
   color: #555;
-  line-height: 1.6;
-  font-size: 1.05rem;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.highlight {
+  background: linear-gradient(to bottom, transparent 50%, rgba(107, 70, 193, 0.15) 50%);
+  padding: 0 4px;
+}
+
+.colorHighlight {
+  color: #6b46c1;
+  font-weight: 500;
 }
 
 /* Content section with map and lab images */
 .contentSection {
   display: grid;
   grid-template-columns: 3fr 2fr;
-  gap: 2rem;
+  gap: 2.5rem;
   margin: 2rem 0;
+  z-index: 1;
 }
 
 .contentSection h2 {
   font-size: 1.6rem;
   color: #333;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
   position: relative;
   padding-bottom: 0.5rem;
+  font-weight: 600;
 }
 
 .contentSection h2::after {
@@ -214,7 +237,8 @@
   left: 0;
   height: 3px;
   width: 50px;
-  background: #6b46c1;
+  background: linear-gradient(90deg, #6b46c1, #9333ea);
+  border-radius: 3px;
 }
 
 .mapContainer {
@@ -223,12 +247,17 @@
 }
 
 .mapWrapper {
-  flex: 1;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  height: 400px; /* Reduced from 450px */
   position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 400px;
+  width: 100%;
+}
+
+.mapWrapper:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
 }
 
 .labImagesSection {
@@ -236,26 +265,26 @@
   flex-direction: column;
 }
 
-.labImagesContainer {
+.labImagesGrid {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  flex: 1;
+  height: 400px;
 }
 
 .labImage {
   position: relative;
-  border-radius: 10px;
+  border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  flex: 1;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: calc(50% - 0.5rem);
 }
 
 .imageWrapper {
   position: relative;
   width: 100%;
-  height: 300px; 
+  height: 100%;
   overflow: hidden;
 }
 
@@ -270,31 +299,35 @@
   right: 0;
   background: rgba(0, 0, 0, 0.6);
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1.2rem;
+  font-weight: 500;
   font-size: 0.9rem;
   transition: background 0.3s ease;
   z-index: 2;
 }
 
 .labImage:hover .imageCaption {
-  background: rgba(107, 70, 193, 0.8);
+  background: rgba(107, 70, 193, 0.85);
 }
 
-/* Visiting hours section */
+/* Working hours section */
 .visitSection {
   background: white;
-  border-radius: 10px;
-  padding: 2rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   margin: 1rem 0 3rem;
+  z-index: 1;
+  border: 1px solid rgba(107, 70, 193, 0.08);
 }
 
 .visitSection h2 {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   color: #333;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
   position: relative;
   padding-bottom: 0.5rem;
+  font-weight: 600;
 }
 
 .visitSection h2::after {
@@ -304,55 +337,92 @@
   left: 0;
   height: 3px;
   width: 50px;
-  background: #6b46c1;
+  background: linear-gradient(90deg, #6b46c1, #9333ea);
+  border-radius: 3px;
 }
 
 .hoursContainer {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 .hoursItem {
-  flex: 1;
-  min-width: 200px;
-  padding: 1.2rem;
-  background: rgba(107, 70, 193, 0.05);
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 1.8rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
   text-align: center;
-  transition: transform 0.3s ease, background 0.3s ease;
+  border: 1px solid rgba(107, 70, 193, 0.08);
 }
 
 .hoursItem:hover {
-  transform: translateY(-3px);
-  background: rgba(107, 70, 193, 0.1);
+  background: rgba(107, 70, 193, 0.05);
+}
+
+.dayWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.timeIcon {
+  color: #6b46c1;
+  font-size: 1.2rem;
 }
 
 .day {
   font-weight: 600;
   color: #333;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
 .time {
   color: #6b46c1;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.backgroundGradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(241, 241, 241, 0.97) 0%, rgba(245, 245, 250, 0.95) 100%);
+  z-index: -1;
 }
 
 /* Responsive styles */
 @media (max-width: 992px) {
   .header h1 {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
   }
   
   .contentSection {
     gap: 2rem;
+  }
+  
+  .hoursContainer {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -361,8 +431,12 @@
     padding: 1.5rem 1rem;
   }
 
+  .header h1 {
+    font-size: 2.2rem;
+  }
+
   .sectionTop {
-    height: 100px;
+    height: 80px;
   }
   
   .contactInfo {
@@ -371,41 +445,59 @@
   
   .contentSection {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
   
   .mapWrapper {
-    height: 250px; /* Reduced from 350px */
+    height: 350px;
   }
   
-  .labImagesContainer {
-    flex-direction: row;
+  .labImagesGrid {
+    gap: 1rem;
+    height: auto;
   }
-
-  .imageWrapper {
-    height: 200px; /* Reduce height for mobile */
+  
+  .labImage {
+    height: 200px;
   }
   
   .hoursContainer {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .messageBox {
+    padding: 2rem 1.5rem;
+  }
+
+  .visitSection {
+    padding: 2rem;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 576px) {
   .header h1 {
     font-size: 1.8rem;
   }
   
   .contentSection h2,
-  .visitSection h2,
+  .visitSection h2 {
+    font-size: 1.5rem;
+  }
+  
   .messageBox h2 {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
   
-  .labImagesContainer {
-    flex-direction: column;
+  .mapWrapper {
+    height: 250px;
   }
   
-  .imageWrapper {
-    height: 150px; /* Even smaller height for smaller screens */
+  .labImage {
+    height: 180px;
+  }
+  
+  .messageBox p {
+    font-size: 1rem;
   }
 }
