@@ -10,7 +10,7 @@ import TiltedCard from "./TiltedCard"
 import Curve from '@/components/Curve/Curve'
 import Aurora from "@/components/Aurora/Aurora";
 import { currentMembers, alumniMembers } from "@/constants";
-
+import SpotlightCard from "@/components/SpotlightCard/SpotlightCard";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -264,6 +264,7 @@ function MemberCard({ member }: { member: Member }) {
 
 function AlumniCard({ alumni }: { alumni: Alumni }) {
   return (
+    <SpotlightCard className="custom-spotlight-card" spotlightColor="rgba(123, 31, 162, 0.15)">
     <motion.div variants={itemVariants} className={styles.alumniCard}>
       
       <div className={styles.alumniInfo}>
@@ -271,6 +272,9 @@ function AlumniCard({ alumni }: { alumni: Alumni }) {
         <p className={styles.alumniTitle}>{alumni.title}</p>
         <p className={styles.alumniPeriod}>{alumni.period}</p>
       </div>
+     
     </motion.div>
+    </SpotlightCard>
+
   )
 }
