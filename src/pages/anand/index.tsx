@@ -2,7 +2,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import styles from "./Anand.module.css";
-import { Twitter, Linkedin, Mail, Award, Building, BookOpen, ChevronRight } from "lucide-react";
+import { Twitter, Linkedin, Mail, Award, Building, BookOpen, ChevronRight, Bookmark } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
@@ -18,7 +18,9 @@ export default function AnandPage() {
   const [isLoaded, setIsLoaded] = useState(false);
   
   const profileRef = useRef(null);
+  const descriptionRef = useRef(null);
   const isProfileInView = useInView(profileRef, { once: true });
+  const isDescriptionInView = useInView(descriptionRef, { once: true });
 
   // Initialize particles
   useEffect(() => {
@@ -165,6 +167,21 @@ export default function AnandPage() {
     })
   };
 
+  const textShimmer = {
+    hidden: { opacity: 0, width: 0 },
+    visible: {
+      opacity: [0, 0.5, 0.8, 0.5, 0],
+      width: ["0%", "100%", "100%", "100%", "0%"],
+      left: ["0%", "0%", "0%", "0%", "100%"],
+      transition: {
+        duration: 2.5,
+        ease: "easeInOut",
+        repeat: Infinity,
+        repeatDelay: 4
+      }
+    }
+  };
+
   const title = "Anand JEYASEKHARAN";
   const charAnimation = {
     hidden: { opacity: 0, y: 20 },
@@ -177,6 +194,18 @@ export default function AnandPage() {
         ease: [0.2, 0.65, 0.3, 0.9],
       },
     }),
+  };
+
+  const principalInvestigatorAnimation = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.8,
+        ease: [0.2, 0.65, 0.3, 0.9],
+      }
+    }
   };
 
   return (
@@ -229,16 +258,20 @@ export default function AnandPage() {
                 </motion.span>
               ))}
             </h1>
-            <motion.div 
-              className={styles.underline} 
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ 
-                duration: 0.8, 
-                delay: 1, 
-                ease: "easeOut" 
-              }}
-            />
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={principalInvestigatorAnimation}
+              className={styles.roleTitle}
+            >
+              Principal Investigator
+              <motion.span 
+                className={styles.roleTitleShimmer}
+                variants={textShimmer}
+                initial="hidden"
+                animate="visible"
+              />
+            </motion.div>
           </motion.div>
 
           <motion.div 
@@ -256,8 +289,8 @@ export default function AnandPage() {
                 <Image
                   src="/media/ADJ-Profile2.png"
                   alt="Anand Jeyasekharan"
-                  width={300}
-                  height={400}
+                  width={350}
+                  height={470}
                   className={styles.profileImage}
                   priority
                 />
@@ -296,19 +329,39 @@ export default function AnandPage() {
                 >
                   <Linkedin size={20} />
                 </motion.a>
+                <motion.a
+                  href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=2nrv9VIAAAAJ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1, backgroundColor: "#6b46c1", color: "white" }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`${styles.socialLink} ${styles.scholarLink}`}
+                  aria-label="Google Scholar"
+                >
+                  <Bookmark size={20} />
+                  <span className={styles.scholarText}>Google Scholar</span>
+                </motion.a>
               </motion.div>
             </motion.div>
             
             <motion.div className={styles.content}>
               <motion.div
+                ref={descriptionRef}
                 variants={fadeInUp}
                 className={styles.description}
+                initial="hidden"
+                animate={isDescriptionInView ? "visible" : "hidden"}
               >
                 <p>
-                  Work in the ADJ laboratory focuses on how the immune system recognizes cancer cells upon treatment with DNA damaging chemotherapy.
-                  Our eventual aim is to use this information to guide the rational design of immunotherapy-chemotherapy combinations for cancer treatment.
-                  Our research involves both fundamental research (molecular and cellular biology of chemotherapy responses) and translational research
-                  (using clinical samples) in a variety of cancer types. We have a specific interest in lymphomas; and work closely with colleagues in
+                  Work in the <span className={styles.colorHighlight}>ADJ laboratory</span> focuses on how the <span className={styles.colorHighlight}>immune system recognizes cancer cells</span> upon treatment with DNA damaging chemotherapy.
+                  Our eventual aim is to use this information to guide the <span className={styles.colorHighlight}>rational design of immunotherapy-chemotherapy combinations</span> for cancer treatment.
+                </p>
+                <p className={styles.descriptionEmphasis}>
+                  Our research involves both <span className={styles.underlineAnimation}>fundamental research</span> (molecular and cellular biology of chemotherapy responses) and <span className={styles.underlineAnimation}>translational research</span>
+                  (using clinical samples) in a variety of cancer types.
+                </p>
+                <p>
+                  We have a specific interest in <span className={styles.colorHighlight}>lymphomas</span>; and work closely with colleagues in
                   the NUH Lymphoma team to develop novel therapeutic strategies for clinical use.
                 </p>
               </motion.div>

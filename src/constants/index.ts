@@ -268,19 +268,16 @@ export const alumniMembers = [
     {
         name: "Justin Chan",
         title: "Former Research Assistant",
-        image: "/media/LabMembers/Justin.jpg", 
         period: "2020-2023",
       },
       {
         name: "Bryce Tan Wei Quan",
         title: "Former PhD Student",
-        image: "/media/LabMembers/Bryce-Tan.jpeg",
         period: "2019-2024",
       },
       {
         name: "Michal Marek Hoppe",
         title: "Former Research Fellow",
-        image: "/media/LabMembers/Michal.jpg", 
         period: "2018-2022",
       },
       {
@@ -292,19 +289,16 @@ export const alumniMembers = [
       {
         name: "Liu Min",
         title: "Former Research Assistant",
-        image: "/media/LabMembers/Liu-Min.jpg", 
         period: "2019-2022",
       },
       {
-        name: "Kanav Kupta",
+        name: "Kanav Gupta",
         title: "Former Research Intern",
-        image: "/media/LabMembers/Kanav.jpg", 
         period: "May 2024 - Nov 2024",
       },
       {
         name: "Wang Rui",
         title: "Former Research Assistant",
-        image: "/media/LabMembers/Wang-Rui.jpg", 
         period: "2019-2021",
       },
 
