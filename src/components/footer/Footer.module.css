@@ -6,7 +6,7 @@
   padding: 1.5rem 0;
   position: relative;
   overflow: hidden;
-  margin-top: auto; /* Push footer to bottom */
+  margin-top: auto; 
   font-family: 'Inter', sans-serif;
 }
 
@@ -201,12 +201,22 @@
   .footerTop {
     flex-direction: column;
     gap: 1.5rem;
+    align-items: center;
   }
   
   .companyLogos {
-    flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     width: 100%;
+  }
+  
+  .logoRow {
+    justify-content: center;
+  }
+  
+  .socialLinks {
+    margin: 1rem 0;
+    width: 100%;
+    justify-content: center;
   }
   
   .socialLinks::before,
@@ -225,15 +235,34 @@
     padding: 1.25rem 0;
   }
   
+  .container {
+    padding: 0 1rem;
+  }
+  
   .companyLogos {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: 1rem;
+    width: 100%;
+  }
+  
+  .logoRow {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
   }
   
   .companyLogo {
     max-width: 120px; /* Smaller width on mobile */
     height: 50px; /* Smaller height on mobile */
+  }
+  
+  .socialLinks {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
   }
 
   .nav {
@@ -247,5 +276,28 @@
   
   .navLink {
     padding: 0.3rem;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .addressSection {
+    padding: 0.5rem 0;
+  }
+  
+  .addressSection p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 400px) {
+  .companyLogo {
+    max-width: 100px;
+    height: 40px;
+    padding: 0.3rem;
+  }
+  
+  .socialLinks {
+    gap: 0.5rem;
   }
 }

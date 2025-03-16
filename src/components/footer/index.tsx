@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useInView } from "framer-motion";
 import styles from "./Footer.module.css";
 import { FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
+import { SiGooglescholar } from "react-icons/si";
 import React from "react";
 
 export default function Footer() {
@@ -43,8 +44,10 @@ export default function Footer() {
     { name: "Research", path: "/research" },
     { name: "Anand", path: "/anand" },
     { name: "Lab Members", path: "/members" },
-    { name: "Publications", path: "/publications" },
-    { name: "Contact", path: "/contact" }
+    { name: "Lab Events", path: "/lab-events" },
+    { name: "Publication", path: "/publications" },
+    { name: "Join Us", path: "/join-us" },
+    { name: "Contact", path: "/contact" },
   ];
 
   return (
@@ -93,11 +96,12 @@ export default function Footer() {
             variants={fadeInUp}
           >
             <motion.a
-              href="https://github.com/shrutisridhar99"
+              href="https://github.com/Kakarrxt/adj-lab-website"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialLink}
               variants={fadeInUp}
+              aria-label="GitHub"
             >
               <FaGithub size={20} />
             </motion.a>
@@ -107,6 +111,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className={styles.socialLink}
               variants={fadeInUp}
+              aria-label="Twitter"
             >
               <FaTwitter size={20} />
             </motion.a>
@@ -116,8 +121,19 @@ export default function Footer() {
               rel="noopener noreferrer"
               className={styles.socialLink}
               variants={fadeInUp}
+              aria-label="LinkedIn"
             >
               <FaLinkedin size={20} />
+            </motion.a>
+            <motion.a
+              href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=2nrv9VIAAAAJ"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialLink}
+              variants={fadeInUp}
+              aria-label="Google Scholar"
+            >
+              <SiGooglescholar size={20} />
             </motion.a>
           </motion.div>
         
