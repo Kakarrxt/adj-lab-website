@@ -38,8 +38,22 @@ export default function ResearchPage() {
   const isPublicationsInView = useInView(publicationsRef, { once: true, margin: "-100px" });
   const filterRef = useRef(null);
   const isFilterInView = useInView(filterRef, { once: true, margin: "-150px" });
+  const [backgroundExpanded, setBackgroundExpanded] = useState<boolean>(false);
+
+
+  useEffect(() => {
+    // Wait for 5 seconds before expanding the background
+    const expansionTimeout = setTimeout(() => {
+      setBackgroundExpanded(true);
+    }, 6000);
+    
+    return () => {
+      clearTimeout(expansionTimeout);
+    };
+  }, []);
   
 
+  
   useEffect(() => {
     const animationSequence = () => {
       setAnimationStage('initial');
@@ -171,19 +185,38 @@ export default function ResearchPage() {
             </motion.div>
           )}
         </AnimatePresence>
-
+        <div className={`${styles.heroContentBackground} ${backgroundExpanded ? styles.expanded : ''}`}></div>
         <motion.div
-  className={styles.heroContent}
-            initial={{ opacity: 0, scale: 0.9 }}
-  animate={{
-              opacity: animationStage === 'initial' ? 1 : 0.5,
-              scale: 1
+            className={styles.heroContent}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ 
+              opacity: 1, 
+              y: 0,
+              transition: { duration: 1.2, ease: "easeOut" }
             }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
           >
-            <h1>ADJ Laboratory</h1>
-            <p>Spatial Analysis in Lymphoma</p>
-</motion.div>
+            <motion.h1
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.5, delay: 0.3 }}
+            >
+              ADJ Laboratory
+            </motion.h1>
+            <motion.div className={styles.underline}
+              initial={{ width: 0 }}
+              animate={{ width: '40%' }}
+              transition={{ duration: 1.2, delay: 0.8 }}
+            />
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.5, delay: 1.2 }}
+            >
+              Spatial Analysis in Lymphoma
+            </motion.p>
+          </motion.div>
+
+
       </section>
 
         {/* Research Topics Section */}
