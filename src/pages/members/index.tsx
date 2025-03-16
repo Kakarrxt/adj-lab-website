@@ -11,6 +11,7 @@ import Curve from '@/components/Curve/Curve'
 import Aurora from "@/components/Aurora/Aurora";
 import { currentMembers, alumniMembers } from "@/constants";
 
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -264,21 +265,7 @@ function MemberCard({ member }: { member: Member }) {
 function AlumniCard({ alumni }: { alumni: Alumni }) {
   return (
     <motion.div variants={itemVariants} className={styles.alumniCard}>
-      <div className={styles.alumniPhoto}>
-        <TiltedCard
-          imageSrc={alumni.image}
-          altText={alumni.name}
-          containerHeight="150px"
-          containerWidth="150px"
-          imageHeight="150px"
-          imageWidth="150px"
-          borderRadius='50%'
-          scaleOnHover={1.05}
-          rotateAmplitude={7}
-          showMobileWarning={false}
-          showTooltip={false}
-        />
-      </div>
+      
       <div className={styles.alumniInfo}>
         <h3 className={styles.alumniName}>{alumni.name}</h3>
         <p className={styles.alumniTitle}>{alumni.title}</p>
