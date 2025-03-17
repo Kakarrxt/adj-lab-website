@@ -287,7 +287,7 @@ export default function AnandPage() {
             >
               <div className={styles.imageWrapper}>
                 <Image
-                  src="/media/ADJ-Profile2.png"
+                  src="/media/anand/anand-profile.png"
                   alt="Anand Jeyasekharan"
                   width={350}
                   height={470}

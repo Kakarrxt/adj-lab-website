@@ -5,7 +5,6 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
 import styles from "./members.module.css"
-import Link from "next/link"
 import TiltedCard from "./TiltedCard"
 import Curve from '@/components/Curve/Curve'
 import Aurora from "@/components/Aurora/Aurora";
@@ -231,10 +230,10 @@ function MemberCard({ member }: { member: Member }) {
           <TiltedCard
             imageSrc={member.image}
             altText={member.name}
-            containerHeight="180px"
-            containerWidth="180px"
-            imageHeight="180px"
-            imageWidth="180px"
+            containerHeight="240px"
+            containerWidth="240px"
+            imageHeight="240px"
+            imageWidth="240px"
             borderRadius='50%'
             scaleOnHover={1.05}
             rotateAmplitude={5}
@@ -242,9 +241,6 @@ function MemberCard({ member }: { member: Member }) {
             showTooltip={false}
           />
         </div>
-        <Link href={`mailto:${member.email}`} className={styles.emailLink}>
-          <span className={styles.emailIcon}>✉️</span> Contact
-        </Link>
       </div>
 
       <div className={styles.infoSection}>
@@ -263,17 +259,18 @@ function MemberCard({ member }: { member: Member }) {
 
 function AlumniCard({ alumni }: { alumni: Alumni }) {
   return (
-    <SpotlightCard className="custom-spotlight-card" spotlightColor="rgba(123, 31, 162, 0.15)">
-    <motion.div variants={itemVariants} className={styles.alumniCard}>
-      
-      <div className={styles.alumniInfo}>
-        <h3 className={styles.alumniName}>{alumni.name}</h3>
-        <p className={styles.alumniTitle}>{alumni.title}</p>
-        <p className={styles.alumniPeriod}>{alumni.period}</p>
-      </div>
-     
+   
+    <motion.div variants={itemVariants} className={styles.alumniCardWrapper}>
+       <SpotlightCard className="custom-spotlight-card" spotlightColor="rgba(123, 31, 162, 0.15)">
+        <div className={styles.alumniCard}>
+          <div className={styles.alumniInfo}>
+            <h3 className={styles.alumniName}>{alumni.name}</h3>
+            <p className={styles.alumniTitle}>{alumni.title}</p>
+            <p className={styles.alumniPeriod}>{alumni.period}</p>
+          </div>
+        </div>
+        </SpotlightCard>
     </motion.div>
-    </SpotlightCard>
-
+ 
   )
 }

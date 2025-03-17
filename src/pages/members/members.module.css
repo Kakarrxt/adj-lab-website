@@ -165,37 +165,11 @@
 }
 
 .imageWrapper {
-  width: 180px;
-  height: 180px;
+  width: 220px;
+  height: 220px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1rem;
-}
-
-.emailLink {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #7b1fa2;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  background-color: white;
-  box-shadow: 0 2px 6px rgba(123, 31, 162, 0.15);
-  transition: all 0.2s ease;
-  margin-top: 1rem;
-}
-
-.emailLink:hover {
-  background-color: #7b1fa2;
-  color: white;
-  transform: translateY(-2px);
-}
-
-.emailIcon {
-  margin-right: 0.5rem;
 }
 
 /* Info section */
@@ -255,41 +229,55 @@
 .alumniGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
+}
+
+.alumniCardWrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 .alumniCard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem;
-  border-radius: 12px;
+  padding: 1.2rem;
+  border-radius: 10px;
   background-color: #fff;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   text-align: center;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
 }
 
 .alumniCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transform: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.alumniPhoto {
-  margin-bottom: 1rem;
-  width: 150px;
-  height: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+:global(.custom-spotlight-card) {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px !important;
+  transition: all 0.3s ease;
 }
+
+:global(.custom-spotlight-card:hover) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.12);
+}
+
+
 
 .alumniInfo {
   width: 100%;
 }
 
 .alumniName {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: bold;
   color: #4a0072;
   margin-bottom: 0.25rem;
@@ -299,12 +287,12 @@
   color: #7b1fa2;
   font-weight: 500;
   margin-bottom: 0.5rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .alumniPeriod {
   color: #666;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-style: italic;
 }
 
@@ -337,4 +325,3 @@
     grid-template-columns: 1fr;
   }
 }
-

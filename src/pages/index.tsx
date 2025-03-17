@@ -45,7 +45,7 @@ export default function ResearchPage() {
     // Wait for 5 seconds before expanding the background
     const expansionTimeout = setTimeout(() => {
       setBackgroundExpanded(true);
-    }, 5000);
+    }, 3000);
     
     return () => {
       clearTimeout(expansionTimeout);
@@ -159,7 +159,7 @@ export default function ResearchPage() {
             initial="initial"
           >
             <Image
-              src="/media/Nautical.png"
+              src="/media/home/Nautical.png"
               alt="Nautical Map Background"
               layout="fill"
               objectFit="cover"
@@ -177,7 +177,7 @@ export default function ResearchPage() {
                 exit={{ opacity: 0, transition: { duration: 0.5 } }}
             >
               <Image
-                src="/media/cells.jpg"
+                src="/media/home/cells.jpg"
                 alt="Cancer Cells"
                 layout="fill"
                 objectFit="cover"

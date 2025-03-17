@@ -251,7 +251,7 @@ export default function ResearchPage() {
               variants={fadeInLeft}
             >
               <Image
-                src="/media/Research.png"
+                src="/media/research/image.png"
                 alt="Lymphoma Research Visualization"
                 width={500}
                 height={400}

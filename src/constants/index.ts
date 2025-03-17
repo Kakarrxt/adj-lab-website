@@ -161,145 +161,197 @@ export const awards = [
 // Lab Members 
 
 export const currentMembers = [
-
-    {
-        name: "Norbert Tay Sheng Cong",
-        title: "Research Fellow",
-        image: "/media/LabMembers/Chow-Norbert-Tay-.jpg",
-        description:
-          "Investigating Molecular Mechanism of DNA Damage Response-based Therapies in Haematological Malignancies.",
-        bio: "Investigating Molecular Mechanism of DNA Damage Response-based Therapies in Haematological Malignancies.",
-        email: "Email",
-      },
-      {
-        name: "Clarissa Toh Chin Min",
-        title: "Research Fellow",
-        image: "/media/LabMembers/Clarissa-Toh.jpeg",
-        description: "Investigating the role of novel proteins in replication stress-induced inflammatory signalling.",
-        bio: "Investigating the role of novel proteins in replication stress-induced inflammatory signalling.",
-        email: "Email",
-      },
-      {
-        name: "Allison Chan",
-        title: "Research Fellow",
-        image: "/media/LabMembers/Allison.jpg",
-        description: "Investigating immune activation after DNA damage in B cell lymphoma.",
-        bio: "Investigating immune activation after DNA damage in B cell lymphoma.",
-        email: "Email",
-      },
-      {
-        name: "Akshaya Anbuselvan",
-        title: "Research Assistant",
-        image: "/media/LabMembers/Akshaya.jpg",
-        description: "Study of immune activation after DNA damage in Diffuse large B cell lymphoma.",
-        bio: "Study of immune activation after DNA damage in Diffuse large B cell lymphoma.",
-        email: "Email",
-      },
-      {
-        name: "Phuong Mai Hoang",
-        title: "Research Fellow",
-        image: "/media/LabMembers/Phoung.jpg",
-        description: "Investigating immune activation in response to replication stress.",
-        bio: "Investigating immune activation in response to replication stress.",
-        email: "Email",
-      },
-      {
-        name: "Charmaine Ong Zi Yan",
-        title: "PhD Student",
-        image: "/media/LabMembers/Charmaine-Ong.jpg",
-        description: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
-        bio: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
-        email: "Email",
-      },
-      {
-        name: "Shruti Sridhar",
-        title: "PhD Student",
-        image: "/media/LabMembers/Shruti.png",
-        description:
-          "Investigating cellular and spatial patterns of prognostically relevant oncogene co-expression in DLBCL.",
-        bio: "Investigating cellular and spatial patterns of prognostically relevant oncogene co-expression in DLBCL.",
-        email: "Email",
-      },
-      {
-        name: "Hong Liang",
-        title: "Research Assistant/PhD Student",
-        image: "/media/LabMembers/Hong.png",
-        description: "Study of transcriptomics like RNA sequencing analysis using bioinformatics techniques.",
-        bio: "Study of transcriptomics like RNA sequencing analysis using bioinformatics techniques.",
-        email: "Email",
-      },
-      {
-        name: "Chartsiam (Sam) Tipgomut",
-        title: "Scientific Officer",
-        image: "/media/LabMembers/sam-Chartsiam.jpg",
-        description:
-          "Development of human cellular model systems for in-depth analysis and drug screening of a novel Diamond-Blackfan anemia mutation.",
-        bio: "Development of human cellular model systems for in-depth analysis and drug screening of a novel Diamond-Blackfan anemia mutation.",
-        email: "Email",
-      },
-      {
-        name: "Lee Rui Xue",
-        title: "PhD Student",
-        image: "/media/LabMembers/Lee-Rui-Xue.jpg",
-        description: "Identifying novel drug combinations that augment the efficacy of immunomodulators in DLBCL.",
-        bio: "Identifying novel drug combinations that augment the efficacy of immunomodulators in DLBCL.",
-        email: "Email",
-      },
-      {
-        name: "Girija Shenoy",
-        title: "Research Assistant",
-        image: "/media/LabMembers/Girija.png",
-        description: "RNAseq and single-cell RNA sequencing data analysis using bioinformatics techniques.",
-        bio: "RNAseq and single-cell RNA sequencing data analysis using bioinformatics techniques.",
-        email: "Email",
-      },
-      {
-        name: "Irene Biju",
-        title: "Undergraduate-Master Student",
-        image: "/media/LabMembers/Irene.jpg", 
-        description: "",
-        bio: "",
-        email: "Email",
-      },
+  {
+      name: "Norbert Tay Sheng Cong",
+      title: "Research Fellow",
+      image: "/media/LabMembers/Chow-Norbert-Tay-.jpg",
+      description:
+        "Investigating Molecular Mechanism of DNA Damage Response-based Therapies in Haematological Malignancies.",
+      bio: "Final Year PhD Student. Current Project: Understanding the effects of ARID1A-loss on the tumour immune microenvironment of gastric cancer. A Wet & Dry (Some would call me moist) Lab Scientist with a keen interest in furthering the effectiveness of immunotherapy through understanding the spatial microenvironment of various cancer types using state of the art methods such as spatial transcriptomics and proteomic techniques.",
+      email: "Email",
+  },
+  {
+      name: "Clarissa Toh Chin Min",
+      title: "Research Fellow",
+      image: "/media/LabMembers/Clarissa.jpeg",
+      description: "Investigating the role of novel proteins in replication stress-induced inflammatory signalling.",
+      bio: "I’m a final year PhD student working on how DNA damage influences inflammatory signalling. Caffeine is my life support and the key to unlocking this girl’s animated expressions. If I’m not at my bench, I’ll be at my desk with coffee!!",
+      email: "Email",
+  },
+  {
+      name: "Allison Chan",
+      title: "Research Fellow",
+      image: "/media/LabMembers/Allison.jpg",
+      description: "Investigating immune activation after DNA damage in B cell lymphoma.",
+      bio: "Investigating immune activation after DNA damage in B cell lymphoma.",
+      email: "Email",
+  },
+  {
+      name: "Akshaya Anbuselvan",
+      title: "Research Assistant",
+      image: "/media/LabMembers/Akshaya.jpg",
+      description: "Study of immune activation after DNA damage in Diffuse large B cell lymphoma.",
+      bio: "Lab Manager- Handling procurement and lab safety. Research Assistant- Investigating Immune activation after DNA damage in B cell lymphoma. ",
+      email: "Email",
+  },
+  {
+      name: "Phuong Mai Hoang",
+      title: "Research Fellow",
+      image: "/media/LabMembers/Phoung.jpg",
+      description: "Investigating immune activation in response to replication stress.",
+      bio: "Investigating immune activation in response to replication stress.",
+      email: "Email",
+  },
+  {
+      name: "Charmaine Ong Zi Yan",
+      title: "PhD Student",
+      image: "/media/LabMembers/Charmaine-Ong.jpg",
+      description: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
+      bio: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
+      email: "Email",
+  },
+  {
+      name: "Shruti Sridhar",
+      title: "PhD Student",
+      image: "/media/LabMembers/Shruti.png",
+      description:
+        "Investigating cellular and spatial patterns of prognostically relevant oncogene co-expression in DLBCL.",
+      bio: "Investigating cellular and spatial patterns of prognostically relevant oncogene co-expression in DLBCL.",
+      email: "Email",
+  },
+  {
+      name: "Hong Liang",
+      title: "Research Assistant/PhD Student",
+      image: "/media/LabMembers/Liang_Hong.jpg",
+      description: "Study of transcriptomics like RNA sequencing analysis using bioinformatics techniques.",
+      bio: "Hi everyone! I'm a Research Assistant and PhD student in Dr. Anand's lab at CSI, focusing on the lymphoma immune microenvironment using spatial transcriptomics. Before diving into research, I worked as a data analyst, but my curiosity led me to pursue a PhD. I really enjoy working here and appreciate the supportive environment—looking forward to learning and growing together. Wishing everyone success in their journey!",
+      email: "Email",
+  },
+  {
+      name: "Chartsiam (Sam) Tipgomut",
+      title: "Scientific Officer",
+      image: "/media/LabMembers/Chartsiam_Tipgomut.JPG",
+      description:"Development of human cellular model systems for in-depth analysis and drug screening of a novel Diamond-Blackfan anemia mutation.",
+      bio: "A Thailand-born project manager holding a PhD in medical research. I thrive on orchestrating teams and delivering impactful results. As a dedicated fitness enthusiast, I believe every rep in the gym counts—just as every milestone matters in the projects. Valuing a healthy work-life balance, I integrate meticulous planning, agility, and discipline to achieve sustainable success both professionally and personally.",
+      email: "Email",
+  },
+  {
+      name: "Lee Rui Xue",
+      title: "PhD Student",
+      image: "/media/LabMembers/Lee_Rui_Xue.jpeg",
+      description: "Identifying novel drug combinations that augment the efficacy of immunomodulators in DLBCL.",
+      bio: "Full-time PhD student, All-time animal lover, Part-time hibernator.",
+      email: "Email",
+  },
+  {
+      name: "Girija Shenoy",
+      title: "Research Assistant",
+      image: "/media/LabMembers/Girija.png",
+      description: "RNAseq and single-cell RNA sequencing data analysis using bioinformatics techniques.",
+      bio: "Research Assistant and Bioinformatician. I enjoy exploring computational solutions for various questions that arise from the biological research process.",
+      email: "Email",
+  }
 ];
 
-
 export const alumniMembers = [
-    {
-        name: "Justin Chan",
-        title: "Former Research Assistant",
-        period: "2020-2023",
-      },
-      {
-        name: "Bryce Tan Wei Quan",
-        title: "Former PhD Student",
-        period: "2019-2024",
-      },
-      {
-        name: "Michal Marek Hoppe",
-        title: "Former Research Fellow",
-        period: "2018-2022",
-      },
-      {
-        name: "Patrick William Jaynes",
-        title: "Former Research Fellow",
-        image: "/media/LabMembers/Patrick.jpg",
-        period: "2020-2024",
-      },
-      {
-        name: "Liu Min",
-        title: "Former Research Assistant",
-        period: "2019-2022",
-      },
-      {
-        name: "Kanav Gupta",
-        title: "Former Research Intern",
-        period: "May 2024 - Nov 2024",
-      },
-      {
-        name: "Wang Rui",
-        title: "Former Research Assistant",
-        period: "2019-2021",
-      },
-
+  {
+      name: "Joseph Jonathan Zhao Zhi Wei",
+      title: "Local MBBS Student",
+      period: "",
+  },
+  {
+      name: "Norman Fong",
+      title: "Local MBBS Student",
+      period: "",
+  },
+  {
+      name: "Ian Wee Jan Yen",
+      title: "Local MBBS Student",
+      period: "",
+  },
+  {
+      name: "Judith Toh",
+      title: "Local MBBS Student",
+      period: "",
+  },
+  {
+      name: "Robert Walsh",
+      title: "Local MBBS Student",
+      period: "",
+  },
+  {
+      name: "Guo Hong",
+      title: "Former Member",
+      period: "",
+  },
+  {
+      name: "Gideon Harianja",
+      title: "Former Member",
+      period: "",
+  },
+  {
+      name: "Ho Guiyi",
+      title: "Former Member",
+      period: "",
+  },
+  {
+      name: "Cherie Tan",
+      title: "Former Member",
+      period: "",
+  },
+  {
+      name: "Huang Juncheng",
+      title: "Former Member",
+      period: "",
+  },
+  {
+      name: "Thng Yu Qing",
+      title: "Former Member",
+      period: "",
+  },
+  {
+      name: "Peter Low",
+      title: "Former Member",
+      period: "",
+  },
+  {
+      name: "Justin Chan",
+      title: "Master Student",
+      period: "",
+  },
+  {
+      name: "Bryce Tan Wei Quan",
+      title: "MBBS-PhD Student",
+      period: "2022",
+  },
+  {
+      name: "Michal Marek Hoppe",
+      title: "Research Fellow",
+      period: "2020",
+  },
+  {
+      name: "Liu Min",
+      title: "Attachment Student",
+      period: "2023",
+  },
+  {
+      name: "Jaynes Patrick William",
+      title: "Research Fellow/Project Manager",
+      period: "2024",
+  },
+  {
+      name: "Wang Rui",
+      title: "Attachment Student",
+      period: "2024",
+  },
+  {
+      name: "Kanav Gupta",
+      title: "Attachment Student",
+      period: "2024",
+  },
+  {
+      name: "Irene Biju",
+      title: "Former Undergraduate-Master Student",
+      period: "2025",
+  }
 ];
