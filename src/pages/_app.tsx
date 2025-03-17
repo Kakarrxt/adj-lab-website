@@ -12,6 +12,18 @@ import "./research/Research.module.css";
 import "./page.module.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "ADJ Lab",
+	description: "Cancer cartography",
+
+	icons: {
+		icon: ['/image/favicon.ico?v=4'],
+		apple: ['/image/apple-touch-icon.png?v=4'],
+		shortcut: ['/image/apple-touch-icon.png'],
+	  },
+  };
 
 export default function App({
 	Component,
@@ -24,8 +36,8 @@ export default function App({
 }) {
 	return (
 		<>
-		      <Analytics/>
-			  <SpeedInsights/>
+		    <Analytics/>
+			<SpeedInsights/>
 			<Navbar />
 			<AnimatePresence mode="wait">
 				<Component
