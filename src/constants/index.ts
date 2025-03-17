@@ -230,7 +230,7 @@ export const currentMembers = [
         name: "Clemence Lai",
         title: "PhD Student",
         image: "/media/LabMembers/Clemence_Lai.jpg",
-        description:"-",
+        description:"Investigating the Tumor-Immune Microenvironment and elucidating immune evasion mechanisms in Ovarian Cancer",
         bio: "My horoscope is Cancer and my PhD is in cancer (mind blown 🤯). Composed of 40% coffee ☕️, 30% green tea 🍃 and 30% chaos ☄️. My academic interest lies in understanding the tumor microenvironment of hyper-proliferative cancers. ",
     },
   {
