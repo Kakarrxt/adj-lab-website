@@ -212,7 +212,6 @@ interface Member {
   image: string
   description: string
   bio: string
-  email: string
 }
 
 interface Alumni {

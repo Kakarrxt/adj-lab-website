@@ -168,7 +168,6 @@ export const currentMembers = [
       description:
         "Investigating Molecular Mechanism of DNA Damage Response-based Therapies in Haematological Malignancies.",
       bio: "Final Year PhD Student. Current Project: Understanding the effects of ARID1A-loss on the tumour immune microenvironment of gastric cancer. A Wet & Dry (Some would call me moist) Lab Scientist with a keen interest in furthering the effectiveness of immunotherapy through understanding the spatial microenvironment of various cancer types using state of the art methods such as spatial transcriptomics and proteomic techniques.",
-      email: "Email",
   },
   {
       name: "Clarissa Toh Chin Min",
@@ -176,7 +175,6 @@ export const currentMembers = [
       image: "/media/LabMembers/Clarissa.jpeg",
       description: "Investigating the role of novel proteins in replication stress-induced inflammatory signalling.",
       bio: "I’m a final year PhD student working on how DNA damage influences inflammatory signalling. Caffeine is my life support and the key to unlocking this girl’s animated expressions. If I’m not at my bench, I’ll be at my desk with coffee!!",
-      email: "Email",
   },
   {
       name: "Allison Chan",
@@ -184,7 +182,6 @@ export const currentMembers = [
       image: "/media/LabMembers/Allison.jpg",
       description: "Investigating immune activation after DNA damage in B cell lymphoma.",
       bio: "Investigating immune activation after DNA damage in B cell lymphoma.",
-      email: "Email",
   },
   {
       name: "Akshaya Anbuselvan",
@@ -192,7 +189,6 @@ export const currentMembers = [
       image: "/media/LabMembers/Akshaya.jpg",
       description: "Study of immune activation after DNA damage in Diffuse large B cell lymphoma.",
       bio: "Lab Manager- Handling procurement and lab safety. Research Assistant- Investigating Immune activation after DNA damage in B cell lymphoma. ",
-      email: "Email",
   },
   {
       name: "Phuong Mai Hoang",
@@ -200,7 +196,6 @@ export const currentMembers = [
       image: "/media/LabMembers/Phoung.jpg",
       description: "Investigating immune activation in response to replication stress.",
       bio: "Investigating immune activation in response to replication stress.",
-      email: "Email",
   },
   {
       name: "Charmaine Ong Zi Yan",
@@ -208,7 +203,6 @@ export const currentMembers = [
       image: "/media/LabMembers/Charmaine-Ong.jpg",
       description: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
       bio: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
-      email: "Email",
   },
   {
       name: "Shruti Sridhar",
@@ -217,7 +211,6 @@ export const currentMembers = [
       description:
         "Investigating cellular and spatial patterns of prognostically relevant oncogene co-expression in DLBCL.",
       bio: "Investigating cellular and spatial patterns of prognostically relevant oncogene co-expression in DLBCL.",
-      email: "Email",
   },
   {
       name: "Hong Liang",
@@ -225,7 +218,6 @@ export const currentMembers = [
       image: "/media/LabMembers/Liang_Hong.jpg",
       description: "Study of transcriptomics like RNA sequencing analysis using bioinformatics techniques.",
       bio: "Hi everyone! I'm a Research Assistant and PhD student in Dr. Anand's lab at CSI, focusing on the lymphoma immune microenvironment using spatial transcriptomics. Before diving into research, I worked as a data analyst, but my curiosity led me to pursue a PhD. I really enjoy working here and appreciate the supportive environment—looking forward to learning and growing together. Wishing everyone success in their journey!",
-      email: "Email",
   },
   {
       name: "Chartsiam (Sam) Tipgomut",
@@ -233,15 +225,20 @@ export const currentMembers = [
       image: "/media/LabMembers/Chartsiam_Tipgomut.JPG",
       description:"Development of human cellular model systems for in-depth analysis and drug screening of a novel Diamond-Blackfan anemia mutation.",
       bio: "A Thailand-born project manager holding a PhD in medical research. I thrive on orchestrating teams and delivering impactful results. As a dedicated fitness enthusiast, I believe every rep in the gym counts—just as every milestone matters in the projects. Valuing a healthy work-life balance, I integrate meticulous planning, agility, and discipline to achieve sustainable success both professionally and personally.",
-      email: "Email",
   },
+  {
+        name: "Clemence Lai",
+        title: "PhD Student",
+        image: "/media/LabMembers/Clemence_Lai.jpg",
+        description:"-",
+        bio: "My horoscope is Cancer and my PhD is in cancer (mind blown 🤯). Composed of 40% coffee ☕️, 30% green tea 🍃 and 30% chaos ☄️. My academic interest lies in understanding the tumor microenvironment of hyper-proliferative cancers. ",
+    },
   {
       name: "Lee Rui Xue",
       title: "PhD Student",
       image: "/media/LabMembers/Lee_Rui_Xue.jpeg",
       description: "Identifying novel drug combinations that augment the efficacy of immunomodulators in DLBCL.",
       bio: "Full-time PhD student, All-time animal lover, Part-time hibernator.",
-      email: "Email",
   },
   {
       name: "Girija Shenoy",
@@ -249,7 +246,6 @@ export const currentMembers = [
       image: "/media/LabMembers/Girija.png",
       description: "RNAseq and single-cell RNA sequencing data analysis using bioinformatics techniques.",
       bio: "Research Assistant and Bioinformatician. I enjoy exploring computational solutions for various questions that arise from the biological research process.",
-      email: "Email",
   }
 ];
 
