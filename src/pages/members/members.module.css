@@ -258,18 +258,17 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-:global(.custom-spotlight-card) {
+.spotlightWrapper {
   width: 100%;
   height: 100%;
-  border-radius: 10px !important;
+  border-radius: 10px;
   transition: all 0.3s ease;
 }
 
-:global(.custom-spotlight-card:hover) {
+.spotlightWrapper:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.12);
 }
-
 
 
 .alumniInfo {

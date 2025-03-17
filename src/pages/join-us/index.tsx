@@ -316,7 +316,7 @@ export default function JoinUsPage() {
           >
             <div className={styles.featureImageWrapper}>
           <Image 
-            src="/media/Lab-MD6.png" 
+            src="/media/contact/Lab-MD6.png" 
             alt="Research environment" 
             fill
             objectFit="cover"

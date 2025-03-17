@@ -301,7 +301,7 @@ export default function ContactPage() {
                   >
                     <div className={styles.imageWrapper}>
                       <Image 
-                        src="/media/Lab-MD6.png" 
+                        src="/media//contact/Lab-MD6.png" 
                         alt="Lab facility" 
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
@@ -316,7 +316,7 @@ export default function ContactPage() {
                   >
                     <div className={styles.imageWrapper}>
                       <Image 
-                        src="/media/Lab-interior.jpeg" 
+                        src="/media/contact/Lab-interior.jpeg" 
                         alt="Lab facility" 
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"

@@ -259,9 +259,11 @@ function MemberCard({ member }: { member: Member }) {
 
 function AlumniCard({ alumni }: { alumni: Alumni }) {
   return (
-   
     <motion.div variants={itemVariants} className={styles.alumniCardWrapper}>
-       <SpotlightCard className="custom-spotlight-card" spotlightColor="rgba(123, 31, 162, 0.15)">
+      <SpotlightCard 
+        className={`custom-spotlight-card ${styles.spotlightWrapper}`}
+        spotlightColor="rgba(123, 31, 162, 0.15)"
+      >
         <div className={styles.alumniCard}>
           <div className={styles.alumniInfo}>
             <h3 className={styles.alumniName}>{alumni.name}</h3>
@@ -269,8 +271,7 @@ function AlumniCard({ alumni }: { alumni: Alumni }) {
             <p className={styles.alumniPeriod}>{alumni.period}</p>
           </div>
         </div>
-        </SpotlightCard>
+      </SpotlightCard>
     </motion.div>
- 
-  )
+  );
 }
