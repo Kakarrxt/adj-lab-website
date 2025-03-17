@@ -178,15 +178,13 @@
 
 /* Message box */
 .messageBox {
-  background: rgba(107, 70, 193, 0.03);
-  border-radius: 16px;
-  padding: 2.5rem 3rem;
+  background: rgba(107, 70, 193, 0.1);
+  border-radius: 10px;
+  padding: 2rem 3rem;
   margin: 1rem 0;
   text-align: center;
-  border-left: 4px solid transparent;
-  border-image: linear-gradient(to bottom, #6b46c1, #9333ea);
-  border-image-slice: 1;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  border-left: 4px solid #6b46c1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .messageBox h2 {
