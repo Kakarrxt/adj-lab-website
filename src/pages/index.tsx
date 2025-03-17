@@ -45,7 +45,7 @@ export default function ResearchPage() {
     // Wait for 5 seconds before expanding the background
     const expansionTimeout = setTimeout(() => {
       setBackgroundExpanded(true);
-    }, 6000);
+    }, 5000);
     
     return () => {
       clearTimeout(expansionTimeout);
