@@ -11,7 +11,7 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
 import AnimatedTitle from "@/components/AnimatedTitle";
-
+import NUSMapbox from "./nusMap";
 export default function ContactPage() {
   const title = "Contact Us";
 
@@ -256,7 +256,7 @@ export default function ContactPage() {
               <motion.div variants={fadeInRight} className={styles.mapContainer}>
                 <h2>Find Us</h2>
                 <div className={styles.mapWrapper}>
-                  <iframe 
+                  {/* <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7985025311636!2d103.78172909999999!3d1.2954827000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1a51485a1695%3A0x5a1ae37f15111c63!2sCancer%20Science%20Institute%20(CSI)%20Singapore%20-%20NUS!5e0!3m2!1sen!2sin!4v1740492023597!5m2!1sen!2sin"
                     width="100%" 
                     height="100%" 
@@ -264,7 +264,8 @@ export default function ContactPage() {
                     allowFullScreen={false} 
                     loading="lazy"
                     title="Lab Location"
-                  ></iframe>
+                  ></iframe> */}
+                  <NUSMapbox/>
                 </div>
               </motion.div>
               

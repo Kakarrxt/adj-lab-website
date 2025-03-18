@@ -595,6 +595,7 @@
   
   .publication {
     padding: 1.2rem;
+    max-height: 70%;
   }
   
   .publication h2 {

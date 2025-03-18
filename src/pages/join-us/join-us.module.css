@@ -509,6 +509,10 @@
     .positionDetails {
       padding: 1.5rem;
     }
+
+    .applySection{
+      max-height: 75%;
+    }
     
     .applyContent {
       padding: 0;
@@ -516,6 +520,7 @@
     
     .messageBox {
       padding: 1.8rem 1.5rem;
+      height:75%;
     }
   }
   
