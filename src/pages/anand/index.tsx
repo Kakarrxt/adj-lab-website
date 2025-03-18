@@ -13,6 +13,8 @@ import { primaryAffiliations, additionalPositions, awards } from "@/constants";
 import { useInView } from "framer-motion";
 
 export default function AnandPage() {
+  const title = "Anand Jeyasekharan";
+  
   const [init, setInit] = useState(false);
   const [activeTab, setActiveTab] = useState('affiliations');
   const [isLoaded, setIsLoaded] = useState(false);
@@ -21,17 +23,30 @@ export default function AnandPage() {
   const descriptionRef = useRef(null);
   const isProfileInView = useInView(profileRef, { once: true });
   const isDescriptionInView = useInView(descriptionRef, { once: true });
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Initialize particles
   useEffect(() => {
     initParticlesEngine(async (engine: Engine) => {
       await loadSlim(engine);
     }).then(() => {
       setInit(true);
     });
-    
-    // Set page as loaded after a slight delay for animations
+
     setTimeout(() => setIsLoaded(true), 300);
+  }, []);
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); 
+    };
+
+    handleResize(); 
+    window.addEventListener("resize", handleResize);
+    
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const fadeInUp = {
@@ -182,14 +197,15 @@ export default function AnandPage() {
     }
   };
 
-  const title = "Anand JEYASEKHARAN";
+  
+  
   const charAnimation = {
     hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: {
-        delay: 0.8 + i * 0.04,
+        delay: 0.4 + i * 0.04,
         duration: 0.8,
         ease: [0.2, 0.65, 0.3, 0.9],
       },
@@ -210,8 +226,10 @@ export default function AnandPage() {
 
   return (
     <>
-    <Curve backgroundColor="#f1f1f1">
-      <div className={styles.backgroundGradient}></div>
+      {!isMobile && <Curve backgroundColor="#f1f1f1">
+        <div className={styles.backgroundGradient}></div>
+      </Curve>}
+      
       {init && (
         <Particles
           id="tsparticles"
@@ -241,7 +259,7 @@ export default function AnandPage() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
+            transition={{ duration: 0.8, delay: 0.5}}
             className={styles.header}
           >
             <h1 aria-label={title}>
@@ -475,7 +493,6 @@ export default function AnandPage() {
           </motion.div>
         </main>
       </div>
-    </Curve>
     </>
   );
 }

@@ -1,56 +1,56 @@
 .sectionTop {
-    position: relative;
-    height: 100px; 
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; 
-    z-index: 0; 
-  }
-  
-  /* Add a container for animation to control its size */
-  .sectionTop > div {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .main {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    /* gap: 3rem; */
-  }
-  
-  .header {
-    text-align: center;
-    /* margin-bottom: 1rem; */
-  }
-  
-  .animatedChar {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: #4a0072;
-    display: inline-block;
-  }
-  
-  .titleUnderline {
-    height: 3px;
-    width: 80px;
-    background: #6b46c1;
-    margin: 0 auto;
-  }
+  position: relative;
+  height: 100px; 
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; 
+  z-index: 0; 
+}
 
-  /* .circularGallery{
-    height: 600px; 
-    position: 'relative';
-    margin-top: -7rem; 
-    margin-bottom: 10rem;
-  } */
-   .photoGallery{
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-   }
+/* Add a container for animation to control its size */
+.sectionTop > div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* gap: 3rem; */
+}
+
+.header {
+  text-align: center;
+  /* margin-bottom: 1rem; */
+}
+
+.animatedChar {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #4a0072;
+  display: inline-block;
+}
+
+.titleUnderline {
+  height: 3px;
+  width: 80px;
+  background: #6b46c1;
+  margin: 0 auto;
+}
+
+/* .circularGallery{
+  height: 600px; 
+  position: 'relative';
+  margin-top: -7rem; 
+  margin-bottom: 10rem;
+} */
+ .photoGallery{
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+ }

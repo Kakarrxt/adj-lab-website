@@ -39,6 +39,20 @@ export default function ResearchPage() {
   const filterRef = useRef(null);
   const isFilterInView = useInView(filterRef, { once: true, margin: "-150px" });
   const [backgroundExpanded, setBackgroundExpanded] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); 
+    };
+
+    handleResize(); 
+    window.addEventListener("resize", handleResize);
+    
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
 
   useEffect(() => {
@@ -146,7 +160,9 @@ export default function ResearchPage() {
   return (
     
     <>
-     <Curve backgroundColor="#f1f1f1">
+     {!isMobile && <Curve backgroundColor="#f1f1f1">
+        <div className={styles.backgroundGradient}></div>
+      </Curve>}
     <div className={styles.container}>
       {/* Dynamic Hero Section */}
       <section className={styles.heroSection}>
@@ -596,7 +612,6 @@ export default function ResearchPage() {
         )}
       </AnimatePresence>
     </div>
-    </Curve>
     </>
   );
 }

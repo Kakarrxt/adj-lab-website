@@ -8,6 +8,7 @@ import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
 import Curve from '@/components/Curve/Curve'
 import Aurora from '@/components/Aurora/Aurora';
+import AnimatedTitle from '@/components/AnimatedTitle';
 
 interface PubMedSearchResponse {
   esearchresult: {
@@ -59,18 +60,10 @@ interface Publication {
 }
 
 export default function Publications() {
+  const title = "Publications";
+
   const [init, setInit] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    initParticlesEngine(async (engine: Engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
-    
-    setTimeout(() => setIsLoaded(true), 300);
-  }, []);
   
   const [publications, setPublications] = useState<Publication[]>([]);
   const [sortedPublications, setSortedPublications] = useState<Publication[]>([]);
@@ -90,6 +83,20 @@ export default function Publications() {
 
   const AUTHOR_NAME = 'Jeyasekharan AD[Author]';
   const MAX_RESULTS = 50;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); 
+    };
+
+    handleResize(); 
+    window.addEventListener("resize", handleResize);
+    
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -110,6 +117,16 @@ export default function Publications() {
     }
   };
 
+
+  useEffect(() => {
+    initParticlesEngine(async (engine: Engine) => {
+      await loadSlim(engine);
+    }).then(() => {
+      setInit(true);
+    });
+    
+    setTimeout(() => setIsLoaded(true), 300);
+  }, []);
   const searchPubMed = async (query: string, max: number): Promise<string[]> => {
     try {
       const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${encodeURIComponent(query)}&retmax=${max}&retmode=json`;
@@ -258,7 +275,6 @@ export default function Publications() {
   }, [sortedPublications, currentPage, itemsPerPage]);
   
   const paginate = (pageNumber: number) => {
-    // Scroll to the top of the component
     topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setCurrentPage(pageNumber);
   };
@@ -289,14 +305,14 @@ export default function Publications() {
     fpsLimit: 120,
     particles: {
       color: {
-        value: "#5a3da5", // Darker purple color for particles
+        value: "#5a3da5", 
       },
       links: {
-        color: "#8a6ad6", // Slightly darker link color
+        color: "#8a6ad6", 
         distance: 150,
         enable: true,
-        opacity: 0.3, // Increased opacity from 0.2 to 0.3
-        width: 1.2, // Slightly wider links
+        opacity: 0.3, 
+        width: 1.2, 
       },
       move: {
         direction: "none" as const,
@@ -305,7 +321,7 @@ export default function Publications() {
           default: "bounce" as const,
         },
         random: false,
-        speed: 0.7, // Slightly slower speed for smoother movement
+        speed: 0.7,
         straight: false,
       },
       number: {
@@ -313,14 +329,14 @@ export default function Publications() {
           enable: true,
           area: 800,
         },
-        value: 70, // Reduced from 80 to 70 for less cluttered appearance
+        value: 70, 
       },
       opacity: {
-        value: 0.35, // Increased from 0.25 to 0.35 for more visibility
+        value: 0.35, 
         anim: {
           enable: true,
-          speed: 0.4, // Slightly slower animation
-          opacity_min: 0.15, // Higher minimum opacity
+          speed: 0.4, 
+          opacity_min: 0.15, 
           sync: false
         }
       },
@@ -328,7 +344,7 @@ export default function Publications() {
         type: "circle",
       },
       size: {
-        value: { min: 1, max: 4.5 }, // Slightly larger max size
+        value: { min: 1, max: 4.5 }, 
       },
     },
     interactivity: {
@@ -340,31 +356,35 @@ export default function Publications() {
       },
       modes: {
         repulse: {
-          distance: 120, // Increased from 100 to 120
-          duration: 0.5, // Slightly longer duration
+          distance: 120, 
+          duration: 0.5, 
         },
       },
     },
     detectRetina: true,
   };
 
-  const title = "Publications";
+
   const charAnimation = {
     hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: {
-        delay: 0.8 +  i * 0.04,
+        delay: 0.8 + i * 0.04,
         duration: 0.8,
         ease: [0.2, 0.65, 0.3, 0.9],
       },
     }),
   };
+
   
   return (
     <>
-    <Curve backgroundColor="#f1f1f1">
+      {!isMobile && <Curve backgroundColor="#f1f1f1">
+        <div className={styles.backgroundGradient}></div>
+      </Curve>}
+
       <div ref={topRef} id="publications-top"></div>
       {init && (
         <Particles
@@ -392,39 +412,7 @@ export default function Publications() {
       
       <div className={styles.container}>
         <main className={styles.main}>
-          <motion.div
-            ref={headerRef}
-            initial="hidden"
-            animate={isHeaderInView ? "visible" : "hidden"}
-            variants={fadeInUp}
-            className={styles.header}
-          >
- 
-            <h1 aria-label={title}>
-              {title.split("").map((char, i) => (
-                <motion.span
-                  key={`${char}-${i}`}
-                  custom={i}
-                  variants={charAnimation}
-                  initial="hidden"
-                  animate="visible"
-                  className={styles.animatedChar}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
-            </h1>
-            <motion.div 
-              className={styles.underline} 
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ 
-                duration: 0.8, 
-                delay: 1, 
-                ease: "easeOut" 
-              }}
-            />
-          </motion.div>
+          <AnimatedTitle title={title} />
 
           <motion.div 
             variants={fadeInUp}
@@ -659,7 +647,6 @@ export default function Publications() {
           )}
         </main>
       </div>
-    </Curve>
     </>
   );
 }

@@ -10,6 +10,7 @@ import Curve from '@/components/Curve/Curve'
 import Aurora from "@/components/Aurora/Aurora";
 import { currentMembers, alumniMembers } from "@/constants";
 import SpotlightCard from "@/components/SpotlightCard/SpotlightCard";
+import AnimatedTitle from "@/components/AnimatedTitle";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -24,22 +25,25 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 }
 
-const title = "Lab Members";
-
-const charAnimation = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 0.8 +  i * 0.04,
-      duration: 0.8,
-      ease: [0.2, 0.65, 0.3, 0.9],
-    },
-  }),
-};
 
 export default function LabMembers() {
+
+  const title = "Lab Members";
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); 
+    };
+
+    handleResize(); 
+    window.addEventListener("resize", handleResize);
+    
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const [init, setInit] = useState(false);
   useEffect(() => {
     initParticlesEngine(async (engine: Engine) => {
@@ -48,6 +52,19 @@ export default function LabMembers() {
       setInit(true);
     });
   }, []);
+
+  const charAnimation = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.8 + i * 0.04,
+        duration: 0.8,
+        ease: [0.2, 0.65, 0.3, 0.9],
+      },
+    }),
+  };
 
 
   const particlesOptions = {
@@ -121,7 +138,9 @@ export default function LabMembers() {
 
   return (
     <>
-    <Curve backgroundColor="#f1f1f1">
+      {!isMobile && <Curve backgroundColor="#f1f1f1">
+        <div className={styles.backgroundGradient}></div>
+      </Curve>}
       
       {init && (
         <Particles
@@ -150,37 +169,7 @@ export default function LabMembers() {
   
         <main className={styles.main}>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}  
-          className={styles.header}
-        >
-        <h1 aria-label={title}>
-              {title.split("").map((char, i) => (
-                <motion.span
-                  key={`${char}-${i}`}
-                  custom={i}
-                  variants={charAnimation}
-                  initial="hidden"
-                  animate="visible"
-                  className={styles.animatedChar}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
-            </h1>
-          <motion.div 
-          className={styles.underline} 
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ 
-            duration: 0.8, 
-            delay: 1, 
-            ease: "easeOut" 
-          }}
-          />
-        </motion.div>
+       <AnimatedTitle title={title} />
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Current Lab Members</h2>
@@ -201,7 +190,6 @@ export default function LabMembers() {
           </section>
         </main>
       </div>
-      </Curve>
     </>
   )
 }

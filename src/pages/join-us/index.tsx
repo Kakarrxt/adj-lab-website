@@ -10,13 +10,31 @@ import Aurora from "@/components/Aurora/Aurora";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
+import AnimatedTitle from "@/components/AnimatedTitle";
 export default function JoinUsPage() {
+  const title = "Join Our Team";
+
   const positionsRef = useRef(null);
   const careerInfoRef = useRef(null);
   const isPositionsInView = useInView(positionsRef, { once: true });
   const isCareerInfoInView = useInView(careerInfoRef, { once: true });
   const [isLoaded, setIsLoaded] = useState(false);
   const [init, setInit] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); 
+    };
+
+    handleResize(); 
+    window.addEventListener("resize", handleResize);
+    
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   useEffect(() => {
     initParticlesEngine(async (engine: Engine) => {
       await loadSlim(engine);
@@ -132,7 +150,7 @@ export default function JoinUsPage() {
     detectRetina: true,
   };
 
-  const title = "Join Our Team";
+  
 
   const charAnimation = {
     hidden: { opacity: 0, y: 20 },
@@ -140,7 +158,7 @@ export default function JoinUsPage() {
       opacity: 1,
       y: 0,
       transition: {
-        delay: 0.8 +  i * 0.04,
+        delay: 0.8 + i * 0.04,
         duration: 0.8,
         ease: [0.2, 0.65, 0.3, 0.9],
       },
@@ -150,8 +168,11 @@ export default function JoinUsPage() {
 
   return (
     <>
-    <Curve backgroundColor="#f1f1f1">
-    <div className={styles.backgroundGradient}></div>
+      {!isMobile && <Curve backgroundColor="#f1f1f1">
+        <div className={styles.backgroundGradient}></div>
+      </Curve>}
+
+
     {init && (
         <Particles
           id="tsparticles"
@@ -179,37 +200,7 @@ export default function JoinUsPage() {
       <div className={styles.container}>
         <main className={styles.main}>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}  
-          className={styles.header}
-        >
-        <h1 aria-label={title}>
-              {title.split("").map((char, i) => (
-                <motion.span
-                  key={`${char}-${i}`}
-                  custom={i}
-                  variants={charAnimation}
-                  initial="hidden"
-                  animate="visible"
-                  className={styles.animatedChar}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
-            </h1>
-          <motion.div 
-          className={styles.underline} 
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ 
-            duration: 0.8, 
-            delay: 1, 
-            ease: "easeOut" 
-          }}
-          />
-        </motion.div>
+        <AnimatedTitle title={title} />
 
         <motion.div
         variants={fadeInUp}
@@ -371,7 +362,6 @@ export default function JoinUsPage() {
         </motion.section>
       </main>
       </div>
-      </Curve>
     </>
   );
 }

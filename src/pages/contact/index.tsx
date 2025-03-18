@@ -10,14 +10,18 @@ import Aurora from "@/components/Aurora/Aurora";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
+import AnimatedTitle from "@/components/AnimatedTitle";
 
 export default function ContactPage() {
+  const title = "Contact Us";
+
   const mapRef = useRef(null);
   const contactInfoRef = useRef(null);
   const isMapInView = useInView(mapRef, { once: true, amount: 0.3 });
   const isContactInfoInView = useInView(contactInfoRef, { once: true, amount: 0.3 });
   const [isLoaded, setIsLoaded] = useState(false);
   const [init, setInit] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     initParticlesEngine(async (engine: Engine) => {
@@ -29,6 +33,19 @@ export default function ContactPage() {
     setTimeout(() => setIsLoaded(true), 300);
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); 
+    };
+
+    handleResize(); 
+    window.addEventListener("resize", handleResize);
+    
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -143,25 +160,13 @@ export default function ContactPage() {
     detectRetina: true,
   };
 
-  const title = "Contact Us";
-
-  const charAnimation = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.8 + i * 0.04,
-        duration: 0.8,
-        ease: [0.2, 0.65, 0.3, 0.9],
-      },
-    }),
-  };
 
   return (
     <>
-      <Curve backgroundColor="#f7f7f8">
+      {!isMobile && <Curve backgroundColor="#f1f1f1">
         <div className={styles.backgroundGradient}></div>
+      </Curve>}
+
         {init && (
           <Particles
             id="tsparticles"
@@ -187,37 +192,8 @@ export default function ContactPage() {
 
         <div className={styles.container}>
           <main className={styles.main}>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1 }}  
-              className={styles.header}
-            >
-              <h1 aria-label={title}>
-                {title.split("").map((char, i) => (
-                  <motion.span
-                    key={`${char}-${i}`}
-                    custom={i}
-                    variants={charAnimation}
-                    initial="hidden"
-                    animate="visible"
-                    className={styles.animatedChar}
-                  >
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
-                ))}
-              </h1>
-              <motion.div 
-                className={styles.underline} 
-                initial={{ scaleX: 0, opacity: 0 }}
-                animate={{ scaleX: 1, opacity: 1 }}
-                transition={{ 
-                  duration: 0.8, 
-                  delay: 1, 
-                  ease: "easeOut" 
-                }}
-              />
-            </motion.div>
+            
+             <AnimatedTitle title={title} />
 
             <motion.div
               variants={fadeInUp}
@@ -301,7 +277,7 @@ export default function ContactPage() {
                   >
                     <div className={styles.imageWrapper}>
                       <Image 
-                        src="/media//contact/Lab-MD6.png" 
+                        src="/media/contact/Lab-MD6.png" 
                         alt="Lab facility" 
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
@@ -362,7 +338,6 @@ export default function ContactPage() {
             </motion.section>
           </main>
         </div>
-      </Curve>
     </>
   );
 }

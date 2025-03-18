@@ -5,9 +5,11 @@ import styles from "./lab-events.module.css"
 // import CircularGalleryWithFlip from "@/components/CircularGallery/CircularGallery";
 import Curve from '@/components/Curve/Curve'
 import Aurora from "@/components/Aurora/Aurora";
-export default function LabEvents(){
+import { useEffect, useState } from "react";
+import AnimatedTitle from "@/components/AnimatedTitle";
 
-  
+
+export default function LabEvents(){
     const fadeInUp = {
       hidden: { opacity: 0, y: 20 },
       visible: {
@@ -30,25 +32,127 @@ export default function LabEvents(){
         },
       }),
     };
+
+    const [isMobile, setIsMobile] = useState(false);
+    
+    useEffect(() => {
+        const handleResize = () => {
+          setIsMobile(window.innerWidth <= 768); 
+        };
+    
+        handleResize(); 
+        window.addEventListener("resize", handleResize);
+        
+        return () => {
+          window.removeEventListener("resize", handleResize);
+        };
+      }, []);
   
     const title = "ADJ Lab Events";
 
+    // Create SVG placeholders directly as Base64 encoded images
+    // Using pastel purple background (#d8ccf1) with white text
+    const placeholderSVGBase64 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMjAwIDMwMCI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IiNkOGNjZjEiLz48dGV4dCB4PSIxMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSI+VG8gQmUgQWRkZWQ8L3RleHQ+PC9zdmc+";
+
+    // Modified data array with properly formatted image URLs and added backContent
     const data = [
-      { id: 1, image: 'https://picsum.photos/id/10/200/300', height: 400 },
-      { id: 2, image: 'https://picsum.photos/id/14/200/300', height: 300 },
-      { id: 3, image: 'https://picsum.photos/id/15/200/300', height: 400 },
-      { id: 4, image: 'https://picsum.photos/id/16/200/300', height: 300 },
-      { id: 5, image: 'https://picsum.photos/id/17/200/300', height: 400 },
-      { id: 6, image: 'https://picsum.photos/id/19/200/300', height: 300 },
-      { id: 7, image: 'https://picsum.photos/id/37/200/300', height: 300 },
-      { id: 8, image: 'https://picsum.photos/id/39/200/300', height: 300 },
-      { id: 9, image: 'https://picsum.photos/id/85/200/300', height: 400 },
-      { id: 10, image: 'https://picsum.photos/id/103/200/300', height: 400 }
+      { 
+        id: 1, 
+        image: placeholderSVGBase64,
+        height: 400,
+        backContent: {
+          title: "Event 1",
+          description: "Description for Event 1"
+        }
+      },
+      { 
+        id: 2, 
+        image: placeholderSVGBase64,
+        height: 300,
+        backContent: {
+          title: "Event 2",
+          description: "Description for Event 2"
+        }
+      },
+      { 
+        id: 3, 
+        image: placeholderSVGBase64,
+        height: 400,
+        backContent: {
+          title: "Event 3",
+          description: "Description for Event 3"
+        }
+      },
+      { 
+        id: 4, 
+        image: placeholderSVGBase64,
+        height: 300,
+        backContent: {
+          title: "Event 4",
+          description: "Description for Event 4"
+        }
+      },
+      { 
+        id: 5, 
+        image: placeholderSVGBase64,
+        height: 400,
+        backContent: {
+          title: "Event 5",
+          description: "Description for Event 5"
+        }
+      },
+      { 
+        id: 6, 
+        image: placeholderSVGBase64,
+        height: 300,
+        backContent: {
+          title: "Event 6",
+          description: "Description for Event 6"
+        }
+      },
+      { 
+        id: 7, 
+        image: placeholderSVGBase64,
+        height: 300,
+        backContent: {
+          title: "Event 7",
+          description: "Description for Event 7"
+        }
+      },
+      { 
+        id: 8, 
+        image: placeholderSVGBase64,
+        height: 300,
+        backContent: {
+          title: "Event 8",
+          description: "Description for Event 8"
+        }
+      },
+      { 
+        id: 9, 
+        image: placeholderSVGBase64,
+        height: 400,
+        backContent: {
+          title: "Event 9",
+          description: "Description for Event 9"
+        }
+      },
+      { 
+        id: 10, 
+        image: placeholderSVGBase64,
+        height: 400,
+        backContent: {
+          title: "Event 10",
+          description: "Description for Event 10"
+        }
+      }
     ];
 
     return(
         <>
-        <Curve backgroundColor="#f1f1f1">
+      {!isMobile && <Curve backgroundColor="#f1f1f1">
+        <div className={styles.backgroundGradient}></div>
+      </Curve>}
         <motion.div 
         className={styles.sectionTop}
         initial={{ opacity: 0 }}
@@ -56,9 +160,6 @@ export default function LabEvents(){
         transition={{ duration: 0.8 }}
       >
         <div>
-                  {/*
-          <NeonIsometricMaze />
-        */}
         <Aurora
           colorStops={["#A855F7", "#9333EA", "#6B21A8"]}
           blend={0.5}
@@ -71,37 +172,7 @@ export default function LabEvents(){
       <div className={styles.container}>
         <main className={styles.main}>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}  
-          className={styles.header}
-        >
-        <h1 aria-label={title}>
-              {title.split("").map((char, i) => (
-                <motion.span
-                  key={`${char}-${i}`}
-                  custom={i}
-                  variants={charAnimation}
-                  initial="hidden"
-                  animate="visible"
-                  className={styles.animatedChar}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
-            </h1>
-          <motion.div 
-          className={styles.underline} 
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ 
-            duration: 0.8, 
-            delay: 1, 
-            ease: "easeOut" 
-          }}
-          />
-        </motion.div>
+       <AnimatedTitle title={title} />
           
         
         <motion.div
@@ -120,8 +191,6 @@ export default function LabEvents(){
           
           </main>
           </div>
-
-        </Curve>
         </>
     )
 }

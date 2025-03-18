@@ -10,6 +10,17 @@
   font-family: 'Inter', sans-serif;
 }
 
+.animatedChar {
+  display: inline-block;
+  color: #4a0072;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.animatedChar:hover {
+  color: #6b46c1;
+  transform: translateY(-2px);
+}
+
 .main {
   width: 100%;
   display: flex;
