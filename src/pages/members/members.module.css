@@ -298,11 +298,13 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+
   .memberCard {
     flex-direction: column;
-    max-width: 80%; /* Make cards take up less width */
-    max-height: 60%;
+    max-width: 85%; /* Make cards take up less width */
+    max-height: 40%;
     margin: 0 auto; /* Center the cards */
+    font-size: 0.8 rem;
   }
   
   .photoSection, .infoSection, .bioSection {
@@ -334,13 +336,15 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 15px; /* Add some space between grid items */
   }
+  
 }
 
 @media (max-width: 480px) {
-  .memberCard {
-    max-width: 95%; /* Adjust width for very small screens */
-  }
-
+  .sectionTitle{
+    font-size: 1.8rem;
+    /* Prevent word breaks in header title */
+    word-break: keep-all;
+   }
   .photoSection img {
     max-width: 80%; /* Make images even smaller on phones */
   }
@@ -348,5 +352,15 @@
   .alumniGrid {
     grid-template-columns: 1fr;
     gap: 10px; /* Smaller gap for smaller screens */
+  }
+
+  .memberCard {
+    flex-direction: column;
+    max-width: 90%; /* Make cards take up less width */
+    max-height: 40%;
+    margin: 0 auto; /* Center the cards */
+  }
+  .memberDescription {
+    font-size: 0.8 rem;
   }
 }
