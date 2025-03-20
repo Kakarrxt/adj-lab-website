@@ -530,9 +530,13 @@
   .actions {
     flex-direction: column;
   }
+  .actions a{
+    font-size: 0.7rem;
+    max-height: 80%;
+  }
   
   .link, .citeButton {
-    width: 100%;
+    max-width: 85%;
     margin-bottom: 0.5rem;
   }
   
@@ -541,12 +545,59 @@
   }
   
   .publication h2 {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   
-  .metadata {
+  .metadata span{
     flex-direction: column;
     gap: 0.3rem;
+    font-size: 0.7rem;
+  }
+  .authors{
+    font-size: 0.75rem;
+  }
+  .filterBar label{
+    font-size: 0.8rem;
+  }
+
+  .filterBar select{
+    max-height:50%;
+    font-size: 0.8rem;
+  }
+
+  .filterBar option{
+    font-size: 0.8rem;
+  }
+
+  .paginationSettings label{
+    font-size: 0.8rem;
+  }
+  .paginationSettings span{
+    font-size: 0.8rem;
+  }
+  .paginationSettings select{
+    font-size: 0.8rem;
+  }
+  .paginationSettings option{
+    font-size: 0.8rem;
+  }
+
+  .paginationControls button{
+    max-width: 60px;
+    max-height: 40px;
+    font-size: 0.7rem;
+    align-items: center;
+  }
+
+  .statCard{
+    max-height: 90%;
+  }
+  .statNumber{
+   font-size: 1.6rem;
+  }
+
+  .statsSection h2{
+    font-size: 1.5rem;
   }
 }
 
@@ -560,7 +611,8 @@
     font-size: 0.8rem;
   }
   
-  .metadata {
+  .metadata span{
+    font-size: 0.7rem;
     gap: 0.5rem;
   }
   
@@ -569,7 +621,7 @@
   }
   
   .publication h2 {
-    -webkit-line-clamp: 3; /* Allow more lines on smaller screens */
+    font-size:0.7rem; /* Allow more lines on smaller screens */
   }
 }
 

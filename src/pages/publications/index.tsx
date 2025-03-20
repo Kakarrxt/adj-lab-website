@@ -567,7 +567,7 @@ export default function Publications() {
                     aria-label="Previous page"
                     type="button"
                   >
-                    &laquo; Prev
+                    &laquo; 
                   </button>
                   
                   {/* Page numbers */}
@@ -609,7 +609,7 @@ export default function Publications() {
                     aria-label="Next page"
                     type="button"
                   >
-                    Next &raquo;
+                    &raquo;
                   </button>
                 </div>
               </motion.div>

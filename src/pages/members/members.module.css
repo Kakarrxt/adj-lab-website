@@ -364,3 +364,37 @@
     font-size: 0.8 rem;
   }
 }
+
+@media (max-width:375px) {
+  .section h2{
+    font-size: 1.5rem;
+  }
+  .memberCard {
+    flex-direction: column;
+    max-width: 90%; /* Make cards take up less width */
+    max-height: 40%;
+    margin: 0 auto; /* Center the cards */
+  }
+
+  .bioSection p{
+    font-size: 0.85rem;
+  }
+  .memberDescription{
+    font-size: 0.85rem;
+  }
+
+  .infoSection h3{
+    font-size: 1.2rem;
+  }
+  .photoSection img {
+    max-width: 70%;
+    max-height: 70%; /* Make images even smaller on phones */
+  }
+  .alumniName{
+    font-size: 0.9rem;
+  }
+
+  .alumniCard{
+    max-height: 90%;
+  }
+}
