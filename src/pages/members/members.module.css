@@ -370,31 +370,60 @@
     font-size: 1.5rem;
   }
   .memberCard {
-    flex-direction: column;
-    max-width: 90%; /* Make cards take up less width */
-    max-height: 40%;
-    margin: 0 auto; /* Center the cards */
+    /* flex-direction: column; */
+    max-width: 100%; /* Make cards take up less width */
+    max-height: 100%;
+    margin: 0 auto;
   }
 
   .bioSection p{
-    font-size: 0.85rem;
+    font-size: 0.6rem;
   }
+  .bioTitle{
+    font-size: 0.75rem;
+  } 
+
   .memberDescription{
-    font-size: 0.85rem;
+    font-size: 0.6rem;
+  }
+
+  .memberTitle{
+    font-size: 0.7rem;
   }
 
   .infoSection h3{
-    font-size: 1.2rem;
+    font-size: 0.73rem;
   }
   .photoSection img {
-    max-width: 70%;
-    max-height: 70%; /* Make images even smaller on phones */
+    max-width: 35%;
+    max-height: 35%; /* Make images even smaller on phones */
+  }
+  .photoSection{
+    max-height: 100px;
   }
   .alumniName{
-    font-size: 0.9rem;
+    font-size: 0.65rem;
+  }
+  .alumniTitle{
+    font-size:0.65rem;
   }
 
   .alumniCard{
-    max-height: 90%;
+    max-height: 100%;
   }
+
+  .alumniPeriod{
+    font-size: 0.65rem;
+  }
+
+  .alumniGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  /* .membersGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  } */
 }
