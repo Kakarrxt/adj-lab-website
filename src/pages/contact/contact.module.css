@@ -11,13 +11,14 @@
 
 .sectionTop {
   position: relative;
-  height: 100px; 
+  height: 100px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; 
-  z-index: 0; 
+  overflow: hidden;
+  z-index: 0;
+  contain: layout paint;
 }
 
 .sectionTop > div {
@@ -33,9 +34,8 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  contain: content;
 }
-
-
 
 /* Contact info section */
 .contactInfo {
@@ -43,6 +43,7 @@
   justify-content: space-between;
   gap: 1.5rem;
   margin: 2rem 0;
+  contain: layout;
 }
 
 .contactCard {
@@ -50,13 +51,14 @@
   background: white;
   padding: 2rem;
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
   z-index: 1;
   border: 1px solid rgba(107, 70, 193, 0.08);
+  will-change: transform;
 }
 
 .contactCard::before {
@@ -68,12 +70,12 @@
   height: 100%;
   background: linear-gradient(180deg, #6b46c1, #9233ea5e);
   z-index: -1;
-  transition: width 1s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .contactCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.09);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
 }
 
 .contactCard:hover::before {
@@ -186,6 +188,7 @@
   gap: 2.5rem;
   margin: 2rem 0;
   z-index: 1;
+  contain: layout;
 }
 
 .contentSection h2 {
@@ -211,6 +214,8 @@
 .mapContainer {
   display: flex;
   flex-direction: column;
+  aspect-ratio: 4/3;
+  contain: layout;
 }
 
 .mapWrapper {
@@ -221,6 +226,8 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 400px;
   width: 100%;
+  aspect-ratio: 4/3;
+  will-change: transform;
 }
 
 .mapWrapper:hover {
@@ -230,6 +237,7 @@
 .labImagesSection {
   display: flex;
   flex-direction: column;
+  contain: paint layout;
 }
 
 .labImagesGrid {
@@ -246,6 +254,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: calc(50% - 0.5rem);
+  will-change: transform;
 }
 
 .imageWrapper {
@@ -253,6 +262,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  aspect-ratio: 16/9;
 }
 
 .labImage:hover {
@@ -286,6 +296,7 @@
   margin: 1rem 0 3rem;
   z-index: 1;
   border: 1px solid rgba(107, 70, 193, 0.08);
+  contain: content;
 }
 
 .visitSection h2 {
@@ -324,7 +335,7 @@
   padding: 1.8rem 1rem;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
   text-align: center;
   border: 1px solid rgba(107, 70, 193, 0.08);
 }
@@ -366,6 +377,7 @@
   z-index: 0;
   opacity: 0.5;
   pointer-events: none;
+  will-change: transform;
 }
 
 .backgroundGradient {
@@ -376,6 +388,7 @@
   height: 100%;
   background: linear-gradient(135deg, rgba(241, 241, 241, 0.97) 0%, rgba(245, 245, 250, 0.95) 100%);
   z-index: -1;
+  contain: strict;
 }
 
 /* Responsive styles */
@@ -395,15 +408,15 @@
 
 @media (max-width: 768px) {
   .container {
-    padding: 1.5rem 1rem;
+    padding: 1rem 0.75rem;
   }
 
   .header h1 {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   .sectionTop {
-    height: 80px;
+    height: 70px;
   }
   
   .contactInfo {
@@ -412,59 +425,152 @@
   
   .contentSection {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-  
-  .mapWrapper {
-    height: 350px;
-  }
-  
-  .labImagesGrid {
-    gap: 1rem;
-    height: auto;
-  }
-  
-  .labImage {
-    height: 200px;
-  }
-  
-  .hoursContainer {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .messageBox {
-    padding: 2rem 1.5rem;
-  }
-
-  .visitSection {
-    padding: 2rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .header h1 {
-    font-size: 1.8rem;
-  }
-  
-  .contentSection h2,
-  .visitSection h2 {
-    font-size: 1.5rem;
-  }
-  
-  .messageBox h2 {
-    font-size: 1.6rem;
+    gap: 2rem;
   }
   
   .mapWrapper {
     height: 250px;
   }
   
+  .labImagesGrid {
+    gap: 0.75rem;
+    height: auto;
+  }
+  
   .labImage {
-    height: 180px;
+    height: 175px;
+  }
+  
+  .hoursContainer {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .messageBox {
+    padding: 1.5rem 1.25rem;
+  }
+  
+  .messageBox h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
   }
   
   .messageBox p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .visitSection {
+    padding: 1.75rem;
+  }
+  
+  .visitSection h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .contactCard {
+    padding: 1.5rem;
+  }
+  
+  .contactCard h3 {
+    font-size: 1.1rem;
+  }
+  
+  .contactCard p {
+    font-size: 0.9rem;
+  }
+  
+  .iconWrapper {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .icon {
+    font-size: 1.5rem;
+  }
+  
+  .contentSection h2 {
+    font-size: 1.4rem;
+  }
+  
+  .day {
+    font-size: 0.95rem;
+  }
+  
+  .time {
+    font-size: 0.95rem;
+  }
+  
+  .hoursItem {
+    padding: 1.4rem 0.75rem;
+  }
+  
+  .imageCaption {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .header h1 {
+    font-size: 1.6rem;
+  }
+  
+  .contentSection h2,
+  .visitSection h2 {
+    font-size: 1.3rem;
+  }
+  
+  .messageBox h2 {
+    font-size: 1.4rem;
+  }
+  
+  .mapWrapper {
+    height: 200px;
+  }
+  
+  .labImage {
+    height: 150px;
+  }
+  
+  .messageBox p {
+    font-size: 0.9rem;
+  }
+  
+  .contactCard {
+    padding: 1.25rem 1rem;
+  }
+  
+  .iconWrapper {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 0.75rem;
+  }
+  
+  .icon {
+    font-size: 1.3rem;
+  }
+  
+  .day {
+    font-size: 0.85rem;
+  }
+  
+  .time {
+    font-size: 0.85rem;
+  }
+  
+  .contactCard h3 {
     font-size: 1rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .contactCard p {
+    font-size: 0.85rem;
+    line-height: 1.5;
   }
 }

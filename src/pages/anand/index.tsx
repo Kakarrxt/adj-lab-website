@@ -1,5 +1,5 @@
 "use client"
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import Image from "next/image";
 import styles from "./Anand.module.css";
 import { Twitter, Linkedin, Mail, Award, Building, BookOpen, ChevronRight, Bookmark } from "lucide-react";
@@ -10,7 +10,6 @@ import type { Engine } from "@tsparticles/engine";
 import Curve from '@/components/Curve/Curve';
 import Aurora from "@/components/Aurora/Aurora";
 import { primaryAffiliations, additionalPositions, awards } from "@/constants";
-import { useInView } from "framer-motion";
 
 export default function AnandPage() {
   const title = "Anand Jeyasekharan";
@@ -18,23 +17,31 @@ export default function AnandPage() {
   const [init, setInit] = useState(false);
   const [activeTab, setActiveTab] = useState('affiliations');
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   
   const profileRef = useRef(null);
   const descriptionRef = useRef(null);
   const isProfileInView = useInView(profileRef, { once: true });
   const isDescriptionInView = useInView(descriptionRef, { once: true });
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    initParticlesEngine(async (engine: Engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
-
-    setTimeout(() => setIsLoaded(true), 300);
+    const img = new window.Image();
+    img.src = "/media/anand/anand-profile.png";
   }, []);
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      initParticlesEngine(async (engine: Engine) => {
+        await loadSlim(engine);
+      }).then(() => {
+        setInit(true);
+      });
+    }, 1000); 
+
+    setTimeout(() => setIsLoaded(true), 300);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,12 +49,84 @@ export default function AnandPage() {
     };
 
     handleResize(); 
-    window.addEventListener("resize", handleResize);
+
+    let timeoutId: NodeJS.Timeout;
+    const debouncedResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(handleResize, 200);
+    };
+    
+    window.addEventListener("resize", debouncedResize);
     
     return () => {
-      window.removeEventListener("resize", handleResize);
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", debouncedResize);
     };
   }, []);
+
+
+  const particlesOptions = {
+    background: {
+      color: {
+        value: "transparent",
+      },
+    },
+    fpsLimit: 60, // Reduced from 120
+    particles: {
+      color: {
+        value: "#5a3da5", 
+      },
+      links: {
+        color: "#8a6ad6", 
+        distance: 150,
+        enable: true,
+        opacity: 0.4,
+        width: 1.2, 
+      },
+      move: {
+        direction: "none" as const,
+        enable: true,
+        outModes: {
+          default: "bounce" as const,
+        },
+        random: false,
+        speed: 0.5,
+        straight: false,
+      },
+      number: {
+        density: {
+          enable: true,
+          area: 800,
+        },
+        value: 60, 
+      },
+      opacity: {
+        value: 0.6,
+        anim: {
+          enable: true,
+          speed: 0.3, 
+          opacity_min: 0.15,
+          sync: false
+        }
+      },
+      shape: {
+        type: "circle",
+      },
+      size: {
+        value: { min: 2, max: 5 }, // Reduced from 4.5
+      },
+    },
+    interactivity: {
+      modes: {
+        repulse: {
+          distance: 100, // Reduced from 120
+          duration: 0.4,
+        },
+      },
+    },
+    detectRetina: true,
+  };
+
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -101,73 +180,6 @@ export default function AnandPage() {
     }
   };
 
-  const particlesOptions = {
-    background: {
-      color: {
-        value: "transparent",
-      },
-    },
-    fpsLimit: 120,
-    particles: {
-      color: {
-        value: "#5a3da5", 
-      },
-      links: {
-        color: "#8a6ad6", 
-        distance: 150,
-        enable: true,
-        opacity: 0.3,
-        width: 1.2, 
-      },
-      move: {
-        direction: "none" as const,
-        enable: true,
-        outModes: {
-          default: "bounce" as const,
-        },
-        random: false,
-        speed: 0.7, 
-        straight: false,
-      },
-      number: {
-        density: {
-          enable: true,
-          area: 800,
-        },
-        value: 70,
-      },
-      opacity: {
-        value: 0.35,
-        anim: {
-          enable: true,
-          speed: 0.4,
-          opacity_min: 0.15,
-          sync: false
-        }
-      },
-      shape: {
-        type: "circle",
-      },
-      size: {
-        value: { min: 1, max: 4.5 },
-      },
-    },
-    interactivity: {
-      events: {
-        onHover: {
-          enable: true,
-          mode: "repulse" as const,
-        },
-      },
-      modes: {
-        repulse: {
-          distance: 120,
-          duration: 0.5,
-        },
-      },
-    },
-    detectRetina: true,
-  };
 
   const listItemVariants = {
     hidden: { opacity: 0, x: 30 },
@@ -196,8 +208,6 @@ export default function AnandPage() {
       }
     }
   };
-
-  
   
   const charAnimation = {
     hidden: { opacity: 0, y: 20 },
@@ -310,7 +320,10 @@ export default function AnandPage() {
                   width={350}
                   height={470}
                   className={styles.profileImage}
-                  priority
+                  priority={true}
+                  sizes="(max-width: 768px) 280px, (max-width: 1024px) 340px, 350px"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAEtgJJi+SQHQAAAABJRU5ErkJggg=="
                 />
                 <div className={styles.imageOverlay}></div>
               </div>

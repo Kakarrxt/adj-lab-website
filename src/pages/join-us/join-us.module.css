@@ -1,56 +1,66 @@
 /* Components/JoinUs/join-us.module.css */
 .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    color: #333;
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-  }
-  
-  .sectionTop {
-    position: relative;
-    height: 100px; 
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; 
-    z-index: 0; 
-  }
-  
-  /* Add a container for animation to control its size */
-  .sectionTop > div {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  color: #333;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
 
-  .main {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-  }
-  
-  .header {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-  .header h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: #4a0072;
-    display: inline-block;
-  }
+.sectionTop {
+  position: relative;
+  height: 100px; 
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; 
+  z-index: 0;
+  /* Adding aspect ratio to prevent CLS */
+  aspect-ratio: 10 / 1;
+}
+
+/* Add a container for animation to control its size */
+.sectionTop > div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1rem;
+  /* Set explicit height to reduce CLS */
+  min-height: 60px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #4a0072;
+  display: inline-block;
+  /* Improve text rendering */
+  text-rendering: optimizeLegibility;
+}
+
 .animatedChar {
   display: inline-block;
   color: #4a0072;
+  /* Use hardware acceleration for animations */
+  transform: translateZ(0);
+  will-change: transform, color;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -58,498 +68,590 @@
   color: #6b46c1;
   transform: translateY(-2px);
 }
-  
-  .underline {
-    height: 3px;
-    width: 80px;
-    background: #6b46c1;
-    margin: 0 auto;
-  }
-  
-  /* Career info section */
-  .careerInfo {
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-    margin: 2rem 0;
-  }
-  
-  .careerCard {
-    flex: 1;
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-  }
-  
-  .careerCard::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 5px;
-    height: 100%;
-    background: #6b46c160;
-    z-index: -1;
-    transition: width 0.7s ease;
-  }
-  
-  .careerCard:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
-  }
-  
-  .careerCard:hover::before {
-    width: 100%;
-    opacity: 0.05;
-  }
-  
-  .iconWrapper {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: rgba(107, 70, 193, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
-    transition: transform 0.3s ease, background 0.3s ease;
-  }
-  
-  .careerCard:hover .iconWrapper {
-    transform: scale(1.1);
-    background: rgba(107, 70, 193, 0.15);
-  }
-  
-  .icon {
-    font-size: 1.8rem;
-    color: #6b46c1;
-  }
-  
-  .careerCard h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #333;
-  }
-  
-  .careerCard p {
-    color: #555;
-    line-height: 1.6;
-    margin: 0.25rem 0;
-    font-size: 0.95rem;
-  }
 
-  .colorHighlight {
-    color: #6b46c1;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-  
-  .colorHighlight:hover {
-    color: #9333ea;
-  }
+.underline {
+  height: 3px;
+  width: 80px;
+  background: #6b46c1;
+  margin: 0 auto;
+}
 
-  
-  .underlineAnimation {
-    background: linear-gradient(90deg, #6b46c1, #c026d3);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 2px;
-  }
-  
-  .underlineAnimation::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(90deg, #6b46c1, #c026d3); /* Changed color */
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.3s ease-out;
-  }
-  
-  .underlineAnimation:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
+/* Career info section */
+.careerInfo {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 2rem 0;
+}
 
-  /* Message box */
-  .messageBox {
-    background: rgba(107, 70, 193, 0.1);
-    border-radius: 10px;
-    padding: 2rem 3rem;
-    margin: 1rem 0;
-    text-align: center;
-    border-left: 4px solid #6b46c1;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+.careerCard {
+  flex: 1;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Reduced shadow for performance */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  /* Pre-define space to reduce CLS */
+  min-height: 200px;
+}
+
+.careerCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: #6b46c160;
+  z-index: -1;
+  transition: width 0.7s ease;
+}
+
+.careerCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+}
+
+.careerCard:hover::before {
+  width: 100%;
+  opacity: 0.05;
+}
+
+.iconWrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(107, 70, 193, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  will-change: transform, background; /* Optimize animations */
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.careerCard:hover .iconWrapper {
+  transform: scale(1.1);
+  background: rgba(107, 70, 193, 0.15);
+}
+
+.icon {
+  font-size: 1.8rem;
+  color: #6b46c1;
+}
+
+.careerCard h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.careerCard p {
+  color: #555;
+  line-height: 1.6;
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.colorHighlight {
+  color: #6b46c1;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.colorHighlight:hover {
+  color: #9333ea;
+}
+
+.underlineAnimation {
+  background: linear-gradient(90deg, #6b46c1, #c026d3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+
+.underlineAnimation::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, #6b46c1, #c026d3);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  will-change: transform; /* Optimize animation */
+  transition: transform 0.3s ease-out;
+}
+
+.underlineAnimation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Message box */
+.messageBox {
+  background: rgba(107, 70, 193, 0.1);
+  border-radius: 10px;
+  padding: 2rem 3rem;
+  margin: 1rem 0;
+  text-align: center;
+  border-left: 4px solid #6b46c1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Reduced shadow for performance */
+  /* Pre-define space to reduce CLS */
+  min-height: 150px;
+}
+
+.messageBox h2 {
+  font-size: 1.7rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.messageBox p {
+  color: #555;
+  line-height: 1.7;
+  font-size: 1.1rem;
+}
+
+.highlight {
+  color: #6b46c1;
+  font-weight: 700;
+}
+
+/* Content section with positions and lab images */
+.contentSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin: 2rem 0;
+  z-index: 1;
+}
+
+.contentSection h2 {
+  font-size: 1.6rem;
+  color: #333;
+  margin-bottom: 1.2rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.contentSection h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 50px;
+  background: #6b46c1;
+}
+
+.positionsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.positionCard {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Reduced shadow for performance */
+  overflow: hidden;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 4px solid #6b46c1;
+}
+
+.positionCard h3 {
+  background: rgba(107, 70, 193, 0.05);
+  padding: 1.2rem 1.5rem;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 1px solid rgba(107, 70, 193, 0.1);
+}
+
+.positionDetails {
+  padding: 1.8rem;
+}
+
+.positionDetails p {
+  margin-bottom: 1.5rem;
+  color: #555;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+.applyButton {
+  display: inline-block;
+  background: #6b46c1;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  will-change: transform, background; /* Optimize animations */
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.applyButton:hover {
+  background: #5835a9;
+  transform: translateY(-2px);
+}
+
+.labImageSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.featureImage {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Reduced shadow for performance */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.featureImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  overflow: hidden;
+  /* Set aspect ratio to prevent CLS */
+  aspect-ratio: 16 / 9;
+}
+
+.featureImage:hover {
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+}
+
+.imageCaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 0.8rem 1.2rem;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+  z-index: 2;
+}
+
+.featureImage:hover .imageCaption {
+  background: rgba(107, 70, 193, 0.8);
+}
+
+/* Apply section */
+.applySection {
+  background: white;
+  border-radius: 10px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Reduced shadow for performance */
+  margin: 1rem 0;
+  z-index: 1;
+}
+
+.applySection h2 {
+  font-size: 1.6rem;
+  color: #333;
+  margin-bottom: 1.8rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.applySection h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 50px;
+  background: #6b46c1;
+}
+
+.applyContent {
+  line-height: 1.7;
+  padding: 0 1rem;
+}
+
+.applyContent p {
+  margin-bottom: 1.2rem;
+  color: #555;
+  font-size: 1.05rem;
+}
+
+.importantNote {
+  background: rgba(107, 70, 193, 0.08);
+  border-left: 3px solid #6b46c1;
+  padding: 1.2rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.importantNote p {
+  margin: 0;
+  color: #333;
+}
+
+.highlightText {
+  font-weight: 600;
+  color: #6b46c1;
+  font-size: 1.2rem;
+  border-left: 3px solid #6b46c1;
+  padding-left: 1.2rem;
+  margin-top: 2rem;
+  line-height: 1.6;
+}
+
+/* Skills section */
+.skillsSection {
+  background: white;
+  border-radius: 10px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Reduced shadow for performance */
+  margin: 1rem 0 3rem;
+  z-index: 1;
+}
+
+.skillsSection h2 {
+  font-size: 1.6rem;
+  color: #333;
+  margin-bottom: 1.8rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.skillsSection h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 50px;
+  background: #6b46c1;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.skillCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 1.8rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Reduced shadow for performance */
+  transition: all 0.3s ease;
+  text-align: center;
+  border: 1px solid rgba(107, 70, 193, 0.1);
+  height: 140px;
+}
+
+.skillIcon {
+  font-size: 2.2rem;
+  color: #6b46c1;
+  margin-bottom: 1rem;
+}
+
+.skillCard span {
+  font-weight: 500;
+  color: #333;
+  font-size: 1.05rem;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.7; /* Reduced slightly for performance */
+  pointer-events: none;
+  /* Add property to optimize rendering */
+  will-change: transform;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .header h1 {
+    font-size: 2.2rem;
   }
   
-  .messageBox h2 {
-    font-size: 1.7rem;
-    color: #333;
-    margin-bottom: 1rem;
-  }
-  
-  .messageBox p {
-    color: #555;
-    line-height: 1.7;
-    font-size: 1.1rem;
-  }
-  
-  .highlight {
-    color: #6b46c1;
-    font-weight: 700;
-  }
-  
-  /* Content section with positions and lab images */
   .contentSection {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    margin: 2rem 0;
-    z-index: 1;
-  }
-  
-  .contentSection h2 {
-    font-size: 1.6rem;
-    color: #333;
-    margin-bottom: 1.2rem;
-    position: relative;
-    padding-bottom: 0.5rem;
-  }
-  
-  .contentSection h2::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    width: 50px;
-    background: #6b46c1;
-  }
-  
-  .positionsContainer {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .positionCard {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    margin-bottom: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 4px solid #6b46c1;
-  }
-  
-  .positionCard h3 {
-    background: rgba(107, 70, 193, 0.05);
-    padding: 1.2rem 1.5rem;
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #333;
-    border-bottom: 1px solid rgba(107, 70, 193, 0.1);
-  }
-  
-  .positionDetails {
-    padding: 1.8rem;
-  }
-  
-  .positionDetails p {
-    margin-bottom: 1.5rem;
-    color: #555;
-    line-height: 1.6;
-    font-size: 1.05rem;
-  }
-  
-  .applyButton {
-    display: inline-block;
-    background: #6b46c1;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.3s ease, transform 0.3s ease;
-  }
-  
-  .applyButton:hover {
-    background: #5835a9;
-    transform: translateY(-2px);
-  }
-  
-  .labImageSection {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .featureImage {
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
-  }
-  
-  .featureImageWrapper {
-    position: relative;
-    width: 100%;
-    height: 340px;
-    overflow: hidden;
-  }
-  
-  .featureImage:hover {
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
-  }
-  
-  .imageCaption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 0.8rem 1.2rem;
-    font-weight: 500;
-    font-size: 1rem;
-    transition: background 0.3s ease;
-    z-index: 2;
-  }
-  
-  .featureImage:hover .imageCaption {
-    background: rgba(107, 70, 193, 0.8);
-  }
-  
-  /* Apply section */
-  .applySection {
-    background: white;
-    border-radius: 10px;
-    padding: 2.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    margin: 1rem 0;
-    z-index: 1;
-  }
-  
-  .applySection h2 {
-    font-size: 1.6rem;
-    color: #333;
-    margin-bottom: 1.8rem;
-    position: relative;
-    padding-bottom: 0.5rem;
-  }
-  
-  .applySection h2::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    width: 50px;
-    background: #6b46c1;
-  }
-  
-  .applyContent {
-    line-height: 1.7;
-    padding: 0 1rem;
-  }
-  
-  .applyContent p {
-    margin-bottom: 1.2rem;
-    color: #555;
-    font-size: 1.05rem;
-  }
-  
-  .importantNote {
-    background: rgba(107, 70, 193, 0.08);
-    border-left: 3px solid #6b46c1;
-    padding: 1.2rem 1.5rem;
-    margin: 1.5rem 0;
-    border-radius: 0 8px 8px 0;
-  }
-  
-  .importantNote p {
-    margin: 0;
-    color: #333;
-  }
-  
-  .highlightText {
-    font-weight: 600;
-    color: #6b46c1;
-    font-size: 1.2rem;
-    border-left: 3px solid #6b46c1;
-    padding-left: 1.2rem;
-    margin-top: 2rem;
-    line-height: 1.6;
-  }
-  
-  /* Skills section */
-  .skillsSection {
-    background: white;
-    border-radius: 10px;
-    padding: 2.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    margin: 1rem 0 3rem;
-    z-index: 1;
-  }
-  
-  .skillsSection h2 {
-    font-size: 1.6rem;
-    color: #333;
-    margin-bottom: 1.8rem;
-    position: relative;
-    padding-bottom: 0.5rem;
-  }
-  
-  .skillsSection h2::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    width: 50px;
-    background: #6b46c1;
+    gap: 2rem;
   }
   
   .skillsGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+
+  .sectionTop {
+    height: 80px; /* Reduced height for mobile */
+  }
+  
+  .careerInfo {
+    flex-direction: column;
+  }
+  
+  .contentSection {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .featureImageWrapper {
+    height: 280px;
+  }
+  
+  .positionDetails {
+    padding: 1.5rem;
+  }
+
+  .applySection {
+    max-height: 75%;
+    padding: 2rem 1.5rem; /* Reduced padding */
+  }
+  
+  .applyContent {
+    padding: 0;
+  }
+  
+  .messageBox {
+    padding: 1.5rem 1.2rem; /* Reduced padding */
+    height: 75%;
+  }
+  
+  /* Reduce font sizes for mobile */
+  .messageBox p {
+    font-size: 0.95rem;
+  }
+  
+  .positionDetails p {
+    font-size: 0.95rem;
+  }
+  
+  .applyContent p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .header h1 {
+    font-size: 1.7rem; /* Slightly smaller than before */
+  }
+  
+  .contentSection h2,
+  .applySection h2,
+  .skillsSection h2 {
+    font-size: 1.3rem; /* Smaller than before */
+  }
+  
+  .messageBox h2 {
+    font-size: 1.3rem; /* Smaller than before */
+  }
+  
+  .featureImageWrapper {
+    height: 200px; /* Smaller for mobile */
+  }
+  
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr); /* Two columns for tiny screens */
+    gap: 1rem;
+  }
+  
+  .messageBox p {
+    font-size: 0.9rem; /* Smaller than before */
+  }
+  
+  .highlightText {
+    font-size: 1rem; /* Smaller than before */
+  }
+  
+  .careerCard {
+    padding: 1.5rem; /* Reduced padding */
+  }
+  
+  .careerCard h3 {
+    font-size: 1.2rem; /* Smaller than before */
+  }
+  
+  .careerCard p {
+    font-size: 0.85rem; /* Smaller than before */
   }
   
   .skillCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    padding: 1.8rem 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-    text-align: center;
-    border: 1px solid rgba(107, 70, 193, 0.1);
-    height: 140px;
-  }
-  
-  .skillIcon {
-    font-size: 2.2rem;
-    color: #6b46c1;
-    margin-bottom: 1rem;
+    height: 120px; /* Smaller height */
+    padding: 1.5rem 0.8rem; /* Reduced padding */
   }
   
   .skillCard span {
-    font-weight: 500;
-    color: #333;
-    font-size: 1.05rem;
+    font-size: 0.9rem; /* Smaller than before */
   }
+  
+  .skillIcon {
+    font-size: 1.8rem; /* Smaller than before */
+    margin-bottom: 0.8rem; /* Reduced margin */
+  }
+  
+  .iconWrapper {
+    width: 50px; /* Smaller */
+    height: 50px; /* Smaller */
+  }
+  
+  .applyButton {
+    padding: 0.7rem 1.3rem; /* Smaller button */
+    font-size: 0.9rem; /* Smaller text */
+  }
+}
 
-  .particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    opacity: 0.8; /* Increased from 0.7 to 0.8 for slightly darker particles */
-    pointer-events: none;
+/* Add specific breakpoint for small phones */
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.5rem;
   }
   
-  /* Responsive styles */
-  @media (max-width: 992px) {
-    .header h1 {
-      font-size: 2.2rem;
-    }
-    
-    .contentSection {
-      gap: 2rem;
-    }
-    
-    .skillsGrid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
   
-  @media (max-width: 768px) {
-    .container {
-      padding: 1.5rem 1rem;
-    }
-  
-    .sectionTop {
-      height: 100px;
-    }
-    
-    .careerInfo {
-      flex-direction: column;
-    }
-    
-    .contentSection {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-    
-    .featureImageWrapper {
-      height: 280px;
-    }
-    
-    .positionDetails {
-      padding: 1.5rem;
-    }
-
-    .applySection{
-      max-height: 75%;
-    }
-    
-    .applyContent {
-      padding: 0;
-    }
-    
-    .messageBox {
-      padding: 1.8rem 1.5rem;
-      height:75%;
-    }
+  .featureImageWrapper {
+    height: 180px;
   }
   
-  @media (max-width: 640px) {
-    .header h1 {
-      font-size: 1.8rem;
-    }
-    
-    .contentSection h2,
-    .applySection h2,
-    .skillsSection h2, 
-    .messageBox h2 {
-      font-size: 1.4rem;
-    }
-    
-    .featureImageWrapper {
-      height: 220px;
-    }
-    
-    .skillsGrid {
-      grid-template-columns: 1fr;
-      gap: 1.2rem;
-    }
-    
-    .messageBox p {
-      font-size: 1rem;
-    }
-    
-    .highlightText {
-      font-size: 1.1rem;
-    }
+  /* Make content more compact */
+  .careerCard {
+    padding: 1.2rem;
+    min-height: 180px;
   }
+  
+  .positionDetails {
+    padding: 1.2rem;
+  }
+  
+  .messageBox {
+    padding: 1.2rem 1rem;
+  }
+}

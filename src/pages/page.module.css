@@ -7,6 +7,7 @@
   font-family: 'Inter', sans-serif;
 }
 
+/* HERO SECTION - CLS FIX: Define explicit dimensions and prevent content shifting */
 .heroSection {
   position: relative;
   width: 100%;
@@ -17,6 +18,7 @@
   overflow: hidden;
   background-color: black;
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  min-height: 500px;
 }
 
 .backgroundImage {
@@ -26,6 +28,7 @@
   width: 100%;
   height: 100%;
   opacity: 0.3;
+  object-fit: cover; 
 }
 
 .heroContentBackground {
@@ -35,64 +38,44 @@
   transform: translate(-50%, -50%);
   width: 100%;
   max-width: 800px;
-  height: auto;
-  aspect-ratio: 3 / 1.5;
+  min-height: 300px;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(8px);
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.12);
   z-index: 5;
-  transition: all 0.5s ease-out;
   opacity: 1;
-  padding: 1rem; 
+  padding: 1rem;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
 
 .heroContentBackground.expanded {
-  animation: expandBackground 5s forwards ease-in-out;
+  animation: expandBackgroundLarge 5s forwards ease-in-out;
 }
 
-@keyframes expandBackground {
+@keyframes expandBackgroundLarge {
   0% {
-    max-width: 800px;
-    height: auto;
-    aspect-ratio: 3 / 1.5;
+    transform: translate(-50%, -50%) scale(1);
     border-radius: 16px;
     opacity: 1;
   }
-  25% {
-    max-width: 45%;
-    height: auto;
-    border-radius: 8px;
-    opacity: 1;
-  }
-  50% {
-    max-width: 60%;
-    height: 45%;
-    border-radius: 8px;
-    opacity: 0.95;
-  }
   100% {
-    max-width: 120%;
-    width: 120%;
-    height: 120%;
+    transform: translate(-50%, -50%) scale(1.5);
     border-radius: 0;
     opacity: 0.85;
   }
 }
 
-
-
-/* Update heroContent to be transparent and have higher z-index */
 .heroContent {
   position: relative;
-  z-index: 20; /* Higher than background to ensure text stays on top */
+  z-index: 20;
   text-align: center;
   max-width: 800px;
   padding: 2.5rem 3rem;
-  background-color: transparent; /* Remove background as it's now handled by heroContentBackground */
-  box-shadow: none; /* Remove shadow */
-  border: none; /* Remove border */
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
 }
 
 .heroContent h1 {
@@ -100,7 +83,7 @@
   margin-bottom: 0.8rem;
   font-weight: 700;
   letter-spacing: -0.05rem;
-  text-shadow: 0 0 15px rgba(106, 13, 173, 0.6); /* Purple glow */
+  text-shadow: 0 0 15px rgba(106, 13, 173, 0.6);
   color: white;
   font-family: 'Inter', sans-serif;
   background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
@@ -108,7 +91,6 @@
   -webkit-background-clip: text;
   color: transparent;
 }
-
 
 .underline {
   height: 3px;
@@ -126,8 +108,6 @@
   color: #f0f0f0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
-
-
 
 .researchSection,
 .publicationsSection {
@@ -165,6 +145,9 @@
   font-size: 1rem;
   font-weight: 500;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  /* Improve touch target size for mobile */
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .filterButton:hover,
@@ -186,11 +169,11 @@
   background-color: white;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  min-height: 400px;
 }
 
 .researchCard:hover {
@@ -202,6 +185,13 @@
   position: relative;
   width: 100%;
   height: 260px;
+  overflow: hidden; 
+}
+
+.cardImageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .cardContent {
@@ -251,6 +241,7 @@
   position: relative;
   border: 1px solid rgba(107, 70, 193, 0.12);
   background-image: linear-gradient(to right, #ffffff, #f8f8f8);
+  min-height: 150px;
 }
 
 .publicationCard:nth-child(even) {
@@ -306,16 +297,16 @@
 }
 
 .publicationJournal::before {
-    content: "\2013";
-    margin-right: 0.4em;
-    color: #ccc;
+  content: "\2013";
+  margin-right: 0.4em;
+  color: #ccc;
 }
 
 .publicationYear {
-    color: #6b46c1;
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-top: 0;
+  color: #6b46c1;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0;
 }
 
 .publicationDoi {
@@ -372,6 +363,11 @@
   z-index: 10;
   opacity: 0.8;
   transition: opacity 0.2s ease;
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .closeButton:hover {
@@ -400,6 +396,12 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.modalImageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .modalDescription {
@@ -487,20 +489,21 @@
   white-space: pre-wrap;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .heroContent h1 {
-    font-size: 3rem;
-    margin-bottom: 0.8rem;
+    font-size: 2.5rem; 
+    margin-bottom: 0.6rem;
   }
 
   .heroContent p {
-    font-size: 1.3rem;
+    font-size: 1.1rem; 
+    letter-spacing: 0.05rem; 
   }
 
   .heroContentBackground {
     max-width: 90%;
     width: 90%;
-    aspect-ratio: 2 / 1.5;
+    min-height: 200px; 
     padding: 0.75rem;
   }
   
@@ -508,32 +511,19 @@
     padding: 1.5rem 1.25rem;
   }
   
-  @keyframes expandBackground {
+  /* Apply medium-sized screen animation */
+  .heroContentBackground.expanded {
+    animation: expandBackgroundMedium 5s forwards ease-in-out;
+  }
+  
+  @keyframes expandBackgroundMedium {
     0% {
-      max-width: 90%;
-      width: 90%;
-      aspect-ratio: 2 / 1.5;
+      transform: translate(-50%, -50%) scale(1);
       border-radius: 12px;
       opacity: 1;
     }
-    25% {
-      max-width: 85%;
-      width: 85%;
-      height: auto;
-      border-radius: 8px;
-      opacity: 1;
-    }
-    50% {
-      max-width: 95%;
-      width: 95%;
-      height: 50%;
-      border-radius: 6px;
-      opacity: 0.95;
-    }
     100% {
-      max-width: 100%;
-      width: 100%;
-      height: 100%;
+      transform: translate(-50%, -50%) scale(1.3);
       border-radius: 0;
       opacity: 0.85;
     }
@@ -541,20 +531,34 @@
 
   .researchSection h2,
   .publicationsSection h2 {
-    font-size: 2.2rem;
-    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
   }
 
   .filterContainer {
-    margin-bottom: 2rem;
-    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; 
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+  }
+  
+  .filterContainer::-webkit-scrollbar {
+    display: none; 
   }
 
   .filterButton {
     padding: 0.5rem 1rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     border-width: 1.5px;
     border-radius: 20px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap; 
   }
 
   .researchGrid {
@@ -563,20 +567,21 @@
   }
 
   .researchCard {
-     box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    min-height: 350px; /* Reduced minimum height for mobile */
   }
 
   .cardImageContainer {
-    height: 200px;
+    height: 180px; /* Smaller images on mobile */
   }
 
   .cardContent {
-    padding: 1.5rem;
+    padding: 1.2rem; /* Reduced padding for mobile */
   }
 
   .cardContent h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.6rem;
+    font-size: 1.1rem; /* Smaller card titles */
+    margin-bottom: 0.5rem;
   }
 
   .tag {
@@ -587,83 +592,70 @@
 
   .publicationsContainer {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.25rem; /* Reduced gap for mobile */
   }
 
   .publicationCard {
     box-shadow: 0 5px 12px rgba(0,0,0,0.07);
     border-radius: 10px;
     border: none;
-    padding: 1.2rem 1rem;
-    background-color: white;
+    min-height: auto; /* Allow cards to size to content */
   }
   
-  .publicationCard:hover {
-    background-color: #f9f9f9;
-    transform: none;
-    box-shadow: 0 5px 12px rgba(0,0,0,0.07);
-  }
-
-  .publicationCard:last-child {
-    border-bottom: none;
-  }
-
-  .publicationYear {
-    display: block;
-    margin-top: 0.2rem;
-    font-size: 0.85rem;
-  }
-
   .publicationContent {
     padding: 1rem;
   }
 
   .publicationTitle {
-    font-size: 1.05rem;
+    font-size: 1rem; /* Smaller publication titles */
     margin-bottom: 0.3rem;
   }
 
   .publicationJournal {
     margin-bottom: 0.3rem;
-    font-size: 0.8rem;
+    font-size: 0.8rem; /* Smaller journal text */
+  }
+
+  .publicationYear {
+    font-size: 0.85rem; /* Smaller year text */
   }
 
   .publicationDoi {
     margin-top: 0.2rem;
-    font-size: 0.8rem;
+    font-size: 0.8rem; /* Smaller DOI text */
     border-bottom-width: 1px;
   }
 
   .modalContent {
-    padding: 1.5rem;
-    width: 98%;
+    padding: 1.25rem; /* Reduced padding for modals */
+    width: 95%;
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.15);
   }
 
   .modalImageContainer {
-    height: 180px;
+    height: 170px; /* Smaller modal images */
     margin-bottom: 1rem;
-    border-radius: 10px;
+    border-radius: 8px;
   }
 
   .modalHeader h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.7rem;
+    font-size: 1.4rem; /* Smaller modal titles */
+    margin-bottom: 0.5rem;
   }
 
   .modalDescription {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 0.95rem; /* Smaller description text */
+    line-height: 1.5; /* Tighter line height for mobile */
   }
 
   .publicationModalHeader h2 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin-top: 0.3rem;
   }
 
   .publicationModalBody {
-    gap: 1.2rem;
+    gap: 1rem;
   }
 
   .publicationModalSection h3 {
@@ -672,29 +664,103 @@
   }
 
   .publicationModalSection p {
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-size: 0.9rem; /* Smaller paragraph text in modals */
+    line-height: 1.4; /* Tighter line height for mobile */
   }
 
   .publicationAbstract {
     padding: 0.8rem;
     border-radius: 6px;
     border-left-width: 2.5px;
+    font-size: 0.85rem; /* Smaller abstract text */
   }
 
+  /* Improved mobile navigation for filters */
   .filterContainer {
-    flex-direction: row;
-    overflow-x: auto;
-    padding-bottom: 1rem;
     justify-content: flex-start;
-  }
-
-  .filterButton {
-    flex-shrink: 0;
+    padding-bottom: 0.5rem;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    padding-left: 0.5rem;
   }
 }
 
-@media screen and (min-width: 769px) and (max-width: 1024px) {
+@media (max-width: 480px) {
+  .heroContentBackground {
+    max-width: 95%;
+    width: 95%;
+    min-height: 180px;
+  }
+  
+  .heroContent {
+    padding: 1rem 0.75rem;
+  }
+  
+  /* Apply small-sized screen animation */
+  .heroContentBackground.expanded {
+    animation: expandBackgroundSmall 5s forwards ease-in-out;
+  }
+  
+  @keyframes expandBackgroundSmall {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      border-radius: 10px;
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      border-radius: 0;
+      opacity: 0.85;
+    }
+  }
+
+  .heroContent h1 {
+    font-size: 1.75rem; 
+    margin-bottom: 0.4rem;
+  }
+
+  .heroContent p {
+    font-size: 0.85rem;
+    letter-spacing: 0.03rem;
+  }
+
+  .underline {
+    height: 2px; /* Thinner underline */
+    margin-bottom: 1rem;
+  }
+
+  .researchSection,
+  .publicationsSection {
+    padding: 2rem 1rem;
+  }
+
+  .researchSection h2,
+  .publicationsSection h2 {
+    font-size: 1.5rem; /* Smaller section headers */
+  }
+
+  .cardImageContainer {
+    height: 160px; /* Smaller card images */
+  }
+
+  .modalContent {
+    padding: 1rem 0.75rem; /* Smaller padding */
+  }
+
+  .publicationModalHeader h2 {
+    font-size: 1.1rem;
+  }
+  
+  /* Native-like mobile touch feedback */
+  .researchCard:active,
+  .publicationCard:active,
+  .filterButton:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
   .heroContent h1 {
     font-size: 3rem;
   }
@@ -708,7 +774,7 @@
   }
 }
 
-@media screen and (min-width: 1600px) {
+@media (min-width: 1600px) {
   .researchGrid,
   .publicationsContainer {
     max-width: 1400px;
@@ -727,16 +793,27 @@
   }
 }
 
+/* Reduced motion preference support */
 @media (prefers-reduced-motion: reduce) {
   .researchCard,
   .publicationCard,
   .modalContent,
-  .backgroundImage {
+  .backgroundImage,
+  .heroContentBackground,
+  .heroContentBackground.expanded {
     transition: none !important;
+    animation: none !important;
+    transform: none !important;
   }
 
   .publicationTitle:after {
     transition: none !important;
+  }
+  
+  /* Alternative for animations: instant state changes */
+  .heroContentBackground.expanded {
+    opacity: 0.85;
+    border-radius: 0;
   }
 }
 
@@ -793,95 +870,6 @@
   }
 }
 
-@media screen and (max-width: 480px) {
-  
-  .heroContentBackground {
-    max-width: 95%;
-    width: 95%;
-    aspect-ratio: 1.8 / 1.8;
-  }
-  
-  .heroContent {
-    padding: 1rem 0.75rem;
-  }
-  
-  @keyframes expandBackground {
-    0% {
-      max-width: 95%;
-      width: 95%;
-      aspect-ratio: 1.8 / 1.8;
-      border-radius: 10px;
-      opacity: 1;
-    }
-    50% {
-      max-width: 98%;
-      width: 98%;
-      height: 60%;
-      border-radius: 4px;
-      opacity: 0.95;
-    }
-    100% {
-      max-width: 100%;
-      width: 100%;
-      height: 100%;
-      border-radius: 0;
-      opacity: 0.85;
-    }
-  }
-
-  .heroContent h1 {
-    font-size: 2rem;
-  }
-
-  .heroContent p {
-    font-size: 1rem;
-  }
-
-  .researchSection,
-  .publicationsSection {
-    padding: 2rem 1rem;
-  }
-
-  .researchSection h2,
-  .publicationsSection h2 {
-    font-size: 1.8rem;
-  }
-
-  .cardImageContainer {
-    height: 180px;
-  }
-
-  .publicationYear {
-    min-width: 50px;
-    min-height: 50px;
-    font-size: 1rem;
-  }
-
-  .publicationContent {
-    padding: 1rem;
-  }
-
-  .publicationTitle {
-    font-size: 1rem;
-  }
-
-  .modalContent {
-    padding: 1rem;
-  }
-
-  .publicationModalHeader h2 {
-    font-size: 1.2rem;
-  }
-}
-
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .cardImageContainer img,
-  .backgroundImage img,
-  .modalImageContainer img {
-    image-rendering: -webkit-optimize-contrast;
-  }
-}
-
 .researchCard:focus,
 .publicationCard:focus,
 .filterButton:focus,
@@ -903,6 +891,8 @@
   justify-content: center;
   align-items: center;
   min-height: 200px;
+  width: 100%;
+  height: 200px;
 }
 
 .loadingSpinner {
@@ -919,17 +909,15 @@
 }
 
 .fadeInUp {
-  animation: fadeInUp 0.6s ease forwards;
+  animation: fadeInFixed 0.6s ease forwards;
 }
 
-@keyframes fadeInUp {
+@keyframes fadeInFixed {
   from {
     opacity: 0;
-    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -941,6 +929,12 @@
   animation: fadeIn 0.5s ease forwards;
 }
 
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* RTL support */
 [dir="rtl"] .publicationYear {
   border-radius: 0 0 0 15px;
 }

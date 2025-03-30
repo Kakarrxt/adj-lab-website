@@ -49,6 +49,7 @@
   z-index: 0;
   opacity: 0.8; 
   pointer-events: none;
+  will-change: transform; /* Optimize for animations */
 }
 
 .main {
@@ -81,7 +82,7 @@
   margin: 0 auto;
 }
 
-/* Hero section with image */
+/* Hero section with image - Reserve space to prevent CLS */
 .heroSection {
   display: flex;
   align-items: center;
@@ -89,6 +90,7 @@
   z-index: 1;
   margin: 2rem 0 3rem;
   position: relative;
+  min-height: 400px; /* Add min-height to reserve space */
 }
 
 .heroContent {
@@ -106,6 +108,7 @@
   align-items: center;
   position: relative;
   z-index: 1;
+  aspect-ratio: 5/4; /* Maintain aspect ratio */
 }
 
 .researchImage {
@@ -114,6 +117,7 @@
   max-width: 100%;
   height: auto;
   object-fit: cover;
+  width: 100%; /* Set explicit width */
 }
 
 .intro {
@@ -174,8 +178,9 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
   border-top: 4px solid #6b46c1;
   transition: transform 0.3s ease;
-  z-index: 2; /* Changed from 1 to 2 */
+  z-index: 2;
   position: relative;
+  contain: content; /* Improve performance by isolating content */
 }
 
 .researchSection:hover {
@@ -225,6 +230,7 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
   position: relative;
   z-index: 2;
+  contain: content; /* Improve performance */
 }
 
 .labCulture h2 {
@@ -339,6 +345,7 @@
   
   .heroSection {
     gap: 2rem;
+    min-height: 350px; /* Adjust min-height for smaller screens */
   }
   
   .researchSection {
@@ -352,21 +359,30 @@
   }
 
   .sectionTop {
-    height: 100px;
+    height: 80px; /* Reduced height */
   }
   
   .heroSection {
     flex-direction: column-reverse;
-    gap: 2rem;
+    gap: 1.5rem; /* Reduced gap */
+    min-height: auto; /* Allow flexible height on mobile */
+    margin: 1rem 0 2rem; /* Reduced margin */
   }
   
   .heroContent, .heroImage {
     flex: 1 1 100%;
   }
   
+  .heroImage {
+    min-height: auto; /* Remove min-height to prevent extra space */
+    max-height: 250px; /* Limit maximum height */
+  }
+  
   .researchImage {
     max-width: 100%;
     height: auto;
+    max-height: 250px; /* Limit maximum height */
+    object-fit: contain; /* Ensure the image fits within the container */
   }
   
   .commitments {
@@ -381,6 +397,16 @@
   .labCulture h2 {
     font-size: 1.5rem;
   }
+  
+  /* Reduce spacing between sections */
+  .main {
+    gap: 2rem;
+  }
+  
+  /* Reduce margin on highlight box */
+  .highlightBox {
+    margin-bottom: 1.5rem;
+  }
 }
 
 @media (max-width: 640px) {
@@ -394,6 +420,7 @@
   
   .researchSection {
     padding: 1.2rem;
+    margin-bottom: 2rem; /* Reduced margin */
   }
   
   .researchSection h2,
@@ -409,5 +436,15 @@
   
   .highlightBox p {
     font-size: 1.05rem;
+  }
+  
+  /* Further reduce spacing */
+  .heroSection {
+    gap: 1rem;
+  }
+  
+  /* Ensure no extra space is added by aspect ratio */
+  .heroImage {
+    aspect-ratio: auto;
   }
 }

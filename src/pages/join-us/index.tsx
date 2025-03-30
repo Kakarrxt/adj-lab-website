@@ -23,27 +23,102 @@ export default function JoinUsPage() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      initParticlesEngine(async (engine: Engine) => {
+        await loadSlim(engine);
+      }).then(() => {
+        setInit(true);
+      });
+    }, 1000); 
+
+    setTimeout(() => setIsLoaded(true), 300);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768); 
     };
 
     handleResize(); 
-    window.addEventListener("resize", handleResize);
+
+    let timeoutId: NodeJS.Timeout;
+    const debouncedResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(handleResize, 200);
+    };
+    
+    window.addEventListener("resize", debouncedResize);
     
     return () => {
-      window.removeEventListener("resize", handleResize);
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", debouncedResize);
     };
   }, []);
 
-  useEffect(() => {
-    initParticlesEngine(async (engine: Engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
 
-    setTimeout(() => setIsLoaded(true), 300);
-  }, []);
+  const particlesOptions = {
+    background: {
+      color: {
+        value: "transparent",
+      },
+    },
+    fpsLimit: 60, // Reduced from 120
+    particles: {
+      color: {
+        value: "#5a3da5", 
+      },
+      links: {
+        color: "#8a6ad6", 
+        distance: 150,
+        enable: true,
+        opacity: 0.4,
+        width: 1.2, 
+      },
+      move: {
+        direction: "none" as const,
+        enable: true,
+        outModes: {
+          default: "bounce" as const,
+        },
+        random: false,
+        speed: 0.5,
+        straight: false,
+      },
+      number: {
+        density: {
+          enable: true,
+          area: 800,
+        },
+        value: 60, 
+      },
+      opacity: {
+        value: 0.6,
+        anim: {
+          enable: true,
+          speed: 0.3, 
+          opacity_min: 0.15,
+          sync: false
+        }
+      },
+      shape: {
+        type: "circle",
+      },
+      size: {
+        value: { min: 2, max: 5 }, // Reduced from 4.5
+      },
+    },
+    interactivity: {
+      modes: {
+        repulse: {
+          distance: 100, // Reduced from 120
+          duration: 0.4,
+        },
+      },
+    },
+    detectRetina: true,
+  };
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -80,89 +155,6 @@ export default function JoinUsPage() {
       scale: 1,
       transition: { duration: 0.6, ease: "easeOut" }
     }
-  };
-
-  const particlesOptions = {
-    background: {
-      color: {
-        value: "transparent",
-      },
-    },
-    fpsLimit: 120,
-    particles: {
-      color: {
-        value: "#5a3da5", // Darker purple color for particles
-      },
-      links: {
-        color: "#8a6ad6", // Slightly darker link color
-        distance: 150,
-        enable: true,
-        opacity: 0.3, // Increased opacity from 0.2 to 0.3
-        width: 1.2, // Slightly wider links
-      },
-      move: {
-        direction: "none" as const,
-        enable: true,
-        outModes: {
-          default: "bounce" as const,
-        },
-        random: false,
-        speed: 0.7, // Slightly slower speed for smoother movement
-        straight: false,
-      },
-      number: {
-        density: {
-          enable: true,
-          area: 800,
-        },
-        value: 70, // Reduced from 80 to 70 for less cluttered appearance
-      },
-      opacity: {
-        value: 0.35, // Increased from 0.25 to 0.35 for more visibility
-        anim: {
-          enable: true,
-          speed: 0.4, // Slightly slower animation
-          opacity_min: 0.15, // Higher minimum opacity
-          sync: false
-        }
-      },
-      shape: {
-        type: "circle",
-      },
-      size: {
-        value: { min: 1, max: 4.5 }, // Slightly larger max size
-      },
-    },
-    interactivity: {
-      events: {
-        onHover: {
-          enable: true,
-          mode: "repulse" as const,
-        },
-      },
-      modes: {
-        repulse: {
-          distance: 120, // Increased from 100 to 120
-          duration: 0.5, // Slightly longer duration
-        },
-      },
-    },
-    detectRetina: true,
-  };
-
-  
-
-  const charAnimation = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.8 + i * 0.04,
-        duration: 0.8,
-        ease: [0.2, 0.65, 0.3, 0.9],
-      },
-    }),
   };
 
 
