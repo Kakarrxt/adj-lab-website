@@ -8,7 +8,16 @@ import { AnimatePresence } from "framer-motion";
 import { Suspense, lazy } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import "../styles/styles.css"; 
+import "../pages/anand/Anand.module.css";
+import "../pages/contact/contact.module.css";
+import "../pages/join-us/join-us.module.css";
+import "../pages/lab-events/lab-events.module.css";
+import "../pages/members/members.module.css";
+import "../pages/publications/Publications.module.css";
+import "../pages/research/Research.module.css";
+import "../pages/page.module.css";
+import "../components/Masonry/Masonry.css";
+import "../components/AnimatedTitle/AnimatedTitle.module.css";
 
 export const metadata: Metadata = {
   title: "ADJ Lab",
