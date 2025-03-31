@@ -21,7 +21,7 @@ Experience the interactive website here: [ADJ Lab Website](https://adj-lab-websi
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/4863cc96-fffc-4751-903a-a2392a55df90" alt="Desktop View" width="70%"/>
-  <img src="https://your-mobile-screenshot-url-here.png" alt="Mobile View" width="20%"/>
+  <img src="https://github.com/user-attachments/assets/e3999ca7-ac60-4f4c-9d1e-a5e73ad6340b" alt="Mobile View" width="20%"/>
 </div>
 
 ## ✨ Highlights
@@ -37,8 +37,9 @@ Experience the interactive website here: [ADJ Lab Website](https://adj-lab-websi
 ## 🎬 Features Showcase
 
 <div align="center">
-  <img src="https://your-animation-demo-url-here.gif" alt="Animation Demo" width="45%"/>
-  <img src="https://your-responsive-demo-url-here.gif" alt="Responsive Demo" width="45%"/>
+  <img src="https://github.com/user-attachments/assets/7e016ba1-64a6-49a8-95ce-d61924e1a501" alt="Dr. Anand" width="45%"/>
+  <img src="https://github.com/user-attachments/assets/8b61bb88-71eb-4e40-a031-715517692105" alt="Research Page" width="45%"/>
+  <img src="https://github.com/user-attachments/assets/f45e8177-9189-43df-bdf1-bceec0289f74" alt="Responsive Demo" width="80%"/>
 </div>
 
 ### Interactive Elements
