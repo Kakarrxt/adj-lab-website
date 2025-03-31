@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![ADJ Lab Website](https://github.com/user-attachments/assets/13193327-91c4-4726-9365-ec86fb2eac21)
+![ADJ Lab Website](https://github.com/user-attachments/assets/22ec5ef3-0e13-4d83-bf67-f382fa02ba23)
 
 **Interactive research platform built exclusively for ADJ Lab, Cancer Science Institute of Singapore**
 
@@ -12,7 +12,6 @@
 [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
 
 </div>
-
 
 
 ## 🌐 Live Demo
@@ -39,8 +38,10 @@ Experience the interactive website here: [ADJ Lab Website](https://adj-lab-websi
 <div align="center">
   <img src="https://github.com/user-attachments/assets/7e016ba1-64a6-49a8-95ce-d61924e1a501" alt="Dr. Anand" width="45%"/>
   <img src="https://github.com/user-attachments/assets/8b61bb88-71eb-4e40-a031-715517692105" alt="Research Page" width="45%"/>
-  <img src="https://github.com/user-attachments/assets/f45e8177-9189-43df-bdf1-bceec0289f74" alt="Responsive Demo" width="80%"/>
+  
+  ![Responsive Demo](https://github.com/user-attachments/assets/1ec83c97-79e0-4f80-bc57-70dc6c239194)
 </div>
+
 
 ### Interactive Elements
 
