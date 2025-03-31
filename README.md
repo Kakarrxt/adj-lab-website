@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![ADJ Lab Website](/assests/Screen/20Recording/202025-03-31/20at%204.39.40 PM.gif)
+![ADJ Lab Website](assests/Screen Recording 2025-03-31 at 4.39.40 PM.gif)
 
 **Interactive research platform built exclusively for ADJ Lab, Cancer Science Institute of Singapore**
 
