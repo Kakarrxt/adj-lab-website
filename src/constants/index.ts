@@ -351,3 +351,25 @@ export const alumniMembers = [
       period: "2025",
   }
 ];
+
+
+// Join-us 
+
+export const openPositions = [
+    {
+        heading: "Postdoctoral Research Fellow (Bioinformatics)",
+        body: "We're looking for talented researchers with experience in bioinformatics to join our team.",
+        link: "https://careers.nus.edu.sg/job-invite/27885"
+      },
+      // Example of additional positions you can add:
+      // {
+      //   heading: "Research Assistant (Cancer Biology)",
+      //   body: "Join our team to work on cutting-edge cancer biology research projects.",
+      //   link: "https://example.com/job-link"
+      // },
+      // {
+      //   heading: "PhD Student Fellowship",
+      //   body: "We're seeking motivated PhD candidates to work on translational cancer research.",
+      //   link: "https://example.com/phd-fellowship"
+      // }
+];

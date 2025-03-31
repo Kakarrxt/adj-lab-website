@@ -18,6 +18,7 @@ import "../pages/research/Research.module.css";
 import "../pages/page.module.css";
 import "../components/Masonry/Masonry.css";
 import "../components/AnimatedTitle/AnimatedTitle.module.css";
+import Providers from "@/app/providers/Providers";
 
 export const metadata: Metadata = {
   title: "ADJ Lab",
@@ -57,12 +58,14 @@ export default function App({
       <Navbar />
       <main>
         <Suspense fallback={<LoadingFallback />}>
+        <Providers>
           <AnimatePresence mode="wait">
             <Component
               key={router.pathname}
               {...pageProps}
             />
           </AnimatePresence>
+          </Providers>
         </Suspense>
       </main>
       <Footer />

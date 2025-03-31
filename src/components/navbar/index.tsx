@@ -22,16 +22,14 @@ export default function Navbar() {
   const [isHovered, setIsHovered] = useState(false);
   const pathname = usePathname();
 
-  // Improved responsive check with debounce
   const checkMobile = useCallback(() => {
     setIsMobile(window.innerWidth <= 768);
   }, []);
 
   useEffect(() => {
-    // Initial check
+
     checkMobile();
-    
-    // Debounced resize handler
+
     let timeoutId: NodeJS.Timeout;
     const handleResize = () => {
       clearTimeout(timeoutId);
@@ -46,17 +44,14 @@ export default function Navbar() {
     };
   }, [checkMobile]);
 
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (typeof document !== 'undefined') {
       document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
-      
-      // Add touch handling for mobile
+
       if (isMobileMenuOpen) {
         document.addEventListener('touchmove', preventScroll, { passive: false });
       } else {
@@ -72,7 +67,6 @@ export default function Navbar() {
     };
   }, [isMobileMenuOpen]);
 
-  // Prevent scroll on touch devices when menu is open
   const preventScroll = (e: TouchEvent) => {
     if (isMobileMenuOpen) {
       e.preventDefault();
@@ -89,9 +83,9 @@ export default function Navbar() {
       y: -20,
       transition: {
         when: "afterChildren",
-        staggerChildren: 0.05,
+        staggerChildren: 0.03, 
         staggerDirection: -1,
-        duration: 0.2
+        duration: 0.1 
       }
     },
     visible: {
@@ -99,8 +93,8 @@ export default function Navbar() {
       y: 0,
       transition: {
         when: "beforeChildren",
-        staggerChildren: 0.1,
-        duration: 0.3
+        staggerChildren: 0.05,
+        duration: 0.2 
       }
     }
   };
@@ -115,120 +109,124 @@ export default function Navbar() {
   };
 
   return (
-    <motion.nav
-      className={styles.navbar}
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      transition={{ 
-        duration: 0.5, 
-        type: "spring", 
-        stiffness: 120 
-      }}
-    >
-      <div 
-        className={`${styles.navContent} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}
-        style={{
-          backgroundColor: isHovered 
-            ? 'rgba(255, 255, 255, 0.8)' 
-            : 'rgba(255, 255, 255, 0.5)'
+    <>
+      <motion.nav
+        className={styles.navbar}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        onHoverStart={() => setIsHovered(true)}
+        onHoverEnd={() => setIsHovered(false)}
+        transition={{ 
+          duration: 0.5, 
+          type: "spring", 
+          stiffness: 120 
         }}
       >
-        <motion.div
-          className={styles.logoContainer}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        <div 
+          className={`${styles.navContent} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}
+          style={{
+            backgroundColor: isHovered 
+              ? 'rgba(255, 255, 255, 0.8)' 
+              : 'rgba(255, 255, 255, 0.5)'
+          }}
         >
-          <Link href="/" className={styles.logo}>
-            ADJ
-          </Link>
-        </motion.div>
-
-        {/* Desktop Navigation */}
-        {!isMobile && (
-          <motion.div 
-            className={styles.navItemsContainer}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
+          <motion.div
+            className={styles.logoContainer}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <div className={styles.navItems}>
-              {navItems.map((item) => (
-                <motion.div
-                  key={item.name}
-                  className={`${styles.navItem} ${
-                    pathname === item.href ? styles.active : ""
-                  }`}
-                  onHoverStart={() => setHoveredItem(item.name)}
-                  onHoverEnd={() => setHoveredItem(null)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Link href={item.href}>{item.name}</Link>
-                  {(hoveredItem === item.name || pathname === item.href) && (
-                    <motion.div
-                      className={styles.activeBackground}
-                      layoutId="activeBackground"
-                      initial={false}
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30
-                      }}
-                    />
-                  )}
-                </motion.div>
-              ))}
-            </div>
+            <Link href="/" className={styles.logo}>
+              ADJ
+            </Link>
           </motion.div>
-        )}
 
-        {/* Mobile Menu Button */}
-        {isMobile && (
-          <motion.button 
-            className={styles.mobileMenuButton} 
-            onClick={toggleMobileMenu}
-            aria-label="Toggle menu"
-            whileTap={{ scale: 0.9 }}
-          >
-            <div className={`${styles.hamburgerIcon} ${isMobileMenuOpen ? styles.open : ''}`}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </motion.button>
-        )}
-      </div>
+          {/* Desktop Navigation */}
+          {!isMobile && (
+            <motion.div 
+              className={styles.navItemsContainer}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <div className={styles.navItems}>
+                {navItems.map((item) => (
+                  <motion.div
+                    key={item.name}
+                    className={`${styles.navItem} ${
+                      pathname === item.href ? styles.active : ""
+                    }`}
+                    onHoverStart={() => setHoveredItem(item.name)}
+                    onHoverEnd={() => setHoveredItem(null)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Link href={item.href}>{item.name}</Link>
+                    {(hoveredItem === item.name || pathname === item.href) && (
+                      <motion.div
+                        className={styles.activeBackground}
+                        layoutId="activeBackground"
+                        initial={false}
+                        transition={{
+                          type: "spring",
+                          stiffness: 380,
+                          damping: 30
+                        }}
+                      />
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
 
-      {/* Mobile Menu - Outside navContent for better positioning */}
-      <AnimatePresence>
-        {isMobile && isMobileMenuOpen && (
-          <motion.div 
-            className={styles.mobileMenu}
-            variants={mobileMenuVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-          >
-            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              {navItems.map((item) => (
-                <motion.div
-                  key={item.name}
-                  className={`${styles.mobileNavItem} ${
-                    pathname === item.href ? styles.mobileActiveItem : ""
-                  }`}
-                  variants={mobileItemVariants}
-                >
-                  <Link href={item.href} onClick={toggleMobileMenu}>
-                    {item.name}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+          {/* Mobile Menu Button */}
+          {isMobile && (
+            <motion.button 
+              className={styles.mobileMenuButton} 
+              onClick={toggleMobileMenu}
+              aria-label="Toggle menu"
+              whileTap={{ scale: 0.9 }}
+            >
+              <div className={`${styles.hamburgerIcon} ${isMobileMenuOpen ? styles.open : ''}`}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </motion.button>
+          )}
+        </div>
+      </motion.nav>
+
+      {/* Mobile Menu */}
+      {isMobile && (
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div 
+              className={styles.mobileMenuOverlay}
+              variants={mobileMenuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              <div className={styles.mobileMenuItems}>
+                {navItems.map((item) => (
+                  <motion.div
+                    key={item.name}
+                    className={`${styles.mobileNavItem} ${
+                      pathname === item.href ? styles.mobileActiveItem : ""
+                    }`}
+                    variants={mobileItemVariants}
+                  >
+                    <Link href={item.href} onClick={toggleMobileMenu}>
+                      {item.name}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      )}
+    </>
   );
 }

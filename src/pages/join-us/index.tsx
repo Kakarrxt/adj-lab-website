@@ -11,6 +11,9 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
 import AnimatedTitle from "@/components/AnimatedTitle";
+import {openPositions} from "@/constants"
+
+
 export default function JoinUsPage() {
   const title = "Join Our Team";
 
@@ -274,18 +277,29 @@ export default function JoinUsPage() {
           >
         <motion.div variants={fadeInRight} className={styles.positionsContainer}>
           <h2>Opening Positions</h2>
-          <motion.div 
-            className={styles.positionCard}
-            whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
-          >
-            <h3>Postdoctoral Research Fellow (Bioinformatics)</h3>
-            <div className={styles.positionDetails}>
-          <p>We&apos;re looking for talented researchers with experience in <strong>bioinformatics</strong> to join our team.</p>
-          <a href="https://careers.nus.edu.sg/job-invite/27885" className={styles.applyButton}>
-            View Position
-          </a>
+          
+          {openPositions.map((position, index) => (
+            <motion.div 
+              key={index}
+              className={styles.positionCard}
+              whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+            >
+              <h3>{position.heading}</h3>
+              <div className={styles.positionDetails}>
+                <p>{position.body}</p>
+                <a href={position.link} className={styles.applyButton}>
+                  View Position
+                </a>
+              </div>
+            </motion.div>
+          ))}
+          
+          {/* Show message if no positions are available */}
+          {openPositions.length === 0 && (
+            <div className={styles.noPositions}>
+              <p>There are currently no open positions. Please check back later or contact us directly.</p>
             </div>
-          </motion.div>
+          )}
         </motion.div>
         
         <motion.div variants={fadeInRight} className={styles.labImageSection}>

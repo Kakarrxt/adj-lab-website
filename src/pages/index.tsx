@@ -260,8 +260,7 @@ export default function ResearchPage() {
             Our Research Focus
           </motion.span>
         </motion.h2>
-
-        {/* Research Filters with faster animation */}
+        
         <motion.div 
           ref={filterRef}
           className={styles.filterContainer}
@@ -279,7 +278,7 @@ export default function ResearchPage() {
               transition={{ 
                 duration: 0.4, 
                 ease: [0.33, 1, 0.68, 1],
-                delay: 0.2 + (index * 0.03) // Faster staggered animation
+                delay: 0.2 + (index * 0.03) 
               }}
               whileHover={{ 
                 scale: 1.05, 
