@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![ADJ Lab Website](assests/Screen Recording 2025-03-31 at 4.39.40 PM.gif)
+![ADJ Lab Website](https://github.com/user-attachments/assets/22ec5ef3-0e13-4d83-bf67-f382fa02ba23)
 
 **Interactive research platform built exclusively for ADJ Lab, Cancer Science Institute of Singapore**
 
@@ -21,6 +21,8 @@ Experience the interactive website here: [ADJ Lab Website](https://adj-lab-websi
 <div align="center">
   <img src="https://github.com/user-attachments/assets/4863cc96-fffc-4751-903a-a2392a55df90" alt="Desktop View" width="70%"/>
   <img src="https://github.com/user-attachments/assets/e3999ca7-ac60-4f4c-9d1e-a5e73ad6340b" alt="Mobile View" width="20%"/>
+
+   ![Responsive Demo](https://github.com/user-attachments/assets/1ec83c97-79e0-4f80-bc57-70dc6c239194)
 </div>
 
 ## ✨ Highlights
