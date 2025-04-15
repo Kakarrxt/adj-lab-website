@@ -297,16 +297,13 @@ export default function ResearchPage() {
               </div>
               
               <div className={styles.researchImageContainer}>
-                <Image
-                  src="/media/home/cells.jpg"
-                  alt="Cancer Cells Mapping"
-                  layout="fill"
-                  objectFit="cover"
-                  className={styles.researchImage}
-                />
-                <div className={styles.imageOverlay}>
-                  <span>Spatial Profiling</span>
-                </div>
+              <Image
+                src="/media/home/research.png"
+                alt="Research"
+                fill={true}
+                style={{ objectFit: "cover", objectPosition: "center" }}
+                className={styles.researchImage}
+              />
               </div>
             </div>
             

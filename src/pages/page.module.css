@@ -220,10 +220,13 @@
 .researchImageContainer {
   position: relative;
   width: 45%;
-  height: 320px;
+  height: auto;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(107, 70, 193, 0.15);
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
 }
 
 .researchImage {
