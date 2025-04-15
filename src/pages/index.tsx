@@ -235,7 +235,7 @@ export default function ResearchPage() {
 
       </section>
 
-        {/* Research Topics Section */}
+      {/* Research Topics Section */}
       <section
         ref={researchRef}
         className={styles.researchSection}
@@ -247,7 +247,7 @@ export default function ResearchPage() {
           className={styles.sectionTitle}
         >
           <motion.span
-            initial={{ backgroundSize: "0% 2px" }} // Thin 2px underline
+            initial={{ backgroundSize: "0% 2px" }}
             animate={isResearchInView ? { backgroundSize: "100% 2px" } : {}}
             transition={{ duration: 0.7, ease: [0.33, 1, 0.68, 1], delay: 0.3 }}
             style={{
@@ -262,98 +262,66 @@ export default function ResearchPage() {
         </motion.h2>
         
         <motion.div 
-          ref={filterRef}
-          className={styles.filterContainer}
-          initial={{ opacity: 0, y: 15 }}
-          animate={isResearchInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1], delay: 0.15 }}
-        >
-          {Array.from(new Set(ResearchTopics.flatMap(topic => topic.tags))).map((tag, index) => (
-            <motion.button
-              key={tag}
-              onClick={() => setFilter(filter === tag ? null : tag)}
-              className={`${styles.filterButton} ${filter === tag ? styles.activeFilter : ''}`}
-              initial={{ opacity: 0, y: 10 }}
-              animate={isFilterInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ 
-                duration: 0.4, 
-                ease: [0.33, 1, 0.68, 1],
-                delay: 0.2 + (index * 0.03) 
-              }}
-              whileHover={{ 
-                scale: 1.05, 
-                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-                transition: { duration: 0.15 }
-              }}
-              whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
-            >
-              {tag}
-            </motion.button>
-          ))}
-        </motion.div>
-
-        <motion.div 
-          className={styles.researchGrid}
+          className={styles.researchContentContainer}
           initial={{ opacity: 0 }}
           animate={isResearchInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1], delay: 0.25 }}
         >
-          {filteredResearch.map((topic, index) => (
-            <motion.div
-              key={topic.id}
-              className={styles.researchCard}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isResearchInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ 
-                duration: 0.5, 
-                ease: [0.33, 1, 0.68, 1], 
-                delay: 0.3 + (index * 0.05) // Faster staggered card animations
-              }}
-              whileHover={{ 
-                scale: 1.03, 
-                boxShadow: "0 8px 15px rgba(0,0,0,0.1)",
-                transition: { duration: 0.15, ease: "easeOut" }
-              }}
-              onClick={() => setSelectedResearch(topic)}
-            >
-              <div className={styles.cardImageContainer}>
-                <motion.div
-                  initial={{ scale: 1.05 }}
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ width: '100%', height: '100%', position: 'relative' }}
+          <motion.div 
+            className={styles.researchContent}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isResearchInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1], delay: 0.3 }}
+          >
+            <div className={styles.researchLayout}>
+              <div className={styles.researchText}>
+                <p>Our research aims to chart a detailed <span className={styles.highlight}>"cancer cartography"</span> of aggressive lymphomas by mapping spatial and molecular tumour features to clinical outcomes.</p>
+                
+                <p>By integrating <span className={styles.highlight}>high-resolution profiling tools</span> such as digital spatial profiling and single-cell immunohistochemistry, we uncover intratumoural heterogeneity and immune microenvironment dynamics that drive treatment resistance.</p>
+                
+                <motion.div 
+                  className={styles.keyFinding}
+                  initial={{ opacity: 0, x: -15 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
                 >
-                  <Image
-                    src={topic.image}
-                    alt={topic.title}
-                    layout="fill"
-                    objectFit="cover" />
+                  <div className={styles.keyFindingIcon}>
+                    <span>★</span>
+                  </div>
+                  <div className={styles.keyFindingContent}>
+                    <h3>Key Discovery</h3>
+                    <p>We identified a <span className={styles.highlight}>high-risk M+2+6−</span> subpopulation in diffuse large B-cell lymphoma predictive of chemotherapy failure, enabling precise patient stratification.</p>
+                  </div>
                 </motion.div>
               </div>
-              <motion.div 
-                className={styles.cardContent}
-                whileHover={{ backgroundColor: "rgba(249, 249, 249, 0.95)" }}
-              >
-                <h3>{topic.title}</h3>
-                <p>{topic.description}</p>
-                <div className={styles.cardTags}>
-                  {topic.tags.map(tag => (
-                    <motion.span 
-                      key={tag} 
-                      className={styles.tag}
-                      whileHover={{ 
-                        backgroundColor: "rgba(0,0,0,0.8)", 
-                        color: "#fff",
-                        transition: { duration: 0.15 }
-                      }}
-                    >
-                      {tag}
-                    </motion.span>
-                  ))}
+              
+              <div className={styles.researchImageContainer}>
+                <Image
+                  src="/media/home/cells.jpg"
+                  alt="Cancer Cells Mapping"
+                  layout="fill"
+                  objectFit="cover"
+                  className={styles.researchImage}
+                />
+                <div className={styles.imageOverlay}>
+                  <span>Spatial Profiling</span>
                 </div>
-              </motion.div>
+              </div>
+            </div>
+            
+            <p>Complementing this, we pioneered the use of the <span className={styles.highlight}>QPOP platform</span> to personalise drug combinations, with promising clinical results.</p>
+            
+            <motion.div 
+              className={styles.researchConclusion}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
+            >
+              <p>Our discoveries, spanning from tumour-intrinsic oncogenic co-expression to macrophage-driven immune regulation, collectively advance a framework for <span className={styles.highlightBox}>precision immunotherapy</span>—transforming static tumour classification into dynamic, actionable maps for guiding next-generation treatment strategies.</p>
             </motion.div>
-          ))}
+          </motion.div>
         </motion.div>
       </section>
 

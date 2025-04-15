@@ -17,8 +17,8 @@ import {openPositions} from "@/constants"
 export default function JoinUsPage() {
   const title = "Join Our Team";
 
-  const positionsRef = useRef(null);
-  const careerInfoRef = useRef(null);
+  const positionsRef = useRef<HTMLDivElement>(null);
+  const careerInfoRef = useRef<HTMLDivElement>(null);
   const isPositionsInView = useInView(positionsRef, { once: true });
   const isCareerInfoInView = useInView(careerInfoRef, { once: true });
   const [isLoaded, setIsLoaded] = useState(false);
@@ -247,34 +247,63 @@ export default function JoinUsPage() {
         </motion.section>
 
         <motion.section 
-        className={styles.applySection}
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-        <h2>How to Apply</h2>
-        <div className={styles.applyContent}>
-          <p>
-            To apply, please send your CV to <strong>Sam Tipgomut</strong> (<a href="mailto:c.tip@nus.edu.sg" className={styles.underlineAnimation}>c.tip@nus.edu.sg</a>).
-          </p>
-          <div className={styles.importantNote}>
-            <p>
-          <strong>Important:</strong> Applications must be submitted at least <strong>4 months</strong> before your intended start date to accommodate the student pass process.
-            </p>
-          </div>
-          <p className={styles.highlightText}>
-            We look forward to hearing from you and advancing cancer research together!
+          className={styles.applySection}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <h2>How to Apply</h2>
+          <div className={styles.applyContent}>
+            <div className={styles.applyCategory}>
+              <h3>Undergraduate Students</h3>
+              <p>
+                To apply, please send your CV to <strong>Sam Tipgomut</strong> (<a href="mailto:c.tip@nus.edu.sg" className={styles.underlineAnimation}>c.tip@nus.edu.sg</a>).
+              </p>
+              <div className={styles.importantNote}>
+                <p>
+                  <strong>Important:</strong> Applications must be submitted at least <strong>4 months</strong> before your intended start date to accommodate the student pass process.
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.applyCategory}>
+              <h3>PhD Applicants</h3>
+              <p>
+                PhD candidates should apply directly through the <a href="https://csi.nus.edu.sg/" className={styles.underlineAnimation}>CSI Singapore website</a>. Please review the admission requirements and application deadlines before submitting your application.
               </p>
             </div>
+
+            <div className={styles.applyCategory}>
+              <h3>Postdoctoral Researchers & Others</h3>
+              <p>
+                For postdoctoral and other research positions, please check our <a href="#positions" className={styles.underlineAnimation} onClick={(e) => {
+                e.preventDefault();
+                const offset = 100;
+                if (positionsRef.current) {
+                  const targetPosition = positionsRef.current.offsetTop - offset;
+                  window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                  });
+                }
+              }}>Opening Positions</a> section for current opportunities.
+              </p>
+            </div>
+            
+            <p className={styles.highlightText}>
+              We look forward to hearing from you and advancing cancer research together!
+            </p>
+          </div>
         </motion.section>
 
         <motion.section
+        id="positions"
         ref={positionsRef}
         initial="hidden"
         animate={isPositionsInView ? "visible" : "hidden"}
         variants={staggerChildren}
         className={styles.contentSection}
-          >
+      >
         <motion.div variants={fadeInRight} className={styles.positionsContainer}>
           <h2>Opening Positions</h2>
           

@@ -385,6 +385,49 @@
   font-size: 1.05rem;
 }
 
+.applyCategory {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(107, 70, 193, 0.1);
+}
+
+.applyCategory:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.applyCategory h3 {
+  font-size: 1.25rem;
+  color: #4a0072;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  position: relative;
+  padding-left: 1rem;
+  display: inline-block;
+}
+
+.applyCategory h3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #6b46c1;
+  border-radius: 4px;
+}
+
+.applyContent {
+  line-height: 1.7;
+  padding: 0 1rem;
+}
+
+.applyContent p {
+  margin-bottom: 1.2rem;
+  color: #555;
+  font-size: 1.05rem;
+}
+
 .importantNote {
   background: rgba(107, 70, 193, 0.08);
   border-left: 3px solid #6b46c1;
@@ -550,6 +593,15 @@
   .applyContent p {
     font-size: 0.95rem;
   }
+  .applyCategory h3 {
+    font-size: 1.15rem;
+  }
+  
+  .applyCategory {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.2rem;
+  }
+
 }
 
 @media (max-width: 640px) {
@@ -646,4 +698,14 @@
   .messageBox {
     padding: 1.2rem 1rem;
   }
+
+  .applyCategory h3 {
+    font-size: 1.1rem;
+  }
+  
+  .applyCategory {
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+  }
+  
 }
