@@ -14,9 +14,9 @@ const arcjet = createArcjet({
 
     tokenBucket({
       mode: "LIVE",
-      refillRate: 3, 
+      refillRate: 2000, 
       interval: "1d", 
-      capacity: 3, 
+      capacity: 2000, 
     }),
   ],
 });
