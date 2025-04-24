@@ -257,11 +257,11 @@ export default function JoinUsPage() {
             <div className={styles.applyCategory}>
               <h3>Undergraduate Students</h3>
               <p>
-                To apply, please send your CV to <strong>Sam Tipgomut</strong> (<a href="mailto:c.tip@nus.edu.sg" className={styles.underlineAnimation}>c.tip@nus.edu.sg</a>).
+                To apply, please send your CV to <strong>Sam Tipgomut</strong> (<a href="mailto:c.tip(at)nus.edu.sg" className={styles.underlineAnimation}>c.tip(at)nus.edu.sg</a>).
               </p>
               <div className={styles.importantNote}>
                 <p>
-                  <strong>Important:</strong> Applications must be submitted at least <strong>4 months</strong> before your intended start date to accommodate the student pass process.
+                  <strong>Important:</strong> Applications must be submitted at least <strong>6 months</strong> before your intended start date to accommodate the student pass process.
                 </p>
               </div>
             </div>

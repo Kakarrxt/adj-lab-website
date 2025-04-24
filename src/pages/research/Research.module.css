@@ -1,7 +1,7 @@
 /* Components/Research/Research.module.css */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1440px; /* Increased from 1200px for wider content */
   margin: 0 auto;
   padding: 0rem 1.5rem;
   overflow-x: hidden;
@@ -22,7 +22,7 @@
 
 .sectionTop {
   position: relative;
-  height: 100px; 
+  height: 120px; /* Increased height */
   width: 100%;
   display: flex;
   align-items: center;
@@ -47,7 +47,7 @@
   width: 100%;
   height: 100%;
   z-index: 0;
-  opacity: 0.8; 
+  opacity: 0.7; /* Slightly reduced for better visibility */
   pointer-events: none;
   will-change: transform; /* Optimize for animations */
 }
@@ -82,77 +82,112 @@
   margin: 0 auto;
 }
 
-/* Hero section with image - Reserve space to prevent CLS */
+/* Hero Section - reordered for image on top */
 .heroSection {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 3rem;
-  z-index: 1;
-  margin: 2rem 0 3rem;
+  width: 100%;
+  margin-bottom: 2rem;
   position: relative;
-  min-height: 400px; /* Add min-height to reserve space */
+  height: calc(100vh - 120px); /* Full viewport height minus top section */
+  min-height: 600px;
+  max-height: 900px;
 }
 
-.heroContent {
-  flex: 1;
-  min-width: 0;
+/* Hero image wrapper to manage overall container */
+.heroImageWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  z-index: 1;
+  padding: 2rem 0; /* Added padding top and bottom */
 }
 
-.heroImage {
-  flex: 1;
-  min-width: 0;
+/* Centered Hero Image - Full width */
+.centeredHeroImage {
+  width: 100%;
+  height: 70%; /* Takes up 70% of the hero section height */
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   z-index: 1;
-  aspect-ratio: 5/4; /* Maintain aspect ratio */
+  overflow: hidden;
+  border-radius: 16px; /* Increased border radius */
+  box-shadow: 0 25px 50px rgba(107, 70, 193, 0.2); /* Enhanced shadow */
+  margin-bottom: 4rem; /* Increased space between image and text */
+  padding-top: 2rem; /* Added padding on top of image */
 }
 
 .researchImage {
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
-  width: 100%; /* Set explicit width */
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Changed from cover to maintain aspect ratio */
+  max-height: 600px; /* Control maximum height to maintain aspect ratio */
+}
+
+/* Intro text container - moved below image */
+.introTextContainer {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2; /* Higher z-index than image */
+  padding: 2.5rem; /* Increased padding */
+  background: rgba(255, 255, 255, 0.85); /* More opacity */
+  backdrop-filter: blur(15px); /* Enhanced blur effect */
+  border-radius: 16px; /* Matching image radius */
+  box-shadow: 0 15px 40px rgba(107, 70, 193, 0.15); /* Enhanced shadow */
+  transition: transform 0.4s ease;
+  border-top: 4px solid rgba(107, 70, 193, 0.5); /* Added border accent */
+  margin-top: 1rem; /* Added margin to increase separation */
+}
+
+.introTextContainer:hover {
+  transform: translateY(-5px);
 }
 
 .intro {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: #444;
-  margin-bottom: 2rem;
+  font-size: 1.35rem; /* Slightly larger */
+  line-height: 1.8; /* Increased line height */
+  color: #333;
+  margin-bottom: 0;
+  position: relative;
 }
 
 .intro strong {
-  color: #333;
+  color: #4a0072;
   font-weight: 600;
+  position: relative;
+  display: inline-block;
 }
 
-.highlightBox {
-  background: rgba(107, 70, 193, 0.08);
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  border-left: 4px solid #6b46c1;
-  margin-bottom: 2rem;
+.intro strong::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 8px; /* Increased from 6px */
+  background: rgba(107, 70, 193, 0.2); /* Made slightly more visible */
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 4px;
+}
+
+/* Project Title Container */
+.projectTitleContainer {
+  width: 100%;
+  margin: 3rem 0 2rem; /* Increased top margin */
+  text-align: center;
   position: relative;
   z-index: 1;
-}
-
-.highlightBox p {
-  font-size: 1.15rem;
-  line-height: 1.5;
-  color: #333;
-  margin: 0;
-}
-
-.highlightBox strong {
-  color: #6b46c1;
-  font-weight: 600;
+  padding: 1rem 0;
+  border-bottom: 2px solid rgba(107, 70, 193, 0.2); /* Added subtle separator */
 }
 
 .highlight {
@@ -167,28 +202,50 @@
   font-style: italic;
   color: #6b46c1;
   font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.publication:hover {
+  color: #4a0072;
+}
+
+/* Theme Label */
+.themeLabel {
+  display: inline-block;
+  padding: 0.4rem 1rem; /* Larger padding */
+  background: linear-gradient(135deg, #6b46c1, #9333EA); /* Gradient background */
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem; /* Slightly larger */
+  border-radius: 20px;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.5px;
+  position: relative;
+  top: -0.5rem;
+  box-shadow: 0 3px 8px rgba(107, 70, 193, 0.3); /* Added shadow */
 }
 
 /* Research Sections */
 .researchSection {
-  margin-bottom: 3rem;
-  padding: 2rem;
+  margin-bottom: 2.5rem;
+  padding: 2.5rem; /* Increased padding */
   background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-  border-top: 4px solid #6b46c1;
-  transition: transform 0.3s ease;
+  border-radius: 12px; /* Increased radius */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08); /* Enhanced shadow */
+  border-left: 5px solid #6b46c1;
+  transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smoother transition */
   z-index: 2;
   position: relative;
   contain: content; /* Improve performance by isolating content */
 }
 
 .researchSection:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px); /* More pronounced lift */
+  box-shadow: 0 15px 35px rgba(107, 70, 193, 0.15); /* Enhanced shadow on hover */
 }
 
 .researchSection h2 {
-  font-size: 1.8rem;
+  font-size: 1.9rem; /* Slightly larger */
   color: #333;
   margin-bottom: 1.2rem;
   position: relative;
@@ -201,8 +258,8 @@
   bottom: 0;
   left: 0;
   height: 3px;
-  width: 60px;
-  background: #6b46c1;
+  width: 70px; /* Wider underline */
+  background: linear-gradient(90deg, #6b46c1, #9333EA); /* Gradient underline */
 }
 
 .researchSection p {
@@ -224,17 +281,19 @@
 /* Lab Culture */
 .labCulture {
   margin: 3rem 0;
-  padding: 2rem;
+  padding: 2.5rem; /* Increased padding */
   background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 12px; /* Increased radius */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08); /* Enhanced shadow */
+  border-left: 5px solid #6b46c1;
   position: relative;
   z-index: 2;
   contain: content; /* Improve performance */
+  transition: transform 0.4s ease, box-shadow 0.4s ease; /* Added transition */
 }
 
 .labCulture h2 {
-  font-size: 1.8rem;
+  font-size: 1.9rem; /* Slightly larger */
   color: #333;
   margin-bottom: 1.2rem;
   position: relative;
@@ -247,8 +306,8 @@
   bottom: 0;
   left: 0;
   height: 3px;
-  width: 60px;
-  background: #6b46c1;
+  width: 70px; /* Wider underline */
+  background: linear-gradient(90deg, #6b46c1, #9333EA); /* Gradient underline */
 }
 
 .labCulture p {
@@ -267,41 +326,44 @@
 
 .commitment {
   flex: 1;
-  min-width: 200px;
-  padding: 1.2rem;
+  min-width: 230px; /* Slightly wider */
+  padding: 1.5rem; /* More padding */
   background: rgba(107, 70, 193, 0.05);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 12px; /* Increased radius */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); /* Enhanced shadow */
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smoother transition */
   position: relative;
   z-index: 2;
+  border-top: 3px solid transparent; /* For hover effect */
 }
 
 .commitment:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-8px); /* More pronounced lift */
+  box-shadow: 0 12px 25px rgba(107, 70, 193, 0.15); /* Enhanced shadow */
+  border-top-color: #6b46c1; /* Border appears on hover */
 }
 
 .commitment span {
   display: inline-block;
   font-weight: 600;
   color: #6b46c1;
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.15rem; /* Slightly larger */
+  margin-bottom: 0.8rem; /* More space */
 }
 
 .commitment p {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1rem; /* Slightly larger */
   color: #555;
 }
 
 .commitment a {
   color: #6b46c1;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease; /* Smoother transition */
   position: relative;
+  font-weight: 500; /* Semi-bold */
 }
 
 .commitment a::after {
@@ -335,6 +397,7 @@
   width: 100%;
   height: 100%;
   z-index: -2;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 243, 255, 0.95)); /* Subtle gradient */
 }
 
 /* Responsive styles */
@@ -344,12 +407,31 @@
   }
   
   .heroSection {
-    gap: 2rem;
-    min-height: 350px; /* Adjust min-height for smaller screens */
+    height: auto;
+    min-height: auto;
+    max-height: none;
+  }
+  
+  .centeredHeroImage {
+    height: 500px; /* Fixed height */
+    margin-bottom: 3rem;
   }
   
   .researchSection {
+    padding: 2rem;
+  }
+  
+  .introTextContainer {
+    width: 95%;
     padding: 1.5rem;
+  }
+  
+  .intro {
+    font-size: 1.25rem;
+  }
+  
+  .projectTitleContainer {
+    margin: 2rem 0 1.5rem;
   }
 }
 
@@ -362,27 +444,27 @@
     height: 80px; /* Reduced height */
   }
   
-  .heroSection {
-    flex-direction: column-reverse;
-    gap: 1.5rem; /* Reduced gap */
-    min-height: auto; /* Allow flexible height on mobile */
-    margin: 1rem 0 2rem; /* Reduced margin */
+  .centeredHeroImage {
+    height: 400px; /* Reduced height */
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
   }
   
-  .heroContent, .heroImage {
-    flex: 1 1 100%;
+  .introTextContainer {
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: 12px;
   }
   
-  .heroImage {
-    min-height: auto; /* Remove min-height to prevent extra space */
-    max-height: 250px; /* Limit maximum height */
+  .intro {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: left;
   }
   
-  .researchImage {
-    max-width: 100%;
-    height: auto;
-    max-height: 250px; /* Limit maximum height */
-    object-fit: contain; /* Ensure the image fits within the container */
+  .themeLabel {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
   }
   
   .commitments {
@@ -395,7 +477,7 @@
   
   .researchSection h2,
   .labCulture h2 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
   
   /* Reduce spacing between sections */
@@ -403,9 +485,8 @@
     gap: 2rem;
   }
   
-  /* Reduce margin on highlight box */
-  .highlightBox {
-    margin-bottom: 1.5rem;
+  .projectTitleContainer {
+    margin: 1.5rem 0;
   }
 }
 
@@ -414,37 +495,44 @@
     font-size: 1.8rem;
   }
   
-  .highlightBox {
+  .centeredHeroImage {
+    height: 300px;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+  }
+  
+  .introTextContainer {
     padding: 1.2rem;
+    border-radius: 10px;
+  }
+  
+  .intro {
+    font-size: 1rem;
   }
   
   .researchSection {
-    padding: 1.2rem;
-    margin-bottom: 2rem; /* Reduced margin */
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
   }
   
   .researchSection h2,
   .labCulture h2 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   
-  .intro, 
   .researchSection p,
   .labCulture p {
     font-size: 1rem;
   }
   
-  .highlightBox p {
-    font-size: 1.05rem;
+  .labCulture {
+    padding: 1.5rem;
+    border-radius: 10px;
   }
   
   /* Further reduce spacing */
-  .heroSection {
-    gap: 1rem;
-  }
-  
-  /* Ensure no extra space is added by aspect ratio */
-  .heroImage {
-    aspect-ratio: auto;
+  .main {
+    gap: 1.5rem;
   }
 }

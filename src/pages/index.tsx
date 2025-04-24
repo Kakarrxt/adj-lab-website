@@ -41,6 +41,26 @@ export default function ResearchPage() {
   const [backgroundExpanded, setBackgroundExpanded] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState(false);
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+  
+  const fadeInRight = {
+    hidden: { opacity: 0, x: -30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
+  
+
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768); 
@@ -319,7 +339,34 @@ export default function ResearchPage() {
               <p>Our discoveries, spanning from tumour-intrinsic oncogenic co-expression to macrophage-driven immune regulation, collectively advance a framework for <span className={styles.highlightBox}>precision immunotherapy</span>—transforming static tumour classification into dynamic, actionable maps for guiding next-generation treatment strategies.</p>
             </motion.div>
           </motion.div>
+
+   {/* Lab Culture */}
+
+          <motion.div variants={fadeInUp} className={styles.labCulture}>
+              <h2>Lab Culture & Collaboration</h2>
+              <p>
+                Graduate students and post-doctoral researchers take the helm on exciting projects. We collaborate with both local and international colleagues to explore our findings in real-world clinical tissue collections. We welcome overseas students, NUH residents and medical students, who are passionate about translational cancer research.
+              </p>
+              <div className={styles.commitments}>
+                <motion.div variants={fadeInRight} className={styles.commitment}>
+                  <span>#heforshe</span>
+                  <p>We are committed to promoting diversity in science</p>
+                </motion.div>
+                <motion.div variants={fadeInRight} className={styles.commitment}>
+                  <span>#scienceisnotapyramid</span>
+                  <p>We foster a culture of mutual respect</p>
+                </motion.div>
+                <motion.div variants={fadeInRight} className={styles.commitment}>
+                  <span>DORA</span>
+                  <p>We are committed to fairness and transparency - <a href="https://sfdora.org/" target="_blank" rel="noopener noreferrer">sfdora.org</a></p>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            
         </motion.div>
+
+
       </section>
 
       {/* Publications Section - Faster animations with thin underline */}

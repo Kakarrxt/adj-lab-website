@@ -139,11 +139,11 @@ export const primaryAffiliations = [
 ];
 
 export const additionalPositions = [
-    "Platform leader and EXCO member; Translational Research Integration and Support platform - Singapore Translational Cancer Consortium",
-    "Facility head; CSI Microscopy and Multiplex Assays (MMA) Core",
-    "Program Chair, Musculoskeletal Oncology, Sarcoma; NCIS, NUH",
-    "Senior Principal Investigator; Institute of Molecular and Cell Biology (IMCB) - A*STAR",
+    "Platform lead and EXCO member; Translational Research Integration and Support platform - Singapore Translational Cancer Consortium",
     "Research Director; NCIS, NUH",
+    "Program Chair, Musculoskeletal Oncology, Sarcoma; NCIS, NUH",
+    "Joint Senior Principal Investigator; Institute of Molecular and Cell Biology (IMCB) - A*STAR",
+    "Visiting Consultant; National Cancer Centre Singapore (NCCS)",
 ];
 
 export const awards = [
