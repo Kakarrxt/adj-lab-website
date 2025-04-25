@@ -239,9 +239,21 @@ export default function ContactPage() {
                   <FaEnvelope className={styles.icon} />
                 </div>
                 <h3>Email</h3>
-                <a href="mailto:csiadj@nus.edu.sg" className={styles.emailLink}>
-                  csiadj@nus.edu.sg
-                </a>
+                <div className={styles.emailContainer}>
+                  <div className={styles.emailItem}>
+                    <span className={styles.personName}>Anand Jeyasekharan (PI)</span>
+                    <a href="mailto:csiadj(at)nus.edu.sg" className={styles.emailLink}>
+                      csiadj(at)nus.edu.sg
+                    </a>
+                  </div>
+                  <div className={styles.emailItem}>
+                    <span className={styles.personName}>Chartsiam (Sam) Tipgomut</span>
+                    <span className={styles.personRole}>Lab Manager</span>
+                    <a href="mailto:c.tip(at)nus.edu.sg" className={styles.emailLink}>
+                      c.tip(at)nus.edu.sg
+                    </a>
+                  </div>
+                </div>
               </motion.div>
 
               <motion.div variants={scaleIn} className={styles.contactCard}>

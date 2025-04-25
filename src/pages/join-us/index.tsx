@@ -267,11 +267,26 @@ export default function JoinUsPage() {
             </div>
 
             <div className={styles.applyCategory}>
-              <h3>PhD Applicants</h3>
-              <p>
-                PhD candidates should apply directly through the <a href="https://csi.nus.edu.sg/" className={styles.underlineAnimation}>CSI Singapore website</a>. Please review the admission requirements and application deadlines before submitting your application.
-              </p>
+            <h3>PhD Applicants</h3>
+            <p>
+              We welcome motivated PhD candidates through two application options:
+            </p>
+            <div className={styles.applicationPathways}>
+              <div className={styles.pathwayOption}>
+                <p>
+                  <strong>Option 1:</strong> Apply through the <a href="https://csi.nus.edu.sg/" className={styles.underlineAnimation}>CSI Singapore</a>. Please review the specific admission requirements and application deadlines before submission.
+                </p>
+              </div>
+              <div className={styles.pathwayOption}>
+                <p>
+                  <strong>Option 2:</strong> Apply through the <a href="https://medicine.nus.edu.sg/graduatestudies/prospective-students/" className={styles.underlineAnimation}>Yong Loo Lin School of Medicine Graduate program</a>.
+                </p>
+              </div>
             </div>
+            <p className={styles.equalConsideration}>
+              We encourage you to select the application method that best aligns with your specific research focus and academic background. Feel free to contact us if you need guidance on which option might be more suitable for your circumstances.
+            </p>
+          </div>
 
             <div className={styles.applyCategory}>
               <h3>Postdoctoral Researchers & Others</h3>

@@ -136,7 +136,7 @@ export default function Navbar() {
             whileTap={{ scale: 0.95 }}
           >
             <Link href="/" className={styles.logo}>
-              ADJ
+              Home
             </Link>
           </motion.div>
 

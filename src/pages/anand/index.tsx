@@ -330,7 +330,7 @@ export default function AnandPage() {
               
               <motion.div className={styles.socialLinks}>
                 <motion.a
-                  href="mailto:csiadj@nus.edu.sg"
+                  href="mailto:csiadj(at)nus.edu.sg"
                   whileHover={{ scale: 1.1, backgroundColor: "#6b46c1", color: "white" }}
                   whileTap={{ scale: 0.95 }}
                   className={styles.socialLink}

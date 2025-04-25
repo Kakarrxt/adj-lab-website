@@ -118,13 +118,51 @@
   font-size: 0.95rem;
 }
 
+.emailContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.emailItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.6rem;
+  border-radius: 8px;
+  background-color: rgba(107, 70, 193, 0.04);
+  transition: background-color 0.3s ease;
+}
+
+.emailItem:hover {
+  background-color: rgba(107, 70, 193, 0.08);
+}
+
+.personName {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+
+.personRole {
+  font-size: 0.85rem;
+  color: #666;
+  font-style: italic;
+  margin-bottom: 0.3rem;
+}
+
 .emailLink {
   color: #6b46c1;
   text-decoration: none;
   font-weight: 500;
+  font-size: 0.92rem;
   position: relative;
   display: inline-block;
   transition: color 0.3s ease;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
 }
 
 .emailLink::after {
@@ -509,6 +547,23 @@
     padding: 0.6rem 1rem;
     font-size: 0.8rem;
   }
+
+  .emailItem {
+    padding: 0.5rem;
+  }
+  
+  .personName {
+    font-size: 0.9rem;
+  }
+  
+  .personRole {
+    font-size: 0.8rem;
+  }
+  
+  .emailLink {
+    font-size: 0.85rem;
+  }
+
 }
 
 @media (max-width: 576px) {
@@ -572,4 +627,20 @@
     font-size: 0.85rem;
     line-height: 1.5;
   }
+  .emailContainer {
+    gap: 0.75rem;
+  }
+  
+  .emailItem {
+    padding: 0.4rem;
+  }
+  
+  .personName {
+    font-size: 0.85rem;
+  }
+  
+  .personRole {
+    font-size: 0.75rem;
+  }
+  
 }
