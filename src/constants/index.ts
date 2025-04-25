@@ -133,7 +133,7 @@ export const Publications = [
 // Anand Jeyasekharan
 
 export const primaryAffiliations = [
-    "Principal Investigator and Facility Head (Microscopy and Multiplexed Assay Core), Cancer Science Institute of Singapore, NUS",
+    "Principal Investigator, Cancer Science Institute of Singapore, NUS",
     "Senior Consultant, Department of Haematology-Oncology, National University Cancer Institute, Singapore",
     "Assistant Professor; Department of Medicine, Yong Loo Lin School of Medicine, NUS",
 ];
