@@ -170,11 +170,17 @@
   font-size: 2.2rem;
 }
 
+.sectionTitle span{
+  /* margin-bottom: 2.5rem; */
+  font-size: 2rem;
+}
+
 .researchContentContainer {
   max-width: 1980px;
   width: 92%;
   margin: 0 auto;
   padding: 0.5rem;
+  /* max-height: 500px; */
 }
 
 .researchContent {
@@ -183,7 +189,7 @@
   padding: 2.5rem;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   text-align: left;
-  font-size: 1.15rem;
+  font-size: 1rem;
   line-height: 1.7;
   color: #444;
 }
@@ -200,6 +206,7 @@
 
 .researchContent p {
   margin-bottom: 1.5rem;
+  font-size: 0.95rem;
 }
 
 .highlight {
@@ -220,7 +227,7 @@
 .researchImageContainer {
   position: relative;
   width: 45%;
-  height: auto;
+  height: 340px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(107, 70, 193, 0.15);
@@ -233,9 +240,9 @@
   transition: transform 0.8s ease;
 }
 
-.researchImageContainer:hover .researchImage {
+/* .researchImageContainer:hover .researchImage {
   transform: scale(1.05);
-}
+} */
 
 .imageOverlay {
   position: absolute;
@@ -280,13 +287,13 @@
 .keyFindingContent h3 {
   color: #6b46c1;
   margin-bottom: 0.5rem;
-  font-size: 1.3rem;
+  font-size: 1.1srem;
   font-weight: 600;
 }
 
 .keyFindingContent p {
   margin-bottom: 0;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
 }
 
 .researchConclusion {

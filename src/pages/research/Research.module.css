@@ -88,48 +88,46 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-bottom: 2rem;
+  margin: 0; /* Removed margin-bottom */
   position: relative;
-  height: calc(100vh - 120px); /* Full viewport height minus top section */
-  min-height: 600px;
-  max-height: 900px;
+  height: calc(100vh - 80px);
+  min-height: 800px;
+  max-height: 1000px;
 }
 
 /* Hero image wrapper to manage overall container */
 .heroImageWrapper {
   width: 100%;
-  height: 100%;
+  height: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 2rem 0; /* Added padding top and bottom */
+  padding: 3rem 0; /* Increased padding */
 }
 
 /* Centered Hero Image - Full width */
 .centeredHeroImage {
-  width: 100%;
-  height: 70%; /* Takes up 70% of the hero section height */
+  width: auto;
+  height: 400px; /* Increased from 70% to 85% */
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   z-index: 1;
   overflow: hidden;
-  border-radius: 16px; /* Increased border radius */
-  box-shadow: 0 25px 50px rgba(107, 70, 193, 0.2); /* Enhanced shadow */
-  margin-bottom: 4rem; /* Increased space between image and text */
-  padding-top: 2rem; /* Added padding on top of image */
+  border-radius: 16px;
+  box-shadow: 0 25px 50px rgba(107, 70, 193, 0.2);
+  margin-bottom: 2rem; /* Reduced from 4rem to allow more space for the image */
 }
 
 .researchImage {
   width: 100%;
-  height: 100%;
-  object-fit: contain; /* Changed from cover to maintain aspect ratio */
-  max-height: 600px; /* Control maximum height to maintain aspect ratio */
+  height: 400px;
+  object-fit: contain; /* Changed back to contain to preserve aspect ratio */
+  max-height: none; /* Removed max-height constraint */
 }
-
 /* Intro text container - moved below image */
 .introTextContainer {
   width: 90%;
@@ -410,6 +408,7 @@
     height: auto;
     min-height: auto;
     max-height: none;
+    margin: 0; /* Ensure no margin in mobile view */
   }
   
   .centeredHeroImage {

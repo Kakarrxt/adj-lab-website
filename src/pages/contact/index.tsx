@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { useInView } from "framer-motion";
 import styles from "./contact.module.css";
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaTimes } from "react-icons/fa";
 import Image from "next/image";
 import Curve from '@/components/Curve/Curve'
 import Aurora from "@/components/Aurora/Aurora";
@@ -22,6 +22,12 @@ export default function ContactPage() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [init, setInit] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [revealedCard, setRevealedCard] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -168,7 +174,10 @@ export default function ContactPage() {
     }
   };
 
-
+  const toggleCard = (id: string) => {
+    setRevealedCard(prev => (prev === id ? id : id));
+  };
+  const closeCard = () => setRevealedCard(null);
 
   return (
     <>
@@ -227,43 +236,75 @@ export default function ContactPage() {
               className={styles.contactInfo}
             >
               <motion.div variants={scaleIn} className={styles.contactCard}>
-                <div className={styles.iconWrapper}>
-                  <FaPhone className={styles.icon} />
-                </div>
-                <h3>Phone</h3>
-                <p>+65 6516 2162</p>
-              </motion.div>
-
-              <motion.div variants={scaleIn} className={styles.contactCard}>
-                <div className={styles.iconWrapper}>
-                  <FaEnvelope className={styles.icon} />
-                </div>
-                <h3>Email</h3>
-                <div className={styles.emailContainer}>
-                  <div className={styles.emailItem}>
-                    <span className={styles.personName}>Anand Jeyasekharan (PI)</span>
-                    <a href="mailto:csiadj(at)nus.edu.sg" className={styles.emailLink}>
-                      csiadj(at)nus.edu.sg
-                    </a>
+                <div className={styles.cardHeader}>
+                  <div className={styles.iconWrapper}>
+                    <FaPhone className={styles.icon} />
                   </div>
-                  <div className={styles.emailItem}>
-                    <span className={styles.personName}>Chartsiam (Sam) Tipgomut</span>
-                    <span className={styles.personRole}>Lab Manager</span>
-                    <a href="mailto:c.tip(at)nus.edu.sg" className={styles.emailLink}>
-                      c.tip(at)nus.edu.sg
-                    </a>
-                  </div>
+                  <h3>Phone</h3>
+                </div>
+                <div className={styles.cardContent}>
+                  <p>+65 6516 2162</p>
                 </div>
               </motion.div>
 
+              <motion.div 
+                variants={scaleIn} 
+                className={`${styles.contactCard} ${isClient && revealedCard === 'email' ? styles.revealed : ''}`}
+                onClick={e => {
+                  if (!isClient) return;
+                  if (revealedCard !== 'email') setRevealedCard('email');
+                }}
+              >
+                {isClient ? (
+                  <>
+                    <div className={styles.cardHeader}>
+                      <div className={styles.iconWrapper}>
+                        <FaEnvelope className={styles.icon} />
+                      </div>
+                      <h3>Email</h3>
+                    </div>
+                    <div className={styles.tapMessage}>Tap to see emails</div>
+                    <div className={styles.emailContent}>
+                      {revealedCard === 'email' && (
+                        <button className={styles.closeButton} onClick={e => { e.stopPropagation(); closeCard(); }} aria-label="Close email card">
+                          <FaTimes />
+                        </button>
+                      )}
+                      <div className={styles.emailContainer}>
+                        <div className={styles.emailItem}>
+                          <span className={styles.personName}>Anand Jeyasekharan (PI)</span>
+                          <span className={styles.personRole}>Principal Investigator</span>
+                          <a href="mailto:csiadj(at)nus.edu.sg" className={styles.emailLink}>
+                            csiadj(at)nus.edu.sg
+                          </a>
+                        </div>
+                        <div className={styles.emailItem}>
+                          <span className={styles.personName}>Chartsiam (Sam) Tipgomut</span>
+                          <span className={styles.personRole}>Lab Manager</span>
+                          <a href="mailto:c.tip(at)nus.edu.sg" className={styles.emailLink}>
+                            c.tip(at)nus.edu.sg
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className={styles.tapMessage}>Loading...</div>
+                )}
+              </motion.div>
+
               <motion.div variants={scaleIn} className={styles.contactCard}>
-                <div className={styles.iconWrapper}>
-                  <FaMapMarkerAlt className={styles.icon} />
+                <div className={styles.cardHeader}>
+                  <div className={styles.iconWrapper}>
+                    <FaMapMarkerAlt className={styles.icon} />
+                  </div>
+                  <h3>Address</h3>
                 </div>
-                <h3>Address</h3>
-                <p>Cancer Science Institute (CSI) Singapore</p>
-                <p>14 Medical Dr, Centre for Translational Medicine (MD6)</p>
-                <p>Singapore 117599</p>
+                <div className={styles.cardContent}>
+                  <p>Cancer Science Institute (CSI) Singapore</p>
+                  <p>14 Medical Dr, Centre for Translational Medicine (MD6)</p>
+                  <p>Singapore 117599</p>
+                </div>
               </motion.div>
             </motion.section>
 

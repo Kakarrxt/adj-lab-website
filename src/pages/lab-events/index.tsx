@@ -48,7 +48,7 @@ export default function LabEvents(){
         };
       }, []);
   
-    const title = "ADJ Lab Events";
+    const title = "Lab Events";
 
     // Create SVG placeholders directly as Base64 encoded images
     // Using pastel purple background (#d8ccf1) with white text
