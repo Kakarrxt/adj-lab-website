@@ -83,28 +83,27 @@
 }
 
 /* Hero Section - reordered for image on top */
-.heroSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin: 0; /* Removed margin-bottom */
-  position: relative;
-  height: calc(100vh - 80px);
-  min-height: 800px;
-  max-height: 1000px;
-}
-
-/* Hero image wrapper to manage overall container */
 .heroImageWrapper {
   width: 100%;
-  height: 1000px;
+  height: auto; /* Change from fixed 1000px to auto */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 3rem 0; /* Increased padding */
+  padding: 3rem 0;
+}
+
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  position: relative;
+  height: auto; /* Change from calc(100vh - 80px) to auto */
+  min-height: auto; /* Remove or reduce min-height */
+  max-height: none; /* Remove max-height constraint */
 }
 
 /* Centered Hero Image - Full width */
@@ -180,7 +179,7 @@
 /* Project Title Container */
 .projectTitleContainer {
   width: 100%;
-  margin: 3rem 0 2rem; /* Increased top margin */
+  margin: 1rem 0 2rem; /* Increased top margin */
   text-align: center;
   position: relative;
   z-index: 1;

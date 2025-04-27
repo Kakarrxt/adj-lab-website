@@ -235,17 +235,23 @@ export default function ContactPage() {
               variants={staggerChildren}
               className={styles.contactInfo}
             >
-              <motion.div variants={scaleIn} className={styles.contactCard}>
-                <div className={styles.cardHeader}>
-                  <div className={styles.iconWrapper}>
-                    <FaPhone className={styles.icon} />
+            <motion.div variants={scaleIn} className={styles.contactCard}>
+              <div className={styles.cardHeader}>
+                <div className={styles.iconWrapper}>
+                  <FaPhone className={styles.icon} />
+                </div>
+                <h3>Contact</h3>
+              </div>
+              <div className={styles.emailContent} style={{ opacity: 1, transform: 'translateY(0)', position: 'relative' }}>
+                <div className={styles.emailContainer}>
+                  <div className={styles.emailItem}>
+                    <span className={styles.personName}>General Inquiries</span>
+                    <span className={styles.personRole}>For collaborations</span>
+                    <span className={styles.emailLink}>+65 6516 2162</span>
                   </div>
-                  <h3>Phone</h3>
                 </div>
-                <div className={styles.cardContent}>
-                  <p>+65 6516 2162</p>
-                </div>
-              </motion.div>
+              </div>
+            </motion.div>
 
               <motion.div 
                 variants={scaleIn} 
@@ -257,6 +263,11 @@ export default function ContactPage() {
               >
                 {isClient ? (
                   <>
+                    {revealedCard === 'email' && (
+                      <button className={styles.closeButton} onClick={e => { e.stopPropagation(); closeCard(); }} aria-label="Close email card">
+                        <FaTimes />
+                      </button>
+                    )}
                     <div className={styles.cardHeader}>
                       <div className={styles.iconWrapper}>
                         <FaEnvelope className={styles.icon} />
@@ -265,11 +276,6 @@ export default function ContactPage() {
                     </div>
                     <div className={styles.tapMessage}>Tap to see emails</div>
                     <div className={styles.emailContent}>
-                      {revealedCard === 'email' && (
-                        <button className={styles.closeButton} onClick={e => { e.stopPropagation(); closeCard(); }} aria-label="Close email card">
-                          <FaTimes />
-                        </button>
-                      )}
                       <div className={styles.emailContainer}>
                         <div className={styles.emailItem}>
                           <span className={styles.personName}>Anand Jeyasekharan (PI)</span>
@@ -379,21 +385,21 @@ export default function ContactPage() {
                 <div className={styles.hoursItem}>
                   <div className={styles.dayWrapper}>
                     <FaClock className={styles.timeIcon} />
-                    <span className={styles.day}>Monday - Friday</span>
+                    <span className={styles.day}>Monday - Thrusday</span>
                   </div>
-                  <span className={styles.time}>8:00 AM - 6:00 PM</span>
+                  <span className={styles.time}>8:30 AM - 6:00 PM</span>
+                </div>
+                <div className={styles.hoursItem}>
+                  <div className={styles.dayWrapper}>
+                    <FaClock className={styles.timeIcon} />
+                    <span className={styles.day}>Friday</span>
+                  </div>
+                  <span className={styles.time}>8:30 AM - 5:30 PM</span>
                 </div>
                 <div className={styles.hoursItem}>
                   <div className={styles.dayWrapper}>
                     <FaClock className={styles.timeIcon} />
                     <span className={styles.day}>Saturday & Sunday</span>
-                  </div>
-                  <span className={styles.time}>Closed</span>
-                </div>
-                <div className={styles.hoursItem}>
-                  <div className={styles.dayWrapper}>
-                    <FaClock className={styles.timeIcon} />
-                    <span className={styles.day}>Public Holidays</span>
                   </div>
                   <span className={styles.time}>Closed</span>
                 </div>

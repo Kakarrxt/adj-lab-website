@@ -164,15 +164,16 @@
 }
 
 .iconWrapper {
-  width: 60px;
-  height: 60px;
+  width: 50px; 
+  height: 50px; 
   border-radius: 50%;
   background: rgba(107, 70, 193, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1rem;
+  margin: 0; 
   transition: all 0.3s ease;
+  flex-shrink: 0; 
 }
 
 .contactCard:hover .iconWrapper {

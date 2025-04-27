@@ -230,8 +230,8 @@ export default function ResearchPage() {
                 <Image
                   src="/media/research/image.png"
                   alt="Lymphoma Research Visualization"
-                  width={1200}
-                  height={600}
+                  width={5000}
+                  height={5000}
                   className={styles.researchImage} 
                   priority
                 />

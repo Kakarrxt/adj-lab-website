@@ -7,7 +7,6 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* HERO SECTION - CLS FIX: Define explicit dimensions and prevent content shifting */
 .heroSection {
   position: relative;
   width: 100%;
@@ -145,7 +144,6 @@
   font-size: 1rem;
   font-weight: 500;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  /* Improve touch target size for mobile */
   min-height: 44px;
   min-width: 44px;
 }
@@ -170,17 +168,12 @@
   font-size: 2.2rem;
 }
 
-.sectionTitle span{
-  /* margin-bottom: 2.5rem; */
-  font-size: 2rem;
-}
 
 .researchContentContainer {
   max-width: 1980px;
   width: 92%;
   margin: 0 auto;
   padding: 0.5rem;
-  /* max-height: 500px; */
 }
 
 .researchContent {
@@ -240,9 +233,6 @@
   transition: transform 0.8s ease;
 }
 
-/* .researchImageContainer:hover .researchImage {
-  transform: scale(1.05);
-} */
 
 .imageOverlay {
   position: absolute;
@@ -623,19 +613,19 @@
 /* Lab Culture */
 .labCulture {
   margin: 3rem 0;
-  padding: 2.5rem; /* Increased padding */
+  padding: 2.5rem; 
   background: #fff;
-  border-radius: 12px; /* Increased radius */
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08); /* Enhanced shadow */
+  border-radius: 12px; 
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
   border-left: 5px solid #6b46c1;
   position: relative;
   z-index: 2;
-  contain: content; /* Improve performance */
-  transition: transform 0.4s ease, box-shadow 0.4s ease; /* Added transition */
+  contain: content;
+  transition: transform 0.4s ease, box-shadow 0.4s ease; 
 }
 
 .labCulture h2 {
-  font-size: 1.9rem; /* Slightly larger */
+  font-size: 1.9rem;
   color: #6b46c1;
   margin-bottom: 1.2rem;
   position: relative;
@@ -648,8 +638,8 @@
   bottom: 0;
   left: 0;
   height: 3px;
-  width: 70px; /* Wider underline */
-  background: linear-gradient(90deg, #6b46c1, #9333EA); /* Gradient underline */
+  width: 70px; 
+  background: linear-gradient(90deg, #6b46c1, #9333EA);
 }
 
 .labCulture p {
@@ -668,11 +658,11 @@
 
 .commitment {
   flex: 1;
-  min-width: 230px; /* Slightly wider */
-  padding: 1.5rem; /* More padding */
+  min-width: 230px; 
+  padding: 1.5rem; 
   background: rgba(107, 70, 193, 0.05);
-  border-radius: 12px; /* Increased radius */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); /* Enhanced shadow */
+  border-radius: 12px; 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); 
   text-align: center;
   transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smoother transition */
   position: relative;
