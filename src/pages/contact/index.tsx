@@ -257,6 +257,11 @@ export default function ContactPage() {
               >
                 {isClient ? (
                   <>
+                  {revealedCard === 'email' && (
+                        <button className={styles.closeButton} onClick={e => { e.stopPropagation(); closeCard(); }} aria-label="Close email card">
+                          <FaTimes />
+                        </button>
+                      )}
                     <div className={styles.cardHeader}>
                       <div className={styles.iconWrapper}>
                         <FaEnvelope className={styles.icon} />
@@ -265,11 +270,11 @@ export default function ContactPage() {
                     </div>
                     <div className={styles.tapMessage}>Tap to see emails</div>
                     <div className={styles.emailContent}>
-                      {revealedCard === 'email' && (
+                      {/* {revealedCard === 'email' && (
                         <button className={styles.closeButton} onClick={e => { e.stopPropagation(); closeCard(); }} aria-label="Close email card">
                           <FaTimes />
                         </button>
-                      )}
+                      )} */}
                       <div className={styles.emailContainer}>
                         <div className={styles.emailItem}>
                           <span className={styles.personName}>Anand Jeyasekharan (PI)</span>

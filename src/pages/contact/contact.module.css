@@ -39,12 +39,10 @@
 /* Contact info section */
 .contactInfo {
   display: flex;
-  justify-content: space-between;
+  align-items: stretch;
+  justify-content: center;
   gap: 1.5rem;
-  margin: 2rem 0;
-  contain: layout;
 }
-
 .contactCard {
   flex: 1;
   background: white;
@@ -62,10 +60,7 @@
   height: 300px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
-
 .contactCard::before {
   content: '';
   position: absolute;
@@ -92,13 +87,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.7rem;
   width: 100%;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
   transition: all 0.3s ease;
   opacity: 1;
   transform: translateY(0);
+  /* Add padding to ensure consistent spacing */
+  /* padding-top: 2rem; */
 }
 
 .contactCard.revealed .cardHeader {
@@ -111,14 +108,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
+  flex-grow: 1;
 }
 
 .closeButton {
   position: absolute;
-  top: 12px;
-  right: 16px;
+  top: 10px;
+  right: 5px;
   background: none;
   border: none;
   color: #6b46c1;
@@ -138,6 +136,10 @@
   transition: all 0.3s ease;
   opacity: 1;
   transform: translateY(0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 0.5rem; */
 }
 
 .contactCard.revealed .tapMessage {
@@ -155,6 +157,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 0.7rem;
 }
 
 .contactCard.revealed .emailContent {
@@ -171,7 +174,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1rem;
+  margin: 0 auto 0.5rem;
   transition: all 0.3s ease;
 }
 
@@ -195,7 +198,7 @@
 .contactCard p {
   color: #555;
   line-height: 1.6;
-  margin: 0.25rem 0;
+  /* margin: 0.25rem 0; */
   font-size: 0.95rem;
 }
 
