@@ -1,6 +1,6 @@
 {
   "name": "adj-lab-website",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -38,7 +38,7 @@
     "lucide-react": "^0.475.0",
     "mapbox-gl": "^3.10.0",
     "motion": "^12.5.0",
-    "next": "15.1.6",
+    "next": "15.2.3",
     "next-auth": "^4.24.11",
     "ogl": "^1.0.11",
     "postcss": "^8.5.3",
@@ -65,6 +65,7 @@
     "postcss": "^8",
     "tailwind-merge": "^3.0.2",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "next": ">=15.2.3"
   }
 }

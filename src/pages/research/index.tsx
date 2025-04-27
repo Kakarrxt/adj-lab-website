@@ -272,7 +272,7 @@ export default function ResearchPage() {
               <div className={styles.themeLabel}>Theme 1</div>
               <h2>Personalised Medicine in Oncology</h2>
               <p>
-                We are exploring <strong>innovative strategies</strong> to optimise drug combinations for patients with refractory lymphoma using the <strong>Quadratic Phenotypic Optimisation Platform (QPOP)</strong>. Our <strong>first-in-human trial</strong> (<span className={styles.publication}>Science Translational Medicine 2022</span>) demonstrated the clinical utility of QPOP in guiding personalized treatment approaches.
+                We are exploring <strong>innovative strategies</strong> to optimise drug combinations for patients with refractory lymphoma using the <strong>Quadratic Phenotypic Optimisation Platform (QPOP)</strong>. Our <strong>first-in-human trial</strong> (<span className={styles.publication}>Science Translational Medicine 2022 </span>) demonstrated the clinical utility of QPOP in guiding personalized treatment approaches.
               </p>
             </motion.div>
 
@@ -280,7 +280,7 @@ export default function ResearchPage() {
               <div className={styles.themeLabel}>Theme 2</div>
               <h2>Quantitative Microscopy</h2>
               <p>
-                Leveraging <strong>advanced spatial and molecular profiling</strong>, we have identified a subpopulation of tumor cells overexpressing <strong>MYC</strong> and <strong>BCL2</strong> while lacking <strong>BCL6</strong> (<span className={styles.highlight}>M+2+6−</span>) in diffuse large B-cell lymphoma (DLBCL) as a <strong>predictor of chemotherapy failure</strong>, leading to the development of an immunohistochemistry-based assay for treatment stratification. Our findings (<span className={styles.publication}>Cancer Discovery 2023</span>), provide a foundation for exploring the relevance of oncogene co-expression at the single-cell level in other cancers.
+                Leveraging <strong>advanced spatial and molecular profiling</strong>, we have identified a subpopulation of tumor cells overexpressing <strong>MYC</strong> and <strong>BCL2</strong> while lacking <strong>BCL6</strong> (<span className={styles.highlight}>M+2+6−</span>) in diffuse large B-cell lymphoma (DLBCL) as a <strong>predictor of chemotherapy failure</strong>, leading to the development of an immunohistochemistry-based assay for treatment stratification. Our findings (<span className={styles.publication}>Cancer Discovery 2023 </span>), provide a foundation for exploring the relevance of oncogene co-expression at the single-cell level in other cancers.
               </p>
             </motion.div>
 
@@ -288,7 +288,7 @@ export default function ResearchPage() {
               <div className={styles.themeLabel}>Theme 3</div>
               <h2>Immune Features of Chemoresistance</h2>
               <p>
-                In advancing immune microenvironment research, our team characterised infiltrating macrophages in DLBCL using <strong>NanoString Digital Spatial Profiling (DSP)</strong> and identified clinically relevant macrophage subtypes with prognostic significance (<span className={styles.publication}>Nature Communications 2024</span>). 
+                In advancing immune microenvironment research, our team characterised infiltrating macrophages in DLBCL using <strong>NanoString Digital Spatial Profiling (DSP)</strong> and identified clinically relevant macrophage subtypes with prognostic significance (<span className={styles.publication}>Nature Communications 2024 </span>). 
               </p>
             </motion.div>
             
@@ -296,7 +296,7 @@ export default function ResearchPage() {
               <div className={styles.themeLabel}>Theme 4</div>
               <h2>Immune Signaling after Genotoxic Stress</h2>
               <p>
-                We elucidated mechanisms of immune regulation in lymphoma, demonstrating that the <strong>PRMT5-ZNF326 axis</strong> serves as a key mediator of innate immune activation in response to chemotherapy-induced replication stress (<span className={styles.publication}>Science Advances 2024</span>). These findings have <strong>important implications</strong> for the development of novel immunotherapy combinations.
+                We elucidated mechanisms of immune regulation in lymphoma, demonstrating that the <strong>PRMT5-ZNF326 axis</strong> serves as a key mediator of innate immune activation in response to chemotherapy-induced replication stress (<span className={styles.publication}>Science Advances 2024 </span>). These findings have <strong>important implications</strong> for the development of novel immunotherapy combinations.
               </p>
             </motion.div>
           </motion.section>
