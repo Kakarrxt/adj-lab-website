@@ -181,7 +181,7 @@ export const currentMembers = [
       title: "Research Fellow",
       image: "/media/LabMembers/Allison.jpg",
       description: "Investigating immune activation after DNA damage in B cell lymphoma.",
-      bio: "Investigating immune activation after DNA damage in B cell lymphoma.",
+      bio: "I'm Allison, a research fellow who loves science and discovery in cancer biology. I study how targeting the DNA damage response in lymphoma can improve outcomes. Outside the lab, I enjoy badminton, hiking, and growing my plant collection. 😎",
   },
   {
       name: "Akshaya Anbuselvan",
@@ -195,14 +195,14 @@ export const currentMembers = [
       title: "Research Fellow",
       image: "/media/LabMembers/Phoung.jpg",
       description: "Investigating immune activation in response to replication stress.",
-      bio: "Investigating immune activation in response to replication stress.",
+      bio: "I am a research fellow in Dr. Anand Jeyasekharan’s lab, where I focus on identifying membrane surface targets in sarcoma and investigating the role of STING expression in lymphoma. Through this work, I aim to better understand tumor biology and identify potential targets for cancer treatment.",
   },
   {
       name: "Charmaine Ong Zi Yan",
       title: "PhD Student",
       image: "/media/LabMembers/Charmaine-Ong.jpg",
       description: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
-      bio: "Determinants of chemosensitivity in aggressive B-cell lymphomas.",
+      bio: "I am a final-year PhD student in the ADJ Lab, where I have been since 2020, starting with my undergraduate Final Year Project. My research focuses on understanding mechanisms of resistance to R-CHOP therapy in Diffuse Large B-Cell Lymphoma, particularly through the tumor microenvironment. To investigate this, we employ hyperplex staining techniques such as PhenoCycler-Fusion, along with other spatial-omics approaches. Outside of research, I enjoy traveling, shopping, and spending time with family and friends. Feel free to reach out to me at c.ong(at)u.nus.edu with any questions!",
   },
   {
       name: "Shruti Sridhar",
